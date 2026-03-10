@@ -1,0 +1,35 @@
+name: Daily AI Researcher
+on:
+  schedule:
+    - cron: '0 5 * * *' # Runs every day at 5:00 AM UTC
+  workflow_dispatch: # Allows you to run it manually for testing
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install AI Library
+        run: pip install -U google-genai
+
+      - name: Run Robot
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python main.py
+
+      - name: Save and Push to Website
+        run: |
+          git config --global user.name "AI-Robot"
+          git config --global user.email "robot@webonlinetools.com"
+          git add .
+          git commit -m "🤖 New Daily News Posted"
+          git push
