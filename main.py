@@ -4,7 +4,7 @@ from google.genai import types
 from datetime import datetime
 
 # 1. Connect to Gemini using your Secret Key
-client = genai.Client(api_key=os.environ["API_KEY"])
+client = genai.Client(api_key=os.environ.get("API_KEY"))
 
 # 2. Tell the AI what to research
 prompt = """
