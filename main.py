@@ -19,8 +19,10 @@ Ensure all links are real and functional.
 """
 
 
+# 3. Run the research with Google Search Grounding
+# Note: We added 'v1beta' to the model name so it can find the newest version
 response = client.models.generate_content(
-    model="gemini-3.1-flash-lite",
+    model="gemini-2.0-flash", 
     contents=prompt,
     config=types.GenerateContentConfig(
         tools=[types.Tool(google_search=types.GoogleSearch())]
