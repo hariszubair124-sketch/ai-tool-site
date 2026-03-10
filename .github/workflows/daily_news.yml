@@ -23,7 +23,7 @@ jobs:
 
       - name: Run Robot
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.API_KEY }}
         run: python main.py
 
       - name: Save and Push to Website
