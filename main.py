@@ -1,38 +1,40 @@
 import os
+import time
 from google import genai
 from google.genai import types
 from datetime import datetime
 
-# 1. Connect to Gemini using your Secret Key
-client = genai.Client(api_key=os.environ.get("API_KEY"))
+# 1. Setup
+api_key = os.environ.get("GEMINI_API_KEY")
+client = genai.Client(api_key=api_key)
 
-# 2. Tell the AI what to research
-prompt = """
-Find the top 3 most important AI news stories from the last 24 hours. 
-Write a high-quality blog post in HTML.
-Include:
-- A catchy <h1> title
-- A 'Key Takeaways' bullet list
-- <h2> headings for each story
-- A 'Why it matters' section for each.
-Ensure all links are real and functional.
-"""
+# 2. The Task
+prompt = "Write a 300-word blog post in HTML about the latest AI news from March 2026."
 
+# 3. The "Retry" Loop (Fixes 429 Errors)
+def run_with_retry(max_attempts=3):
+    for attempt in range(max_attempts):
+        try:
+            print(f"Attempt {attempt + 1}: Generating content...")
+            response = client.models.generate_content(
+                model="gemini-3.1-flash-lite-preview", 
+                contents=prompt
+            )
+            return response.text
+        except Exception as e:
+            if "429" in str(e):
+                print("Server busy (429). Waiting 30 seconds to try again...")
+                time.sleep(30)
+            else:
+                raise e
+    return "Failed to generate content after several attempts."
 
-# 3. Run the research with Google Search Grounding
-# Note: We added 'v1beta' to the model name so it can find the newest version
-response = client.models.generate_content(
-    model="gemini-3.1-flash-lite-preview", 
-    contents=prompt,
-    config=types.GenerateContentConfig(
-        tools=[types.Tool(google_search=types.GoogleSearch())]
-    )
-)
-
+# 4. Save the result
+content = run_with_retry()
 date_str = datetime.now().strftime("%Y-%m-%d")
 filename = f"news-{date_str}.html"
 
 with open(filename, "w", encoding="utf-8") as f:
-    f.write(response.text)
+    f.write(content)
 
-print(f"Robot finished! Created {filename}")
+print(f"Finished! Created {filename}")
