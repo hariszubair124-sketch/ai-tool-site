@@ -2,7 +2,7 @@ name: Daily AI Blog Writer
 
 on:
   schedule:
-    - cron: '0 5 * * *'
+    - cron: '0 9 * * *'   # 9:00 AM UTC — safely after Google's quota reset
   workflow_dispatch:
 
 jobs:
