@@ -1,24 +1,20 @@
 import os
-import time
 from google import genai
 from google.genai import types
 from datetime import datetime
 
-# 1. SETUP - Using your correct secret name: API_KEY
-api_key = os.environ.get("API_KEY")
-client = genai.Client(api_key=api_key)
+# 1. Setup
+client = genai.Client(api_key=os.environ.get("API_KEY"))
 
-# 2. THE SEARCH-OPTIMIZED PROMPT
-# We tell the AI to use ONE targeted search to save quota
-prompt = """
-Perform a single Google Search for 'top AI news March 11 2026'.
-Based on the results, write an SEO-optimized blog post in HTML.
-Include <h1>, <h2>, and <ul> tags. Focus on 'Information Gain'.
-"""
+# 2. Get Today's Date Dynamically
+today = datetime.now().strftime("%B %d, %Y") 
+
+# 3. The Dynamic Prompt
+# Now the date changes every single time the script runs!
+prompt = f"Perform a Google Search for 'top AI news {today}'. Based on the results, write an SEO-optimized blog post in HTML."
 
 def run_robot():
     try:
-        print("Attempting generation with Search...")
         response = client.models.generate_content(
             model="gemini-3.1-flash-lite-preview",
             contents=prompt,
@@ -27,22 +23,10 @@ def run_robot():
             )
         )
         
-        # 3. SAVE AND UPDATE
-        date_str = datetime.now().strftime("%Y-%m-%d")
-        filename = f"news-{date_str}.html"
+        # ... (rest of the slugify and saving logic goes here)
+        print(f"Robot successfully researched news for {today}")
         
-        # Simple injection into your template logic
-        with open("template.html", "r") as f:
-            template = f.read()
-            
-        final_html = template.replace("{{CONTENT}}", response.text).replace("{{DATE}}", date_str)
-        
-        with open(filename, "w") as f:
-            f.write(final_html)
-            
-        print(f"Success! Created {filename}")
-
     except Exception as e:
-        print(f"Error occurred: {e}")
+        print(f"Error: {e}")
 
 run_robot()
