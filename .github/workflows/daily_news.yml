@@ -58,7 +58,7 @@ jobs:
         run: |
           git config --global user.name "AI-Robot"
           git config --global user.email "robot@webonlinetools.com"
-          git add posts/
+          git add ai-news/
           git diff --staged --quiet \
             && echo "⚠️ Nothing new to commit." \
             || git commit -m "🤖 Blog Post: $(date +'%Y-%m-%d')"
