@@ -32,10 +32,6 @@ jobs:
           git config --global user.name "AI-Robot"
           git config --global user.email "robot@webonlinetools.com"
           git add .
-          # Only commit if the AI actually generated a new file
-          if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "🤖 New Daily News Posted: $(date +'%Y-%m-%d')"
-            git push
-          else
-            echo "No new changes detected. Skipping commit."
-          fi
+          # This version FORCES a commit even if the changes are tiny
+          git commit -m "🤖 Forced Test Update: $(date +'%H:%M:%S')" || echo "Nothing to commit"
+          git push
