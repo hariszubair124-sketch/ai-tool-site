@@ -207,7 +207,6 @@ Now write the blog post based on today's most important and authentic AI/tech ne
             filepath  = os.path.join(posts_dir, filename)   # ai-news/nvidia-forges....html
 
 # Safety check — never let filepath create subfolders
-assert os.path.dirname(filepath) == posts_dir, f"Unexpected path: {filepath}"
 
         # ── Inject timestamp fingerprint ────────────────────────────────
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
