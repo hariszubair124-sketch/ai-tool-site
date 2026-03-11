@@ -4,7 +4,7 @@ from google.genai import types
 from datetime import datetime
 
 # Setup
-client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+client = genai.Client(api_key=os.environ.get("API_KEY"))
 
 # SEO Prompt with Search Grounding
 prompt = "Find the top AI news from today, March 11, 2026. Write a detailed blog post with 3 main sections. Use <h2> for headers. Focus on facts and industry impact."
