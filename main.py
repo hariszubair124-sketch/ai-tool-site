@@ -11,7 +11,7 @@ today = datetime.now().strftime("%B %d, %Y")
 
 # 3. The Dynamic Prompt
 # Now the date changes every single time the script runs!
-prompt = f"Perform a Google Search for 'top AI news {today}'. Based on the results, write an SEO-optimized blog post in HTML."
+prompt = "Perform a Google Search for 'top news {today}'. Based on the results, write an SEO-optimized blog post in HTML."
 
 def run_robot():
     try:
