@@ -201,10 +201,13 @@ Now write the blog post based on today's most important and authentic AI/tech ne
         if not clean_filename:
             clean_filename = f"ai-news-{datetime.now().strftime('%Y-%m-%d')}"
 
-        posts_dir = "ai-news"
-        os.makedirs(posts_dir, exist_ok=True)
-        filename  = f"{clean_filename}.html"
-        filepath  = os.path.join(posts_dir, filename)
+            posts_dir = "ai-news"
+            os.makedirs(posts_dir, exist_ok=True)          # creates ai-news/ only
+            filename  = f"{clean_filename}.html"            # just the filename, no folders
+            filepath  = os.path.join(posts_dir, filename)   # ai-news/nvidia-forges....html
+
+# Safety check — never let filepath create subfolders
+assert os.path.dirname(filepath) == posts_dir, f"Unexpected path: {filepath}"
 
         # ── Inject timestamp fingerprint ────────────────────────────────
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
