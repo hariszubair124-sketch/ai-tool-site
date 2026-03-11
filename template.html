@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}} | AI Pulse News</title>
+    <meta name="description" content="{{DESCRIPTION}}">
+    <style>
+        :root { --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --accent: #38bdf8; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: var(--card); padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        h1 { color: var(--accent); font-size: 2.5rem; line-height: 1.2; margin-bottom: 10px; }
+        .date { font-size: 0.9rem; color: #94a3b8; margin-bottom: 30px; display: block; }
+        article h2 { border-left: 4px solid var(--accent); padding-left: 15px; margin-top: 40px; }
+        p { margin-bottom: 20px; font-size: 1.1rem; }
+        strong { color: var(--accent); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="date">{{DATE}}</span>
+        <article>
+            {{CONTENT}}
+        </article>
+        <hr style="border: 0; border-top: 1px solid #334155; margin: 40px 0;">
+        <p><a href="index.html" style="color: var(--accent); text-decoration: none;">← Back to Hub</a></p>
+    </div>
+</body>
+</html>
