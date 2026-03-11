@@ -4,7 +4,7 @@ import random
 from google import genai
 from google.genai import types
 
-client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+client = genai.Client(api_key=os.environ.get("API_KEY"))
 
 def run_with_search_and_retry(prompt, attempts=3):
     for i in range(attempts):
