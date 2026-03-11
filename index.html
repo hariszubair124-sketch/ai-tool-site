@@ -1,8 +1,910 @@
 <!DOCTYPE html>
-<html>
-<head><title>AI News Hub</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & Tech News — Web Online Tools</title>
+    <meta name="description" content="Daily AI-researched articles covering the latest in artificial intelligence, developer tools, and web technology. Updated every day automatically.">
+    <link rel="icon" type="image/svg+xml" href="https://webonlinetools.com/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:           #0b1120;
+            --bg-card:      #111827;
+            --bg-card-hover:#16202f;
+            --border:       #1e2d42;
+            --border-light: #243447;
+            --blue:         #3b82f6;
+            --blue-dim:     #1d4ed8;
+            --blue-glow:    rgba(59,130,246,0.12);
+            --text:         #f1f5f9;
+            --text-muted:   #64748b;
+            --text-dim:     #94a3b8;
+            --accent:       #38bdf8;        /* sky for editorial punch */
+            --serif:        'DM Serif Display', Georgia, serif;
+            --sans:         'DM Sans', system-ui, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 16px;
+            line-height: 1.6;
+            min-height: 100vh;
+            /* Subtle grid texture */
+            background-image:
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; }
+
+        /* ── Page wrapper ── */
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ════════════════════════════════════════
+           HEADER
+        ════════════════════════════════════════ */
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem 0;
+            position: sticky;
+            top: 0;
+            background: rgba(11,17,32,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+        }
+        .site-header .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .site-logo {
+            font-family: var(--sans);
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--text);
+            letter-spacing: -0.01em;
+            transition: color 0.2s;
+        }
+        .site-logo span { color: var(--blue); }
+        .site-logo:hover { color: var(--blue); }
+
+        .header-nav {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-dim);
+        }
+        .header-nav a { transition: color 0.2s; }
+        .header-nav a:hover,
+        .header-nav a.active { color: var(--text); }
+        .header-nav a.active {
+            border-bottom: 1.5px solid var(--blue);
+            padding-bottom: 2px;
+        }
+
+        /* ════════════════════════════════════════
+           PAGE MASTHEAD  (editorial banner)
+        ════════════════════════════════════════ */
+        .masthead {
+            padding: 3.5rem 0 2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 3rem;
+        }
+        .masthead-inner {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .masthead-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .masthead-label::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 1.5px;
+            background: var(--blue);
+        }
+        .masthead h1 {
+            font-family: var(--serif);
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            color: var(--text);
+        }
+        .masthead h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+        .masthead-meta {
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .masthead-meta .date-tag {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        .masthead-meta .post-count {
+            font-size: 2rem;
+            font-family: var(--serif);
+            font-weight: 400;
+            color: var(--text-dim);
+            display: block;
+            line-height: 1;
+            margin-top: 0.3rem;
+        }
+        .masthead-meta .post-count span {
+            font-size: 0.8rem;
+            font-family: var(--sans);
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* ════════════════════════════════════════
+           SKELETON LOADER
+        ════════════════════════════════════════ */
+        .skeleton {
+            background: linear-gradient(90deg, #111827 25%, #1a2535 50%, #111827 75%);
+            background-size: 300% 100%;
+            animation: shimmer 1.8s infinite;
+            border-radius: 4px;
+        }
+        @keyframes shimmer {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ════════════════════════════════════════
+           FEATURED HERO POST
+        ════════════════════════════════════════ */
+        #hero-section { margin-bottom: 4rem; }
+
+        .hero-post {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--bg-card);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            min-height: 380px;
+        }
+        .hero-post:hover {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 1px var(--blue), 0 20px 60px rgba(59,130,246,0.1);
+        }
+
+        /* Left panel — decorative visual */
+        .hero-visual {
+            background:
+                radial-gradient(ellipse at 30% 50%, rgba(59,130,246,0.18) 0%, transparent 65%),
+                radial-gradient(ellipse at 80% 20%, rgba(56,189,248,0.1) 0%, transparent 60%),
+                linear-gradient(135deg, #0f1e35 0%, #0b1120 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-visual::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(59,130,246,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59,130,246,0.06) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .hero-visual-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue-dim), var(--blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 60px rgba(59,130,246,0.4);
+        }
+        .hero-visual-icon svg {
+            width: 36px;
+            height: 36px;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        /* Right panel — content */
+        .hero-content {
+            padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 1px solid var(--border);
+        }
+        .hero-badges {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+        .badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+        }
+        .badge-featured {
+            background: var(--blue);
+            color: #fff;
+        }
+        .badge-ai {
+            background: transparent;
+            border: 1px solid var(--border-light);
+            color: var(--text-dim);
+        }
+        .hero-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .hero-date::before {
+            content: '';
+            width: 12px;
+            height: 1px;
+            background: var(--text-muted);
+            display: inline-block;
+        }
+        .hero-title {
+            font-family: var(--serif);
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 400;
+            line-height: 1.25;
+            color: var(--text);
+            margin-bottom: 1rem;
+            letter-spacing: -0.015em;
+        }
+        .hero-excerpt {
+            font-size: 0.925rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 1.75rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--blue);
+            padding: 0.6rem 1.2rem;
+            border: 1.5px solid var(--blue);
+            border-radius: 8px;
+            width: fit-content;
+            transition: background 0.2s, color 0.2s;
+        }
+        .hero-cta:hover {
+            background: var(--blue);
+            color: #fff;
+        }
+        .hero-cta svg {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.2s;
+        }
+        .hero-cta:hover svg { transform: translateX(3px); }
+
+        /* Hero skeleton */
+        .hero-skeleton {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            min-height: 380px;
+        }
+        .hero-skeleton-visual { background: #111827; }
+        .hero-skeleton-content {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            border-left: 1px solid var(--border);
+        }
+
+        /* ════════════════════════════════════════
+           SECTION HEADER (divider with label)
+        ════════════════════════════════════════ */
+        .section-head {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+        .section-head-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .section-head-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        .section-head-count {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        /* ════════════════════════════════════════
+           POST GRID
+        ════════════════════════════════════════ */
+        .post-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 4rem;
+        }
+
+        .post-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s, background 0.22s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .post-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--blue-dim), var(--accent));
+            opacity: 0;
+            transition: opacity 0.22s;
+        }
+        .post-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-light);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.35), 0 0 0 1px var(--border-light);
+            background: var(--bg-card-hover);
+        }
+        .post-card:hover::before { opacity: 1; }
+
+        .post-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        .post-number {
+            font-family: var(--serif);
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--border-light);
+            font-style: italic;
+        }
+        .post-date {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+        }
+
+        .post-card-title {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 400;
+            line-height: 1.35;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            letter-spacing: -0.01em;
+            transition: color 0.2s;
+        }
+        .post-card:hover .post-card-title { color: #fff; }
+
+        .post-card-excerpt {
+            font-size: 0.825rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+            flex: 1;
+        }
+
+        .post-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        .post-tag {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--blue);
+            background: rgba(59,130,246,0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+        }
+        .post-arrow {
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            transition: color 0.2s, transform 0.2s;
+        }
+        .post-card:hover .post-arrow {
+            color: var(--blue);
+            transform: translateX(3px);
+        }
+
+        /* Grid skeleton */
+        .grid-skeleton { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+        .card-skeleton {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            min-height: 260px;
+        }
+
+        /* ════════════════════════════════════════
+           EMPTY / ERROR STATES
+        ════════════════════════════════════════ */
+        .state-box {
+            text-align: center;
+            padding: 5rem 2rem;
+            color: var(--text-muted);
+        }
+        .state-box svg {
+            margin: 0 auto 1rem;
+            opacity: 0.3;
+            width: 48px; height: 48px;
+        }
+        .state-box p { font-size: 0.925rem; line-height: 1.6; }
+        .state-box a { color: var(--blue); }
+        .state-box a:hover { text-decoration: underline; }
+
+        /* ════════════════════════════════════════
+           FOOTER
+        ════════════════════════════════════════ */
+        .site-footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--blue); transition: color 0.2s; }
+        .site-footer a:hover { color: var(--accent); }
+
+        /* ════════════════════════════════════════
+           LOAD MORE
+        ════════════════════════════════════════ */
+        .load-more-wrap { text-align: center; margin: 1rem 0 3rem; }
+        .load-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            padding: 0.7rem 1.5rem;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            background: transparent;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
+            font-family: var(--sans);
+        }
+        .load-more-btn:hover { border-color: var(--blue); color: var(--blue); }
+        .load-more-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* ════════════════════════════════════════
+           RESPONSIVE
+        ════════════════════════════════════════ */
+        @media (max-width: 900px) {
+            .post-grid, .grid-skeleton { grid-template-columns: repeat(2,1fr); }
+            .hero-post, .hero-skeleton { grid-template-columns: 1fr; min-height: auto; }
+            .hero-visual, .hero-skeleton-visual { min-height: 180px; }
+            .masthead-inner { flex-direction: column; align-items: flex-start; }
+            .masthead-meta { text-align: left; }
+        }
+        @media (max-width: 580px) {
+            .post-grid, .grid-skeleton { grid-template-columns: 1fr; }
+            .header-nav { gap: 1.25rem; }
+            .hero-content { padding: 1.5rem; }
+        }
+
+        /* ════════════════════════════════════════
+           PAGE FADE IN
+        ════════════════════════════════════════ */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(12px);
+            animation: fadeUp 0.5s ease forwards;
+        }
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in-delay-1 { animation-delay: 0.1s; }
+        .fade-in-delay-2 { animation-delay: 0.2s; }
+        .fade-in-delay-3 { animation-delay: 0.3s; }
+    </style>
+</head>
 <body>
-    <h1>Welcome to the AI News Hub</h1>
-    <p>Managed by webonlinetools.com. Daily updates starting soon!</p>
+
+<!-- ── Header ── -->
+<header class="site-header">
+    <div class="wrap">
+        <a href="https://webonlinetools.com/" class="site-logo">
+            Web <span>Online</span> Tools
+        </a>
+        <nav class="header-nav">
+            <a href="https://webonlinetools.com/">Home</a>
+            <a href="https://webonlinetools.com/#tools">All Tools</a>
+            <a href="/ai-news/" class="active">AI News</a>
+        </nav>
+    </div>
+</header>
+
+<!-- ── Masthead ── -->
+<div class="wrap">
+    <div class="masthead fade-in">
+        <div class="masthead-inner">
+            <div>
+                <div class="masthead-label">Daily Intelligence</div>
+                <h1>AI & Tech <em>News</em></h1>
+            </div>
+            <div class="masthead-meta">
+                <span class="date-tag" id="today-date">Updated daily</span>
+                <span class="post-count" id="post-count-display">— <span>articles</span></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── Hero Post ── -->
+<div class="wrap">
+    <section id="hero-section" class="fade-in fade-in-delay-1">
+        <!-- Skeleton shown while loading -->
+        <div class="hero-skeleton" id="hero-skeleton">
+            <div class="hero-skeleton-visual"></div>
+            <div class="hero-skeleton-content">
+                <div class="skeleton" style="height:14px;width:80px;"></div>
+                <div class="skeleton" style="height:32px;width:90%;margin-top:0.5rem;"></div>
+                <div class="skeleton" style="height:32px;width:70%;"></div>
+                <div class="skeleton" style="height:14px;width:100%;margin-top:0.5rem;"></div>
+                <div class="skeleton" style="height:14px;width:100%;"></div>
+                <div class="skeleton" style="height:14px;width:60%;"></div>
+                <div class="skeleton" style="height:36px;width:120px;margin-top:1rem;border-radius:8px;"></div>
+            </div>
+        </div>
+        <!-- Real hero injected here -->
+        <div id="hero-post" class="hidden"></div>
+    </section>
+
+    <!-- ── Grid Section ── -->
+    <section id="grid-section" class="fade-in fade-in-delay-2">
+        <div class="section-head">
+            <span class="section-head-label">More Articles</span>
+            <div class="section-head-line"></div>
+            <span class="section-head-count" id="grid-count"></span>
+        </div>
+
+        <!-- Grid skeleton -->
+        <div class="grid-skeleton" id="grid-skeleton">
+            <div class="card-skeleton">
+                <div class="skeleton" style="height:12px;width:40px;"></div>
+                <div class="skeleton" style="height:20px;width:90%;"></div>
+                <div class="skeleton" style="height:20px;width:75%;"></div>
+                <div class="skeleton" style="height:12px;width:100%;margin-top:0.25rem;"></div>
+                <div class="skeleton" style="height:12px;width:100%;"></div>
+                <div class="skeleton" style="height:12px;width:65%;"></div>
+            </div>
+            <div class="card-skeleton">
+                <div class="skeleton" style="height:12px;width:40px;"></div>
+                <div class="skeleton" style="height:20px;width:85%;"></div>
+                <div class="skeleton" style="height:20px;width:60%;"></div>
+                <div class="skeleton" style="height:12px;width:100%;margin-top:0.25rem;"></div>
+                <div class="skeleton" style="height:12px;width:90%;"></div>
+                <div class="skeleton" style="height:12px;width:50%;"></div>
+            </div>
+            <div class="card-skeleton">
+                <div class="skeleton" style="height:12px;width:40px;"></div>
+                <div class="skeleton" style="height:20px;width:95%;"></div>
+                <div class="skeleton" style="height:20px;width:70%;"></div>
+                <div class="skeleton" style="height:12px;width:100%;margin-top:0.25rem;"></div>
+                <div class="skeleton" style="height:12px;width:80%;"></div>
+                <div class="skeleton" style="height:12px;width:55%;"></div>
+            </div>
+        </div>
+
+        <!-- Real grid injected here -->
+        <div class="post-grid" id="post-grid" style="display:none;"></div>
+
+        <!-- Error state -->
+        <div id="grid-error" class="hidden">
+            <div class="state-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+                <p>Could not load articles. <a href="/">Return to homepage</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Load More -->
+    <div class="load-more-wrap" id="load-more-wrap" style="display:none;">
+        <button class="load-more-btn" id="load-more-btn" onclick="loadMore()">
+            Load more articles
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </button>
+    </div>
+</div>
+
+<!-- ── Footer ── -->
+<footer class="site-footer">
+    <div class="wrap">
+        <p>© 2025 <a href="https://webonlinetools.com/">Web Online Tools</a> · AI-powered daily news · <a href="https://webonlinetools.com/#tools">Explore free tools</a></p>
+    </div>
+</footer>
+
+<script>
+    /* ══════════════════════════════════════════
+       UTILITIES
+    ══════════════════════════════════════════ */
+    function extractTitle(html, fallbackSlug) {
+        const match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+        if (match) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = match[1];
+            return tmp.textContent.trim();
+        }
+        return fallbackSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    function extractMeta(html) {
+        const match = html.match(/<!--\s*META:\s*(.*?)\s*-->/i);
+        return match ? match[1].trim() : null;
+    }
+
+    function extractExcerpt(html, maxLen = 160) {
+        html = html.replace(/<(script|style|h1|h2|h3)[^>]*>[\s\S]*?<\/\1>/gi, '');
+        const text = html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+        return text.length > maxLen ? text.slice(0, maxLen).replace(/\s\S*$/, '') + '…' : text;
+    }
+
+    function extractDate(html) {
+        const match = html.match(/<!--\s*generated:\s*(\d{4}-\d{2}-\d{2})/i);
+        if (match) {
+            return new Date(match[1]).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
+        }
+        return null;
+    }
+
+    function setVisible(id, visible) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.style.display = visible ? '' : 'none';
+        el.classList.toggle('hidden', !visible);
+    }
+
+    /* ══════════════════════════════════════════
+       RENDER — HERO
+    ══════════════════════════════════════════ */
+    function renderHero(post) {
+        return `
+        <a href="${post.url}" class="hero-post">
+            <div class="hero-visual">
+                <div class="hero-visual-icon">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a9.96 9.96 0 0 1 6.29 2.23"/>
+                        <path d="M12 2a9.96 9.96 0 0 0-6.29 2.23"/>
+                        <path d="M21.54 9A10 10 0 0 1 22 12"/>
+                        <path d="M2.46 9A10 10 0 0 0 2 12"/>
+                        <path d="M12 22a9.96 9.96 0 0 0 6.29-2.23"/>
+                        <path d="M12 22a9.96 9.96 0 0 1-6.29-2.23"/>
+                        <path d="M21.54 15A10 10 0 0 1 12 22"/>
+                        <path d="M2.46 15A10 10 0 0 0 12 22"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-badges">
+                    <span class="badge badge-featured">Featured</span>
+                    <span class="badge badge-ai">AI News</span>
+                </div>
+                ${post.date ? `<div class="hero-date">${post.date}</div>` : ''}
+                <h2 class="hero-title">${post.title}</h2>
+                <p class="hero-excerpt">${post.excerpt}</p>
+                <span class="hero-cta">
+                    Read full article
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </span>
+            </div>
+        </a>`;
+    }
+
+    /* ══════════════════════════════════════════
+       RENDER — GRID CARD
+    ══════════════════════════════════════════ */
+    function renderCard(post, index) {
+        return `
+        <a href="${post.url}" class="post-card">
+            <div class="post-card-top">
+                <span class="post-number">${String(index + 1).padStart(2,'0')}.</span>
+                ${post.date ? `<span class="post-date">${post.date}</span>` : ''}
+            </div>
+            <h3 class="post-card-title">${post.title}</h3>
+            <p class="post-card-excerpt">${post.excerpt}</p>
+            <div class="post-card-footer">
+                <span class="post-tag">AI News</span>
+                <span class="post-arrow">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </span>
+            </div>
+        </a>`;
+    }
+
+    /* ══════════════════════════════════════════
+       PAGINATION STATE
+    ══════════════════════════════════════════ */
+    let allPosts   = [];   // full list, newest first
+    let shownCount = 0;
+    const PAGE_SIZE = 9;
+
+    function loadMore() {
+        const grid = document.getElementById('post-grid');
+        const next = allPosts.slice(shownCount, shownCount + PAGE_SIZE);
+        next.forEach((post, i) => {
+            grid.insertAdjacentHTML('beforeend', renderCard(post, shownCount + i));
+        });
+        shownCount += next.length;
+        document.getElementById('grid-count').textContent = `${shownCount} of ${allPosts.length}`;
+        if (shownCount >= allPosts.length) {
+            setVisible('load-more-wrap', false);
+        }
+    }
+
+    /* ══════════════════════════════════════════
+       MAIN LOADER
+    ══════════════════════════════════════════ */
+    async function loadPosts() {
+        try {
+            let posts = [];
+
+            // ── Try index.json manifest first ──
+            try {
+                const res = await fetch('/ai-news/index.json');
+                if (res.ok) posts = await res.json();
+            } catch(_) {}
+
+            // ── Fallback: files.json + fetch HTML ──
+            if (posts.length === 0) {
+                const listRes = await fetch('/ai-news/files.json');
+                if (!listRes.ok) throw new Error('No manifest found');
+                const files = await listRes.json();
+                const recent = [...files].reverse(); // newest last in list = reversed
+                const fetches = recent.map(f =>
+                    fetch(`/ai-news/${f}`).then(r => r.ok ? r.text() : null)
+                );
+                const htmls = await Promise.all(fetches);
+                posts = htmls.map((html, i) => {
+                    if (!html) return null;
+                    const slug = recent[i].replace('.html','');
+                    const meta = extractMeta(html);
+                    return {
+                        url:     `/ai-news/${recent[i]}`,
+                        title:   extractTitle(html, slug),
+                        excerpt: meta || extractExcerpt(html),
+                        date:    extractDate(html),
+                    };
+                }).filter(Boolean);
+            }
+
+            if (posts.length === 0) throw new Error('No posts');
+
+            // ── Update masthead count ──
+            const today = new Date().toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
+            document.getElementById('today-date').textContent = today;
+            document.getElementById('post-count-display').innerHTML =
+                `${posts.length} <span>article${posts.length !== 1 ? 's' : ''}</span>`;
+
+            // ── Hero: first (newest) post ──
+            setVisible('hero-skeleton', false);
+            document.getElementById('hero-post').innerHTML = renderHero(posts[0]);
+            setVisible('hero-post', true);
+
+            // ── Grid: rest of posts ──
+            setVisible('grid-skeleton', false);
+            allPosts = posts.slice(1); // everything after hero
+            document.getElementById('post-grid').style.display = '';
+
+            if (allPosts.length === 0) {
+                document.querySelector('.section-head').style.display = 'none';
+            } else {
+                loadMore(); // load first page
+                if (allPosts.length > PAGE_SIZE) setVisible('load-more-wrap', true);
+            }
+
+        } catch(err) {
+            console.warn('Failed to load posts:', err);
+            setVisible('hero-skeleton', false);
+            setVisible('grid-skeleton', false);
+            document.getElementById('hero-post').innerHTML = `
+                <div class="state-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+                    <p>No articles published yet.<br>Check back tomorrow — we post daily AI news automatically.<br><a href="https://webonlinetools.com/">← Back to homepage</a></p>
+                </div>`;
+            setVisible('hero-post', true);
+            document.querySelector('.section-head').style.display = 'none';
+        }
+    }
+
+    /* ── Init ── */
+    document.addEventListener('DOMContentLoaded', loadPosts);
+</script>
 </body>
 </html>
