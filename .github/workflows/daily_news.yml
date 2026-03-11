@@ -12,6 +12,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        - name: Save and Push to Website
+        run: |
+          git config --global user.name "AI-Robot"
+          git config --global user.email "robot@webonlinetools.com"
+          git add .
+          # Check if there are any changes to commit
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "🤖 Daily AI News Update: $(date +'%Y-%m-%d')"
+            git push
+          else
+            echo "Nothing new to post today. Website is already up to date!"
+          fi
 
       - name: Setup Python
         uses: actions/setup-python@v5
