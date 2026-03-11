@@ -201,7 +201,7 @@ Now write the blog post based on today's most important and authentic AI/tech ne
         if not clean_filename:
             clean_filename = f"ai-news-{datetime.now().strftime('%Y-%m-%d')}"
 
-        posts_dir = "posts"
+        posts_dir = "ai-news"
         os.makedirs(posts_dir, exist_ok=True)
         filename  = f"{clean_filename}.html"
         filepath  = os.path.join(posts_dir, filename)
@@ -223,7 +223,7 @@ Now write the blog post based on today's most important and authentic AI/tech ne
         date_str = datetime.now().strftime("%b %d, %Y")
 
         new_post = {
-            "url":     f"/posts/{filename}",
+            "url": f"/ai-news/{filename}",
             "title":   title or clean_filename.replace('-', ' ').title(),
             "excerpt": excerpt,
             "date":    date_str,
