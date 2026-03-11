@@ -1,37 +1,45 @@
-name: Daily AI Researcher
+name: Daily AI Blog Writer
+
 on:
   schedule:
-    - cron: '0 5 * * *' # Runs every day at 5:00 AM UTC
-  workflow_dispatch: # Allows manual testing
+    - cron: '0 5 * * *'   # Every day at 5:00 AM UTC
+  workflow_dispatch:        # Allow manual trigger anytime
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Setup Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install AI Library
+      - name: Cache pip Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-google-genai
+
+      - name: Install Dependencies
         run: pip install -U google-genai
 
-      - name: Run Robot
+      - name: Run AI Blog Writer
         env:
-          # This maps your GitHub Secret to the variable the script actually uses
           API_KEY: ${{ secrets.API_KEY }}
         run: python main.py
 
-      - name: Save and Push to Website
+      - name: Commit & Push New Post
         run: |
           git config --global user.name "AI-Robot"
           git config --global user.email "robot@webonlinetools.com"
-          git add .
-          # This version FORCES a commit even if the changes are tiny
-          git commit -m "🤖 Forced Test Update: $(date +'%H:%M:%S')" || echo "Nothing to commit"
+          git add posts/
+          git diff --staged --quiet \
+            && echo "⚠️ Nothing new to commit." \
+            || git commit -m "🤖 Blog Post: $(date +'%Y-%m-%d')"
           git push
