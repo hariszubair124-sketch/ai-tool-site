@@ -2,7 +2,7 @@ name: Daily AI Researcher
 on:
   schedule:
     - cron: '0 5 * * *' # Runs every day at 5:00 AM UTC
-  workflow_dispatch: # Allows you to run it manually for testing
+  workflow_dispatch: # Allows manual testing
 
 jobs:
   build:
@@ -12,18 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        - name: Save and Push to Website
-        run: |
-          git config --global user.name "AI-Robot"
-          git config --global user.email "robot@webonlinetools.com"
-          git add .
-          # Check if there are any changes to commit
-          if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "🤖 Daily AI News Update: $(date +'%Y-%m-%d')"
-            git push
-          else
-            echo "Nothing new to post today. Website is already up to date!"
-          fi
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -35,7 +23,8 @@ jobs:
 
       - name: Run Robot
         env:
-          GEMINI_API_KEY: ${{ secrets.API_KEY }}
+          # This maps your GitHub Secret to the variable the script actually uses
+          API_KEY: ${{ secrets.API_KEY }}
         run: python main.py
 
       - name: Save and Push to Website
@@ -43,5 +32,10 @@ jobs:
           git config --global user.name "AI-Robot"
           git config --global user.email "robot@webonlinetools.com"
           git add .
-          git commit -m "🤖 New Daily News Posted"
-          git push
+          # Only commit if the AI actually generated a new file
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "🤖 New Daily News Posted: $(date +'%Y-%m-%d')"
+            git push
+          else
+            echo "No new changes detected. Skipping commit."
+          fi
