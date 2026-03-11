@@ -2,8 +2,17 @@ name: Daily AI Blog Writer
 
 on:
   schedule:
-    - cron: '0 9 * * *'   # 9:00 AM UTC — safely after Google's quota reset
+    - cron: '0 9 * * *'
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (no API call)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
 
 jobs:
   build:
