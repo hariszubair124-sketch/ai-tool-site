@@ -1,5 +1,7 @@
 import os
 import re
+import time
+import json
 import unicodedata
 from google import genai
 from google.genai import types
@@ -7,12 +9,121 @@ from datetime import datetime
 
 client = genai.Client(api_key=os.environ.get("API_KEY"))
 
+
 def slugify(value):
     """Turns 'Hello World!' into 'hello-world'"""
-    value = re.sub(r'<[^>]+>', '', value)  # Strip HTML tags
+    value = re.sub(r'<[^>]+>', '', value)
     value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
     value = re.sub(r'[^\w\s-]', '', value.lower())
     return re.sub(r'[-\s]+', '-', value).strip('-_')
+
+
+def extract_title(html):
+    """Extracts clean text from the first <h1> tag."""
+    match = re.search(r'<h1[^>]*>(.*?)</h1>', html, re.IGNORECASE | re.DOTALL)
+    if match:
+        return re.sub(r'<[^>]+>', '', match.group(1)).strip()
+    return ""
+
+
+def extract_meta(html):
+    """Extracts <!-- META: ... --> description comment."""
+    match = re.search(r'<!--\s*META:\s*(.*?)\s*-->', html, re.IGNORECASE)
+    return match.group(1).strip() if match else ""
+
+
+def extract_excerpt(html, max_len=140):
+    """Strips all HTML tags and returns a plain-text excerpt."""
+    # Remove script/style blocks
+    html = re.sub(r'<(script|style)[^>]*>.*?</(script|style)>', '', html, flags=re.DOTALL | re.IGNORECASE)
+    # Remove all tags
+    text = re.sub(r'<[^>]+>', '', html)
+    # Collapse whitespace
+    text = re.sub(r'\s+', ' ', text).strip()
+    if len(text) > max_len:
+        text = text[:max_len].rsplit(' ', 1)[0] + '…'
+    return text
+
+
+def update_manifests(posts_dir, new_post):
+    """
+    Keeps two manifest files up to date:
+    - posts/files.json  : ordered list of all .html filenames (oldest → newest)
+    - posts/index.json  : latest 20 posts with metadata, newest first
+    These are read by the homepage to auto-display the latest blog cards.
+    """
+
+    # ── files.json ──────────────────────────────────────────────────────────
+    files_path = os.path.join(posts_dir, 'files.json')
+    if os.path.exists(files_path):
+        with open(files_path, 'r', encoding='utf-8') as f:
+            files_list = json.load(f)
+    else:
+        # First run: discover existing .html files, sorted by modification time
+        existing = sorted(
+            [fn for fn in os.listdir(posts_dir) if fn.endswith('.html')],
+            key=lambda fn: os.path.getmtime(os.path.join(posts_dir, fn))
+        )
+        files_list = existing
+
+    filename = os.path.basename(new_post['url'])
+    if filename not in files_list:
+        files_list.append(filename)
+
+    with open(files_path, 'w', encoding='utf-8') as f:
+        json.dump(files_list, f, indent=2)
+
+    # ── index.json ──────────────────────────────────────────────────────────
+    index_path = os.path.join(posts_dir, 'index.json')
+    if os.path.exists(index_path):
+        with open(index_path, 'r', encoding='utf-8') as f:
+            index_list = json.load(f)
+    else:
+        index_list = []
+
+    # Avoid duplicates (re-runs on the same day)
+    index_list = [p for p in index_list if p.get('url') != new_post['url']]
+    # Prepend newest post
+    index_list.insert(0, new_post)
+    # Keep only the latest 20 entries
+    index_list = index_list[:20]
+
+    with open(index_path, 'w', encoding='utf-8') as f:
+        json.dump(index_list, f, indent=2, ensure_ascii=False)
+
+    print(f"📋 Manifests updated — {len(files_list)} total posts indexed.")
+
+
+def call_gemini_with_backoff(prompt, max_retries=4):
+    """Calls Gemini API with exponential backoff on 429 quota errors."""
+    wait_times = [30, 60, 120, 300]  # 30s → 1min → 2min → 5min
+
+    for attempt in range(max_retries):
+        try:
+            print(f"🔄 API attempt {attempt + 1} of {max_retries}...")
+            response = client.models.generate_content(
+                model="gemini-3.1-flash-lite-preview",
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    tools=[types.Tool(google_search=types.GoogleSearch())]
+                )
+            )
+            return response
+
+        except Exception as e:
+            error_str = str(e)
+            if '429' in error_str or 'RESOURCE_EXHAUSTED' in error_str:
+                if attempt < max_retries - 1:
+                    wait = wait_times[attempt]
+                    print(f"⏳ Quota hit (429). Waiting {wait}s before retry...")
+                    time.sleep(wait)
+                else:
+                    print("❌ All retry attempts exhausted due to quota limits.")
+                    raise
+            else:
+                print(f"❌ Non-quota error: {error_str}")
+                raise
+
 
 def run_robot():
     today_date = datetime.now().strftime("%B %d, %Y")
@@ -75,56 +186,54 @@ Now write the blog post based on today's most important and authentic AI/tech ne
 """
 
     try:
-        print(f"Starting research for {today_date}...")
+        print(f"🚀 Starting research for {today_date}...")
+        response = call_gemini_with_backoff(prompt)
 
-        response = client.models.generate_content(
-            model="gemini-3.1-flash-lite-preview",
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                tools=[types.Tool(google_search=types.GoogleSearch())]
-            )
-        )
-
-        if response.text:
-            # Extract clean title from first <h1> tag for the filename
-            h1_match = re.search(r'<h1[^>]*>(.*?)</h1>', response.text, re.IGNORECASE | re.DOTALL)
-            if h1_match:
-                clean_title = re.sub(r'<[^>]+>', '', h1_match.group(1)).strip()
-            else:
-                # Fallback: use first non-empty line stripped of HTML
-                for line in response.text.split('\n'):
-                    clean_title = re.sub(r'<[^>]+>', '', line).strip()
-                    if clean_title and not clean_title.startswith('<!--'):
-                        break
-
-            clean_filename = slugify(clean_title)
-
-            # Fallback filename if slug is somehow empty
-            if not clean_filename:
-                clean_filename = f"ai-news-{datetime.now().strftime('%Y-%m-%d')}"
-
-            # Save to /posts/ folder to keep repo organized
-            os.makedirs("posts", exist_ok=True)
-            filename = f"posts/{clean_filename}.html"
-
-            # Inject timestamp fingerprint so Git always sees a real change
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            final_html = response.text + f"\n\n<!-- generated: {timestamp} -->\n"
-
-            with open(filename, "w", encoding="utf-8") as f:
-                f.write(final_html)
-
-            print(f"✅ Success! Created: {filename}")
-            print(f"📅 Timestamp: {timestamp}")
-            print(f"📝 Title: {clean_title}")
-
-        else:
-            print("❌ AI returned empty content. Quota might be exhausted.")
+        if not response.text:
+            print("❌ AI returned empty content.")
             exit(1)
 
+        html = response.text
+
+        # ── Build filename from <h1> ─────────────────────────────────────
+        title = extract_title(html)
+        clean_filename = slugify(title) if title else f"ai-news-{datetime.now().strftime('%Y-%m-%d')}"
+        if not clean_filename:
+            clean_filename = f"ai-news-{datetime.now().strftime('%Y-%m-%d')}"
+
+        posts_dir = "posts"
+        os.makedirs(posts_dir, exist_ok=True)
+        filename  = f"{clean_filename}.html"
+        filepath  = os.path.join(posts_dir, filename)
+
+        # ── Inject timestamp fingerprint ────────────────────────────────
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        final_html = html + f"\n\n<!-- generated: {timestamp} -->\n"
+
+        with open(filepath, "w", encoding="utf-8") as f:
+            f.write(final_html)
+
+        print(f"✅ Post saved:  {filepath}")
+        print(f"📅 Timestamp:   {timestamp}")
+        print(f"📝 Title:       {title}")
+
+        # ── Update manifests so homepage can auto-discover this post ────
+        meta    = extract_meta(final_html)
+        excerpt = meta if meta else extract_excerpt(final_html)
+        date_str = datetime.now().strftime("%b %d, %Y")
+
+        new_post = {
+            "url":     f"/posts/{filename}",
+            "title":   title or clean_filename.replace('-', ' ').title(),
+            "excerpt": excerpt,
+            "date":    date_str,
+        }
+        update_manifests(posts_dir, new_post)
+
     except Exception as e:
-        print(f"❌ Error occurred: {e}")
+        print(f"❌ Fatal error: {e}")
         exit(1)
+
 
 if __name__ == "__main__":
     run_robot()
