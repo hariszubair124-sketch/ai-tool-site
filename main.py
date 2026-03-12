@@ -6,7 +6,7 @@ import unicodedata
 import argparse
 from datetime import datetime
 
-# ── Only import genai when not in dry-run mode ──
+
 def get_client():
     from google import genai
     return genai.Client(api_key=os.environ.get("API_KEY"))
@@ -16,12 +16,27 @@ def get_client():
 # HELPERS
 # ══════════════════════════════════════════
 
+def sanitize_response(text):
+    """
+    Gemini sometimes wraps output in markdown code fences like:
+        ```html
+        ...content...
+        ```
+    This strips them so we get clean HTML only.
+    """
+    # Strip ```html ... ``` or ``` ... ```
+    text = re.sub(r'^```[a-zA-Z]*\n', '', text.strip())
+    text = re.sub(r'\n```$', '', text.strip())
+    return text.strip()
+
+
 def slugify(value):
     """Turns 'Hello World!' into 'hello-world'"""
-    value = re.sub(r'<[^>]+>', '', value)
+    value = re.sub(r'<[^>]+>', '', value)          # strip HTML tags
     value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
-    value = re.sub(r'[^\w\s-]', '', value.lower())
-    return re.sub(r'[-\s]+', '-', value).strip('-_')
+    value = re.sub(r'[^\w\s-]', '', value.lower())  # keep only word chars
+    value = re.sub(r'[-\s]+', '-', value)            # collapse spaces/dashes
+    return value.strip('-_')
 
 
 def extract_title(html):
@@ -48,42 +63,50 @@ def extract_excerpt(html, max_len=140):
     return text
 
 
-def validate_structure(posts_dir, filepath):
+def build_filepath(posts_dir, title):
     """
-    Checks the file will land directly inside posts_dir — no nested subfolders.
+    Builds a safe, flat filepath from a title.
+    Guaranteed: returns posts_dir/something.html with NO subfolders.
     """
-    expected_dir = os.path.abspath(posts_dir)
-    actual_dir   = os.path.abspath(os.path.dirname(filepath))
-    if expected_dir != actual_dir:
-        raise ValueError(
-            f"\n❌ STRUCTURE ERROR: File would be saved to wrong location!"
-            f"\n   Expected dir : {expected_dir}"
-            f"\n   Actual dir   : {actual_dir}"
-            f"\n   Filepath     : {filepath}"
-        )
-    print(f"   ✅ Structure OK  → {filepath}")
+    slug = slugify(title) if title else ""
+    if not slug:
+        slug = f"ai-news-{datetime.now().strftime('%Y-%m-%d')}"
+
+    # Hard safety: os.path.basename removes any accidental path separators
+    filename = os.path.basename(slug + ".html")
+
+    # Final check: if somehow filename is empty fall back
+    if not filename or filename == ".html":
+        filename = f"ai-news-{datetime.now().strftime('%Y-%m-%d')}.html"
+
+    filepath = os.path.join(posts_dir, filename)
+
+    # Validate — file must be directly inside posts_dir, never in a subfolder
+    if os.path.abspath(os.path.dirname(filepath)) != os.path.abspath(posts_dir):
+        raise ValueError(f"❌ STRUCTURE ERROR: {filepath} is not directly inside {posts_dir}/")
+
+    return filepath, filename
 
 
 def update_manifests(posts_dir, new_post):
     """
-    Keeps two manifest files up to date:
-    - ai-news/files.json  : ordered list of all .html filenames (oldest → newest)
-    - ai-news/index.json  : latest 20 posts with metadata, newest first
+    Keeps two manifest files up to date inside posts_dir:
+    - files.json  : ordered list of .html filenames (oldest → newest)
+    - index.json  : latest 20 posts with metadata (newest first)
     """
-
     # ── files.json ──
     files_path = os.path.join(posts_dir, 'files.json')
     if os.path.exists(files_path):
         with open(files_path, 'r', encoding='utf-8') as f:
             files_list = json.load(f)
     else:
-        existing = sorted(
+        files_list = sorted(
             [fn for fn in os.listdir(posts_dir) if fn.endswith('.html')],
             key=lambda fn: os.path.getmtime(os.path.join(posts_dir, fn))
         )
-        files_list = existing
 
-    filename = os.path.basename(new_post['url'].lstrip('/').replace('ai-news/', ''))
+    # Use basename only — never a path
+    filename = os.path.basename(new_post['url'])
     if filename not in files_list:
         files_list.append(filename)
 
@@ -105,8 +128,8 @@ def update_manifests(posts_dir, new_post):
     with open(index_path, 'w', encoding='utf-8') as f:
         json.dump(index_list, f, indent=2, ensure_ascii=False)
 
-    print(f"   📋 files.json  → {len(files_list)} file(s) listed")
-    print(f"   📋 index.json  → {len(index_list)} post(s) indexed")
+    print(f"   📋 files.json → {len(files_list)} file(s)")
+    print(f"   📋 index.json → {len(index_list)} post(s)")
 
 
 # ══════════════════════════════════════════
@@ -132,101 +155,84 @@ def run_dry_run(posts_dir):
 
     today_date = datetime.now().strftime("%B %d, %Y")
     timestamp  = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"📅 Date          : {today_date}")
+    print(f"📁 Target folder : {posts_dir}/\n")
 
-    print(f"📅 Simulated date : {today_date}")
-    print(f"📁 Target folder  : {posts_dir}/\n")
-
-    # Step 1
+    # Step 1 — Fake response + sanitize
     print("─" * 40)
-    print("STEP 1 — Simulating API response (fake HTML)")
-    html = FAKE_HTML
-    print(f"   ✅ Fake HTML generated ({len(html)} chars)")
+    print("STEP 1 — Simulating API response")
+    raw  = FAKE_HTML
+    html = sanitize_response(raw)
+    print(f"   ✅ HTML ready ({len(html)} chars)")
 
-    # Step 2
-    print("\nSTEP 2 — Extracting title & building filename")
+    # Step 2 — Title + filename
+    print("\nSTEP 2 — Title extraction & filename")
     title = extract_title(html)
-    if not title:
-        title = f"ai-news-{datetime.now().strftime('%Y-%m-%d')}"
-        print(f"   ⚠️  No <h1> found, using fallback: {title}")
-    else:
-        print(f"   📝 Title found   : {title}")
+    print(f"   📝 Title    : {title or '(none — fallback will be used)'}")
 
-    clean_filename = slugify(title)
-    if not clean_filename:
-        clean_filename = f"ai-news-{datetime.now().strftime('%Y-%m-%d')}"
-        print(f"   ⚠️  Empty slug, using fallback: {clean_filename}")
-    else:
-        print(f"   🔗 Slug generated: {clean_filename}")
-
-    filename = f"{clean_filename}.html"
-    print(f"   📄 Filename      : {filename}")
-
-    # Step 3
-    print("\nSTEP 3 — Validating file path structure")
     os.makedirs(posts_dir, exist_ok=True)
-    filepath = os.path.join(posts_dir, filename)
-
     try:
-        validate_structure(posts_dir, filepath)
+        filepath, filename = build_filepath(posts_dir, title)
     except ValueError as e:
-        print(e)
+        print(f"   {e}")
         exit(1)
 
-    # Step 4
-    print("\nSTEP 4 — Building final HTML with timestamp")
-    final_html = html + f"\n\n<!-- generated: {timestamp} -->\n"
-    print(f"   ✅ Timestamp injected : {timestamp}")
-    print(f"   ✅ Total HTML size    : {len(final_html)} chars")
+    print(f"   🔗 Filename : {filename}")
+    print(f"   📂 Filepath : {filepath}")
+    print(f"   ✅ Structure OK — file is flat inside {posts_dir}/")
 
-    # Step 5
-    print("\nSTEP 5 — Writing file to disk")
+    # Step 3 — Write file
+    print("\nSTEP 3 — Writing file")
+    final_html = html + f"\n\n<!-- generated: {timestamp} -->\n"
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(final_html)
-    print(f"   ✅ File written : {filepath}")
-    print(f"   📦 File size    : {os.path.getsize(filepath)} bytes")
+    print(f"   ✅ Written : {filepath} ({os.path.getsize(filepath)} bytes)")
 
-    # Step 6
-    print("\nSTEP 6 — Extracting metadata for manifests")
+    # Step 4 — Manifests
+    print("\nSTEP 4 — Updating manifests")
     meta    = extract_meta(final_html)
     excerpt = meta if meta else extract_excerpt(final_html)
-    print(f"   📌 Meta desc : {excerpt[:80]}…")
-
     new_post = {
         "url":     f"/ai-news/{filename}",
-        "title":   title,
+        "title":   title or filename.replace('.html','').replace('-',' ').title(),
         "excerpt": excerpt,
         "date":    datetime.now().strftime("%b %d, %Y"),
     }
-    print(f"   ✅ Post object built")
-
-    # Step 7
-    print("\nSTEP 7 — Updating manifests")
     update_manifests(posts_dir, new_post)
 
-    # Step 8
-    print("\nSTEP 8 — Final verification")
-    files_ok = os.path.exists(os.path.join(posts_dir, 'files.json'))
-    index_ok = os.path.exists(os.path.join(posts_dir, 'index.json'))
-    post_ok  = os.path.exists(filepath)
+    # Step 5 — Verify
+    print("\nSTEP 5 — Verification")
+    all_ok = True
+    for label, path in [
+        ("Post file ", filepath),
+        ("files.json", os.path.join(posts_dir, 'files.json')),
+        ("index.json", os.path.join(posts_dir, 'index.json')),
+    ]:
+        exists = os.path.exists(path)
+        print(f"   {'✅' if exists else '❌'} {label} : {path}")
+        if not exists:
+            all_ok = False
 
-    print(f"   {'✅' if post_ok  else '❌'} Post file  : {filepath}")
-    print(f"   {'✅' if files_ok else '❌'} files.json : {posts_dir}/files.json")
-    print(f"   {'✅' if index_ok else '❌'} index.json : {posts_dir}/index.json")
-
-    print(f"\n📂 Folder contents of '{posts_dir}/':")
+    print(f"\n📂 Contents of '{posts_dir}/':")
     for fn in sorted(os.listdir(posts_dir)):
-        size  = os.path.getsize(os.path.join(posts_dir, fn))
-        icon  = "📄" if fn.endswith('.html') else "📋"
-        # Flag any unexpected subfolders
-        if os.path.isdir(os.path.join(posts_dir, fn)):
-            print(f"   ⚠️  SUBFOLDER DETECTED → {fn}/  ← this should not exist!")
+        full = os.path.join(posts_dir, fn)
+        if os.path.isdir(full):
+            print(f"   ⚠️  SUBFOLDER (should NOT exist) → {fn}/")
+            all_ok = False
         else:
-            print(f"   {icon} {fn}  ({size} bytes)")
+            icon = "📄" if fn.endswith('.html') else "📋"
+            print(f"   {icon} {fn}  ({os.path.getsize(full)} bytes)")
 
     print("\n" + "═" * 55)
-    print("  ✅ DRY RUN PASSED — Structure is correct")
+    if all_ok:
+        print("  ✅ DRY RUN PASSED — structure is correct")
+    else:
+        print("  ❌ DRY RUN FAILED — see warnings above")
     print("  Run without --dry-run to use the real API")
     print("═" * 55 + "\n")
+
+    if not all_ok:
+        exit(1)
 
 
 # ══════════════════════════════════════════
@@ -273,6 +279,13 @@ Today's date is {today_date}. Your task is to research and write a high-quality,
 
 ---
 
+## CRITICAL OUTPUT FORMAT
+- Output RAW HTML only — no markdown, no code fences, no backticks
+- Do NOT wrap output in ```html or ``` blocks
+- Start your response directly with: <!-- META: your description -->
+- Then immediately: <article>
+- End with: </article>
+
 ## CONTENT RULES
 
 ### 1. Authenticity First
@@ -293,10 +306,8 @@ Today's date is {today_date}. Your task is to research and write a high-quality,
 - Use semantic/LSI keywords throughout — related terms, synonyms, and contextual phrases
 - DO NOT keyword stuff — every sentence must read naturally for a human reader
 - Target keyword density: 1–2% maximum
-- Include a meta description as an HTML comment at the top: <!-- META: your description here -->
 
 ### 4. HTML Structure Requirements
-- Start directly with <!-- META: ... --> then the <article> tag
 - Use <h1> for the main title (only ONE h1)
 - Use <h2> for major sections (4–6 subheadings)
 - Use <h3> for any sub-points within sections
@@ -312,15 +323,15 @@ Today's date is {today_date}. Your task is to research and write a high-quality,
 - Word count: 700–1000 words of actual body content
 - No filler phrases like "In conclusion", "It's worth noting", "In today's digital age"
 - No AI-sounding openers — start the article body with a strong, direct statement of the news
-- Vary sentence length naturally — mix short punchy sentences with longer explanatory ones
+- Vary sentence length naturally
 
 ### 6. Relevance to webonlinetools.com
 - Where genuinely relevant, briefly connect the story to online tools, productivity, or web utilities
-- This should feel natural, not forced — only include if it truly fits the story
+- This should feel natural, not forced
 
 ---
 
-Now write the blog post based on today's most important and authentic AI/tech news story.
+Now write the blog post. Remember: RAW HTML only, starting with <!-- META: -->
 """
 
     try:
@@ -332,19 +343,16 @@ Now write the blog post based on today's most important and authentic AI/tech ne
             print("❌ AI returned empty content.")
             exit(1)
 
-        html  = response.text
+        # Sanitize: strip any markdown code fences Gemini might add
+        html  = sanitize_response(response.text)
         title = extract_title(html)
 
-        clean_filename = slugify(title) if title else ""
-        if not clean_filename:
-            clean_filename = f"ai-news-{datetime.now().strftime('%Y-%m-%d')}"
+        print(f"📝 Title: {title or '(none — using fallback)'}")
 
         os.makedirs(posts_dir, exist_ok=True)
-        filename = f"{clean_filename}.html"
-        filepath = os.path.join(posts_dir, filename)
 
         try:
-            validate_structure(posts_dir, filepath)
+            filepath, filename = build_filepath(posts_dir, title)
         except ValueError as e:
             print(e)
             exit(1)
@@ -355,16 +363,15 @@ Now write the blog post based on today's most important and authentic AI/tech ne
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(final_html)
 
-        print(f"✅ Post saved  : {filepath}")
-        print(f"📅 Timestamp   : {timestamp}")
-        print(f"📝 Title       : {title}")
+        print(f"✅ Saved   : {filepath}")
+        print(f"📅 Time    : {timestamp}")
 
         meta    = extract_meta(final_html)
         excerpt = meta if meta else extract_excerpt(final_html)
 
         new_post = {
             "url":     f"/ai-news/{filename}",
-            "title":   title or clean_filename.replace('-', ' ').title(),
+            "title":   title or filename.replace('.html','').replace('-',' ').title(),
             "excerpt": excerpt,
             "date":    datetime.now().strftime("%b %d, %Y"),
         }
@@ -381,16 +388,8 @@ Now write the blog post based on today's most important and authentic AI/tech ne
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="AI Blog Writer for webonlinetools.com")
-    parser.add_argument(
-        '--dry-run',
-        action='store_true',
-        help='Test file structure and manifests without calling the Gemini API'
-    )
-    parser.add_argument(
-        '--posts-dir',
-        default='ai-news',
-        help='Folder to save posts into (default: ai-news)'
-    )
+    parser.add_argument('--dry-run',    action='store_true', help='Test without API calls')
+    parser.add_argument('--posts-dir',  default='ai-news',   help='Folder to save posts (default: ai-news)')
     args = parser.parse_args()
 
     if args.dry_run:
