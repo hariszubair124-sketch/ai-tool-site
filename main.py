@@ -22,9 +22,7 @@ def sanitize_response(text):
     This strips them so we get clean HTML only.
     """
     text = text.strip()
-    # Remove opening ```html or ``` fence
     text = re.sub(r'^```[a-zA-Z]*\s*\n', '', text)
-    # Remove closing ``` fence
     text = re.sub(r'\n```\s*$', '', text)
     return text.strip()
 
@@ -62,57 +60,57 @@ def extract_excerpt(html, max_len=140):
     return text
 
 
-def build_filepath(posts_dir, title):
+def build_filepath(save_dir, title):
     """
-    Builds a safe, FLAT filepath from a title.
-    Guaranteed: returns posts_dir/something.html with NO subfolders ever.
+    Builds a safe flat filepath.
+    Files are saved to save_dir (repo root on GitHub).
+    Public URLs always point to /ai-news/filename.html on Hostinger.
     """
     slug = slugify(title) if title else ""
     if not slug:
         slug = f"ai-news-{datetime.now().strftime('%Y-%m-%d')}"
 
-    # os.path.basename strips any accidental slashes or path separators
+    # os.path.basename strips any accidental path separators
     filename = os.path.basename(slug + ".html")
 
-    # Fallback if filename is somehow empty
     if not filename or filename == ".html":
         filename = f"ai-news-{datetime.now().strftime('%Y-%m-%d')}.html"
 
-    filepath = os.path.join(posts_dir, filename)
+    filepath = os.path.join(save_dir, filename)
 
-    # Hard validation — file must be directly inside posts_dir
-    if os.path.abspath(os.path.dirname(filepath)) != os.path.abspath(posts_dir):
-        raise ValueError(
-            f"❌ STRUCTURE ERROR: {filepath} is not directly inside {posts_dir}/"
-        )
+    # Validate flat structure
+    if os.path.abspath(os.path.dirname(filepath)) != os.path.abspath(save_dir):
+        raise ValueError(f"❌ STRUCTURE ERROR: {filepath} is not directly inside {save_dir}/")
 
     return filepath, filename
 
 
-def update_manifests(posts_dir, new_post):
+def update_manifests(save_dir, new_post):
     """
-    Keeps two manifest files up to date inside posts_dir:
+    Keeps two manifest files up to date in save_dir:
     - files.json : ordered list of .html filenames (oldest → newest)
     - index.json : latest 20 posts with metadata (newest first)
+
+    NOTE: URLs in both files point to /ai-news/ (public Hostinger path),
+    not to the GitHub repo root where files are actually saved.
     """
 
     # ── files.json ──
-    files_path = os.path.join(posts_dir, 'files.json')
+    files_path = os.path.join(save_dir, 'files.json')
     if os.path.exists(files_path):
         with open(files_path, 'r', encoding='utf-8') as f:
             files_list = json.load(f)
     else:
-        # First run: scan folder — FILES ONLY, never subfolders
+        # First run: scan save_dir for existing .html files only (never folders)
         files_list = sorted(
             [
-                fn for fn in os.listdir(posts_dir)
+                fn for fn in os.listdir(save_dir)
                 if fn.endswith('.html')
-                and os.path.isfile(os.path.join(posts_dir, fn))  # ← KEY FIX
+                and os.path.isfile(os.path.join(save_dir, fn))
             ],
-            key=lambda fn: os.path.getmtime(os.path.join(posts_dir, fn))
+            key=lambda fn: os.path.getmtime(os.path.join(save_dir, fn))
         )
 
-    # Always use basename — strip any path prefix from the URL
     filename = os.path.basename(new_post['url'])
     if filename and filename not in files_list:
         files_list.append(filename)
@@ -121,14 +119,13 @@ def update_manifests(posts_dir, new_post):
         json.dump(files_list, f, indent=2)
 
     # ── index.json ──
-    index_path = os.path.join(posts_dir, 'index.json')
+    index_path = os.path.join(save_dir, 'index.json')
     if os.path.exists(index_path):
         with open(index_path, 'r', encoding='utf-8') as f:
             index_list = json.load(f)
     else:
         index_list = []
 
-    # Remove duplicate if re-running same post
     index_list = [p for p in index_list if p.get('url') != new_post['url']]
     index_list.insert(0, new_post)
     index_list = index_list[:20]
@@ -156,17 +153,19 @@ FAKE_HTML = """<!-- META: NVIDIA has forged a 2 billion dollar strategic allianc
 </article>"""
 
 
-def run_dry_run(posts_dir):
+def run_dry_run(save_dir):
     print("\n" + "═" * 55)
     print("  DRY RUN MODE — No API calls will be made")
     print("═" * 55 + "\n")
 
     today_date = datetime.now().strftime("%B %d, %Y")
     timestamp  = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"📅 Date          : {today_date}")
-    print(f"📁 Target folder : {posts_dir}/\n")
 
-    # Step 1 — Fake response + sanitize
+    print(f"📅 Date           : {today_date}")
+    print(f"📁 Save to (GitHub): {save_dir}/")
+    print(f"🌐 Public URL base : /ai-news/\n")
+
+    # Step 1 — Sanitize
     print("─" * 40)
     print("STEP 1 — Simulating API response")
     html = sanitize_response(FAKE_HTML)
@@ -175,38 +174,38 @@ def run_dry_run(posts_dir):
     # Step 2 — Title + filename
     print("\nSTEP 2 — Title extraction & filename")
     title = extract_title(html)
-    print(f"   📝 Title    : {title or '(none — fallback will be used)'}")
+    print(f"   📝 Title     : {title or '(none — fallback will be used)'}")
 
-    os.makedirs(posts_dir, exist_ok=True)
+    os.makedirs(save_dir, exist_ok=True)
 
     try:
-        filepath, filename = build_filepath(posts_dir, title)
+        filepath, filename = build_filepath(save_dir, title)
     except ValueError as e:
         print(f"   {e}")
         exit(1)
 
-    print(f"   🔗 Filename : {filename}")
-    print(f"   📂 Filepath : {filepath}")
-    print(f"   ✅ Structure OK — flat inside {posts_dir}/")
+    print(f"   🔗 Filename  : {filename}")
+    print(f"   💾 Saves to  : {filepath}  (GitHub repo root)")
+    print(f"   🌐 Public URL: /ai-news/{filename}  (Hostinger)")
 
     # Step 3 — Write file
     print("\nSTEP 3 — Writing file")
     final_html = html + f"\n\n<!-- generated: {timestamp} -->\n"
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(final_html)
-    print(f"   ✅ Written  : {filepath} ({os.path.getsize(filepath)} bytes)")
+    print(f"   ✅ Written : {filepath} ({os.path.getsize(filepath)} bytes)")
 
     # Step 4 — Manifests
     print("\nSTEP 4 — Updating manifests")
     meta    = extract_meta(final_html)
     excerpt = meta if meta else extract_excerpt(final_html)
     new_post = {
-        "url":     f"/ai-news/{filename}",
+        "url":     f"/ai-news/{filename}",   # public Hostinger URL
         "title":   title or filename.replace('.html', '').replace('-', ' ').title(),
         "excerpt": excerpt,
         "date":    datetime.now().strftime("%b %d, %Y"),
     }
-    update_manifests(posts_dir, new_post)
+    update_manifests(save_dir, new_post)
 
     # Step 5 — Verify
     print("\nSTEP 5 — Verification")
@@ -214,17 +213,17 @@ def run_dry_run(posts_dir):
 
     for label, path in [
         ("Post file ", filepath),
-        ("files.json", os.path.join(posts_dir, 'files.json')),
-        ("index.json", os.path.join(posts_dir, 'index.json')),
+        ("files.json", os.path.join(save_dir, 'files.json')),
+        ("index.json", os.path.join(save_dir, 'index.json')),
     ]:
         exists = os.path.exists(path)
         print(f"   {'✅' if exists else '❌'} {label} : {path}")
         if not exists:
             all_ok = False
 
-    print(f"\n📂 Contents of '{posts_dir}/':")
-    for fn in sorted(os.listdir(posts_dir)):
-        full = os.path.join(posts_dir, fn)
+    print(f"\n📂 Files saved in '{save_dir}/' (these go to Hostinger ai-news/):")
+    for fn in sorted(os.listdir(save_dir)):
+        full = os.path.join(save_dir, fn)
         if os.path.isdir(full):
             print(f"   ⚠️  SUBFOLDER DETECTED (should NOT exist) → {fn}/")
             all_ok = False
@@ -235,6 +234,7 @@ def run_dry_run(posts_dir):
     print("\n" + "═" * 55)
     if all_ok:
         print("  ✅ DRY RUN PASSED — structure is correct")
+        print("  GitHub root → Hostinger ai-news/ ✅")
     else:
         print("  ❌ DRY RUN FAILED — see warnings above")
     print("  Run without --dry-run to use the real API")
@@ -278,7 +278,7 @@ def call_gemini_with_backoff(client, prompt, max_retries=4):
                 raise
 
 
-def run_live(posts_dir):
+def run_live(save_dir):
     today_date = datetime.now().strftime("%B %d, %Y")
 
     prompt = f"""
@@ -352,16 +352,15 @@ Now write the blog post. Remember: RAW HTML only, starting with <!-- META: -->
             print("❌ AI returned empty content.")
             exit(1)
 
-        # Sanitize: strip any markdown fences Gemini might add
         html  = sanitize_response(response.text)
         title = extract_title(html)
 
         print(f"📝 Title: {title or '(none — using fallback)'}")
 
-        os.makedirs(posts_dir, exist_ok=True)
+        os.makedirs(save_dir, exist_ok=True)
 
         try:
-            filepath, filename = build_filepath(posts_dir, title)
+            filepath, filename = build_filepath(save_dir, title)
         except ValueError as e:
             print(e)
             exit(1)
@@ -372,19 +371,19 @@ Now write the blog post. Remember: RAW HTML only, starting with <!-- META: -->
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(final_html)
 
-        print(f"✅ Saved    : {filepath}")
+        print(f"✅ Saved    : {filepath}  →  deploys to /ai-news/{filename}")
         print(f"📅 Time     : {timestamp}")
 
         meta    = extract_meta(final_html)
         excerpt = meta if meta else extract_excerpt(final_html)
 
         new_post = {
-            "url":     f"/ai-news/{filename}",
+            "url":     f"/ai-news/{filename}",   # public Hostinger URL
             "title":   title or filename.replace('.html', '').replace('-', ' ').title(),
             "excerpt": excerpt,
             "date":    datetime.now().strftime("%b %d, %Y"),
         }
-        update_manifests(posts_dir, new_post)
+        update_manifests(save_dir, new_post)
 
     except Exception as e:
         print(f"❌ Fatal error: {e}")
@@ -398,7 +397,11 @@ Now write the blog post. Remember: RAW HTML only, starting with <!-- META: -->
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="AI Blog Writer for webonlinetools.com")
     parser.add_argument('--dry-run',   action='store_true', help='Test without API calls')
-    parser.add_argument('--posts-dir', default='ai-news',   help='Folder to save posts (default: ai-news)')
+    parser.add_argument(
+        '--posts-dir',
+        default='.',                 # repo root — Hostinger deploys this into ai-news/
+        help='Directory to save post files (default: . = repo root)'
+    )
     args = parser.parse_args()
 
     if args.dry_run:
