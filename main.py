@@ -221,10 +221,15 @@ def run_dry_run(save_dir):
         if not exists:
             all_ok = False
 
+    # System folders that are always safe to ignore at repo root
+    IGNORED_DIRS = {'.git', '.github', '.gitignore', 'node_modules', '__pycache__'}
+
     print(f"\n📂 Files saved in '{save_dir}/' (these go to Hostinger ai-news/):")
     for fn in sorted(os.listdir(save_dir)):
         full = os.path.join(save_dir, fn)
         if os.path.isdir(full):
+            if fn in IGNORED_DIRS:
+                continue  # skip system folders silently
             print(f"   ⚠️  SUBFOLDER DETECTED (should NOT exist) → {fn}/")
             all_ok = False
         else:
