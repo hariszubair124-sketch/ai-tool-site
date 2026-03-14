@@ -274,7 +274,7 @@ def call_gemini_with_backoff(client, prompt, max_retries=4):
         try:
             print(f"🔄 API attempt {attempt + 1} of {max_retries}...")
             response = client.models.generate_content(
-                model="gemini-3.1-flash-lite-preview",
+                model="gemini-2.5-flash",
                 contents=prompt,
                 config=types.GenerateContentConfig(
                     tools=[types.Tool(google_search=types.GoogleSearch())]
