@@ -17,10 +17,7 @@ def get_client():
 # ══════════════════════════════════════════
 
 def sanitize_response(text):
-    """
-    Gemini sometimes wraps output in markdown code fences.
-    This strips them so we get clean HTML only.
-    """
+    """Strip markdown code fences Gemini sometimes adds."""
     text = text.strip()
     text = re.sub(r'^```[a-zA-Z]*\s*\n', '', text)
     text = re.sub(r'\n```\s*$', '', text)
@@ -28,7 +25,6 @@ def sanitize_response(text):
 
 
 def slugify(value):
-    """Turns 'Hello World!' into 'hello-world'"""
     value = re.sub(r'<[^>]+>', '', value)
     value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
     value = re.sub(r'[^\w\s-]', '', value.lower())
@@ -37,7 +33,6 @@ def slugify(value):
 
 
 def extract_title(html):
-    """Extracts clean text from the first <h1> tag."""
     match = re.search(r'<h1[^>]*>(.*?)</h1>', html, re.IGNORECASE | re.DOTALL)
     if match:
         return re.sub(r'<[^>]+>', '', match.group(1)).strip()
@@ -45,13 +40,11 @@ def extract_title(html):
 
 
 def extract_meta(html):
-    """Extracts <!-- META: ... --> description comment."""
     match = re.search(r'<!--\s*META:\s*(.*?)\s*-->', html, re.IGNORECASE)
     return match.group(1).strip() if match else ""
 
 
-def extract_excerpt(html, max_len=140):
-    """Strips all HTML tags and returns a plain-text excerpt."""
+def extract_excerpt(html, max_len=160):
     html = re.sub(r'<(script|style)[^>]*>.*?</(script|style)>', '', html, flags=re.DOTALL | re.IGNORECASE)
     text = re.sub(r'<[^>]+>', '', html)
     text = re.sub(r'\s+', ' ', text).strip()
@@ -60,40 +53,74 @@ def extract_excerpt(html, max_len=140):
     return text
 
 
+def estimate_read_time(html):
+    text  = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', html)).strip()
+    words = len(text.split())
+    mins  = max(1, round(words / 220))
+    return f"{mins} min read"
+
+
 def build_filepath(save_dir, title):
-    """
-    Builds a safe flat filepath.
-    Files are saved to save_dir (repo root on GitHub).
-    Public URLs always point to /ai-news/filename.html on Hostinger.
-    """
+    """Builds a safe flat filepath. Never creates subfolders."""
     slug = slugify(title) if title else ""
     if not slug:
         slug = f"ai-news-{datetime.now().strftime('%Y-%m-%d')}"
-
-    # os.path.basename strips any accidental path separators
     filename = os.path.basename(slug + ".html")
-
     if not filename or filename == ".html":
         filename = f"ai-news-{datetime.now().strftime('%Y-%m-%d')}.html"
-
     filepath = os.path.join(save_dir, filename)
-
-    # Validate flat structure
     if os.path.abspath(os.path.dirname(filepath)) != os.path.abspath(save_dir):
         raise ValueError(f"❌ STRUCTURE ERROR: {filepath} is not directly inside {save_dir}/")
-
     return filepath, filename
 
 
-def update_manifests(save_dir, new_post):
+def build_full_page(save_dir, article_html, title, excerpt, filename, date_display, read_time, timestamp):
     """
-    Keeps two manifest files up to date in save_dir:
-    - files.json : ordered list of .html filenames (oldest → newest)
-    - index.json : latest 20 posts with metadata (newest first)
+    Reads template.html and replaces all {{PLACEHOLDER}} tokens
+    with real content. Returns a complete, styled HTML page.
+    """
+    template_path = os.path.join(save_dir, 'template.html')
+    if not os.path.exists(template_path):
+        # Fallback: wrap article in minimal HTML if template missing
+        print("   ⚠️  template.html not found — saving with minimal wrapper")
+        return f"""<!DOCTYPE html><html><head><meta charset="UTF-8">
+<title>{title} — Web Online Tools</title></head><body>
+{article_html}
+<!-- generated: {timestamp} -->
+</body></html>"""
 
-    NOTE: URLs in both files point to /ai-news/ (public Hostinger path),
-    not to the GitHub repo root where files are actually saved.
-    """
+    with open(template_path, 'r', encoding='utf-8') as f:
+        page = f.read()
+
+    # Clean article: strip <article> wrapper tags and META/generated comments
+    body = article_html
+    body = re.sub(r'<!--\s*META:[^-]*-->', '', body)
+    body = re.sub(r'<!--\s*generated:[^-]*-->', '', body)
+    body = re.sub(r'^\s*<article[^>]*>', '', body, flags=re.IGNORECASE)
+    body = re.sub(r'</article>\s*$', '', body, flags=re.IGNORECASE)
+    body = body.strip()
+
+    date_iso = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+
+    replacements = {
+        '{{PAGE_TITLE}}':   title,
+        '{{META_DESC}}':    excerpt,
+        '{{FILENAME}}':     filename,
+        '{{DATE_DISPLAY}}': date_display,
+        '{{READ_TIME}}':    read_time,
+        '{{DATE_ISO}}':     date_iso,
+        '{{ARTICLE_BODY}}': body,
+    }
+
+    for token, value in replacements.items():
+        page = page.replace(token, value)
+
+    page += f"\n<!-- generated: {timestamp} -->\n"
+    return page
+
+
+def update_manifests(save_dir, new_post):
+    """Updates files.json and index.json in save_dir."""
 
     # ── files.json ──
     files_path = os.path.join(save_dir, 'files.json')
@@ -101,13 +128,9 @@ def update_manifests(save_dir, new_post):
         with open(files_path, 'r', encoding='utf-8') as f:
             files_list = json.load(f)
     else:
-        # First run: scan save_dir for existing .html files only (never folders)
         files_list = sorted(
-            [
-                fn for fn in os.listdir(save_dir)
-                if fn.endswith('.html')
-                and os.path.isfile(os.path.join(save_dir, fn))
-            ],
+            [fn for fn in os.listdir(save_dir)
+             if fn.endswith('.html') and os.path.isfile(os.path.join(save_dir, fn))],
             key=lambda fn: os.path.getmtime(os.path.join(save_dir, fn))
         )
 
@@ -160,57 +183,54 @@ def run_dry_run(save_dir):
 
     today_date = datetime.now().strftime("%B %d, %Y")
     timestamp  = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-    print(f"📅 Date           : {today_date}")
-    print(f"📁 Save to (GitHub): {save_dir}/")
+    print(f"📅 Date            : {today_date}")
+    print(f"💾 Save to (GitHub): {save_dir}/")
     print(f"🌐 Public URL base : /ai-news/\n")
 
-    # Step 1 — Sanitize
     print("─" * 40)
     print("STEP 1 — Simulating API response")
     html = sanitize_response(FAKE_HTML)
     print(f"   ✅ HTML ready ({len(html)} chars)")
 
-    # Step 2 — Title + filename
     print("\nSTEP 2 — Title extraction & filename")
     title = extract_title(html)
-    print(f"   📝 Title     : {title or '(none — fallback will be used)'}")
-
+    print(f"   📝 Title     : {title or '(none — fallback)'}")
     os.makedirs(save_dir, exist_ok=True)
-
     try:
         filepath, filename = build_filepath(save_dir, title)
     except ValueError as e:
-        print(f"   {e}")
-        exit(1)
-
+        print(f"   {e}"); exit(1)
     print(f"   🔗 Filename  : {filename}")
-    print(f"   💾 Saves to  : {filepath}  (GitHub repo root)")
-    print(f"   🌐 Public URL: /ai-news/{filename}  (Hostinger)")
+    print(f"   💾 Saves to  : {filepath}")
+    print(f"   🌐 Public URL: /ai-news/{filename}")
 
-    # Step 3 — Write file
-    print("\nSTEP 3 — Writing file")
-    final_html = html + f"\n\n<!-- generated: {timestamp} -->\n"
+    print("\nSTEP 3 — Building full styled page from template")
+    meta         = extract_meta(html)
+    excerpt      = meta if meta else extract_excerpt(html)
+    date_display = datetime.now().strftime("%B %d, %Y")
+    read_time    = estimate_read_time(html)
+    final_html   = build_full_page(save_dir, html, title, excerpt, filename, date_display, read_time, timestamp)
+    template_used = 'template.html' in final_html or '{{' not in final_html
+    print(f"   ✅ Page built ({len(final_html)} chars)")
+    print(f"   {'✅' if os.path.exists(os.path.join(save_dir, 'template.html')) else '⚠️ '} template.html {'found' if os.path.exists(os.path.join(save_dir, 'template.html')) else 'NOT found — minimal fallback used'}")
+
+    print("\nSTEP 4 — Writing file")
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(final_html)
     print(f"   ✅ Written : {filepath} ({os.path.getsize(filepath)} bytes)")
 
-    # Step 4 — Manifests
-    print("\nSTEP 4 — Updating manifests")
-    meta    = extract_meta(final_html)
-    excerpt = meta if meta else extract_excerpt(final_html)
+    print("\nSTEP 5 — Updating manifests")
     new_post = {
-        "url":     f"/ai-news/{filename}",   # public Hostinger URL
+        "url":     f"/ai-news/{filename}",
         "title":   title or filename.replace('.html', '').replace('-', ' ').title(),
         "excerpt": excerpt,
         "date":    datetime.now().strftime("%b %d, %Y"),
     }
     update_manifests(save_dir, new_post)
 
-    # Step 5 — Verify
-    print("\nSTEP 5 — Verification")
+    print("\nSTEP 6 — Verification")
     all_ok = True
-
+    IGNORED = {'.git', '.github', '__pycache__', 'node_modules'}
     for label, path in [
         ("Post file ", filepath),
         ("files.json", os.path.join(save_dir, 'files.json')),
@@ -218,19 +238,14 @@ def run_dry_run(save_dir):
     ]:
         exists = os.path.exists(path)
         print(f"   {'✅' if exists else '❌'} {label} : {path}")
-        if not exists:
-            all_ok = False
+        if not exists: all_ok = False
 
-    # System folders that are always safe to ignore at repo root
-    IGNORED_DIRS = {'.git', '.github', '.gitignore', 'node_modules', '__pycache__'}
-
-    print(f"\n📂 Files saved in '{save_dir}/' (these go to Hostinger ai-news/):")
+    print(f"\n📂 Files in '{save_dir}/' (deploy → Hostinger ai-news/):")
     for fn in sorted(os.listdir(save_dir)):
         full = os.path.join(save_dir, fn)
         if os.path.isdir(full):
-            if fn in IGNORED_DIRS:
-                continue  # skip system folders silently
-            print(f"   ⚠️  SUBFOLDER DETECTED (should NOT exist) → {fn}/")
+            if fn in IGNORED: continue
+            print(f"   ⚠️  UNEXPECTED SUBFOLDER → {fn}/")
             all_ok = False
         else:
             icon = "📄" if fn.endswith('.html') else "📋"
@@ -238,15 +253,14 @@ def run_dry_run(save_dir):
 
     print("\n" + "═" * 55)
     if all_ok:
-        print("  ✅ DRY RUN PASSED — structure is correct")
+        print("  ✅ DRY RUN PASSED")
         print("  GitHub root → Hostinger ai-news/ ✅")
+        print("  Template applied to every post ✅")
     else:
         print("  ❌ DRY RUN FAILED — see warnings above")
     print("  Run without --dry-run to use the real API")
     print("═" * 55 + "\n")
-
-    if not all_ok:
-        exit(1)
+    if not all_ok: exit(1)
 
 
 # ══════════════════════════════════════════
@@ -256,7 +270,6 @@ def run_dry_run(save_dir):
 def call_gemini_with_backoff(client, prompt, max_retries=4):
     from google.genai import types
     wait_times = [30, 60, 120, 300]
-
     for attempt in range(max_retries):
         try:
             print(f"🔄 API attempt {attempt + 1} of {max_retries}...")
@@ -276,7 +289,7 @@ def call_gemini_with_backoff(client, prompt, max_retries=4):
                     print(f"⏳ Quota hit (429). Waiting {wait}s before retry...")
                     time.sleep(wait)
                 else:
-                    print("❌ All retry attempts exhausted due to quota limits.")
+                    print("❌ All retry attempts exhausted.")
                     raise
             else:
                 print(f"❌ Non-quota error: {error_str}")
@@ -309,43 +322,39 @@ Today's date is {today_date}. Your task is to research and write a high-quality,
 - Cite real sources naturally within the content (e.g., "According to Google's official blog...")
 
 ### 2. Semantic Content Structure
-- The article must have ONE clear topic — do not mix multiple unrelated news stories
-- Cover the WHO, WHAT, WHEN, WHERE, WHY, and HOW of the story
-- Include background context so readers unfamiliar with the topic can understand it
-- Add a "Why This Matters" section explaining the real-world impact
-- End with a "What's Next" or forward-looking paragraph
+- The article must have ONE clear topic
+- Cover WHO, WHAT, WHEN, WHERE, WHY, HOW
+- Add a "Why This Matters" section
+- End with a "What's Next" paragraph
 
 ### 3. SEO & Keyword Guidelines
-- Use the primary keyword naturally in the <h1>, first paragraph, and at least 2 subheadings
-- Use semantic/LSI keywords throughout — related terms, synonyms, and contextual phrases
-- DO NOT keyword stuff — every sentence must read naturally for a human reader
-- Target keyword density: 1–2% maximum
+- Use primary keyword in <h1>, first paragraph, and 2+ subheadings
+- Use semantic/LSI keywords throughout
+- No keyword stuffing — every sentence must read naturally
+- Target keyword density: 1–2%
 
 ### 4. HTML Structure Requirements
-- Use <h1> for the main title (only ONE h1)
-- Use <h2> for major sections (4–6 subheadings)
-- Use <h3> for any sub-points within sections
-- Use <p> for all body paragraphs (minimum 3 sentences each)
-- Use <ul> or <ol> for lists — maximum 1 list per section
-- Use <strong> to bold only genuinely important terms or facts (max 5 per article)
-- Use <blockquote> for any real quotes from official sources
-- Do NOT include <html>, <head>, <body>, or <style> tags
+- Use <h1> for title (ONE only)
+- Use <h2> for major sections (4–6)
+- Use <h3> for sub-points
+- Use <p> for paragraphs (min 3 sentences each)
+- Use <ul> or <ol> for lists (max 1 per section)
+- Use <strong> for key facts (max 5)
+- Use <blockquote> for real quotes
+- No <html>, <head>, <body>, <style> tags
 
-### 5. Writing Quality Standards
-- Tone: Professional, informative, and accessible — like a trusted tech journalist
-- Reading level: Aim for Grade 8–10 (clear, not dumbed down)
-- Word count: 700–1000 words of actual body content
-- No filler phrases like "In conclusion", "It's worth noting", "In today's digital age"
-- No AI-sounding openers — start the article body with a strong, direct statement of the news
+### 5. Writing Quality
+- Tone: professional, informative, accessible
+- Word count: 700–1000 words
+- No filler phrases
 - Vary sentence length naturally
 
 ### 6. Relevance to webonlinetools.com
-- Where genuinely relevant, briefly connect the story to online tools, productivity, or web utilities
-- This should feel natural, not forced
+- Connect to online tools/productivity only where it fits naturally
 
 ---
 
-Now write the blog post. Remember: RAW HTML only, starting with <!-- META: -->
+Now write the blog post. RAW HTML only, starting with <!-- META: -->
 """
 
     try:
@@ -359,31 +368,32 @@ Now write the blog post. Remember: RAW HTML only, starting with <!-- META: -->
 
         html  = sanitize_response(response.text)
         title = extract_title(html)
-
         print(f"📝 Title: {title or '(none — using fallback)'}")
 
         os.makedirs(save_dir, exist_ok=True)
-
         try:
             filepath, filename = build_filepath(save_dir, title)
         except ValueError as e:
-            print(e)
-            exit(1)
+            print(e); exit(1)
 
-        timestamp  = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        final_html = html + f"\n\n<!-- generated: {timestamp} -->\n"
+        timestamp    = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        meta         = extract_meta(html)
+        excerpt      = meta if meta else extract_excerpt(html)
+        date_display = datetime.now().strftime("%B %d, %Y")
+        read_time    = estimate_read_time(html)
+
+        # Bake article into template — produces complete styled page
+        final_html = build_full_page(save_dir, html, title, excerpt, filename, date_display, read_time, timestamp)
 
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(final_html)
 
-        print(f"✅ Saved    : {filepath}  →  deploys to /ai-news/{filename}")
+        print(f"✅ Saved    : {filepath}  →  /ai-news/{filename}")
         print(f"📅 Time     : {timestamp}")
-
-        meta    = extract_meta(final_html)
-        excerpt = meta if meta else extract_excerpt(final_html)
+        print(f"📦 Size     : {os.path.getsize(filepath)} bytes")
 
         new_post = {
-            "url":     f"/ai-news/{filename}",   # public Hostinger URL
+            "url":     f"/ai-news/{filename}",
             "title":   title or filename.replace('.html', '').replace('-', ' ').title(),
             "excerpt": excerpt,
             "date":    datetime.now().strftime("%b %d, %Y"),
@@ -402,11 +412,7 @@ Now write the blog post. Remember: RAW HTML only, starting with <!-- META: -->
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="AI Blog Writer for webonlinetools.com")
     parser.add_argument('--dry-run',   action='store_true', help='Test without API calls')
-    parser.add_argument(
-        '--posts-dir',
-        default='.',                 # repo root — Hostinger deploys this into ai-news/
-        help='Directory to save post files (default: . = repo root)'
-    )
+    parser.add_argument('--posts-dir', default='.',         help='Directory to save files (default: . = repo root)')
     args = parser.parse_args()
 
     if args.dry_run:
