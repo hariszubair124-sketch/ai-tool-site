@@ -76,23 +76,30 @@ def build_filepath(save_dir, title):
 
 def build_full_page(save_dir, article_html, title, excerpt, filename, date_display, read_time, timestamp):
     """
-    Reads template.html and replaces all {{PLACEHOLDER}} tokens
-    with real content. Returns a complete, styled HTML page.
+    Reads template.html, replaces {{PLACEHOLDER}} tokens,
+    returns a complete styled HTML page.
     """
-    template_path = os.path.join(save_dir, 'template.html')
-    if not os.path.exists(template_path):
-        # Fallback: wrap article in minimal HTML if template missing
-        print("   ⚠️  template.html not found — saving with minimal wrapper")
-        return f"""<!DOCTYPE html><html><head><meta charset="UTF-8">
-<title>{title} — Web Online Tools</title></head><body>
-{article_html}
-<!-- generated: {timestamp} -->
-</body></html>"""
+    candidates = [
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), 'template.html'),
+        os.path.join(save_dir, 'template.html'),
+        'template.html',
+    ]
+
+    template_path = None
+    for c in candidates:
+        if os.path.exists(c):
+            template_path = c
+            print(f"   ✅ template.html found: {c}")
+            break
+
+    if not template_path:
+        print("   ❌ template.html NOT found — saving raw HTML")
+        return article_html + f"\n\n<!-- generated: {timestamp} -->\n"
 
     with open(template_path, 'r', encoding='utf-8') as f:
         page = f.read()
 
-    # Clean article: strip <article> wrapper tags and META/generated comments
+    # Clean article body
     body = article_html
     body = re.sub(r'<!--\s*META:[^-]*-->', '', body)
     body = re.sub(r'<!--\s*generated:[^-]*-->', '', body)
@@ -102,7 +109,7 @@ def build_full_page(save_dir, article_html, title, excerpt, filename, date_displ
 
     date_iso = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
 
-    replacements = {
+    for token, value in {
         '{{PAGE_TITLE}}':   title,
         '{{META_DESC}}':    excerpt,
         '{{FILENAME}}':     filename,
@@ -110,9 +117,7 @@ def build_full_page(save_dir, article_html, title, excerpt, filename, date_displ
         '{{READ_TIME}}':    read_time,
         '{{DATE_ISO}}':     date_iso,
         '{{ARTICLE_BODY}}': body,
-    }
-
-    for token, value in replacements.items():
+    }.items():
         page = page.replace(token, value)
 
     page += f"\n<!-- generated: {timestamp} -->\n"
@@ -120,7 +125,7 @@ def build_full_page(save_dir, article_html, title, excerpt, filename, date_displ
 
 
 def update_manifests(save_dir, new_post):
-    """Updates files.json and index.json in save_dir."""
+    """Updates files.json and index.json."""
 
     # ── files.json ──
     files_path = os.path.join(save_dir, 'files.json')
@@ -160,6 +165,48 @@ def update_manifests(save_dir, new_post):
     print(f"   📋 index.json → {len(index_list)} post(s)")
 
 
+def update_sitemap(save_dir, filename, date_str):
+    """
+    Adds the new blog post URL into sitemap.xml between
+    <!-- BLOG_POSTS_START --> and <!-- BLOG_POSTS_END --> markers.
+    Skips if the URL already exists in the sitemap.
+    """
+    sitemap_path = os.path.join(save_dir, 'sitemap.xml')
+
+    if not os.path.exists(sitemap_path):
+        print("   ⚠️  sitemap.xml not found — skipping sitemap update")
+        return
+
+    with open(sitemap_path, 'r', encoding='utf-8') as f:
+        sitemap = f.read()
+
+    public_url = f"https://webonlinetools.com/ai-news/{filename}"
+
+    # Skip if already exists
+    if public_url in sitemap:
+        print(f"   ℹ️  Sitemap already contains this URL — skipping")
+        return
+
+    new_entry = (
+        f"  <url>\n"
+        f"    <loc>{public_url}</loc>\n"
+        f"    <lastmod>{date_str}</lastmod>\n"
+        f"    <changefreq>monthly</changefreq>\n"
+        f"    <priority>0.7</priority>\n"
+        f"  </url>\n"
+        f"  <!-- BLOG_POSTS_END -->"
+    )
+
+    # Inject before the closing marker
+    if '<!-- BLOG_POSTS_END -->' in sitemap:
+        sitemap = sitemap.replace('<!-- BLOG_POSTS_END -->', new_entry)
+        with open(sitemap_path, 'w', encoding='utf-8') as f:
+            f.write(sitemap)
+        print(f"   🗺️  sitemap.xml updated → {public_url}")
+    else:
+        print("   ⚠️  sitemap.xml missing BLOG_POSTS_END marker — skipping")
+
+
 # ══════════════════════════════════════════
 # DRY RUN
 # ══════════════════════════════════════════
@@ -183,6 +230,8 @@ def run_dry_run(save_dir):
 
     today_date = datetime.now().strftime("%B %d, %Y")
     timestamp  = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    date_str   = datetime.now().strftime("%Y-%m-%d")
+
     print(f"📅 Date            : {today_date}")
     print(f"💾 Save to (GitHub): {save_dir}/")
     print(f"🌐 Public URL base : /ai-news/\n")
@@ -207,12 +256,10 @@ def run_dry_run(save_dir):
     print("\nSTEP 3 — Building full styled page from template")
     meta         = extract_meta(html)
     excerpt      = meta if meta else extract_excerpt(html)
-    date_display = datetime.now().strftime("%B %d, %Y")
+    date_display = today_date
     read_time    = estimate_read_time(html)
     final_html   = build_full_page(save_dir, html, title, excerpt, filename, date_display, read_time, timestamp)
-    template_used = 'template.html' in final_html or '{{' not in final_html
     print(f"   ✅ Page built ({len(final_html)} chars)")
-    print(f"   {'✅' if os.path.exists(os.path.join(save_dir, 'template.html')) else '⚠️ '} template.html {'found' if os.path.exists(os.path.join(save_dir, 'template.html')) else 'NOT found — minimal fallback used'}")
 
     print("\nSTEP 4 — Writing file")
     with open(filepath, 'w', encoding='utf-8') as f:
@@ -228,17 +275,21 @@ def run_dry_run(save_dir):
     }
     update_manifests(save_dir, new_post)
 
-    print("\nSTEP 6 — Verification")
+    print("\nSTEP 6 — Updating sitemap")
+    update_sitemap(save_dir, filename, date_str)
+
+    print("\nSTEP 7 — Verification")
     all_ok = True
     IGNORED = {'.git', '.github', '__pycache__', 'node_modules'}
+
     for label, path in [
         ("Post file ", filepath),
         ("files.json", os.path.join(save_dir, 'files.json')),
         ("index.json", os.path.join(save_dir, 'index.json')),
+        ("sitemap.xml", os.path.join(save_dir, 'sitemap.xml')),
     ]:
         exists = os.path.exists(path)
-        print(f"   {'✅' if exists else '❌'} {label} : {path}")
-        if not exists: all_ok = False
+        print(f"   {'✅' if exists else '⚠️ '} {label} : {path}")
 
     print(f"\n📂 Files in '{save_dir}/' (deploy → Hostinger ai-news/):")
     for fn in sorted(os.listdir(save_dir)):
@@ -255,7 +306,8 @@ def run_dry_run(save_dir):
     if all_ok:
         print("  ✅ DRY RUN PASSED")
         print("  GitHub root → Hostinger ai-news/ ✅")
-        print("  Template applied to every post ✅")
+        print("  Template applied ✅")
+        print("  Sitemap updated ✅")
     else:
         print("  ❌ DRY RUN FAILED — see warnings above")
     print("  Run without --dry-run to use the real API")
@@ -274,7 +326,7 @@ def call_gemini_with_backoff(client, prompt, max_retries=4):
         try:
             print(f"🔄 API attempt {attempt + 1} of {max_retries}...")
             response = client.models.generate_content(
-                model="gemini-2.5-flash",
+                model="gemini-3.1-flash-lite-preview",
                 contents=prompt,
                 config=types.GenerateContentConfig(
                     tools=[types.Tool(google_search=types.GoogleSearch())]
@@ -298,6 +350,7 @@ def call_gemini_with_backoff(client, prompt, max_retries=4):
 
 def run_live(save_dir):
     today_date = datetime.now().strftime("%B %d, %Y")
+    date_str   = datetime.now().strftime("%Y-%m-%d")
 
     prompt = f"""
 You are an expert technology journalist and SEO content strategist writing for webonlinetools.com — a website focused on free online tools for productivity, file conversion, text editing, and web utilities.
@@ -382,7 +435,7 @@ Now write the blog post. RAW HTML only, starting with <!-- META: -->
         date_display = datetime.now().strftime("%B %d, %Y")
         read_time    = estimate_read_time(html)
 
-        # Bake article into template — produces complete styled page
+        # Bake into template
         final_html = build_full_page(save_dir, html, title, excerpt, filename, date_display, read_time, timestamp)
 
         with open(filepath, 'w', encoding='utf-8') as f:
@@ -399,6 +452,7 @@ Now write the blog post. RAW HTML only, starting with <!-- META: -->
             "date":    datetime.now().strftime("%b %d, %Y"),
         }
         update_manifests(save_dir, new_post)
+        update_sitemap(save_dir, filename, date_str)
 
     except Exception as e:
         print(f"❌ Fatal error: {e}")
@@ -412,7 +466,7 @@ Now write the blog post. RAW HTML only, starting with <!-- META: -->
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="AI Blog Writer for webonlinetools.com")
     parser.add_argument('--dry-run',   action='store_true', help='Test without API calls')
-    parser.add_argument('--posts-dir', default='.',         help='Directory to save files (default: . = repo root)')
+    parser.add_argument('--posts-dir', default='.',         help='Directory to save files (default: repo root)')
     args = parser.parse_args()
 
     if args.dry_run:
