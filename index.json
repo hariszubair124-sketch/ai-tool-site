@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/revolutionizing-ai-a-breakthrough-in-energy-efficiency-and-intelligence.html",
+    "title": "Revolutionizing AI: A Breakthrough in Energy Efficiency and Intelligence",
+    "excerpt": "Discover how groundbreaking neuro-symbolic AI research from Tufts University could slash AI's massive energy consumption by up to 100x while boosting accuracy, heralding a new era of sustainable and powerful artificial intelligence.",
+    "date": "Apr 06, 2026"
+  },
+  {
     "url": "/ai-news/autonomous-ai-cybersecurity-a-new-era-of-digital-vulnerability-unveiled.html",
     "title": "Autonomous AI Cybersecurity: A New Era of Digital Vulnerability Unveiled",
     "excerpt": "Explore the groundbreaking news of an autonomous AI agent hacking FreeBSD, exposing a new era of cybersecurity challenges and the urgent need for enhanced digital defenses. Discover the implications for critical infrastructure and the future of AI safety.",
@@ -112,11 +118,5 @@
     "title": "Kingfisher and Google Cloud Unleash the Future of AI-Powered Shopping",
     "excerpt": "Discover how Kingfisher and Google Cloud are revolutionizing online retail with AI-powered shopping, utilizing agentic AI and Vertex AI for a more intuitive and productive e-commerce experience.",
     "date": "Mar 18, 2026"
-  },
-  {
-    "url": "/ai-news/microsoft-365-copilots-cowork-feature-ushering-in-a-new-era-of-agentic-ai-productivity.html",
-    "title": "Microsoft 365 Copilot's \"Cowork\" Feature: Ushering in a New Era of Agentic AI Productivity",
-    "excerpt": "Discover how Microsoft 365 Copilot's new \"Cowork\" feature, powered by advanced agentic AI, is transforming workplace productivity by automating multi-step tasks across apps, bringing a new era of efficiency to webonlinetools.com users.",
-    "date": "Mar 17, 2026"
   }
 ]
