@@ -2,7 +2,7 @@ name: Daily AI Blog Writer
 
 on:
   schedule:
-    - cron: '0 9 * * *'
+    - cron: '0 3 * * *'   # 3:00 AM UTC = 8:00 AM PKT
   workflow_dispatch:
     inputs:
       dry_run:
@@ -54,6 +54,7 @@ jobs:
         run: |
           git config --global user.name "AI-Robot"
           git config --global user.email "robot@webonlinetools.com"
+          echo "Last run: $(date +'%Y-%m-%d %H:%M:%S UTC')" > .last-run
           git add .
           git diff --staged --quiet \
             && echo "⚠️ Nothing new to commit." \
