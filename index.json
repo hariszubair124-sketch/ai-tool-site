@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/openai-unveils-gpt-54-cyber-a-new-era-for-ai-cybersecurity-tools.html",
+    "title": "OpenAI Unveils GPT-5.4-Cyber: A New Era for AI Cybersecurity Tools",
+    "excerpt": "Dive into OpenAI's new GPT-5.4-Cyber, an advanced AI cybersecurity tool designed to defend against digital threats and analyze software vulnerabilities, enhancing online safety for businesses and users.",
+    "date": "Apr 15, 2026"
+  },
+  {
     "url": "/ai-news/japan-unites-softbank-nec-sony-honda-form-new-alliance-for-high-performance-ai-development.html",
     "title": "Japan Unites: SoftBank, NEC, Sony, Honda Form New Alliance for High-Performance AI Development",
     "excerpt": "SoftBank, NEC, Sony, and Honda unite to form a new company focused on high-performance AI development in Japan, aiming to compete with global tech leaders. Discover how this strategic alliance is set to redefine Japan's role in the AI landscape and its future impact on online productivity tools.",
@@ -112,11 +118,5 @@
     "title": "The White House Unveils National Policy Framework for AI: Shaping the Future of Responsible AI and Online Tools",
     "excerpt": "Dive into the details of the White House's groundbreaking National Policy Framework for AI, unveiled today, March 23, 2026. Discover how this comprehensive strategy aims to balance innovation with responsibility, impacting everything from small businesses to the future of online productivity tools.",
     "date": "Mar 23, 2026"
-  },
-  {
-    "url": "/ai-news/nvidia-gtc-2026-unveils-groundbreaking-ai-innovations-for-the-future.html",
-    "title": "Nvidia GTC 2026 Unveils Groundbreaking AI Innovations for the Future",
-    "excerpt": "Dive into Nvidia's GTC 2026 announcements, revealing groundbreaking AI innovations like OpenClaw, Vera Rubin, and Dynamo 1.0 that are set to redefine agentic AI, infrastructure, and enterprise deployment.",
-    "date": "Mar 22, 2026"
   }
 ]
