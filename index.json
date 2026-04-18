@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/anthropics-mythos-ai-model-a-new-frontier-in-cybersecurity-and-national-dialogue.html",
+    "title": "Anthropic's Mythos AI Model: A New Frontier in Cybersecurity and National Dialogue",
+    "excerpt": "Explore Anthropic's groundbreaking Mythos AI model, its advanced cybersecurity capabilities, and the critical discussions surrounding its potential government and enterprise deployment on April 18, 2026.",
+    "date": "Apr 18, 2026"
+  },
+  {
     "url": "/ai-news/anthropic-unleashes-claude-opus-47-a-leap-forward-for-enterprise-ai-and-enhanced-productivity.html",
     "title": "Anthropic Unleashes Claude Opus 4.7: A Leap Forward for Enterprise AI and Enhanced Productivity",
     "excerpt": "Explore Anthropic's new Claude Opus 4.7 AI model, its advanced capabilities for software engineering and complex tasks, and its impact on enterprise productivity and AI safety.",
@@ -112,11 +118,5 @@
     "title": "OpenAI Shuts Down Sora AI Video App, Signals Major Strategic Shift Towards Business AI and Robotics",
     "excerpt": "OpenAI's decision to shut down its Sora AI video app marks a significant strategic pivot towards enterprise AI solutions and robotics research, signaling a maturing AI landscape and new priorities for leading developers.",
     "date": "Mar 26, 2026"
-  },
-  {
-    "url": "/ai-news/quantum-computing-breakthrough-fujitsu-and-osaka-university-unlock-new-era-for-material-science.html",
-    "title": "Quantum Computing Breakthrough: Fujitsu and Osaka University Unlock New Era for Material Science",
-    "excerpt": "Explore how Fujitsu and The University of Osaka's quantum computing breakthrough is revolutionizing chemical material science, accelerating drug discovery and new material development, and setting the stage for advanced online tools.",
-    "date": "Mar 25, 2026"
   }
 ]
