@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/the-double-edged-sword-unpacking-the-cybersecurity-risks-of-autonomous-ai-agents.html",
+    "title": "The Double-Edged Sword: Unpacking the Cybersecurity Risks of Autonomous AI Agents",
+    "excerpt": "Explore the escalating cybersecurity risks associated with autonomous AI agents like OpenClaw, and understand how to navigate the emerging threats to online productivity and data security.",
+    "date": "Apr 19, 2026"
+  },
+  {
     "url": "/ai-news/anthropics-mythos-ai-model-a-new-frontier-in-cybersecurity-and-national-dialogue.html",
     "title": "Anthropic's Mythos AI Model: A New Frontier in Cybersecurity and National Dialogue",
     "excerpt": "Explore Anthropic's groundbreaking Mythos AI model, its advanced cybersecurity capabilities, and the critical discussions surrounding its potential government and enterprise deployment on April 18, 2026.",
@@ -112,11 +118,5 @@
     "title": "Google DeepMind Unleashes Gemini 3.1 Flash Live: The Future of Real-Time Voice AI",
     "excerpt": "Discover Google DeepMind's Gemini 3.1 Flash Live, the latest breakthrough in real-time AI voice technology, enhancing natural conversation and productivity for users and developers on webonlinetools.com.",
     "date": "Mar 27, 2026"
-  },
-  {
-    "url": "/ai-news/openai-shuts-down-sora-ai-video-app-signals-major-strategic-shift-towards-business-ai-and-robotics.html",
-    "title": "OpenAI Shuts Down Sora AI Video App, Signals Major Strategic Shift Towards Business AI and Robotics",
-    "excerpt": "OpenAI's decision to shut down its Sora AI video app marks a significant strategic pivot towards enterprise AI solutions and robotics research, signaling a maturing AI landscape and new priorities for leading developers.",
-    "date": "Mar 26, 2026"
   }
 ]
