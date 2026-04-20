@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/anthropics-mythos-ai-a-cybersecurity-breakthrough-deemed-too-dangerous-for-public-release.html",
+    "title": "Anthropic's \"Mythos\" AI: A Cybersecurity Breakthrough Deemed Too Dangerous for Public Release",
+    "excerpt": "Explore Anthropic's groundbreaking yet concerning \"Mythos\" AI model, designed for advanced cybersecurity but deemed too risky for public release, and its implications for online safety and future AI development.",
+    "date": "Apr 20, 2026"
+  },
+  {
     "url": "/ai-news/the-double-edged-sword-unpacking-the-cybersecurity-risks-of-autonomous-ai-agents.html",
     "title": "The Double-Edged Sword: Unpacking the Cybersecurity Risks of Autonomous AI Agents",
     "excerpt": "Explore the escalating cybersecurity risks associated with autonomous AI agents like OpenClaw, and understand how to navigate the emerging threats to online productivity and data security.",
@@ -112,11 +118,5 @@
     "title": "OpenAI Pulls the Plug on Sora: A Retreat from Viral AI Video Amid Deepfake Alarms",
     "excerpt": "OpenAI discontinues its viral AI video generation app, Sora, on March 28, 2026, citing deepfake concerns and a strategic shift towards enterprise AI solutions.",
     "date": "Mar 28, 2026"
-  },
-  {
-    "url": "/ai-news/google-deepmind-unleashes-gemini-31-flash-live-the-future-of-real-time-voice-ai.html",
-    "title": "Google DeepMind Unleashes Gemini 3.1 Flash Live: The Future of Real-Time Voice AI",
-    "excerpt": "Discover Google DeepMind's Gemini 3.1 Flash Live, the latest breakthrough in real-time AI voice technology, enhancing natural conversation and productivity for users and developers on webonlinetools.com.",
-    "date": "Mar 27, 2026"
   }
 ]
