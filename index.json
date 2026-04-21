@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/adobe-unveils-cx-enterprise-revolutionizing-customer-experience-with-agentic-ai.html",
+    "title": "Adobe Unveils CX Enterprise: Revolutionizing Customer Experience with Agentic AI",
+    "excerpt": "Adobe unveils CX Enterprise, a groundbreaking agentic AI system, at Adobe Summit 2026, set to revolutionize customer experience orchestration and marketing productivity through intelligent, personalized workflows.",
+    "date": "Apr 21, 2026"
+  },
+  {
     "url": "/ai-news/anthropics-mythos-ai-a-cybersecurity-breakthrough-deemed-too-dangerous-for-public-release.html",
     "title": "Anthropic's \"Mythos\" AI: A Cybersecurity Breakthrough Deemed Too Dangerous for Public Release",
     "excerpt": "Explore Anthropic's groundbreaking yet concerning \"Mythos\" AI model, designed for advanced cybersecurity but deemed too risky for public release, and its implications for online safety and future AI development.",
@@ -112,11 +118,5 @@
     "title": "Autonomous AI Agents Transform Productivity: Dan Martell Launches APEX",
     "excerpt": "Discover APEX, Dan Martell's new autonomous AI agent platform, transforming productivity for entrepreneurs by automating critical tasks 24/7 on private servers.",
     "date": "Mar 29, 2026"
-  },
-  {
-    "url": "/ai-news/openai-pulls-the-plug-on-sora-a-retreat-from-viral-ai-video-amid-deepfake-alarms.html",
-    "title": "OpenAI Pulls the Plug on Sora: A Retreat from Viral AI Video Amid Deepfake Alarms",
-    "excerpt": "OpenAI discontinues its viral AI video generation app, Sora, on March 28, 2026, citing deepfake concerns and a strategic shift towards enterprise AI solutions.",
-    "date": "Mar 28, 2026"
   }
 ]
