@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/deepseek-unveils-flagship-v4-ai-models-redefining-large-language-capabilities.html",
+    "title": "DeepSeek Unveils Flagship V4 AI Models, Redefining Large Language Capabilities",
+    "excerpt": "Explore DeepSeek's new V4 Flash and V4 Pro AI models, unveiled April 24, 2026, and their impact on advanced AI capabilities, large language processing, and the future of online productivity tools.",
+    "date": "Apr 24, 2026"
+  },
+  {
     "url": "/ai-news/google-unleashes-eighth-generation-ai-chips-a-leap-forward-for-generative-ai-and-digital-agents.html",
     "title": "Google Unleashes Eighth-Generation AI Chips: A Leap Forward for Generative AI and Digital Agents",
     "excerpt": "Dive into Google's latest AI hardware innovations with the unveiling of their 8th generation Tensor Processing Units (TPUs), designed to power the next wave of generative AI and digital agents. Discover how this dual-chip approach is setting new standards for AI training and inference, shaping the future of online tools and productivity.",
@@ -112,11 +118,5 @@
     "title": "OpenAI Secures Historic $122 Billion Investment to Propel Global AI Infrastructure",
     "excerpt": "OpenAI secures a record-breaking $122 billion investment, propelling its valuation to $852 billion and cementing its role in building the next generation of global AI infrastructure. This article explores the implications for AI development, online tools, and the broader tech landscape.",
     "date": "Apr 01, 2026"
-  },
-  {
-    "url": "/ai-news/databricks-fuels-enterprise-ai-850-million-investment-anchors-uk-expansion-for-data-and-ai-adoption.html",
-    "title": "Databricks Fuels Enterprise AI: $850 Million Investment Anchors UK Expansion for Data and AI Adoption",
-    "excerpt": "Databricks announces an $850 million investment in the UK to accelerate enterprise data and AI adoption, focusing on Lakebase for AI agents and Genie for conversational data interaction. This post explores its impact on productivity and the future of AI tools.",
-    "date": "Mar 31, 2026"
   }
 ]
