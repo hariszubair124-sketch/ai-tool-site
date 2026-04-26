@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/google-unveils-gemini-enterprise-agent-platform-a-new-era-for-ai-in-the-cloud.html",
+    "title": "Google Unveils Gemini Enterprise Agent Platform: A New Era for AI in the Cloud",
+    "excerpt": "Explore Google's new Gemini Enterprise Agent Platform and eighth-generation TPUs from Cloud Next '26, signaling a major shift towards agentic AI in the enterprise. Learn how this impacts productivity and the future of online tools.",
+    "date": "Apr 26, 2026"
+  },
+  {
     "url": "/ai-news/openai-unveils-gpt-55-ushering-in-the-era-of-the-ai-super-app.html",
     "title": "OpenAI Unveils GPT-5.5: Ushering in the Era of the AI Super App",
     "excerpt": "Explore OpenAI's groundbreaking release of GPT-5.5 and its vision for a unified AI Super App, transforming productivity and digital workflows for businesses and individuals.",
@@ -112,11 +118,5 @@
     "title": "Agentic AI Orchestration Redefines Productivity on April 3, 2026",
     "excerpt": "Today, April 3, 2026, marks a pivotal moment in AI development with the announcement of significant advancements in \"Agentic AI Orchestration,\" promising a new era of personalized and autonomous productivity for businesses and individuals alike.",
     "date": "Apr 03, 2026"
-  },
-  {
-    "url": "/ai-news/openais-122-billion-funding-fuels-vision-for-transformative-ai-super-app.html",
-    "title": "OpenAI's $122 Billion Funding Fuels Vision for Transformative AI Super App",
-    "excerpt": "OpenAI secures a record $122 billion in funding, signaling an accelerated push towards a unified AI \"super app\" that promises to redefine online productivity and digital interactions.",
-    "date": "Apr 02, 2026"
   }
 ]
