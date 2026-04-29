@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/googles-ai-transformation-beyond-the-search-bar-into-an-ai-first-future.html",
+    "title": "Google's AI Transformation: Beyond the Search Bar, Into an AI-First Future",
+    "excerpt": "Explore Google's monumental shift from a \"Search Company\" to an \"AI-first\" powerhouse, driven by a decade of internal chip innovation (TPUs) and its profound implications for the future of digital services and online productivity tools.",
+    "date": "Apr 29, 2026"
+  },
+  {
     "url": "/ai-news/openai-and-microsoft-redefine-partnership-a-new-era-for-ai-cloud-strategy.html",
     "title": "OpenAI and Microsoft Redefine Partnership: A New Era for AI Cloud Strategy",
     "excerpt": "Explore the monumental shift in the AI landscape as OpenAI and Microsoft revise their exclusive partnership, signaling a new era of multi-cloud AI development and intensified competition. Learn what this means for the future of AI tools and enterprise innovation.",
@@ -112,11 +118,5 @@
     "title": "Revolutionizing AI: A Breakthrough in Energy Efficiency and Intelligence",
     "excerpt": "Discover how groundbreaking neuro-symbolic AI research from Tufts University could slash AI's massive energy consumption by up to 100x while boosting accuracy, heralding a new era of sustainable and powerful artificial intelligence.",
     "date": "Apr 06, 2026"
-  },
-  {
-    "url": "/ai-news/autonomous-ai-cybersecurity-a-new-era-of-digital-vulnerability-unveiled.html",
-    "title": "Autonomous AI Cybersecurity: A New Era of Digital Vulnerability Unveiled",
-    "excerpt": "Explore the groundbreaking news of an autonomous AI agent hacking FreeBSD, exposing a new era of cybersecurity challenges and the urgent need for enhanced digital defenses. Discover the implications for critical infrastructure and the future of AI safety.",
-    "date": "Apr 05, 2026"
   }
 ]
