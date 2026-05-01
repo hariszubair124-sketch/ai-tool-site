@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/big-techs-ai-investment-boom-record-profits-infrastructure-surge-in-q1-2026.html",
+    "title": "Big Tech's AI Investment Boom: Record Profits & Infrastructure Surge in Q1 2026",
+    "excerpt": "Explore how major tech companies like Alphabet, Amazon, Microsoft, and Meta reported record profits in Q1 2026, driven by unprecedented investments in AI infrastructure and demand. Understand the implications for online tools and future productivity.",
+    "date": "May 01, 2026"
+  },
+  {
     "url": "/ai-news/googles-ai-transformation-beyond-the-search-bar-into-an-ai-first-future.html",
     "title": "Google's AI Transformation: Beyond the Search Bar, Into an AI-First Future",
     "excerpt": "Explore Google's monumental shift from a \"Search Company\" to an \"AI-first\" powerhouse, driven by a decade of internal chip innovation (TPUs) and its profound implications for the future of digital services and online productivity tools.",
@@ -112,11 +118,5 @@
     "title": "Revolutionizing Productivity: Google Launches AI Edge Eloquent, a Free Offline AI Dictation App for iPhone",
     "excerpt": "Discover Google's new AI Edge Eloquent, a free, offline speech-to-text app for iPhone, leveraging Gemma 4 for enhanced productivity and text editing.",
     "date": "Apr 08, 2026"
-  },
-  {
-    "url": "/ai-news/revolutionizing-ai-a-breakthrough-in-energy-efficiency-and-intelligence.html",
-    "title": "Revolutionizing AI: A Breakthrough in Energy Efficiency and Intelligence",
-    "excerpt": "Discover how groundbreaking neuro-symbolic AI research from Tufts University could slash AI's massive energy consumption by up to 100x while boosting accuracy, heralding a new era of sustainable and powerful artificial intelligence.",
-    "date": "Apr 06, 2026"
   }
 ]
