@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/openai-lawsuit-intensifies-microsoft-ceo-satya-nadella-testifies-in-elon-musks-battle-over-ai-commercialization.html",
+    "title": "OpenAI Lawsuit Intensifies: Microsoft CEO Satya Nadella Testifies in Elon Musk's Battle Over AI Commercialization",
+    "excerpt": "Microsoft CEO Satya Nadella testifies in Elon Musk's high-stakes lawsuit against OpenAI, examining the shift from non-profit to AI commercialization and its profound implications for the future of artificial intelligence.",
+    "date": "May 11, 2026"
+  },
+  {
     "url": "/ai-news/nvidias-jensen-huang-unveils-vision-for-physical-ai-the-next-frontier-in-computing.html",
     "title": "Nvidia's Jensen Huang Unveils Vision for Physical AI: The Next Frontier in Computing",
     "excerpt": "Explore Nvidia CEO Jensen Huang's groundbreaking vision for Physical AI, transforming computing from digital screens to real-world interaction and revolutionizing industries. Learn how this tech news will impact productivity and online tools.",
@@ -112,11 +118,5 @@
     "title": "Anthropic's \"Mythos\" AI: A Cybersecurity Breakthrough Deemed Too Dangerous for Public Release",
     "excerpt": "Explore Anthropic's groundbreaking yet concerning \"Mythos\" AI model, designed for advanced cybersecurity but deemed too risky for public release, and its implications for online safety and future AI development.",
     "date": "Apr 20, 2026"
-  },
-  {
-    "url": "/ai-news/the-double-edged-sword-unpacking-the-cybersecurity-risks-of-autonomous-ai-agents.html",
-    "title": "The Double-Edged Sword: Unpacking the Cybersecurity Risks of Autonomous AI Agents",
-    "excerpt": "Explore the escalating cybersecurity risks associated with autonomous AI agents like OpenClaw, and understand how to navigate the emerging threats to online productivity and data security.",
-    "date": "Apr 19, 2026"
   }
 ]
