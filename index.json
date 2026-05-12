@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/the-agentic-ai-revolution-how-gemini-is-transforming-android-productivity-today.html",
+    "title": "The Agentic AI Revolution: How Gemini is Transforming Android Productivity Today",
+    "excerpt": "Explore how Google's agentic Gemini capabilities, unveiled at the Android Show on May 12, 2026, are set to revolutionize mobile productivity and online tools with autonomous task execution and smarter device interaction.",
+    "date": "May 12, 2026"
+  },
+  {
     "url": "/ai-news/openai-lawsuit-intensifies-microsoft-ceo-satya-nadella-testifies-in-elon-musks-battle-over-ai-commercialization.html",
     "title": "OpenAI Lawsuit Intensifies: Microsoft CEO Satya Nadella Testifies in Elon Musk's Battle Over AI Commercialization",
     "excerpt": "Microsoft CEO Satya Nadella testifies in Elon Musk's high-stakes lawsuit against OpenAI, examining the shift from non-profit to AI commercialization and its profound implications for the future of artificial intelligence.",
@@ -112,11 +118,5 @@
     "title": "Adobe Unveils CX Enterprise: Revolutionizing Customer Experience with Agentic AI",
     "excerpt": "Adobe unveils CX Enterprise, a groundbreaking agentic AI system, at Adobe Summit 2026, set to revolutionize customer experience orchestration and marketing productivity through intelligent, personalized workflows.",
     "date": "Apr 21, 2026"
-  },
-  {
-    "url": "/ai-news/anthropics-mythos-ai-a-cybersecurity-breakthrough-deemed-too-dangerous-for-public-release.html",
-    "title": "Anthropic's \"Mythos\" AI: A Cybersecurity Breakthrough Deemed Too Dangerous for Public Release",
-    "excerpt": "Explore Anthropic's groundbreaking yet concerning \"Mythos\" AI model, designed for advanced cybersecurity but deemed too risky for public release, and its implications for online safety and future AI development.",
-    "date": "Apr 20, 2026"
   }
 ]
