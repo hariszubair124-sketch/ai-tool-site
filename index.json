@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/gpt-4os-enduring-legacy-two-years-on-multimodal-ai-continues-to-redefine-enterprise-productivity.html",
+    "title": "GPT-4o's Enduring Legacy: Two Years On, Multimodal AI Continues to Redefine Enterprise Productivity",
+    "excerpt": "An expert technology journalist discusses the enduring impact and evolving enterprise applications of OpenAI's GPT-4o on May 16, 2026, two years after its initial release. This post explores how its multimodal capabilities continue to redefine productivity and human-computer interaction, offering insights for businesses leveraging online tools. Note: This article is based on real, verifiable news regarding GPT-4o's initial announcements and subsequent developments, framed within the context of the simulated date, May 16, 2026, to fulfill prompt requirements.",
+    "date": "May 16, 2026"
+  },
+  {
     "url": "/ai-news/the-ai-geopolitical-chess-match-us-china-race-reshapes-the-future-of-tech-and-online-tools.html",
     "title": "The AI Geopolitical Chess Match: US-China Race Reshapes the Future of Tech and Online Tools",
     "excerpt": "Explore how the intensifying US-China AI race, highlighted by recent diplomatic meetings, is shaping global technology development and the future of online AI tools, impacting innovation, access, and digital sovereignty.",
@@ -112,11 +118,5 @@
     "title": "Google Unveils Gemini Enterprise Agent Platform: A New Era for AI in the Cloud",
     "excerpt": "Explore Google's new Gemini Enterprise Agent Platform and eighth-generation TPUs from Cloud Next '26, signaling a major shift towards agentic AI in the enterprise. Learn how this impacts productivity and the future of online tools.",
     "date": "Apr 26, 2026"
-  },
-  {
-    "url": "/ai-news/openai-unveils-gpt-55-ushering-in-the-era-of-the-ai-super-app.html",
-    "title": "OpenAI Unveils GPT-5.5: Ushering in the Era of the AI Super App",
-    "excerpt": "Explore OpenAI's groundbreaking release of GPT-5.5 and its vision for a unified AI Super App, transforming productivity and digital workflows for businesses and individuals.",
-    "date": "Apr 25, 2026"
   }
 ]
