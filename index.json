@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/google-io-2026-kicks-off-gemini-intelligence-set-to-redefine-every-google-product.html",
+    "title": "Google I/O 2026 Kicks Off: Gemini Intelligence Set to Redefine Every Google Product",
+    "excerpt": "Dive into Google I/O 2026's groundbreaking AI announcements, focusing on Gemini's pervasive integration across Android, Googlebook, and XR for enhanced productivity and intelligent systems.",
+    "date": "May 19, 2026"
+  },
+  {
     "url": "/ai-news/ai-in-drug-discovery-dr-cesar-de-la-fuente-honored-for-pioneering-antibiotic-research.html",
     "title": "AI in Drug Discovery: Dr. César de la Fuente Honored for Pioneering Antibiotic Research",
     "excerpt": "Discover how AI is revolutionizing drug discovery, specifically in the fight against antimicrobial resistance, as Dr. César de la Fuente receives a prestigious award for his groundbreaking work at the University of Pennsylvania. This post covers the latest AI breakthroughs in biomedical research.",
@@ -112,11 +118,5 @@
     "title": "Google's AI Transformation: Beyond the Search Bar, Into an AI-First Future",
     "excerpt": "Explore Google's monumental shift from a \"Search Company\" to an \"AI-first\" powerhouse, driven by a decade of internal chip innovation (TPUs) and its profound implications for the future of digital services and online productivity tools.",
     "date": "Apr 29, 2026"
-  },
-  {
-    "url": "/ai-news/openai-and-microsoft-redefine-partnership-a-new-era-for-ai-cloud-strategy.html",
-    "title": "OpenAI and Microsoft Redefine Partnership: A New Era for AI Cloud Strategy",
-    "excerpt": "Explore the monumental shift in the AI landscape as OpenAI and Microsoft revise their exclusive partnership, signaling a new era of multi-cloud AI development and intensified competition. Learn what this means for the future of AI tools and enterprise innovation.",
-    "date": "Apr 28, 2026"
   }
 ]
