@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/the-google-ai-search-overhaul-ushering-in-the-agentic-gemini-era.html",
+    "title": "The Google AI Search Overhaul: Ushering in the Agentic Gemini Era",
+    "excerpt": "Explore the groundbreaking Google AI Search Overhaul announced at I/O 2026, ushering in the agentic Gemini era with enhanced AI summaries, multimodal search, and proactive AI agents like Gemini Spark. Learn its impact on web interaction, content discovery, and online productivity.",
+    "date": "May 21, 2026"
+  },
+  {
     "url": "/ai-news/google-io-2026-ai-agents-revolutionize-productivity-across-search-chrome-and-beyond.html",
     "title": "Google I/O 2026: AI Agents Revolutionize Productivity Across Search, Chrome, and Beyond",
     "excerpt": "Discover how Google I/O 2026 is revolutionizing productivity and web interaction with advanced AI agents, Gemini 3.5 Flash, Gemini Omni, and intelligent updates to Search and Chrome.",
@@ -112,11 +118,5 @@
     "title": "OpenAI's GPT-5.5 and AI Agents Redefine the Future of Online Productivity",
     "excerpt": "Explore how OpenAI's GPT-5.5 and the rise of AI agents are transforming online productivity, automating complex tasks, and reshaping the future of digital tools and workflows.",
     "date": "May 02, 2026"
-  },
-  {
-    "url": "/ai-news/big-techs-ai-investment-boom-record-profits-infrastructure-surge-in-q1-2026.html",
-    "title": "Big Tech's AI Investment Boom: Record Profits & Infrastructure Surge in Q1 2026",
-    "excerpt": "Explore how major tech companies like Alphabet, Amazon, Microsoft, and Meta reported record profits in Q1 2026, driven by unprecedented investments in AI infrastructure and demand. Understand the implications for online tools and future productivity.",
-    "date": "May 01, 2026"
   }
 ]
