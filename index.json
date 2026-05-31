@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/softbank-unveils-75-billion-ai-data-center-investment-to-propel-france-as-european-ai-hub.html",
+    "title": "SoftBank Unveils €75 Billion AI Data Center Investment to Propel France as European AI Hub",
+    "excerpt": "SoftBank Group announces a colossal €75 billion investment to build advanced AI data centers in France, poised to transform Europe's AI infrastructure and foster digital sovereignty.",
+    "date": "May 31, 2026"
+  },
+  {
     "url": "/ai-news/anthropics-record-breaking-valuation-and-claude-opus-48-reshaping-the-ai-landscape-for-productivity.html",
     "title": "Anthropic's Record-Breaking Valuation and Claude Opus 4.8: Reshaping the AI Landscape for Productivity",
     "excerpt": "Explore how Anthropic's monumental $965 billion valuation and the launch of Claude Opus 4.8 are redefining the landscape of AI, driving unprecedented productivity gains, and shaping the future of enterprise and coding tools.",
@@ -112,11 +118,5 @@
     "title": "The Agentic AI Revolution: How Gemini is Transforming Android Productivity Today",
     "excerpt": "Explore how Google's agentic Gemini capabilities, unveiled at the Android Show on May 12, 2026, are set to revolutionize mobile productivity and online tools with autonomous task execution and smarter device interaction.",
     "date": "May 12, 2026"
-  },
-  {
-    "url": "/ai-news/openai-lawsuit-intensifies-microsoft-ceo-satya-nadella-testifies-in-elon-musks-battle-over-ai-commercialization.html",
-    "title": "OpenAI Lawsuit Intensifies: Microsoft CEO Satya Nadella Testifies in Elon Musk's Battle Over AI Commercialization",
-    "excerpt": "Microsoft CEO Satya Nadella testifies in Elon Musk's high-stakes lawsuit against OpenAI, examining the shift from non-profit to AI commercialization and its profound implications for the future of artificial intelligence.",
-    "date": "May 11, 2026"
   }
 ]
