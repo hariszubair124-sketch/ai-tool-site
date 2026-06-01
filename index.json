@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/the-dawn-of-the-agentic-era-nvidia-unveils-n1x-and-rtx-spark-for-a-reimagined-ai-pc-future.html",
+    "title": "The Dawn of the Agentic Era: NVIDIA Unveils N1X and RTX Spark for a Reimagined AI PC Future",
+    "excerpt": "NVIDIA unveils the N1X chip and RTX Spark platform at Computex 2026, heralding a new era of AI-powered personal computers with agentic AI capabilities for enhanced local productivity.",
+    "date": "Jun 01, 2026"
+  },
+  {
     "url": "/ai-news/softbank-unveils-75-billion-ai-data-center-investment-to-propel-france-as-european-ai-hub.html",
     "title": "SoftBank Unveils €75 Billion AI Data Center Investment to Propel France as European AI Hub",
     "excerpt": "SoftBank Group announces a colossal €75 billion investment to build advanced AI data centers in France, poised to transform Europe's AI infrastructure and foster digital sovereignty.",
@@ -112,11 +118,5 @@
     "title": "Pentagon Forges Landmark Military AI Contracts with Tech Giants",
     "excerpt": "Explore the groundbreaking news of May 13, 2026, as the Pentagon announces significant AI contracts with tech giants like Google, Microsoft, and OpenAI, reshaping military technology and sparking crucial ethical debates.",
     "date": "May 13, 2026"
-  },
-  {
-    "url": "/ai-news/the-agentic-ai-revolution-how-gemini-is-transforming-android-productivity-today.html",
-    "title": "The Agentic AI Revolution: How Gemini is Transforming Android Productivity Today",
-    "excerpt": "Explore how Google's agentic Gemini capabilities, unveiled at the Android Show on May 12, 2026, are set to revolutionize mobile productivity and online tools with autonomous task execution and smarter device interaction.",
-    "date": "May 12, 2026"
   }
 ]
