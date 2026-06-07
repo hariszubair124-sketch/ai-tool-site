@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/the-dawn-of-autonomous-ai-how-agentic-systems-are-redefining-enterprise-productivity.html",
+    "title": "The Dawn of Autonomous AI: How Agentic Systems are Redefining Enterprise Productivity",
+    "excerpt": "Explore how AI agents, with recent advancements from Microsoft, OpenAI, and others, are transforming enterprise productivity and reshaping the future of work.",
+    "date": "Jun 07, 2026"
+  },
+  {
     "url": "/ai-news/us-house-proposes-sweeping-federal-ai-framework-eyeing-unified-national-regulation.html",
     "title": "US House Proposes Sweeping Federal AI Framework, Eyeing Unified National Regulation",
     "excerpt": "Dive into the latest tech policy news as the U.S. House introduces a draft bill to establish a federal AI framework, aiming to streamline regulation and boost innovation while sparking debate over state autonomy and consumer protection. Explore what this means for the future of online tools and AI development.",
@@ -112,11 +118,5 @@
     "title": "GPT-4o's Enduring Legacy: Two Years On, Multimodal AI Continues to Redefine Enterprise Productivity",
     "excerpt": "An expert technology journalist discusses the enduring impact and evolving enterprise applications of OpenAI's GPT-4o on May 16, 2026, two years after its initial release. This post explores how its multimodal capabilities continue to redefine productivity and human-computer interaction, offering insights for businesses leveraging online tools. Note: This article is based on real, verifiable news regarding GPT-4o's initial announcements and subsequent developments, framed within the context of the simulated date, May 16, 2026, to fulfill prompt requirements.",
     "date": "May 16, 2026"
-  },
-  {
-    "url": "/ai-news/the-ai-geopolitical-chess-match-us-china-race-reshapes-the-future-of-tech-and-online-tools.html",
-    "title": "The AI Geopolitical Chess Match: US-China Race Reshapes the Future of Tech and Online Tools",
-    "excerpt": "Explore how the intensifying US-China AI race, highlighted by recent diplomatic meetings, is shaping global technology development and the future of online AI tools, impacting innovation, access, and digital sovereignty.",
-    "date": "May 15, 2026"
   }
 ]
