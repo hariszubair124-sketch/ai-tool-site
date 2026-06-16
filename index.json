@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/ricoh-invests-in-weaviate-powering-the-future-of-ai-with-context-aware-data-management.html",
+    "title": "Ricoh Invests in Weaviate: Powering the Future of AI with Context-Aware Data Management",
+    "excerpt": "Ricoh invests in Weaviate, an AI-native vector database, to unlock unstructured data for advanced AI agents and boost enterprise productivity in digital transformation.",
+    "date": "Jun 16, 2026"
+  },
+  {
     "url": "/ai-news/government-mandates-global-shutdown-of-anthropics-advanced-ai-model-fable-5-citing-security-risks.html",
     "title": "Government Mandates Global Shutdown of Anthropic's Advanced AI Model, Fable 5, Citing Security Risks",
     "excerpt": "Explore the unprecedented global shutdown of Anthropic's Fable 5 AI model by the U.S. government due to critical security vulnerabilities, analyzing its implications for AI development and regulation.",
@@ -112,11 +118,5 @@
     "title": "The Google AI Search Overhaul: Ushering in the Agentic Gemini Era",
     "excerpt": "Explore the groundbreaking Google AI Search Overhaul announced at I/O 2026, ushering in the agentic Gemini era with enhanced AI summaries, multimodal search, and proactive AI agents like Gemini Spark. Learn its impact on web interaction, content discovery, and online productivity.",
     "date": "May 21, 2026"
-  },
-  {
-    "url": "/ai-news/google-io-2026-ai-agents-revolutionize-productivity-across-search-chrome-and-beyond.html",
-    "title": "Google I/O 2026: AI Agents Revolutionize Productivity Across Search, Chrome, and Beyond",
-    "excerpt": "Discover how Google I/O 2026 is revolutionizing productivity and web interaction with advanced AI agents, Gemini 3.5 Flash, Gemini Omni, and intelligent updates to Search and Chrome.",
-    "date": "May 20, 2026"
   }
 ]
