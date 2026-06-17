@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/deloitte-and-google-cloud-unveil-london-ai-studio-to-scale-agentic-ai-for-businesses.html",
+    "title": "Deloitte and Google Cloud Unveil London AI Studio to Scale Agentic AI for Businesses",
+    "excerpt": "Deloitte and Google Cloud's new London AI Studio is set to revolutionize business operations by accelerating the deployment of Agentic AI, transforming productivity and digital workflows across key sectors in the UK.",
+    "date": "Jun 17, 2026"
+  },
+  {
     "url": "/ai-news/ricoh-invests-in-weaviate-powering-the-future-of-ai-with-context-aware-data-management.html",
     "title": "Ricoh Invests in Weaviate: Powering the Future of AI with Context-Aware Data Management",
     "excerpt": "Ricoh invests in Weaviate, an AI-native vector database, to unlock unstructured data for advanced AI agents and boost enterprise productivity in digital transformation.",
@@ -112,11 +118,5 @@
     "title": "China Blocks Meta's $2 Billion Manus AI Acquisition: A Landmark Decision Reshaping Global AI Deals",
     "excerpt": "Explore the geopolitical implications and future of AI M&A as China blocks Meta's $2 billion acquisition of Manus AI, forcing an unwinding and highlighting rising regulatory scrutiny in the global tech landscape.",
     "date": "May 22, 2026"
-  },
-  {
-    "url": "/ai-news/the-google-ai-search-overhaul-ushering-in-the-agentic-gemini-era.html",
-    "title": "The Google AI Search Overhaul: Ushering in the Agentic Gemini Era",
-    "excerpt": "Explore the groundbreaking Google AI Search Overhaul announced at I/O 2026, ushering in the agentic Gemini era with enhanced AI summaries, multimodal search, and proactive AI agents like Gemini Spark. Learn its impact on web interaction, content discovery, and online productivity.",
-    "date": "May 21, 2026"
   }
 ]
