@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/the-silent-shift-unpacking-ais-ghost-downsizing-impact-on-the-modern-workforce.html",
+    "title": "The Silent Shift: Unpacking AI's \"Ghost Downsizing\" Impact on the Modern Workforce",
+    "excerpt": "In-depth analysis of Omni Calculator's 2026 \"Ghost Downsizing\" AI Survey, revealing how AI is silently reshaping workforce dynamics, hiring, and productivity across U.S. workplaces.",
+    "date": "Jun 25, 2026"
+  },
+  {
     "url": "/ai-news/google-deepminds-latest-multimodal-ai-pushes-boundaries-of-creative-productivity.html",
     "title": "Google DeepMind's Latest Multimodal AI Pushes Boundaries of Creative Productivity",
     "excerpt": "Explore Google DeepMind's latest advancements in multimodal AI, including DiffusionGemma for faster text generation and Gemma 4 12B for on-device creativity, revolutionizing online productivity tools in June 2026.",
@@ -112,11 +118,5 @@
     "title": "Anthropic's Record-Breaking Valuation and Claude Opus 4.8: Reshaping the AI Landscape for Productivity",
     "excerpt": "Explore how Anthropic's monumental $965 billion valuation and the launch of Claude Opus 4.8 are redefining the landscape of AI, driving unprecedented productivity gains, and shaping the future of enterprise and coding tools.",
     "date": "May 30, 2026"
-  },
-  {
-    "url": "/ai-news/anthropic-soars-to-near-1-trillion-valuation-poised-to-unleash-mythos-level-ai.html",
-    "title": "Anthropic Soars to Near-$1 Trillion Valuation, Poised to Unleash Mythos-Level AI",
-    "excerpt": "Anthropic's valuation reaches almost $1 trillion, surpassing OpenAI, as the company announces the imminent wider release of its powerful, previously restricted Mythos-level AI models for enhanced cybersecurity and enterprise applications.",
-    "date": "May 29, 2026"
   }
 ]
