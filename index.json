@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/south-korea-unleashes-nearly-12-trillion-investment-to-dominate-global-ai-landscape.html",
+    "title": "South Korea Unleashes Nearly $1.2 Trillion Investment to Dominate Global AI Landscape",
+    "excerpt": "Explore South Korea's unprecedented nearly $1.2 trillion investment in AI chip manufacturing and data centers, announced today, June 30, 2026, and its profound implications for global AI dominance and technological advancement.",
+    "date": "Jun 30, 2026"
+  },
+  {
     "url": "/ai-news/quantumlink-ai-unleashes-cognito-engine-a-leap-forward-for-next-gen-enterprise-ai.html",
     "title": "QuantumLink AI Unleashes Cognito Engine: A Leap Forward for Next-Gen Enterprise AI",
     "excerpt": "Discover how QuantumLink AI's new Cognito Engine is revolutionizing enterprise productivity with next-gen contextual AI, transforming business workflows, and setting new standards for intelligent automation.",
@@ -112,11 +118,5 @@
     "title": "Microsoft Build 2026 Unveils Future: AI Agents Deeply Integrated into Windows",
     "excerpt": "Discover how Microsoft Build 2026 is revolutionizing computing with deeply integrated AI agents in Windows, shaping the future of productivity and development.",
     "date": "Jun 02, 2026"
-  },
-  {
-    "url": "/ai-news/the-dawn-of-the-agentic-era-nvidia-unveils-n1x-and-rtx-spark-for-a-reimagined-ai-pc-future.html",
-    "title": "The Dawn of the Agentic Era: NVIDIA Unveils N1X and RTX Spark for a Reimagined AI PC Future",
-    "excerpt": "NVIDIA unveils the N1X chip and RTX Spark platform at Computex 2026, heralding a new era of AI-powered personal computers with agentic AI capabilities for enhanced local productivity.",
-    "date": "Jun 01, 2026"
   }
 ]
