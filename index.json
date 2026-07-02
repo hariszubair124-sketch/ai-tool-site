@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/us-government-drives-towards-voluntary-ai-model-standards-amidst-escalating-concerns.html",
+    "title": "US Government Drives Towards Voluntary AI Model Standards Amidst Escalating Concerns",
+    "excerpt": "Explore the latest news on US government initiatives to establish voluntary AI model standards, prompted by concerns over advanced AI capabilities and recent incidents like the Anthropic Fable 5 shutdown. Learn what this means for the future of AI development and regulation.",
+    "date": "Jul 02, 2026"
+  },
+  {
     "url": "/ai-news/us-lifts-export-restrictions-on-anthropics-fable-5-ai-model-expanding-global-access.html",
     "title": "US Lifts Export Restrictions on Anthropic's Fable 5 AI Model, Expanding Global Access",
     "excerpt": "The US government has lifted export restrictions on Anthropic's Fable 5 AI model, significantly expanding global access and impacting the future of AI development and regulation.",
@@ -112,11 +118,5 @@
     "title": "US House Proposes Sweeping Federal AI Framework, Eyeing Unified National Regulation",
     "excerpt": "Dive into the latest tech policy news as the U.S. House introduces a draft bill to establish a federal AI framework, aiming to streamline regulation and boost innovation while sparking debate over state autonomy and consumer protection. Explore what this means for the future of online tools and AI development.",
     "date": "Jun 05, 2026"
-  },
-  {
-    "url": "/ai-news/revolutionizing-ai-mobile-app-creation-mwm-ai-and-google-cloud-launch-ai-mobile-squad.html",
-    "title": "Revolutionizing AI Mobile App Creation: MWM AI and Google Cloud Launch 'AI Mobile Squad'",
-    "excerpt": "Discover how MWM AI and Google Cloud are revolutionizing mobile app creation with the new 'AI Mobile Squad,' enabling anyone to build native apps from a prompt in minutes.",
-    "date": "Jun 04, 2026"
   }
 ]
