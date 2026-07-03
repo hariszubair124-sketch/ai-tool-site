@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/microsoft-unveils-frontier-company-to-supercharge-enterprise-ai-adoption.html",
+    "title": "Microsoft Unveils 'Frontier Company' to Supercharge Enterprise AI Adoption",
+    "excerpt": "Microsoft launches its new 'Frontier Company' with a $2.5 billion investment, aiming to revolutionize enterprise AI deployment and deliver measurable business outcomes for clients worldwide.",
+    "date": "Jul 03, 2026"
+  },
+  {
     "url": "/ai-news/us-government-drives-towards-voluntary-ai-model-standards-amidst-escalating-concerns.html",
     "title": "US Government Drives Towards Voluntary AI Model Standards Amidst Escalating Concerns",
     "excerpt": "Explore the latest news on US government initiatives to establish voluntary AI model standards, prompted by concerns over advanced AI capabilities and recent incidents like the Anthropic Fable 5 shutdown. Learn what this means for the future of AI development and regulation.",
@@ -112,11 +118,5 @@
     "title": "The Dawn of Autonomous AI: How Agentic Systems are Redefining Enterprise Productivity",
     "excerpt": "Explore how AI agents, with recent advancements from Microsoft, OpenAI, and others, are transforming enterprise productivity and reshaping the future of work.",
     "date": "Jun 07, 2026"
-  },
-  {
-    "url": "/ai-news/us-house-proposes-sweeping-federal-ai-framework-eyeing-unified-national-regulation.html",
-    "title": "US House Proposes Sweeping Federal AI Framework, Eyeing Unified National Regulation",
-    "excerpt": "Dive into the latest tech policy news as the U.S. House introduces a draft bill to establish a federal AI framework, aiming to streamline regulation and boost innovation while sparking debate over state autonomy and consumer protection. Explore what this means for the future of online tools and AI development.",
-    "date": "Jun 05, 2026"
   }
 ]
