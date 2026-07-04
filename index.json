@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/google-cloud-ignites-the-agentic-enterprise-with-new-gemini-ai-agent-platform.html",
+    "title": "Google Cloud Ignites the 'Agentic Enterprise' with New Gemini AI Agent Platform",
+    "excerpt": "Explore Google Cloud's revolutionary Gemini Enterprise Agent Platform, ushering in the 'Agentic Enterprise' era with autonomous AI for enhanced software development and productivity.",
+    "date": "Jul 04, 2026"
+  },
+  {
     "url": "/ai-news/microsoft-unveils-frontier-company-to-supercharge-enterprise-ai-adoption.html",
     "title": "Microsoft Unveils 'Frontier Company' to Supercharge Enterprise AI Adoption",
     "excerpt": "Microsoft launches its new 'Frontier Company' with a $2.5 billion investment, aiming to revolutionize enterprise AI deployment and deliver measurable business outcomes for clients worldwide.",
@@ -112,11 +118,5 @@
     "title": "OpenAI's Trillion-Dollar Trajectory: AI Giant Files for IPO, Reshaping the Tech Landscape",
     "excerpt": "Dive into the monumental news of OpenAI's confidential IPO filing, signaling a new era for AI companies and public investment in cutting-edge artificial intelligence, with projections up to a $1 trillion valuation.",
     "date": "Jun 10, 2026"
-  },
-  {
-    "url": "/ai-news/the-dawn-of-autonomous-ai-how-agentic-systems-are-redefining-enterprise-productivity.html",
-    "title": "The Dawn of Autonomous AI: How Agentic Systems are Redefining Enterprise Productivity",
-    "excerpt": "Explore how AI agents, with recent advancements from Microsoft, OpenAI, and others, are transforming enterprise productivity and reshaping the future of work.",
-    "date": "Jun 07, 2026"
   }
 ]
