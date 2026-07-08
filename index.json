@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/openai-unleashes-gpt-56-a-new-era-for-next-generation-ai-models.html",
+    "title": "OpenAI Unleashes GPT-5.6: A New Era for Next-Generation AI Models",
+    "excerpt": "OpenAI is launching its highly anticipated GPT-5.6 series on July 9, 2026, featuring Sol, Terra, and Luna models. Discover what these next-generation AI models mean for productivity, web tools, and the future of artificial intelligence.",
+    "date": "Jul 08, 2026"
+  },
+  {
     "url": "/ai-news/ai-breakthrough-accelerates-search-for-room-temperature-superconductors.html",
     "title": "AI Breakthrough Accelerates Search for Room-Temperature Superconductors",
     "excerpt": "Discover how AI is revolutionizing material science with the latest breakthrough in superconductor discovery, accelerating the quest for room-temperature superconductivity. Learn about Aalto University's innovative approach.",
@@ -112,11 +118,5 @@
     "title": "Ricoh Invests in Weaviate: Powering the Future of AI with Context-Aware Data Management",
     "excerpt": "Ricoh invests in Weaviate, an AI-native vector database, to unlock unstructured data for advanced AI agents and boost enterprise productivity in digital transformation.",
     "date": "Jun 16, 2026"
-  },
-  {
-    "url": "/ai-news/government-mandates-global-shutdown-of-anthropics-advanced-ai-model-fable-5-citing-security-risks.html",
-    "title": "Government Mandates Global Shutdown of Anthropic's Advanced AI Model, Fable 5, Citing Security Risks",
-    "excerpt": "Explore the unprecedented global shutdown of Anthropic's Fable 5 AI model by the U.S. government due to critical security vulnerabilities, analyzing its implications for AI development and regulation.",
-    "date": "Jun 14, 2026"
   }
 ]
