@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/the-ai-security-blind-spot-why-999-of-fixable-ai-vulnerabilities-remain-unpatched.html",
+    "title": "The AI Security Blind Spot: Why 99.9% of Fixable AI Vulnerabilities Remain Unpatched",
+    "excerpt": "An in-depth look at the alarming findings from Orca Security's 2026 report revealing that 99.9% of fixable AI vulnerabilities remain unpatched, threatening enterprise AI deployments.",
+    "date": "Jul 13, 2026"
+  },
+  {
     "url": "/ai-news/apple-files-landmark-lawsuit-against-openai-over-ai-talent-and-trade-secret-theft.html",
     "title": "Apple Files Landmark Lawsuit Against OpenAI Over AI Talent and Trade Secret Theft",
     "excerpt": "Dive into the breaking news of the Apple vs. OpenAI lawsuit, exploring the implications for AI talent, trade secrets, and the competitive landscape of generative AI development.",
@@ -112,11 +118,5 @@
     "title": "Federal Regulators Fast-Track Power for Energy-Hungry AI Data Centers",
     "excerpt": "Explore how US federal regulators are addressing the surging energy demands of artificial intelligence, fast-tracking power supply to critical AI data centers and shaping the future of tech infrastructure.",
     "date": "Jun 21, 2026"
-  },
-  {
-    "url": "/ai-news/national-security-concerns-shape-ai-model-access-in-the-financial-sector.html",
-    "title": "National Security Concerns Shape AI Model Access in the Financial Sector",
-    "excerpt": "Explore how US national security concerns and regulatory actions are directly impacting the deployment and access of advanced AI models like Anthropic's, with JPMorgan's recent restrictions in Hong Kong highlighting a critical shift for businesses and the financial sector.",
-    "date": "Jun 20, 2026"
   }
 ]
