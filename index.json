@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/revolutionizing-enterprise-ai-tencent-cloud-unveils-advanced-agentops-platform.html",
+    "title": "Revolutionizing Enterprise AI: Tencent Cloud Unveils Advanced AgentOps Platform",
+    "excerpt": "Discover how Tencent Cloud's latest AgentOps platform upgrade, unveiled today at the World AI Conference in Shanghai, is poised to revolutionize enterprise AI agent deployment, boosting productivity and secure integration for businesses worldwide.",
+    "date": "Jul 21, 2026"
+  },
+  {
     "url": "/ai-news/google-deepmind-unveils-project-atlas-ai-a-new-era-for-intelligent-project-management-and-content-synthesis.html",
     "title": "Google DeepMind Unveils Project Atlas AI: A New Era for Intelligent Project Management and Content Synthesis",
     "excerpt": "Discover Google DeepMind's Project Atlas AI, a groundbreaking innovation announced on July 20, 2026, that redefines intelligent project management and content synthesis, promising unprecedented productivity enhancements for businesses and individuals.",
@@ -112,11 +118,5 @@
     "title": "US Government Drives Towards Voluntary AI Model Standards Amidst Escalating Concerns",
     "excerpt": "Explore the latest news on US government initiatives to establish voluntary AI model standards, prompted by concerns over advanced AI capabilities and recent incidents like the Anthropic Fable 5 shutdown. Learn what this means for the future of AI development and regulation.",
     "date": "Jul 02, 2026"
-  },
-  {
-    "url": "/ai-news/us-lifts-export-restrictions-on-anthropics-fable-5-ai-model-expanding-global-access.html",
-    "title": "US Lifts Export Restrictions on Anthropic's Fable 5 AI Model, Expanding Global Access",
-    "excerpt": "The US government has lifted export restrictions on Anthropic's Fable 5 AI model, significantly expanding global access and impacting the future of AI development and regulation.",
-    "date": "Jul 01, 2026"
   }
 ]
