@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/autonomous-ai-agents-reshaping-engineering-workflows-a-glimpse-into-next-gen-productivity.html",
+    "title": "Autonomous AI Agents Reshaping Engineering Workflows: A Glimpse into Next-Gen Productivity",
+    "excerpt": "Explore how NVIDIA and Synopsys are leveraging autonomous AI agents to transform engineering workflows, dramatically boosting productivity and efficiency in chip and system design, signaling a new era for AI-driven online tools.",
+    "date": "Jul 27, 2026"
+  },
+  {
     "url": "/ai-news/google-unleashes-gemini-35-omni-a-leap-forward-in-real-time-multimodal-ai.html",
     "title": "Google Unleashes Gemini 3.5 Omni: A Leap Forward in Real-time Multimodal AI",
     "excerpt": "Discover how Google's latest advancements in real-time AI, particularly with Gemini 3.5 Omni, are revolutionizing multimodal interactions and setting new benchmarks for productivity tools in 2026. This post explores the transformative potential of advanced AI agents in daily workflows and enterprise solutions.",
@@ -112,11 +118,5 @@
     "title": "OpenAI Unleashes GPT-5.6: A New Era for Next-Generation AI Models",
     "excerpt": "OpenAI is launching its highly anticipated GPT-5.6 series on July 9, 2026, featuring Sol, Terra, and Luna models. Discover what these next-generation AI models mean for productivity, web tools, and the future of artificial intelligence.",
     "date": "Jul 08, 2026"
-  },
-  {
-    "url": "/ai-news/ai-breakthrough-accelerates-search-for-room-temperature-superconductors.html",
-    "title": "AI Breakthrough Accelerates Search for Room-Temperature Superconductors",
-    "excerpt": "Discover how AI is revolutionizing material science with the latest breakthrough in superconductor discovery, accelerating the quest for room-temperature superconductivity. Learn about Aalto University's innovative approach.",
-    "date": "Jul 07, 2026"
   }
 ]
