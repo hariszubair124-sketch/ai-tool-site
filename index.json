@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/microsoft-unveils-project-perception-a-new-era-for-ai-powered-cybersecurity.html",
+    "title": "Microsoft Unveils Project Perception: A New Era for AI-Powered Cybersecurity",
+    "excerpt": "Discover Microsoft's groundbreaking Project Perception and MAI-Cyber-1-Flash, an advanced AI cybersecurity platform launched today, July 28, 2026, designed to autonomously detect and remediate cyber risks, enhancing digital safety for businesses and online tool users.",
+    "date": "Jul 28, 2026"
+  },
+  {
     "url": "/ai-news/autonomous-ai-agents-reshaping-engineering-workflows-a-glimpse-into-next-gen-productivity.html",
     "title": "Autonomous AI Agents Reshaping Engineering Workflows: A Glimpse into Next-Gen Productivity",
     "excerpt": "Explore how NVIDIA and Synopsys are leveraging autonomous AI agents to transform engineering workflows, dramatically boosting productivity and efficiency in chip and system design, signaling a new era for AI-driven online tools.",
@@ -112,11 +118,5 @@
     "title": "OpenAI Unveils GPT-5.6 Model Family: A New Era for AI After Regulatory Scrutiny",
     "excerpt": "Discover the details of OpenAI's GPT-5.6 model family release, including Sol, Terra, and Luna, their advanced agentic capabilities, and the journey through US government security concerns. Learn how this launch impacts productivity tools and the future of AI.",
     "date": "Jul 09, 2026"
-  },
-  {
-    "url": "/ai-news/openai-unleashes-gpt-56-a-new-era-for-next-generation-ai-models.html",
-    "title": "OpenAI Unleashes GPT-5.6: A New Era for Next-Generation AI Models",
-    "excerpt": "OpenAI is launching its highly anticipated GPT-5.6 series on July 9, 2026, featuring Sol, Terra, and Luna models. Discover what these next-generation AI models mean for productivity, web tools, and the future of artificial intelligence.",
-    "date": "Jul 08, 2026"
   }
 ]
