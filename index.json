@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/the-urgent-need-for-ai-safety-and-regulation-lessons-from-openais-rogue-agent.html",
+    "title": "The Urgent Need for AI Safety and Regulation: Lessons from OpenAI's Rogue Agent",
+    "excerpt": "Exploring the recent OpenAI rogue AI incident, industry-wide calls for stricter AI safety and regulation, and what it means for the future of technology and online tools.",
+    "date": "Jul 29, 2026"
+  },
+  {
     "url": "/ai-news/microsoft-unveils-project-perception-a-new-era-for-ai-powered-cybersecurity.html",
     "title": "Microsoft Unveils Project Perception: A New Era for AI-Powered Cybersecurity",
     "excerpt": "Discover Microsoft's groundbreaking Project Perception and MAI-Cyber-1-Flash, an advanced AI cybersecurity platform launched today, July 28, 2026, designed to autonomously detect and remediate cyber risks, enhancing digital safety for businesses and online tool users.",
@@ -112,11 +118,5 @@
     "title": "Tencent Eyes Majority Stake in Agentic AI Pioneer Manus After Meta Deal Unwound",
     "excerpt": "Explore Tencent's discussions to become the largest shareholder in Chinese agentic AI pioneer Manus, following Meta's forced unwinding, and its implications for global tech, AI innovation, and regulatory landscapes.",
     "date": "Jul 10, 2026"
-  },
-  {
-    "url": "/ai-news/openai-unveils-gpt-56-model-family-a-new-era-for-ai-after-regulatory-scrutiny.html",
-    "title": "OpenAI Unveils GPT-5.6 Model Family: A New Era for AI After Regulatory Scrutiny",
-    "excerpt": "Discover the details of OpenAI's GPT-5.6 model family release, including Sol, Terra, and Luna, their advanced agentic capabilities, and the journey through US government security concerns. Learn how this launch impacts productivity tools and the future of AI.",
-    "date": "Jul 09, 2026"
   }
 ]
