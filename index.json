@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/the-eu-ai-acts-transparency-rules-take-effect-ushering-in-a-new-era-for-ai-accountability.html",
+    "title": "The EU AI Act's Transparency Rules Take Effect: Ushering In a New Era for AI Accountability",
+    "excerpt": "On August 2, 2026, the European Union's landmark AI Act begins enforcing critical transparency rules, mandating labels for AI-generated content and requiring chatbots to identify themselves to users. This post details the implications for businesses and the future of AI accountability.",
+    "date": "Aug 02, 2026"
+  },
+  {
     "url": "/ai-news/the-looming-cloud-us-governments-missed-ai-regulation-deadline-casts-shadow-over-tech-future.html",
     "title": "The Looming Cloud: US Government's Missed AI Regulation Deadline Casts Shadow Over Tech Future",
     "excerpt": "The US government missed its August 1, 2026, deadline for establishing critical AI safety and disclosure frameworks, creating significant regulatory uncertainty for frontier AI labs and the broader tech industry. This article examines the implications of this silence for innovation, investment, and responsible AI development.",
@@ -112,11 +118,5 @@
     "title": "Fujitsu Unveils Groundbreaking AI-Driven Modernization Service on July 14, 2026",
     "excerpt": "Today's top tech news: Fujitsu launches its AI-driven Modernization Service, combining advanced generative AI with deep expertise to revolutionize legacy system transformation and accelerate digital and AI adoption for businesses in 2026. This post explores how AI agents and multi-AI strategies are enhancing productivity and driving business growth.",
     "date": "Jul 14, 2026"
-  },
-  {
-    "url": "/ai-news/the-ai-security-blind-spot-why-999-of-fixable-ai-vulnerabilities-remain-unpatched.html",
-    "title": "The AI Security Blind Spot: Why 99.9% of Fixable AI Vulnerabilities Remain Unpatched",
-    "excerpt": "An in-depth look at the alarming findings from Orca Security's 2026 report revealing that 99.9% of fixable AI vulnerabilities remain unpatched, threatening enterprise AI deployments.",
-    "date": "Jul 13, 2026"
   }
 ]
