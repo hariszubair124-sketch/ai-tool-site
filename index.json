@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/ai-agents-at-a-crossroads-unprecedented-capabilities-meet-urgent-security-concerns.html",
+    "title": "AI Agents at a Crossroads: Unprecedented Capabilities Meet Urgent Security Concerns",
+    "excerpt": "On August 6, 2026, the AI landscape is buzzing with both groundbreaking advancements in autonomous AI agents and pressing new security challenges, as major tech companies push the boundaries of productivity while confronting emergent risks. This post explores the dual nature of agentic AI, covering new product launches, enterprise integrations, and critical cybersecurity incidents impacting the industry today.",
+    "date": "Aug 06, 2026"
+  },
+  {
     "url": "/ai-news/the-expanding-enterprise-ai-footprint-understanding-agentic-ai-adoption-in-2026.html",
     "title": "The Expanding Enterprise AI Footprint: Understanding Agentic AI Adoption in 2026",
     "excerpt": "Discover how enterprise AI is evolving beyond standalone models into complex agentic architectures, as revealed by Snyk's latest report on Agentic AI Adoption. Learn about the expanding AI footprint, the challenges, and what this means for productivity and cybersecurity.",
@@ -112,11 +118,5 @@
     "title": "The Rise of Open-Source Enterprise AI: Prioritizing Privacy and Customization in 2026",
     "excerpt": "Explore the shift towards open-source enterprise AI in 2026, focusing on how businesses are prioritizing data privacy, customizability, and efficiency with on-premise LLM solutions.",
     "date": "Jul 18, 2026"
-  },
-  {
-    "url": "/ai-news/ai-bioresilience-google-deepmind-and-isomorphic-labs-unveil-joint-program-to-safeguard-global-health.html",
-    "title": "AI Bioresilience: Google DeepMind and Isomorphic Labs Unveil Joint Program to Safeguard Global Health",
-    "excerpt": "Discover how Google DeepMind and Isomorphic Labs are leveraging cutting-edge AI for global health security, unveiling a new Bioresilience Program to combat biological threats and accelerate scientific discovery.",
-    "date": "Jul 17, 2026"
   }
 ]
