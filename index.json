@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/critical-ai-model-security-flaw-exposes-hidden-reasoning-in-leading-llms.html",
+    "title": "Critical AI Model Security Flaw Exposes Hidden Reasoning in Leading LLMs",
+    "excerpt": "Discover the critical AI model security flaw recently uncovered in leading LLMs like Claude, GPT, and Gemini, exposing hidden reasoning and private data. Learn how this vulnerability impacts online tools and the future of AI safety.",
+    "date": "Aug 14, 2026"
+  },
+  {
     "url": "/ai-news/nvidia-spearheads-500-billion-ai-infrastructure-investment-to-fuel-global-ai-expansion.html",
     "title": "Nvidia Spearheads $500 Billion AI Infrastructure Investment to Fuel Global AI Expansion",
     "excerpt": "Nvidia's unprecedented $500 billion AI infrastructure investment initiative promises to accelerate global AI development and power the next generation of online tools and productivity solutions.",
@@ -112,11 +118,5 @@
     "title": "Google Unleashes Gemini 3.5 Omni: A Leap Forward in Real-time Multimodal AI",
     "excerpt": "Discover how Google's latest advancements in real-time AI, particularly with Gemini 3.5 Omni, are revolutionizing multimodal interactions and setting new benchmarks for productivity tools in 2026. This post explores the transformative potential of advanced AI agents in daily workflows and enterprise solutions.",
     "date": "Jul 26, 2026"
-  },
-  {
-    "url": "/ai-news/south-koreas-multi-billion-dollar-ai-partnerships-propel-global-tech-leadership.html",
-    "title": "South Korea's Multi-Billion Dollar AI Partnerships Propel Global Tech Leadership",
-    "excerpt": "South Korea's ambitious AI strategy culminates in multi-billion dollar partnerships with global tech giants like Nvidia, Samsung, and Broadcom, cementing its role as a leading AI innovation hub and bolstering the future of online tools and productivity.",
-    "date": "Jul 25, 2026"
   }
 ]
