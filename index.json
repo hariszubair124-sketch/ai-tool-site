@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/navigating-the-frontier-openais-stance-on-ai-safety-and-autonomous-agents-with-gpt-56-cyber.html",
+    "title": "Navigating the Frontier: OpenAI's Stance on AI Safety and Autonomous Agents with GPT-5.6-Cyber",
+    "excerpt": "Explore OpenAI's recent decisions on AI safety, including the pause of the Astra model due to security concerns and the launch of GPT-5.6-Cyber to empower cybersecurity professionals. Understand the implications for autonomous AI agents and digital tool security.",
+    "date": "Aug 15, 2026"
+  },
+  {
     "url": "/ai-news/critical-ai-model-security-flaw-exposes-hidden-reasoning-in-leading-llms.html",
     "title": "Critical AI Model Security Flaw Exposes Hidden Reasoning in Leading LLMs",
     "excerpt": "Discover the critical AI model security flaw recently uncovered in leading LLMs like Claude, GPT, and Gemini, exposing hidden reasoning and private data. Learn how this vulnerability impacts online tools and the future of AI safety.",
@@ -112,11 +118,5 @@
     "title": "Autonomous AI Agents Reshaping Engineering Workflows: A Glimpse into Next-Gen Productivity",
     "excerpt": "Explore how NVIDIA and Synopsys are leveraging autonomous AI agents to transform engineering workflows, dramatically boosting productivity and efficiency in chip and system design, signaling a new era for AI-driven online tools.",
     "date": "Jul 27, 2026"
-  },
-  {
-    "url": "/ai-news/google-unleashes-gemini-35-omni-a-leap-forward-in-real-time-multimodal-ai.html",
-    "title": "Google Unleashes Gemini 3.5 Omni: A Leap Forward in Real-time Multimodal AI",
-    "excerpt": "Discover how Google's latest advancements in real-time AI, particularly with Gemini 3.5 Omni, are revolutionizing multimodal interactions and setting new benchmarks for productivity tools in 2026. This post explores the transformative potential of advanced AI agents in daily workflows and enterprise solutions.",
-    "date": "Jul 26, 2026"
   }
 ]
