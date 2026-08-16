@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/openai-reverses-sustainable-cooling-plan-for-massive-sydney-data-center-sparking-energy-concerns.html",
+    "title": "OpenAI Reverses Sustainable Cooling Plan for Massive Sydney Data Center, Sparking Energy Concerns",
+    "excerpt": "OpenAI's decision to abandon recycled water for cooling its massive Sydney data center raises critical questions about AI data center sustainability, energy consumption, and the environmental footprint of the booming artificial intelligence sector.",
+    "date": "Aug 16, 2026"
+  },
+  {
     "url": "/ai-news/navigating-the-frontier-openais-stance-on-ai-safety-and-autonomous-agents-with-gpt-56-cyber.html",
     "title": "Navigating the Frontier: OpenAI's Stance on AI Safety and Autonomous Agents with GPT-5.6-Cyber",
     "excerpt": "Explore OpenAI's recent decisions on AI safety, including the pause of the Astra model due to security concerns and the launch of GPT-5.6-Cyber to empower cybersecurity professionals. Understand the implications for autonomous AI agents and digital tool security.",
@@ -112,11 +118,5 @@
     "title": "Microsoft Unveils Project Perception: A New Era for AI-Powered Cybersecurity",
     "excerpt": "Discover Microsoft's groundbreaking Project Perception and MAI-Cyber-1-Flash, an advanced AI cybersecurity platform launched today, July 28, 2026, designed to autonomously detect and remediate cyber risks, enhancing digital safety for businesses and online tool users.",
     "date": "Jul 28, 2026"
-  },
-  {
-    "url": "/ai-news/autonomous-ai-agents-reshaping-engineering-workflows-a-glimpse-into-next-gen-productivity.html",
-    "title": "Autonomous AI Agents Reshaping Engineering Workflows: A Glimpse into Next-Gen Productivity",
-    "excerpt": "Explore how NVIDIA and Synopsys are leveraging autonomous AI agents to transform engineering workflows, dramatically boosting productivity and efficiency in chip and system design, signaling a new era for AI-driven online tools.",
-    "date": "Jul 27, 2026"
   }
 ]
