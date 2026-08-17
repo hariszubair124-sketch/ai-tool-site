@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/alibabas-qwen-ai-models-soar-past-3-billion-downloads-reshaping-the-open-source-landscape.html",
+    "title": "Alibaba's Qwen AI Models Soar Past 3 Billion Downloads, Reshaping the Open-Source Landscape",
+    "excerpt": "Discover how Alibaba's Qwen AI models have achieved over 3 billion global downloads, surpassing industry giants and signaling a new era for open-source AI and its impact on online productivity tools.",
+    "date": "Aug 17, 2026"
+  },
+  {
     "url": "/ai-news/openai-reverses-sustainable-cooling-plan-for-massive-sydney-data-center-sparking-energy-concerns.html",
     "title": "OpenAI Reverses Sustainable Cooling Plan for Massive Sydney Data Center, Sparking Energy Concerns",
     "excerpt": "OpenAI's decision to abandon recycled water for cooling its massive Sydney data center raises critical questions about AI data center sustainability, energy consumption, and the environmental footprint of the booming artificial intelligence sector.",
@@ -112,11 +118,5 @@
     "title": "The Urgent Need for AI Safety and Regulation: Lessons from OpenAI's Rogue Agent",
     "excerpt": "Exploring the recent OpenAI rogue AI incident, industry-wide calls for stricter AI safety and regulation, and what it means for the future of technology and online tools.",
     "date": "Jul 29, 2026"
-  },
-  {
-    "url": "/ai-news/microsoft-unveils-project-perception-a-new-era-for-ai-powered-cybersecurity.html",
-    "title": "Microsoft Unveils Project Perception: A New Era for AI-Powered Cybersecurity",
-    "excerpt": "Discover Microsoft's groundbreaking Project Perception and MAI-Cyber-1-Flash, an advanced AI cybersecurity platform launched today, July 28, 2026, designed to autonomously detect and remediate cyber risks, enhancing digital safety for businesses and online tool users.",
-    "date": "Jul 28, 2026"
   }
 ]
