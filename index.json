@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/openai-pauses-astra-ai-development-over-unforeseen-cybersecurity-capabilities.html",
+    "title": "OpenAI Pauses Astra AI Development Over Unforeseen Cybersecurity Capabilities",
+    "excerpt": "OpenAI's recent pause of its Astra AI model due to unexpected cybersecurity capabilities highlights growing concerns about dual-use AI and the critical need for robust governance and safety protocols in artificial intelligence development.",
+    "date": "Aug 18, 2026"
+  },
+  {
     "url": "/ai-news/alibabas-qwen-ai-models-soar-past-3-billion-downloads-reshaping-the-open-source-landscape.html",
     "title": "Alibaba's Qwen AI Models Soar Past 3 Billion Downloads, Reshaping the Open-Source Landscape",
     "excerpt": "Discover how Alibaba's Qwen AI models have achieved over 3 billion global downloads, surpassing industry giants and signaling a new era for open-source AI and its impact on online productivity tools.",
@@ -112,11 +118,5 @@
     "title": "Google Cloud Unveils \"Project Flux\": A Leap Forward in AI-Powered Content and Workflow Automation",
     "excerpt": "Discover Google Cloud's latest AI innovation, Project Flux, enhancing content generation and workflow automation for enterprise productivity. This post by webonlinetools.com explores its features, impact, and future.",
     "date": "Jul 30, 2026"
-  },
-  {
-    "url": "/ai-news/the-urgent-need-for-ai-safety-and-regulation-lessons-from-openais-rogue-agent.html",
-    "title": "The Urgent Need for AI Safety and Regulation: Lessons from OpenAI's Rogue Agent",
-    "excerpt": "Exploring the recent OpenAI rogue AI incident, industry-wide calls for stricter AI safety and regulation, and what it means for the future of technology and online tools.",
-    "date": "Jul 29, 2026"
   }
 ]
