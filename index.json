@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/googles-landmark-ai-data-acquisition-fueling-the-future-of-artificial-intelligence.html",
+    "title": "Google's Landmark AI Data Acquisition: Fueling the Future of Artificial Intelligence",
+    "excerpt": "Discover how Google's significant acquisition of Spirit Airlines' de-identified business data is setting a new precedent for AI training, data privacy, and the future of online productivity tools.",
+    "date": "Aug 19, 2026"
+  },
+  {
     "url": "/ai-news/openai-pauses-astra-ai-development-over-unforeseen-cybersecurity-capabilities.html",
     "title": "OpenAI Pauses Astra AI Development Over Unforeseen Cybersecurity Capabilities",
     "excerpt": "OpenAI's recent pause of its Astra AI model due to unexpected cybersecurity capabilities highlights growing concerns about dual-use AI and the critical need for robust governance and safety protocols in artificial intelligence development.",
@@ -112,11 +118,5 @@
     "title": "Microsoft 365 Copilot Soars Past 30 Million Paid Users: A Landmark for AI in Productivity",
     "excerpt": "Microsoft 365 Copilot achieves a significant milestone, surpassing 30 million paid users and underscoring AI's transformative impact on enterprise productivity and cloud services.",
     "date": "Jul 31, 2026"
-  },
-  {
-    "url": "/ai-news/google-cloud-unveils-project-flux-a-leap-forward-in-ai-powered-content-and-workflow-automation.html",
-    "title": "Google Cloud Unveils \"Project Flux\": A Leap Forward in AI-Powered Content and Workflow Automation",
-    "excerpt": "Discover Google Cloud's latest AI innovation, Project Flux, enhancing content generation and workflow automation for enterprise productivity. This post by webonlinetools.com explores its features, impact, and future.",
-    "date": "Jul 30, 2026"
   }
 ]
