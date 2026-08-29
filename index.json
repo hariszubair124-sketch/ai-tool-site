@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/openai-terminates-partnership-with-cursor-following-spacex-acquisition-reshaping-ai-coding-tools-landscape.html",
+    "title": "OpenAI Terminates Partnership with Cursor Following SpaceX Acquisition, Reshaping AI Coding Tools Landscape",
+    "excerpt": "OpenAI terminates its partnership with AI coding tool Cursor after SpaceX's acquisition, igniting further rivalry between Sam Altman and Elon Musk and raising critical questions about AI model access and developer independence.",
+    "date": "Aug 29, 2026"
+  },
+  {
     "url": "/ai-news/nvidias-reported-hugging-face-acquisition-set-to-reshape-ai-development-landscape.html",
     "title": "Nvidia's Reported Hugging Face Acquisition Set to Reshape AI Development Landscape",
     "excerpt": "Nvidia's reported acquisition of Hugging Face is set to dramatically reshape the AI development landscape, impacting everything from chip manufacturing to model distribution and developer workflows.",
@@ -112,11 +118,5 @@
     "title": "OpenAI Halts Astra Model Development Citing Critical Cybersecurity Risks",
     "excerpt": "OpenAI pauses Astra AI model development over critical cybersecurity concerns, highlighting the urgent need for robust AI safety protocols and responsible AI development.",
     "date": "Aug 08, 2026"
-  },
-  {
-    "url": "/ai-news/ai-powered-weather-forecasting-google-deepminds-weathernext-delivers-game-changing-accuracy.html",
-    "title": "AI-Powered Weather Forecasting: Google DeepMind's WeatherNext Delivers Game-Changing Accuracy",
-    "excerpt": "Discover how Google DeepMind's revolutionary WeatherNext AI model, a breakthrough in AI-powered weather forecasting, is transforming tropical cyclone prediction and global climate science on webonlinetools.com.",
-    "date": "Aug 07, 2026"
   }
 ]
