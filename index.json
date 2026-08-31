@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/ai-powered-cyber-threats-tech-giants-and-financial-regulators-sound-the-alarm.html",
+    "title": "AI-Powered Cyber Threats: Tech Giants and Financial Regulators Sound the Alarm",
+    "excerpt": "Discover how over 100 tech giants and global financial regulators are urging an urgent, society-wide defensive surge against the rapidly escalating threat of AI-powered cyberattacks, impacting everyone from large enterprises to individual users of online tools.",
+    "date": "Aug 31, 2026"
+  },
+  {
     "url": "/ai-news/openai-terminates-partnership-with-cursor-following-spacex-acquisition-reshaping-ai-coding-tools-landscape.html",
     "title": "OpenAI Terminates Partnership with Cursor Following SpaceX Acquisition, Reshaping AI Coding Tools Landscape",
     "excerpt": "OpenAI terminates its partnership with AI coding tool Cursor after SpaceX's acquisition, igniting further rivalry between Sam Altman and Elon Musk and raising critical questions about AI model access and developer independence.",
@@ -112,11 +118,5 @@
     "title": "OpenAI Boosts ChatGPT with NextSlide Acquisition: Revolutionizing AI-Powered Presentations",
     "excerpt": "OpenAI's acquisition of NextSlide marks a significant leap for AI-powered presentation tools within ChatGPT, enhancing productivity and challenging traditional office suites.",
     "date": "Aug 09, 2026"
-  },
-  {
-    "url": "/ai-news/openai-halts-astra-model-development-citing-critical-cybersecurity-risks.html",
-    "title": "OpenAI Halts Astra Model Development Citing Critical Cybersecurity Risks",
-    "excerpt": "OpenAI pauses Astra AI model development over critical cybersecurity concerns, highlighting the urgent need for robust AI safety protocols and responsible AI development.",
-    "date": "Aug 08, 2026"
   }
 ]
