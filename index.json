@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/openai-unveils-gpt-6-astra-a-monumental-leap-towards-artificial-general-intelligence.html",
+    "title": "OpenAI Unveils GPT-6 Astra: A Monumental Leap Towards Artificial General Intelligence",
+    "excerpt": "OpenAI's GPT-6 Astra marks a significant leap towards Artificial General Intelligence, enhancing online productivity tools, coding, and cybersecurity capabilities.",
+    "date": "Sep 04, 2026"
+  },
+  {
     "url": "/ai-news/ai-powered-autonomous-rides-arrive-in-london-with-uber-and-wayve.html",
     "title": "AI-Powered Autonomous Rides Arrive in London with Uber and Wayve",
     "excerpt": "AI-Powered Autonomous Rides in London: Uber and Wayve launch self-driving cars in the UK capital, marking a significant milestone in autonomous mobility.",
@@ -112,11 +118,5 @@
     "title": "Revolutionizing Workflows: Google DeepMind Unveils Gemini Enterprise Pro, Powering Next-Gen AI Productivity Tools",
     "excerpt": "Discover how Google DeepMind's new Gemini Enterprise Pro is revolutionizing AI productivity tools and integrating seamlessly with Google Workspace, announced August 12, 2026.",
     "date": "Aug 12, 2026"
-  },
-  {
-    "url": "/ai-news/meta-unleashes-muse-glimmer-championing-decentralized-ai-for-a-balanced-future.html",
-    "title": "Meta Unleashes Muse Glimmer, Championing Decentralized AI for a Balanced Future",
-    "excerpt": "Meta introduces Muse Glimmer, an open-weight AI model designed for local execution, alongside CEO Mark Zuckerberg's influential letter advocating for decentralized artificial intelligence and individual empowerment.",
-    "date": "Aug 11, 2026"
   }
 ]
