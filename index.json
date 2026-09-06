@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/nvidias-hugging-face-acquisition-a-new-era-for-open-ai-development.html",
+    "title": "NVIDIA's Hugging Face Acquisition: A New Era for Open AI Development",
+    "excerpt": "Explore NVIDIA's landmark $12.9 billion acquisition of Hugging Face, its profound implications for the AI development community, and the future of open-source machine learning tools and productivity solutions.",
+    "date": "Sep 06, 2026"
+  },
+  {
     "url": "/ai-news/openais-gpt-6-astra-agi-claims-critical-risks-and-the-dawn-of-autonomous-ai.html",
     "title": "OpenAI's GPT-6 Astra: AGI Claims, Critical Risks, and the Dawn of Autonomous AI",
     "excerpt": "Explore OpenAI's GPT-6 Astra, its groundbreaking AGI claims, and the critical cybersecurity and safety implications of its autonomous capabilities, alongside recent agent swarm incidents. Learn how this impacts the future of online tools and digital productivity.",
@@ -112,11 +118,5 @@
     "title": "Critical AI Model Security Flaw Exposes Hidden Reasoning in Leading LLMs",
     "excerpt": "Discover the critical AI model security flaw recently uncovered in leading LLMs like Claude, GPT, and Gemini, exposing hidden reasoning and private data. Learn how this vulnerability impacts online tools and the future of AI safety.",
     "date": "Aug 14, 2026"
-  },
-  {
-    "url": "/ai-news/nvidia-spearheads-500-billion-ai-infrastructure-investment-to-fuel-global-ai-expansion.html",
-    "title": "Nvidia Spearheads $500 Billion AI Infrastructure Investment to Fuel Global AI Expansion",
-    "excerpt": "Nvidia's unprecedented $500 billion AI infrastructure investment initiative promises to accelerate global AI development and power the next generation of online tools and productivity solutions.",
-    "date": "Aug 13, 2026"
   }
 ]
