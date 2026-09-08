@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/arm-unveils-new-ai-portal-to-revolutionize-ai-application-development.html",
+    "title": "Arm Unveils New AI Portal to Revolutionize AI Application Development",
+    "excerpt": "Arm launches its new AI Portal, a platform designed to accelerate optimized AI application development and deployment across its compute platform, empowering developers to create more efficient online tools.",
+    "date": "Sep 08, 2026"
+  },
+  {
     "url": "/ai-news/nvidias-hugging-face-acquisition-a-new-era-for-open-ai-development.html",
     "title": "NVIDIA's Hugging Face Acquisition: A New Era for Open AI Development",
     "excerpt": "Explore NVIDIA's landmark $12.9 billion acquisition of Hugging Face, its profound implications for the AI development community, and the future of open-source machine learning tools and productivity solutions.",
@@ -112,11 +118,5 @@
     "title": "Navigating the Frontier: OpenAI's Stance on AI Safety and Autonomous Agents with GPT-5.6-Cyber",
     "excerpt": "Explore OpenAI's recent decisions on AI safety, including the pause of the Astra model due to security concerns and the launch of GPT-5.6-Cyber to empower cybersecurity professionals. Understand the implications for autonomous AI agents and digital tool security.",
     "date": "Aug 15, 2026"
-  },
-  {
-    "url": "/ai-news/critical-ai-model-security-flaw-exposes-hidden-reasoning-in-leading-llms.html",
-    "title": "Critical AI Model Security Flaw Exposes Hidden Reasoning in Leading LLMs",
-    "excerpt": "Discover the critical AI model security flaw recently uncovered in leading LLMs like Claude, GPT, and Gemini, exposing hidden reasoning and private data. Learn how this vulnerability impacts online tools and the future of AI safety.",
-    "date": "Aug 14, 2026"
   }
 ]
