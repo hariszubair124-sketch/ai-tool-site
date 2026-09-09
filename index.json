@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/apple-unveils-revolutionary-foldable-iphone-and-iphone-18-series-at-surprise-and-shine-event.html",
+    "title": "Apple Unveils Revolutionary Foldable iPhone and iPhone 18 Series at \"Surprise and Shine\" Event",
+    "excerpt": "Discover Apple's groundbreaking \"Surprise and Shine\" event on September 9, 2026, featuring the highly anticipated foldable iPhone and the powerful new iPhone 18 Pro series, marking a new era for mobile productivity and innovation.",
+    "date": "Sep 09, 2026"
+  },
+  {
     "url": "/ai-news/arm-unveils-new-ai-portal-to-revolutionize-ai-application-development.html",
     "title": "Arm Unveils New AI Portal to Revolutionize AI Application Development",
     "excerpt": "Arm launches its new AI Portal, a platform designed to accelerate optimized AI application development and deployment across its compute platform, empowering developers to create more efficient online tools.",
@@ -112,11 +118,5 @@
     "title": "OpenAI Reverses Sustainable Cooling Plan for Massive Sydney Data Center, Sparking Energy Concerns",
     "excerpt": "OpenAI's decision to abandon recycled water for cooling its massive Sydney data center raises critical questions about AI data center sustainability, energy consumption, and the environmental footprint of the booming artificial intelligence sector.",
     "date": "Aug 16, 2026"
-  },
-  {
-    "url": "/ai-news/navigating-the-frontier-openais-stance-on-ai-safety-and-autonomous-agents-with-gpt-56-cyber.html",
-    "title": "Navigating the Frontier: OpenAI's Stance on AI Safety and Autonomous Agents with GPT-5.6-Cyber",
-    "excerpt": "Explore OpenAI's recent decisions on AI safety, including the pause of the Astra model due to security concerns and the launch of GPT-5.6-Cyber to empower cybersecurity professionals. Understand the implications for autonomous AI agents and digital tool security.",
-    "date": "Aug 15, 2026"
   }
 ]
