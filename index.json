@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/navigating-the-future-openai-considers-slowing-ai-development-amidst-urgent-calls-for-regulation.html",
+    "title": "Navigating the Future: OpenAI Considers Slowing AI Development Amidst Urgent Calls for Regulation",
+    "excerpt": "Explore the latest groundbreaking discussions around AI safety and regulation, focusing on OpenAI's recent statements on potentially slowing advanced AI development amidst increasing ethical concerns and calls for government oversight.",
+    "date": "Sep 11, 2026"
+  },
+  {
     "url": "/ai-news/openai-calls-for-mandatory-national-ai-safety-rules-in-landmark-congressional-appeal.html",
     "title": "OpenAI Calls for Mandatory National AI Safety Rules in Landmark Congressional Appeal",
     "excerpt": "OpenAI pushes for mandatory AI safety rules, calling on Congress to establish a robust regulatory framework for advanced AI development and deployment.",
@@ -112,11 +118,5 @@
     "title": "OpenAI Pauses Astra AI Development Over Unforeseen Cybersecurity Capabilities",
     "excerpt": "OpenAI's recent pause of its Astra AI model due to unexpected cybersecurity capabilities highlights growing concerns about dual-use AI and the critical need for robust governance and safety protocols in artificial intelligence development.",
     "date": "Aug 18, 2026"
-  },
-  {
-    "url": "/ai-news/alibabas-qwen-ai-models-soar-past-3-billion-downloads-reshaping-the-open-source-landscape.html",
-    "title": "Alibaba's Qwen AI Models Soar Past 3 Billion Downloads, Reshaping the Open-Source Landscape",
-    "excerpt": "Discover how Alibaba's Qwen AI models have achieved over 3 billion global downloads, surpassing industry giants and signaling a new era for open-source AI and its impact on online productivity tools.",
-    "date": "Aug 17, 2026"
   }
 ]
