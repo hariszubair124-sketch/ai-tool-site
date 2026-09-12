@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/addressing-the-alarming-rise-of-ai-misuse-anthropics-latest-threat-report-shakes-the-industry.html",
+    "title": "Addressing the Alarming Rise of AI Misuse: Anthropic's Latest Threat Report Shakes the Industry",
+    "excerpt": "Explore Anthropic's latest AI Threat Report, revealing critical instances of AI misuse in missile guidance, espionage, and bioweapons research, underscoring urgent AI safety concerns for developers and regulators.",
+    "date": "Sep 12, 2026"
+  },
+  {
     "url": "/ai-news/navigating-the-future-openai-considers-slowing-ai-development-amidst-urgent-calls-for-regulation.html",
     "title": "Navigating the Future: OpenAI Considers Slowing AI Development Amidst Urgent Calls for Regulation",
     "excerpt": "Explore the latest groundbreaking discussions around AI safety and regulation, focusing on OpenAI's recent statements on potentially slowing advanced AI development amidst increasing ethical concerns and calls for government oversight.",
@@ -112,11 +118,5 @@
     "title": "Google's Landmark AI Data Acquisition: Fueling the Future of Artificial Intelligence",
     "excerpt": "Discover how Google's significant acquisition of Spirit Airlines' de-identified business data is setting a new precedent for AI training, data privacy, and the future of online productivity tools.",
     "date": "Aug 19, 2026"
-  },
-  {
-    "url": "/ai-news/openai-pauses-astra-ai-development-over-unforeseen-cybersecurity-capabilities.html",
-    "title": "OpenAI Pauses Astra AI Development Over Unforeseen Cybersecurity Capabilities",
-    "excerpt": "OpenAI's recent pause of its Astra AI model due to unexpected cybersecurity capabilities highlights growing concerns about dual-use AI and the critical need for robust governance and safety protocols in artificial intelligence development.",
-    "date": "Aug 18, 2026"
   }
 ]
