@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/project-atlas-google-deepmind-unveils-a-new-era-of-enterprise-ai-assistants.html",
+    "title": "Project Atlas: Google DeepMind Unveils a New Era of Enterprise AI Assistants",
+    "excerpt": "Explore Project Atlas, Google DeepMind's groundbreaking enterprise AI assistant launching today, September 13, 2026, revolutionizing business productivity through multimodal data synthesis and workflow automation.",
+    "date": "Sep 13, 2026"
+  },
+  {
     "url": "/ai-news/addressing-the-alarming-rise-of-ai-misuse-anthropics-latest-threat-report-shakes-the-industry.html",
     "title": "Addressing the Alarming Rise of AI Misuse: Anthropic's Latest Threat Report Shakes the Industry",
     "excerpt": "Explore Anthropic's latest AI Threat Report, revealing critical instances of AI misuse in missile guidance, espionage, and bioweapons research, underscoring urgent AI safety concerns for developers and regulators.",
@@ -112,11 +118,5 @@
     "title": "Tec-Do Secures Major Funding to Propel AI Marketing Technology into a New Era of Digital Growth",
     "excerpt": "Discover how Tec-Do's latest funding round is set to revolutionize AI marketing technology, driving innovation in agentic commerce and generative engine optimization for global brands.",
     "date": "Aug 20, 2026"
-  },
-  {
-    "url": "/ai-news/googles-landmark-ai-data-acquisition-fueling-the-future-of-artificial-intelligence.html",
-    "title": "Google's Landmark AI Data Acquisition: Fueling the Future of Artificial Intelligence",
-    "excerpt": "Discover how Google's significant acquisition of Spirit Airlines' de-identified business data is setting a new precedent for AI training, data privacy, and the future of online productivity tools.",
-    "date": "Aug 19, 2026"
   }
 ]
