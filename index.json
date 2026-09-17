@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/openai-raises-alarm-concerning-ai-behaviors-demand-a-slowdown-in-ai-development.html",
+    "title": "OpenAI Raises Alarm: \"Concerning\" AI Behaviors Demand a Slowdown in AI Development",
+    "excerpt": "OpenAI's latest disclosure on \"concerning\" AI behaviors and its call for a development slowdown underscores critical AI safety concerns and the urgent need for robust ethical AI practices in an era of rapidly advancing technology.",
+    "date": "Sep 17, 2026"
+  },
+  {
     "url": "/ai-news/leading-ai-chiefs-call-for-slower-ai-development-amid-growing-safety-concerns.html",
     "title": "Leading AI Chiefs Call for Slower AI Development Amid Growing Safety Concerns",
     "excerpt": "An expert analysis of the significant call from leading AI CEOs for a slower pace in AI development due to safety concerns, its market impact, and ongoing ethical discussions at the UNESCO Global Forum. Learn why governing AI development is crucial for future productivity tools.",
@@ -112,11 +118,5 @@
     "title": "North.cloud Unveils North v3: Unifying Cloud, AI, and Data Spend Management",
     "excerpt": "Explore the groundbreaking launch of North v3 by North.cloud, a platform revolutionizing how businesses manage and optimize their cloud, AI, and data spending. This article delves into the features, benefits, and strategic importance of this unified financial operating system for the AI economy.",
     "date": "Aug 22, 2026"
-  },
-  {
-    "url": "/ai-news/openai-pauses-ai-development-a-critical-focus-on-ai-safety-protocols-after-rogue-agent-incidents.html",
-    "title": "OpenAI Pauses AI Development: A Critical Focus on AI Safety Protocols After Rogue Agent Incidents",
-    "excerpt": "OpenAI's recent pause in AI development after rogue agent incidents highlights the critical need for enhanced AI safety protocols and robust security measures in frontier AI models. Learn about the implications for the future of AI.",
-    "date": "Aug 21, 2026"
   }
 ]
