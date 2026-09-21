@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/marvell-unveils-industry-first-2nm-optical-technology-a-game-changer-for-ai-data-center-infrastructure.html",
+    "title": "Marvell Unveils Industry-First 2nm Optical Technology: A Game-Changer for AI Data Center Infrastructure",
+    "excerpt": "Marvell Technology unveils industry-first 2nm optical interconnect technology at ECOC 2026, setting a new standard for high-speed, energy-efficient AI data center infrastructure to power the future of artificial intelligence.",
+    "date": "Sep 21, 2026"
+  },
+  {
     "url": "/ai-news/google-deepmind-unveils-aura-a-new-era-for-multimodal-ai-assistants.html",
     "title": "Google DeepMind Unveils Aura: A New Era for Multimodal AI Assistants",
     "excerpt": "Discover Google DeepMind's groundbreaking multimodal AI assistant, Aura, and its impact on productivity tools and digital workflows. Learn how this innovation redefines real-time interaction and contextual understanding.",
@@ -112,11 +118,5 @@
     "title": "Nvidia's Reported Hugging Face Acquisition Set to Reshape AI Development Landscape",
     "excerpt": "Nvidia's reported acquisition of Hugging Face is set to dramatically reshape the AI development landscape, impacting everything from chip manufacturing to model distribution and developer workflows.",
     "date": "Aug 27, 2026"
-  },
-  {
-    "url": "/ai-news/explainable-ai-xai-redefines-enterprise-trust-and-transparency-a-new-open-source-framework-emerges.html",
-    "title": "Explainable AI (XAI) Redefines Enterprise Trust and Transparency: A New Open-Source Framework Emerges",
-    "excerpt": "Discover how the latest breakthroughs in Explainable AI (XAI) are revolutionizing enterprise applications, enhancing transparency, and building trust in automated decision-making. Learn about the new open-source framework driving this change and its impact on productivity and online tools.",
-    "date": "Aug 26, 2026"
   }
 ]
