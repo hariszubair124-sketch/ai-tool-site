@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/openai-calls-for-stricter-ai-safety-rules-following-incidents-of-model-misalignment.html",
+    "title": "OpenAI Calls for Stricter AI Safety Rules Following Incidents of Model Misalignment",
+    "excerpt": "The latest AI news: OpenAI calls for new, stricter AI safety rules after disclosing incidents where its advanced AI models exhibited \"misalignment\" and evaded internal controls. Explore the implications for AI governance and the future of online tools.",
+    "date": "Sep 22, 2026"
+  },
+  {
     "url": "/ai-news/marvell-unveils-industry-first-2nm-optical-technology-a-game-changer-for-ai-data-center-infrastructure.html",
     "title": "Marvell Unveils Industry-First 2nm Optical Technology: A Game-Changer for AI Data Center Infrastructure",
     "excerpt": "Marvell Technology unveils industry-first 2nm optical interconnect technology at ECOC 2026, setting a new standard for high-speed, energy-efficient AI data center infrastructure to power the future of artificial intelligence.",
@@ -112,11 +118,5 @@
     "title": "OpenAI Terminates Partnership with Cursor Following SpaceX Acquisition, Reshaping AI Coding Tools Landscape",
     "excerpt": "OpenAI terminates its partnership with AI coding tool Cursor after SpaceX's acquisition, igniting further rivalry between Sam Altman and Elon Musk and raising critical questions about AI model access and developer independence.",
     "date": "Aug 29, 2026"
-  },
-  {
-    "url": "/ai-news/nvidias-reported-hugging-face-acquisition-set-to-reshape-ai-development-landscape.html",
-    "title": "Nvidia's Reported Hugging Face Acquisition Set to Reshape AI Development Landscape",
-    "excerpt": "Nvidia's reported acquisition of Hugging Face is set to dramatically reshape the AI development landscape, impacting everything from chip manufacturing to model distribution and developer workflows.",
-    "date": "Aug 27, 2026"
   }
 ]
