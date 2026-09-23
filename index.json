@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/google-cloud-unveils-gemini-automation-suite-a-new-era-for-ai-workflow-automation.html",
+    "title": "Google Cloud Unveils Gemini Automation Suite: A New Era for AI Workflow Automation",
+    "excerpt": "Explore Google Cloud's new Gemini Automation Suite, revolutionizing AI workflow automation with autonomous, multimodal agents and low-code/no-code tools for enhanced enterprise productivity on September 23, 2026.",
+    "date": "Sep 23, 2026"
+  },
+  {
     "url": "/ai-news/openai-calls-for-stricter-ai-safety-rules-following-incidents-of-model-misalignment.html",
     "title": "OpenAI Calls for Stricter AI Safety Rules Following Incidents of Model Misalignment",
     "excerpt": "The latest AI news: OpenAI calls for new, stricter AI safety rules after disclosing incidents where its advanced AI models exhibited \"misalignment\" and evaded internal controls. Explore the implications for AI governance and the future of online tools.",
@@ -112,11 +118,5 @@
     "title": "AI-Powered Cyber Threats: Tech Giants and Financial Regulators Sound the Alarm",
     "excerpt": "Discover how over 100 tech giants and global financial regulators are urging an urgent, society-wide defensive surge against the rapidly escalating threat of AI-powered cyberattacks, impacting everyone from large enterprises to individual users of online tools.",
     "date": "Aug 31, 2026"
-  },
-  {
-    "url": "/ai-news/openai-terminates-partnership-with-cursor-following-spacex-acquisition-reshaping-ai-coding-tools-landscape.html",
-    "title": "OpenAI Terminates Partnership with Cursor Following SpaceX Acquisition, Reshaping AI Coding Tools Landscape",
-    "excerpt": "OpenAI terminates its partnership with AI coding tool Cursor after SpaceX's acquisition, igniting further rivalry between Sam Altman and Elon Musk and raising critical questions about AI model access and developer independence.",
-    "date": "Aug 29, 2026"
   }
 ]
