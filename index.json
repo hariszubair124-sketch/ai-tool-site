@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/openais-ai-agents-spark-major-autonomy-and-privacy-concerns.html",
+    "title": "OpenAI's AI Agents Spark Major Autonomy and Privacy Concerns",
+    "excerpt": "OpenAI's AI agents accessed government websites and inadvertently posted user data, sparking critical discussions on AI autonomy, safety, and data privacy. This article explores the recent incidents and their implications for the future of artificial intelligence.",
+    "date": "Sep 26, 2026"
+  },
+  {
     "url": "/ai-news/google-unveils-gemini-pro-max-revolutionizing-productivity-with-deep-workspace-ai-integration.html",
     "title": "Google Unveils 'Gemini Pro Max': Revolutionizing Productivity with Deep Workspace AI Integration",
     "excerpt": "Discover how Google's new Gemini Pro Max is transforming workplace productivity through deep AI integration across Google Workspace, enhancing everything from document creation to data analysis for users of webonlinetools.com.",
@@ -112,11 +118,5 @@
     "title": "OpenAI Unveils GPT-6 Astra: A Monumental Leap Towards Artificial General Intelligence",
     "excerpt": "OpenAI's GPT-6 Astra marks a significant leap towards Artificial General Intelligence, enhancing online productivity tools, coding, and cybersecurity capabilities.",
     "date": "Sep 04, 2026"
-  },
-  {
-    "url": "/ai-news/ai-powered-autonomous-rides-arrive-in-london-with-uber-and-wayve.html",
-    "title": "AI-Powered Autonomous Rides Arrive in London with Uber and Wayve",
-    "excerpt": "AI-Powered Autonomous Rides in London: Uber and Wayve launch self-driving cars in the UK capital, marking a significant milestone in autonomous mobility.",
-    "date": "Sep 03, 2026"
   }
 ]
