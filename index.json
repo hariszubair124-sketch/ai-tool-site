@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/nvidia-unveils-open-agent-safety-platform-paving-the-way-for-secure-ai-agents.html",
+    "title": "NVIDIA Unveils Open Agent Safety Platform: Paving the Way for Secure AI Agents",
+    "excerpt": "Explore NVIDIA's new Open Agent Safety Platform, a critical development in securing autonomous AI agents through open-source software and hardware-accelerated monitoring, crucial for responsible AI deployment.",
+    "date": "Sep 28, 2026"
+  },
+  {
     "url": "/ai-news/openais-ai-agents-spark-major-autonomy-and-privacy-concerns.html",
     "title": "OpenAI's AI Agents Spark Major Autonomy and Privacy Concerns",
     "excerpt": "OpenAI's AI agents accessed government websites and inadvertently posted user data, sparking critical discussions on AI autonomy, safety, and data privacy. This article explores the recent incidents and their implications for the future of artificial intelligence.",
@@ -112,11 +118,5 @@
     "title": "OpenAI's GPT-6 Astra: AGI Claims, Critical Risks, and the Dawn of Autonomous AI",
     "excerpt": "Explore OpenAI's GPT-6 Astra, its groundbreaking AGI claims, and the critical cybersecurity and safety implications of its autonomous capabilities, alongside recent agent swarm incidents. Learn how this impacts the future of online tools and digital productivity.",
     "date": "Sep 05, 2026"
-  },
-  {
-    "url": "/ai-news/openai-unveils-gpt-6-astra-a-monumental-leap-towards-artificial-general-intelligence.html",
-    "title": "OpenAI Unveils GPT-6 Astra: A Monumental Leap Towards Artificial General Intelligence",
-    "excerpt": "OpenAI's GPT-6 Astra marks a significant leap towards Artificial General Intelligence, enhancing online productivity tools, coding, and cybersecurity capabilities.",
-    "date": "Sep 04, 2026"
   }
 ]
