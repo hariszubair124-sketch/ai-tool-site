@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/openais-o1-reasoning-model-a-leap-forward-in-ai-intelligence-and-productivity.html",
+    "title": "OpenAI's O1 Reasoning Model: A Leap Forward in AI Intelligence and Productivity",
+    "excerpt": "Explore the groundbreaking OpenAI O1 reasoning model, code-named Strawberry, and its transformative impact on AI capabilities, productivity tools, and the future of intelligent automation, as discussed on September 29, 2026.",
+    "date": "Sep 29, 2026"
+  },
+  {
     "url": "/ai-news/nvidia-unveils-open-agent-safety-platform-paving-the-way-for-secure-ai-agents.html",
     "title": "NVIDIA Unveils Open Agent Safety Platform: Paving the Way for Secure AI Agents",
     "excerpt": "Explore NVIDIA's new Open Agent Safety Platform, a critical development in securing autonomous AI agents through open-source software and hardware-accelerated monitoring, crucial for responsible AI deployment.",
@@ -112,11 +118,5 @@
     "title": "NVIDIA's Hugging Face Acquisition: A New Era for Open AI Development",
     "excerpt": "Explore NVIDIA's landmark $12.9 billion acquisition of Hugging Face, its profound implications for the AI development community, and the future of open-source machine learning tools and productivity solutions.",
     "date": "Sep 06, 2026"
-  },
-  {
-    "url": "/ai-news/openais-gpt-6-astra-agi-claims-critical-risks-and-the-dawn-of-autonomous-ai.html",
-    "title": "OpenAI's GPT-6 Astra: AGI Claims, Critical Risks, and the Dawn of Autonomous AI",
-    "excerpt": "Explore OpenAI's GPT-6 Astra, its groundbreaking AGI claims, and the critical cybersecurity and safety implications of its autonomous capabilities, alongside recent agent swarm incidents. Learn how this impacts the future of online tools and digital productivity.",
-    "date": "Sep 05, 2026"
   }
 ]
