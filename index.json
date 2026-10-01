@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/ibm-bob-unleashes-enterprise-ai-sovereignty-with-new-self-hosted-deployment.html",
+    "title": "IBM Bob Unleashes Enterprise AI Sovereignty with New Self-Hosted Deployment",
+    "excerpt": "Discover how IBM's new self-hosted deployment for IBM Bob empowers enterprises with unprecedented AI sovereignty, enhancing security and governance for sensitive software development on October 1, 2026.",
+    "date": "Oct 01, 2026"
+  },
+  {
     "url": "/ai-news/openais-dots-ai-assistant-a-new-era-for-personal-productivity-and-web-tools.html",
     "title": "OpenAI's \"dots\" AI Assistant: A New Era for Personal Productivity and Web Tools",
     "excerpt": "Discover OpenAI's \"dots\" AI assistant, launched today, revolutionizing personal productivity and task automation. Learn how this always-on AI is set to transform your digital workflow and its implications for the future of online tools.",
@@ -112,11 +118,5 @@
     "title": "Apple Unveils Revolutionary Foldable iPhone and iPhone 18 Series at \"Surprise and Shine\" Event",
     "excerpt": "Discover Apple's groundbreaking \"Surprise and Shine\" event on September 9, 2026, featuring the highly anticipated foldable iPhone and the powerful new iPhone 18 Pro series, marking a new era for mobile productivity and innovation.",
     "date": "Sep 09, 2026"
-  },
-  {
-    "url": "/ai-news/arm-unveils-new-ai-portal-to-revolutionize-ai-application-development.html",
-    "title": "Arm Unveils New AI Portal to Revolutionize AI Application Development",
-    "excerpt": "Arm launches its new AI Portal, a platform designed to accelerate optimized AI application development and deployment across its compute platform, empowering developers to create more efficient online tools.",
-    "date": "Sep 08, 2026"
   }
 ]
