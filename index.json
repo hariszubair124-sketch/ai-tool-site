@@ -1,5 +1,11 @@
 [
   {
+    "url": "/ai-news/uk-pioneers-lifecycle-approach-to-ai-in-healthcare-regulation.html",
+    "title": "UK Pioneers Lifecycle Approach to AI in Healthcare Regulation",
+    "excerpt": "Discover how the UK's latest policy on AI in healthcare, announced October 6, 2026, is setting a global standard for responsible innovation, patient safety, and regulatory oversight in artificial intelligence medical devices.",
+    "date": "Oct 06, 2026"
+  },
+  {
     "url": "/ai-news/openais-ai-safety-debates-intensify-as-key-staff-depart-and-model-delays-mount.html",
     "title": "OpenAI's AI Safety Debates Intensify as Key Staff Depart and Model Delays Mount",
     "excerpt": "Dive into the escalating AI safety concerns at OpenAI, featuring a high-profile resignation, researcher dismissals, and significant model delays. Understand the implications for AI development and trust in the rapidly evolving tech landscape.",
@@ -112,11 +118,5 @@
     "title": "Project Atlas: Google DeepMind Unveils a New Era of Enterprise AI Assistants",
     "excerpt": "Explore Project Atlas, Google DeepMind's groundbreaking enterprise AI assistant launching today, September 13, 2026, revolutionizing business productivity through multimodal data synthesis and workflow automation.",
     "date": "Sep 13, 2026"
-  },
-  {
-    "url": "/ai-news/addressing-the-alarming-rise-of-ai-misuse-anthropics-latest-threat-report-shakes-the-industry.html",
-    "title": "Addressing the Alarming Rise of AI Misuse: Anthropic's Latest Threat Report Shakes the Industry",
-    "excerpt": "Explore Anthropic's latest AI Threat Report, revealing critical instances of AI misuse in missile guidance, espionage, and bioweapons research, underscoring urgent AI safety concerns for developers and regulators.",
-    "date": "Sep 12, 2026"
   }
 ]
