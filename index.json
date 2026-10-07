@@ -198,12 +198,6 @@
     "date": "Aug 29, 2026"
   },
   {
-    "url": "/ai-news/nvidias-reported-hugging-face-acquisition-set-to-reshape-ai-development-landscape.html",
-    "title": "Nvidia's Reported Hugging Face Acquisition Set to Reshape AI Development Landscape",
-    "excerpt": "Nvidia's reported acquisition of Hugging Face is set to dramatically reshape the AI development landscape, impacting everything from chip manufacturing to model distribution and developer workflows.",
-    "date": "Aug 27, 2026"
-  },
-  {
     "url": "/ai-news/explainable-ai-xai-redefines-enterprise-trust-and-transparency-a-new-open-source-framework-emerges.html",
     "title": "Explainable AI (XAI) Redefines Enterprise Trust and Transparency: A New Open-Source Framework Emerges",
     "excerpt": "Discover how the latest breakthroughs in Explainable AI (XAI) are revolutionizing enterprise applications, enhancing transparency, and building trust in automated decision-making. Learn about the new open-source framework driving this change and its impact on productivity and online tools.",
@@ -244,12 +238,6 @@
     "title": "Google's Landmark AI Data Acquisition: Fueling the Future of Artificial Intelligence",
     "excerpt": "Discover how Google's significant acquisition of Spirit Airlines' de-identified business data is setting a new precedent for AI training, data privacy, and the future of online productivity tools.",
     "date": "Aug 19, 2026"
-  },
-  {
-    "url": "/ai-news/openai-pauses-astra-ai-development-over-unforeseen-cybersecurity-capabilities.html",
-    "title": "OpenAI Pauses Astra AI Development Over Unforeseen Cybersecurity Capabilities",
-    "excerpt": "OpenAI's recent pause of its Astra AI model due to unexpected cybersecurity capabilities highlights growing concerns about dual-use AI and the critical need for robust governance and safety protocols in artificial intelligence development.",
-    "date": "Aug 18, 2026"
   },
   {
     "url": "/ai-news/alibabas-qwen-ai-models-soar-past-3-billion-downloads-reshaping-the-open-source-landscape.html",
@@ -420,12 +408,6 @@
     "date": "Jul 21, 2026"
   },
   {
-    "url": "/ai-news/google-deepmind-unveils-project-atlas-ai-a-new-era-for-intelligent-project-management-and-content-synthesis.html",
-    "title": "Google DeepMind Unveils Project Atlas AI: A New Era for Intelligent Project Management and Content Synthesis",
-    "excerpt": "Discover Google DeepMind's Project Atlas AI, a groundbreaking innovation announced on July 20, 2026, that redefines intelligent project management and content synthesis, promising unprecedented productivity enhancements for businesses and individuals.",
-    "date": "Jul 20, 2026"
-  },
-  {
     "url": "/ai-news/moonshot-ais-kimi-k3-jolts-global-ai-race-reshaping-market-dynamics.html",
     "title": "Moonshot AI's Kimi K3 Jolts Global AI Race, Reshaping Market Dynamics",
     "excerpt": "Discover how Moonshot AI's Kimi K3 model is reshaping the global AI landscape, challenging Western dominance and influencing tech market dynamics on July 19, 2026.",
@@ -450,12 +432,6 @@
     "date": "Jul 16, 2026"
   },
   {
-    "url": "/ai-news/openai-unleashes-gpt-56-a-new-era-for-advanced-ai-models-and-microsoft-copilot-365.html",
-    "title": "OpenAI Unleashes GPT 5.6: A New Era for Advanced AI Models and Microsoft Copilot 365",
-    "excerpt": "Explore OpenAI's latest innovation, GPT 5.6, and its transformative impact on advanced AI models and Microsoft Copilot 365, enhancing productivity and digital workflows.",
-    "date": "Jul 15, 2026"
-  },
-  {
     "url": "/ai-news/fujitsu-unveils-groundbreaking-ai-driven-modernization-service-on-july-14-2026.html",
     "title": "Fujitsu Unveils Groundbreaking AI-Driven Modernization Service on July 14, 2026",
     "excerpt": "Today's top tech news: Fujitsu launches its AI-driven Modernization Service, combining advanced generative AI with deep expertise to revolutionize legacy system transformation and accelerate digital and AI adoption for businesses in 2026. This post explores how AI agents and multi-AI strategies are enhancing productivity and driving business growth.",
@@ -472,12 +448,6 @@
     "title": "Apple Files Landmark Lawsuit Against OpenAI Over AI Talent and Trade Secret Theft",
     "excerpt": "Dive into the breaking news of the Apple vs. OpenAI lawsuit, exploring the implications for AI talent, trade secrets, and the competitive landscape of generative AI development.",
     "date": "Jul 12, 2026"
-  },
-  {
-    "url": "/ai-news/apple-levels-explosive-trade-secret-theft-lawsuit-against-openai-amid-fierce-ai-hardware-race.html",
-    "title": "Apple Levels Explosive Trade Secret Theft Lawsuit Against OpenAI Amid Fierce AI Hardware Race",
-    "excerpt": "Apple has filed a trade secret theft lawsuit against OpenAI and its hardware chief, Tang Tan, alleging the theft of confidential information related to unreleased AI products on July 11, 2026.",
-    "date": "Jul 11, 2026"
   },
   {
     "url": "/ai-news/tencent-eyes-majority-stake-in-agentic-ai-pioneer-manus-after-meta-deal-unwound.html",
@@ -514,12 +484,6 @@
     "title": "SK Telecom Unveils Ambitious Plan for Asia's Largest AI Data Center, Powering Next-Gen AI",
     "excerpt": "Discover how SK Telecom's groundbreaking 15GW AI data center project aims to transform Asia into a leading AI infrastructure hub, impacting the future of online tools and digital innovation.",
     "date": "Jul 05, 2026"
-  },
-  {
-    "url": "/ai-news/google-cloud-ignites-the-agentic-enterprise-with-new-gemini-ai-agent-platform.html",
-    "title": "Google Cloud Ignites the 'Agentic Enterprise' with New Gemini AI Agent Platform",
-    "excerpt": "Explore Google Cloud's revolutionary Gemini Enterprise Agent Platform, ushering in the 'Agentic Enterprise' era with autonomous AI for enhanced software development and productivity.",
-    "date": "Jul 04, 2026"
   },
   {
     "url": "/ai-news/microsoft-unveils-frontier-company-to-supercharge-enterprise-ai-adoption.html",
@@ -952,12 +916,6 @@
     "title": "Google AI Edge Eloquent: Revolutionizing Offline Productivity with On-Device AI Dictation",
     "excerpt": "Discover Google AI Edge Eloquent, a groundbreaking free iPhone app for offline AI dictation, transforming productivity with on-device speech-to-text capabilities and enhanced privacy.",
     "date": "Apr 09, 2026"
-  },
-  {
-    "url": "/ai-news/revolutionizing-productivity-google-launches-ai-edge-eloquent-a-free-offline-ai-dictation-app-for-iphone.html",
-    "title": "Revolutionizing Productivity: Google Launches AI Edge Eloquent, a Free Offline AI Dictation App for iPhone",
-    "excerpt": "Discover Google's new AI Edge Eloquent, a free, offline speech-to-text app for iPhone, leveraging Gemma 4 for enhanced productivity and text editing.",
-    "date": "Apr 08, 2026"
   },
   {
     "url": "/ai-news/revolutionizing-ai-a-breakthrough-in-energy-efficiency-and-intelligence.html",

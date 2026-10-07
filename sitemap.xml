@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://webonlinetools.com/ai-news/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://webonlinetools.com/ai-news/editorial-policy.html</loc></url>
   <url><loc>https://webonlinetools.com/ai-news/atlassian-unveils-agentic-multiplayer-protocol-amp-for-enhanced-ai-code-visibility.html</loc><lastmod>2026-10-07</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/uk-pioneers-lifecycle-approach-to-ai-in-healthcare-regulation.html</loc><lastmod>2026-10-06</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/openais-ai-safety-debates-intensify-as-key-staff-depart-and-model-delays-mount.html</loc><lastmod>2026-10-04</lastmod></url>
@@ -34,7 +35,6 @@
   <url><loc>https://webonlinetools.com/ai-news/john-ternus-takes-helm-at-apple-charting-the-course-for-apples-ai-future.html</loc><lastmod>2026-09-01</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/ai-powered-cyber-threats-tech-giants-and-financial-regulators-sound-the-alarm.html</loc><lastmod>2026-08-31</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/openai-terminates-partnership-with-cursor-following-spacex-acquisition-reshaping-ai-coding-tools-landscape.html</loc><lastmod>2026-08-29</lastmod></url>
-  <url><loc>https://webonlinetools.com/ai-news/nvidias-reported-hugging-face-acquisition-set-to-reshape-ai-development-landscape.html</loc><lastmod>2026-08-27</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/explainable-ai-xai-redefines-enterprise-trust-and-transparency-a-new-open-source-framework-emerges.html</loc><lastmod>2026-08-26</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/the-nvidia-ai-server-price-hike-what-it-means-for-the-future-of-ai.html</loc><lastmod>2026-08-24</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/chinas-inner-mongolia-pioneers-global-green-ai-computing-expansion.html</loc><lastmod>2026-08-23</lastmod></url>
@@ -42,7 +42,6 @@
   <url><loc>https://webonlinetools.com/ai-news/openai-pauses-ai-development-a-critical-focus-on-ai-safety-protocols-after-rogue-agent-incidents.html</loc><lastmod>2026-08-21</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/tec-do-secures-major-funding-to-propel-ai-marketing-technology-into-a-new-era-of-digital-growth.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/googles-landmark-ai-data-acquisition-fueling-the-future-of-artificial-intelligence.html</loc><lastmod>2026-08-19</lastmod></url>
-  <url><loc>https://webonlinetools.com/ai-news/openai-pauses-astra-ai-development-over-unforeseen-cybersecurity-capabilities.html</loc><lastmod>2026-08-18</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/alibabas-qwen-ai-models-soar-past-3-billion-downloads-reshaping-the-open-source-landscape.html</loc><lastmod>2026-08-17</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/openai-reverses-sustainable-cooling-plan-for-massive-sydney-data-center-sparking-energy-concerns.html</loc><lastmod>2026-08-16</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/navigating-the-frontier-openais-stance-on-ai-safety-and-autonomous-agents-with-gpt-56-cyber.html</loc><lastmod>2026-08-15</lastmod></url>
@@ -71,23 +70,19 @@
   <url><loc>https://webonlinetools.com/ai-news/openais-ai-models-go-rogue-hack-hugging-face-in-unprecedented-security-incident.html</loc><lastmod>2026-07-23</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/openais-ai-goes-rogue-an-unprecedented-autonomous-ai-cybersecurity-breach-rocks-the-tech-world.html</loc><lastmod>2026-07-22</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/revolutionizing-enterprise-ai-tencent-cloud-unveils-advanced-agentops-platform.html</loc><lastmod>2026-07-21</lastmod></url>
-  <url><loc>https://webonlinetools.com/ai-news/google-deepmind-unveils-project-atlas-ai-a-new-era-for-intelligent-project-management-and-content-synthesis.html</loc><lastmod>2026-07-20</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/moonshot-ais-kimi-k3-jolts-global-ai-race-reshaping-market-dynamics.html</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/the-rise-of-open-source-enterprise-ai-prioritizing-privacy-and-customization-in-2026.html</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/ai-bioresilience-google-deepmind-and-isomorphic-labs-unveil-joint-program-to-safeguard-global-health.html</loc><lastmod>2026-07-17</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/revolutionizing-design-mit-unleashes-ai-for-seamless-2d-to-3d-cad-generation.html</loc><lastmod>2026-07-16</lastmod></url>
-  <url><loc>https://webonlinetools.com/ai-news/openai-unleashes-gpt-56-a-new-era-for-advanced-ai-models-and-microsoft-copilot-365.html</loc><lastmod>2026-07-15</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/fujitsu-unveils-groundbreaking-ai-driven-modernization-service-on-july-14-2026.html</loc><lastmod>2026-07-14</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/the-ai-security-blind-spot-why-999-of-fixable-ai-vulnerabilities-remain-unpatched.html</loc><lastmod>2026-07-13</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/apple-files-landmark-lawsuit-against-openai-over-ai-talent-and-trade-secret-theft.html</loc><lastmod>2026-07-12</lastmod></url>
-  <url><loc>https://webonlinetools.com/ai-news/apple-levels-explosive-trade-secret-theft-lawsuit-against-openai-amid-fierce-ai-hardware-race.html</loc><lastmod>2026-07-11</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/tencent-eyes-majority-stake-in-agentic-ai-pioneer-manus-after-meta-deal-unwound.html</loc><lastmod>2026-07-10</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/openai-unveils-gpt-56-model-family-a-new-era-for-ai-after-regulatory-scrutiny.html</loc><lastmod>2026-07-09</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/openai-unleashes-gpt-56-a-new-era-for-next-generation-ai-models.html</loc><lastmod>2026-07-08</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/ai-breakthrough-accelerates-search-for-room-temperature-superconductors.html</loc><lastmod>2026-07-07</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/the-landmark-un-global-dialogue-on-ai-governance-kicks-off-in-geneva.html</loc><lastmod>2026-07-06</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/sk-telecom-unveils-ambitious-plan-for-asias-largest-ai-data-center-powering-next-gen-ai.html</loc><lastmod>2026-07-05</lastmod></url>
-  <url><loc>https://webonlinetools.com/ai-news/google-cloud-ignites-the-agentic-enterprise-with-new-gemini-ai-agent-platform.html</loc><lastmod>2026-07-04</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/microsoft-unveils-frontier-company-to-supercharge-enterprise-ai-adoption.html</loc><lastmod>2026-07-03</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/us-government-drives-towards-voluntary-ai-model-standards-amidst-escalating-concerns.html</loc><lastmod>2026-07-02</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/us-lifts-export-restrictions-on-anthropics-fable-5-ai-model-expanding-global-access.html</loc><lastmod>2026-07-01</lastmod></url>
@@ -160,7 +155,6 @@
   <url><loc>https://webonlinetools.com/ai-news/japan-unites-softbank-nec-sony-honda-form-new-alliance-for-high-performance-ai-development.html</loc><lastmod>2026-04-12</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/project-glasswing-how-advanced-ai-is-reshaping-cybersecurity-in-2026.html</loc><lastmod>2026-04-11</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/google-ai-edge-eloquent-revolutionizing-offline-productivity-with-on-device-ai-dictation.html</loc><lastmod>2026-04-09</lastmod></url>
-  <url><loc>https://webonlinetools.com/ai-news/revolutionizing-productivity-google-launches-ai-edge-eloquent-a-free-offline-ai-dictation-app-for-iphone.html</loc><lastmod>2026-04-08</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/revolutionizing-ai-a-breakthrough-in-energy-efficiency-and-intelligence.html</loc><lastmod>2026-04-06</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/autonomous-ai-cybersecurity-a-new-era-of-digital-vulnerability-unveiled.html</loc><lastmod>2026-04-05</lastmod></url>
   <url><loc>https://webonlinetools.com/ai-news/googles-turboquant-algorithm-and-gemini-nano-4-redefine-ai-efficiency-for-productivity-tools.html</loc><lastmod>2026-04-04</lastmod></url>

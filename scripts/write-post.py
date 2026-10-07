@@ -1,0 +1,365 @@
+"""
+Daily AI news writer. Runs in GitHub Actions with the free Gemini API.
+
+1. Asks Gemini (with Google Search grounding) for one story from the last 48 hours, as JSON.
+2. Keeps only sources that Gemini's search actually returned AND that load right now.
+3. Publishes only if: 2+ sources from different sites, 1+ source dated within 72 hours,
+   the story is not one we already covered, and the title is plain (no hype words).
+4. Saves content/posts/<slug>.json, then scripts/build-site.py renders the site.
+
+If a check fails it retries once with a different story, then skips the day.
+Skipping is a normal outcome (exit code 0), so a bad day never publishes a bad post.
+
+Usage:  python scripts/write-post.py            live run
+        python scripts/write-post.py --dry-run  checks parsing with a sample, no API, writes nothing
+"""
+import argparse
+import html
+import json
+import os
+import re
+import subprocess
+import sys
+import unicodedata
+import urllib.request
+from datetime import datetime, timedelta, timezone
+from html.parser import HTMLParser
+from urllib.parse import urlparse
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+MAX_CALLS = 2
+FRESH_HOURS = 72
+UA = "Mozilla/5.0 (compatible; WebOnlineToolsBot/1.0; +https://webonlinetools.com/ai-news/editorial-policy.html)"
+HYPE = ["unveil", "unleash", "revolution", "new era", "landmark", "game-changer", "game changer", "dawn of",
+        "groundbreaking", "unprecedented", "redefin", "reshap", "ushering", "soars", "skyrocket", "leap forward"]
+STOP = set("""a an the of for in on to and with its it as by at is are be how from into new era over after amid
+their this that what why who will can now latest next major global ai""".split())
+ALLOWED_TAGS = {"h2", "h3", "p", "ul", "ol", "li", "strong", "em", "blockquote", "table", "thead", "tbody",
+                "tr", "th", "td", "code", "br"}
+
+
+# ── helpers ───────────────────────────────────────────────────────────
+
+def log(msg):
+    print(msg, flush=True)
+
+
+def words(text):
+    text = text.lower().replace("'s", "")
+    return {w for w in re.findall(r"[a-z0-9][a-z0-9.\-]*[a-z0-9]|[a-z0-9]", text) if w not in STOP and len(w) > 1}
+
+
+def slugify(text, limit=90):
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
+    text = re.sub(r"[^a-z0-9\s-]", "", text.lower())
+    text = re.sub(r"[\s-]+", "-", text).strip("-")
+    if len(text) > limit:
+        text = text[:limit].rsplit("-", 1)[0]
+    return text
+
+
+def domain(url):
+    host = urlparse(url).netloc.lower()
+    return host[4:] if host.startswith("www.") else host
+
+
+def fetch(url, timeout=20):
+    """Returns (final_url, status, html) following redirects; status 0 on network failure."""
+    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html,*/*"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            body = r.read(600_000).decode(r.headers.get_content_charset() or "utf-8", "ignore")
+            return r.geturl(), r.status, body
+    except urllib.error.HTTPError as e:
+        return e.geturl() or url, e.code, ""
+    except Exception:
+        return url, 0, ""
+
+
+DATE_PATTERNS = [
+    r'property=["\']article:published_time["\']\s+content=["\']([^"\']+)',
+    r'content=["\']([^"\']+)["\']\s+property=["\']article:published_time',
+    r'"datePublished"\s*:\s*"([^"]+)"',
+    r'<time[^>]+datetime=["\']([^"\']+)',
+    r'name=["\'](?:pubdate|publish-date|date)["\']\s+content=["\']([^"\']+)',
+]
+
+
+def page_dates(url, page):
+    found = []
+    for pat in DATE_PATTERNS:
+        for m in re.findall(pat, page, re.I)[:5]:
+            d = re.match(r"(\d{4})-(\d{2})-(\d{2})", m.strip())
+            if d:
+                found.append(datetime(int(d[1]), int(d[2]), int(d[3]), tzinfo=timezone.utc))
+    m = re.search(r"/(20\d{2})/(\d{1,2})/(\d{1,2})/", url)
+    if m:
+        found.append(datetime(int(m[1]), int(m[2]), int(m[3]), tzinfo=timezone.utc))
+    return found
+
+
+class Sanitizer(HTMLParser):
+    """Keeps only simple article markup; drops links (sources are cited separately), scripts and styles."""
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.out, self.skip = [], 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag in ("script", "style", "h1"):
+            self.skip += 1
+        elif not self.skip and tag in ALLOWED_TAGS:
+            self.out.append(f"<{tag}>")
+
+    def handle_endtag(self, tag):
+        if tag in ("script", "style", "h1"):
+            self.skip = max(0, self.skip - 1)
+        elif not self.skip and tag in ALLOWED_TAGS and tag != "br":
+            self.out.append(f"</{tag}>")
+
+    def handle_data(self, data):
+        if not self.skip:
+            self.out.append(html.escape(data, quote=False))
+
+
+def sanitize(body):
+    s = Sanitizer()
+    s.feed(body)
+    s.close()
+    return re.sub(r"\n{2,}", "\n", "".join(s.out)).strip()
+
+
+def load_registry():
+    path = os.path.join(ROOT, "data", "keywords.json")
+    return json.load(open(path, encoding="utf-8")) if os.path.exists(path) else []
+
+
+# ── Gemini ────────────────────────────────────────────────────────────
+
+def build_prompt(today, recent, avoid):
+    covered = "\n".join(f"- {p['title']}" for p in recent)
+    extra = "\n".join(f"- {t}" for t in avoid)
+    return f"""You are a careful technology reporter writing for webonlinetools.com, a site of free web tools
+with a reference-style AI news section. Today is {today}.
+
+Use Google Search to find ONE significant, verifiable AI or technology story published in the last 48 hours.
+Prefer stories with an official primary source (company blog, press release, filing, paper, government page).
+
+Do NOT write about any of these stories, which we already covered:
+{covered}
+{("Also avoid these, which were rejected:" + chr(10) + extra) if extra else ""}
+
+Return ONLY a JSON object, no markdown fences, with exactly these keys:
+{{
+  "title": "Plain headline, 45-65 characters, written the way people search: '[Company] [does what]: [detail]'",
+  "keyword": "the specific long-tail search query this story answers, 3-8 words, lowercase",
+  "description": "Meta description, 140-155 characters, states the main fact and the date",
+  "facts": {{"Who": "...", "What": "...", "When": "date as 7 October 2026", "Status": "...", "Official source": "publisher name"}},
+  "body": "HTML article body",
+  "sources": [{{"n": 1, "title": "page title", "publisher": "site or organisation", "date": "YYYY-MM-DD", "url": "exact URL from your search results"}}]
+}}
+
+Rules for the body:
+- 600-900 words. Allowed tags only: h2, h3, p, ul, ol, li, strong, em, blockquote. No h1, no links, no images.
+- Open with two sentences that say who did what, and when.
+- Use 3-5 h2 sections phrased as reader questions, for example "What did OpenAI announce?", "How does it work?",
+  "Why does it matter?", "What happens next?". Use h3 only inside an h2 section.
+- After every factual sentence, add a citation marker like [1] or [2] matching the source's "n".
+- Only state facts, figures, dates and quotes that appear in the sources. Never invent them.
+- Write in your own words; never copy sentences from a source. Quotes must be exact and under 20 words.
+- Natural, plain tone. Never use: unveils, unleashes, revolutionizing, new era, landmark, game-changer,
+  groundbreaking, unprecedented, redefines, reshaping, dawn, leap.
+
+Rules for sources:
+- At least 2 sources from different websites; at least 1 primary source; at least 1 published in the last 48 hours.
+- Use the exact URLs of pages you found in search. Do not guess or construct URLs.
+"""
+
+
+def call_gemini(prompt):
+    from google import genai
+    from google.genai import types
+    client = genai.Client(api_key=os.environ["API_KEY"])
+    resp = client.models.generate_content(
+        model=MODEL, contents=prompt,
+        config=types.GenerateContentConfig(tools=[types.Tool(google_search=types.GoogleSearch())], temperature=0.4))
+    grounded = []
+    try:
+        for chunk in resp.candidates[0].grounding_metadata.grounding_chunks or []:
+            if chunk.web and chunk.web.uri:
+                grounded.append({"uri": chunk.web.uri, "title": chunk.web.title or ""})
+    except (AttributeError, IndexError, TypeError):
+        pass
+    return resp.text or "", grounded
+
+
+def parse_json(text):
+    text = re.sub(r"^```[a-z]*\s*|\s*```$", "", text.strip())
+    start, end = text.find("{"), text.rfind("}")
+    if start < 0 or end < 0:
+        raise ValueError("no JSON object in the response")
+    return json.loads(text[start:end + 1])
+
+
+# ── checks ────────────────────────────────────────────────────────────
+
+def verify_sources(story, grounded, now, offline=False):
+    """Returns (kept sources renumbered, mapping old n -> new n, fresh: bool)."""
+    grounded_domains = set()
+    grounded_urls = {}
+    grounded_finals = set()  # exact pages Google's search returned, even if they block our checker
+    for g in grounded:
+        final, status, _ = (g["uri"], 200, "") if offline else fetch(g["uri"])
+        d = domain(final) or g["title"].lower()
+        grounded_domains.add(d)
+        if domain(final):
+            grounded_finals.add(final.rstrip("/"))
+        if status == 200:
+            grounded_urls.setdefault(d, final)
+    kept, mapping, fresh, seen = [], {}, False, set()
+    for s in story.get("sources", []):
+        url = (s.get("url") or "").strip()
+        d = domain(url)
+        if not url.startswith("http") or d not in grounded_domains:
+            log(f"   drop source (not from search results): {url}")
+            continue
+        final, status, page = (url, 200, "") if offline else fetch(url)
+        if status != 200 and d in grounded_urls:
+            final, status, page = grounded_urls[d], 200, ("" if offline else fetch(grounded_urls[d])[2])
+        if status in (401, 403, 429) and final.rstrip("/") in grounded_finals:
+            status = 200  # real page from search results; the site just blocks automated checks
+        if status != 200 or final in seen:
+            log(f"   drop source (HTTP {status}): {url}")
+            continue
+        seen.add(final)
+        dates = page_dates(final, page)
+        if offline:
+            dates = [now]
+        if any(now - timedelta(hours=FRESH_HOURS) <= d0 <= now + timedelta(days=1) for d0 in dates):
+            fresh = True
+        mapping[int(s.get("n", 0))] = len(kept) + 1
+        kept.append({"title": s.get("title") or final, "publisher": s.get("publisher") or domain(final),
+                     "date": s.get("date", ""), "url": final})
+    return kept, mapping, fresh
+
+
+def renumber(body, mapping):
+    def repl(m):
+        new = mapping.get(int(m.group(1)))
+        return f"[{new}]" if new else ""
+    return re.sub(r"\[(\d{1,2})\]", repl, body)
+
+
+def check_story(story, registry, now):
+    problems = []
+    title = story.get("title", "").strip()
+    if not 25 <= len(title) <= 75:
+        problems.append(f"title length {len(title)}")
+    if any(h in title.lower() for h in HYPE):
+        problems.append("hype word in title")
+    body_words = len(re.sub(r"<[^>]+>", " ", story.get("body", "")).split())
+    if body_words < 450:
+        problems.append(f"body only {body_words} words")
+    mine = words(f"{title} {story.get('keyword', '')}")
+    cutoff = (now - timedelta(days=45)).date().isoformat()
+    for p in registry:
+        if p["published"] < cutoff:
+            continue
+        theirs = words(f"{p['title']} {p.get('keyword', '')}")
+        overlap = len(mine & theirs) / max(1, len(mine | theirs))
+        same_keyword = story.get("keyword") and story.get("keyword", "").strip().lower() == (p.get("keyword") or "").lower()
+        if overlap >= 0.45 or same_keyword:
+            problems.append(f"duplicate of '{p['title']}'")
+            break
+    return problems
+
+
+# ── main ──────────────────────────────────────────────────────────────
+
+SAMPLE = {
+    "title": "Example Corp releases Model X with a 1M-token context window",
+    "keyword": "model x context window",
+    "description": "Example Corp released Model X on 7 October 2026 with a one-million-token context window and lower API prices for developers.",
+    "facts": {"Who": "Example Corp", "What": "Released Model X", "When": "7 October 2026", "Status": "Available now"},
+    "body": "<h1>dup</h1><p>Example Corp released Model X today. [1]</p><h2>What did Example Corp release?</h2>"
+            + "<p>" + "Model X handles long documents and code. [1] It is priced lower than the previous model. [2] " * 40 + "</p>"
+            + '<p><a href="https://evil.example">link</a><script>alert(1)</script>Done. [3]</p>',
+    "sources": [{"n": 1, "title": "Introducing Model X", "publisher": "Example Corp", "date": "2026-10-07", "url": "https://example.com/model-x"},
+                {"n": 2, "title": "Model X pricing", "publisher": "Example News", "date": "2026-10-07", "url": "https://news.example.org/model-x"},
+                {"n": 3, "title": "Made up", "publisher": "Nowhere", "date": "2026-10-07", "url": "https://invented.example.net/x"}],
+}
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--dry-run", action="store_true")
+    args = ap.parse_args()
+
+    now = datetime.now(timezone.utc)
+    today = f"{now.day} {now.strftime('%B %Y')}"
+    registry = load_registry()
+    recent = [p for p in registry if p["published"] >= (now - timedelta(days=30)).date().isoformat()][:40]
+    rejected = []
+
+    for attempt in range(1, MAX_CALLS + 1):
+        log(f"Attempt {attempt} of {MAX_CALLS}")
+        if args.dry_run:
+            text, grounded = json.dumps(SAMPLE), [{"uri": "https://example.com/model-x", "title": "example.com"},
+                                                   {"uri": "https://news.example.org/model-x", "title": "news.example.org"}]
+        else:
+            try:
+                text, grounded = call_gemini(build_prompt(today, recent, rejected))
+            except Exception as e:
+                log(f"Gemini call failed: {e}. Skipping today.")
+                return 0
+        try:
+            story = parse_json(text)
+        except (ValueError, json.JSONDecodeError) as e:
+            log(f"   rejected: unreadable response ({e})")
+            continue
+
+        problems = check_story(story, registry, now)
+        sources, mapping, fresh = verify_sources(story, grounded, now, offline=args.dry_run)
+        if len(sources) < 2 or len({domain(s['url']) for s in sources}) < 2:
+            problems.append(f"only {len(sources)} verified source(s) from different sites")
+        if not fresh:
+            problems.append(f"no source dated within {FRESH_HOURS} hours")
+        if problems:
+            log(f"   rejected '{story.get('title', '?')}': {'; '.join(problems)}")
+            rejected.append(story.get("title", "?"))
+            continue
+
+        slug = slugify(story["title"])
+        existing = {p["slug"] for p in registry}
+        if slug in existing:
+            slug = f"{slug}-{now.strftime('%Y-%m-%d')}"
+        post = {
+            "slug": slug,
+            "title": story["title"].strip(),
+            "description": story.get("description", "").strip()[:160],
+            "keyword": story.get("keyword", "").strip().lower(),
+            "published": now.replace(microsecond=0).isoformat(),
+            "updated": "",
+            "facts": {k: str(v) for k, v in (story.get("facts") or {}).items() if v},
+            "sources": sources,
+            "related": [],
+            "status": "verified",
+            "body": renumber(sanitize(story.get("body", "")), mapping),
+        }
+        if args.dry_run:
+            log(json.dumps({k: (v if k != "body" else v[:300] + "…") for k, v in post.items()}, indent=2))
+            log("Dry run passed. Nothing written.")
+            return 0
+        path = os.path.join(ROOT, "content", "posts", slug + ".json")
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(post, f, indent=2, ensure_ascii=False)
+        log(f"Saved {path} with {len(sources)} sources")
+        subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "build-site.py")], check=True)
+        return 0
+
+    log("No story passed the checks today. Nothing published.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

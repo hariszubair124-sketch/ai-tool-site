@@ -1,0 +1,60 @@
+name: Daily AI news
+
+on:
+  schedule:
+    - cron: '0 3 * * *'   # 3:00 AM UTC = 8:00 AM PKT
+  push:
+    branches: [main]
+    paths: ['templates/**', 'assets/**', 'content/**', 'data/redirects.json', 'scripts/build-site.py']
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'write = new story and rebuild, rebuild = pages only, dry-run = test the writer'
+        required: false
+        default: 'write'
+        type: choice
+        options: ['write', 'rebuild', 'dry-run']
+
+concurrency:
+  group: site-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install the Gemini client
+        if: github.event_name == 'schedule' || github.event.inputs.mode == 'write' || github.event.inputs.mode == 'dry-run'
+        run: pip install -U google-genai
+
+      - name: Write today's story
+        if: github.event_name == 'schedule' || github.event.inputs.mode == 'write'
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: python scripts/write-post.py
+        timeout-minutes: 15
+
+      - name: Test the writer without the API
+        if: github.event.inputs.mode == 'dry-run'
+        run: python scripts/write-post.py --dry-run
+
+      - name: Rebuild pages, sitemap and feed
+        run: python scripts/build-site.py
+
+      - name: Commit and push
+        if: github.event.inputs.mode != 'dry-run'
+        run: |
+          git config user.name "AI-Robot"
+          git config user.email "robot@webonlinetools.com"
+          echo "Last run: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" > .last-run
+          git add -A
+          git diff --staged --quiet && echo "Nothing new to commit." || git commit -m "Site update $(date -u +'%Y-%m-%d')"
+          git push

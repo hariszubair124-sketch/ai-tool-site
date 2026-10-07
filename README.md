@@ -1,2 +1,4 @@
 # ai-tool-site
-Automated AI news and tools
+
+The AI news section of webonlinetools.com, generated and published automatically.
+Start with PROJECT-MAP.md.
