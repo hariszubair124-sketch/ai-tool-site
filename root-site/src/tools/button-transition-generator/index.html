@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ SEO ESSENTIALS ══ -->
+  <title>Ultimate CSS Button Transition Generator — Web Online Tools</title>
+  <meta name="description" content="Generate highly customized, performance-focused CSS button styles with granular control over shadows, gradients, rotations, and wipe transitions." />
+  <meta name="keywords" content="css button generator, css transition generator, hover effect generator, button css code, interactive web buttons" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://webonlinetools.com/tools/css-button-generator/" />
+  
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#060b18" />
+  <link rel="icon" type="image/svg+xml" href="https://webonlinetools.com/favicon.svg" />
+
+  <!-- ══ STRUCTURED DATA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "CSS Button Transition Generator",
+    "operatingSystem": "All",
+    "applicationCategory": "DeveloperApplication",
+    "offers": { "@type": "Offer", "price": "0" },
+    "description": "Generate custom CSS button transitions, hover effects, and wipe animations."
+  }
+  </script>
+
+  <!-- ══ FONTS & TAILWIND ══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ══ HERO & LAYOUT ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    
+    .panel {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 1.5rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .panel::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+    .panel-title { font-family: var(--font-body); font-weight: 700; color: var(--t1); border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1.5rem; font-size: 1.1rem; }
+
+    /* ══ INPUTS ══ */
+    .input-group { margin-bottom: 1.25rem; position: relative; z-index: 2; }
+    .input-label { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; color: var(--t2); margin-bottom: 0.5rem; }
+    .input-label span.val { color: var(--t1); }
+    
+    .text-input, .select-input {
+      width: 100%; padding: 0.75rem 1rem; background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border); border-radius: 10px; color: var(--t1); font-family: var(--font-body);
+      outline: none; transition: all .2s; font-size: 0.9rem;
+    }
+        .text-input:focus, .select-input:focus { 
+          border-color: var(--border-act); 
+          background: rgba(37,99,235,0.05); 
+        }
+        
+        /* Add this new block to fix the dropdown options */
+        .select-input option {
+          background-color: #0d1225; /* Maps to var(--card) to match the panels */
+          color: #f8fafc;            /* Maps to var(--t1) for white text */
+          font-weight: 500;
+          padding: 10px;             /* Adds breathing room in some browsers */
+        }
+    .color-row { display: flex; gap: 0.5rem; align-items: center; }
+    .color-picker { width: 42px; height: 42px; border-radius: 10px; border: 2px solid var(--border); background: transparent; cursor: pointer; padding: 0; }
+    .color-picker::-webkit-color-swatch-wrapper { padding: 0; }
+    .color-picker::-webkit-color-swatch { border: none; border-radius: 8px; }
+
+    /* Custom Range Slider */
+    input[type="range"] { -webkit-appearance: none; width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; outline: none; margin-top: 0.5rem; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; background: #60a5fa; cursor: pointer; border-radius: 50%; box-shadow: 0 0 10px rgba(96,165,250,0.5); transition: transform .1s; }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+    /* ══ CODE AREA ══ */
+    .code-area {
+      width: 100%; min-height: 150px; padding: 1.25rem; font-family: var(--font-mono); font-size: 0.85rem;
+      background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 14px;
+      color: #a5b4fc; outline: none; resize: vertical; position: relative; z-index: 2; white-space: pre; overflow-x: auto;
+    }
+
+    /* ══ BUTTONS ══ */
+    .btn-copy {
+      position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(37,99,235,0.15); color: #60a5fa;
+      border: 1px solid rgba(37,99,235,0.3); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.8rem;
+      font-weight: 700; cursor: pointer; transition: all .2s; z-index: 10;
+    }
+    .btn-copy:hover { background: #2563eb; color: #fff; }
+
+    /* Live Preview Box Pattern */
+    .preview-box {
+      display: flex; align-items: center; justify-content: center; min-height: 200px;
+      background-color: #000; border-radius: 14px; border: 1px solid var(--border);
+      background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 20px 20px; position: relative; z-index: 2; margin-bottom: 2rem;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border);
+      color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000;
+      opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; margin-top: 4rem;}
+  </style>
+  
+  <!-- Dynamic Styles from Generator -->
+  <style id="dynamic-css-preview"></style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <span class="logo-text">Web <em>Online</em> Tools</span>
+      </a>
+      <nav class="hidden md:flex gap-6 font-semibold text-sm">
+        <a href="/tools/" class="text-slate-400 hover:text-white transition">All Tools</a>
+        <a href="/ai-news/" class="text-slate-400 hover:text-white transition">Blog</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-sec">
+    <h1>Ultimate CSS Button Generator</h1>
+    <p style="max-width: 600px; margin: 0 auto;">Design a button with a gradient, shadow and hover effect, such as a sliding fill or a lift, and watch it change as you adjust it. Copy the CSS and HTML when you're done.</p>
+  </section>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+    
+    <!-- COL 1: BASE STYLING -->
+    <div class="panel">
+      <h2 class="panel-title">1. Base Styling & Depth</h2>
+      
+      <div class="input-group">
+        <div class="input-label">Button Text</div>
+        <input type="text" id="button-text" value="Get Started" class="text-input" />
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">Gradient Colors (Start & End)</div>
+        <div class="flex gap-2">
+          <div class="color-row w-1/2">
+            <input type="color" id="base-bg-color-1" value="#ffffff" class="color-picker" />
+            <input type="text" id="base-bg-hex-1" value="#ffffff" class="text-input" oninput="updateColorFromHex('base-bg-1')" />
+          </div>
+          <div class="color-row w-1/2">
+            <input type="color" id="base-bg-color-2" value="#f3f4f6" class="color-picker" />
+            <input type="text" id="base-bg-hex-2" value="#f3f4f6" class="text-input" oninput="updateColorFromHex('base-bg-2')" />
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">Text Color</div>
+        <div class="color-row">
+          <input type="color" id="base-text-color" value="#000000" class="color-picker" />
+          <input type="text" id="base-text-hex" value="#000000" class="text-input" oninput="updateColorFromHex('base-text')" />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">Border Radius <span class="val" id="radius-value">8px</span></div>
+        <input type="range" id="border-radius" min="0" max="40" value="8" />
+      </div>
+
+      <div class="mt-8 border-t border-white/10 pt-6">
+        <div class="input-group">
+          <div class="input-label">Shadow Offset X <span class="val" id="shadow-h-value">0px</span></div>
+          <input type="range" id="base-shadow-h-offset" min="-10" max="10" value="0" />
+        </div>
+        <div class="input-group">
+          <div class="input-label">Shadow Offset Y <span class="val" id="shadow-v-value">0px</span></div>
+          <input type="range" id="base-shadow-v-offset" min="-10" max="10" value="0" />
+        </div>
+        <div class="input-group">
+          <div class="input-label">Shadow Blur <span class="val" id="shadow-blur-value">0px</span></div>
+          <input type="range" id="base-shadow-blur" min="0" max="30" value="0" />
+        </div>
+        <div class="input-group">
+          <div class="input-label">Shadow Color</div>
+          <div class="color-row">
+            <input type="color" id="base-shadow-color" value="#000000" class="color-picker" />
+            <input type="text" id="base-shadow-hex" value="#000000" class="text-input" oninput="updateColorFromHex('base-shadow')" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COL 2: HOVER EFFECTS -->
+    <div class="panel">
+      <h2 class="panel-title">2. Hover Effects & Transitions</h2>
+      
+      <div class="input-group">
+        <div class="input-label">Effect Type</div>
+        <select id="effect-type" class="select-input">
+          <option value="none">Standard Transform (Scale/Shift)</option>
+          <option value="simple-color">Color Swap (BG/Text)</option>
+          <option value="slide-left">Wipe: Slide-In (Left)</option>
+          <option value="slide-right">Wipe: Slide-In (Right)</option>
+          <option value="slide-top">Wipe: Slide-In (Top)</option>
+          <option value="slide-bottom">Wipe: Slide-In (Bottom)</option>
+        </select>
+      </div>
+
+      <div class="input-group" id="color-fill-controls">
+        <div class="input-label" id="slide-color-label">Hover Fill/BG Color</div>
+        <div class="color-row">
+          <input type="color" id="slide-color" value="#2563eb" class="color-picker" />
+          <input type="text" id="slide-hex" value="#2563eb" class="text-input" oninput="updateColorFromHex('slide')" />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">Hover Text Color</div>
+        <div class="color-row">
+          <input type="color" id="hover-text-color" value="#ffffff" class="color-picker" />
+          <input type="text" id="hover-text-hex" value="#ffffff" class="text-input" oninput="updateColorFromHex('hover-text')" />
+        </div>
+      </div>
+
+      <div class="mt-6 border-t border-white/10 pt-6">
+        <div class="input-group">
+          <div class="input-label">Hover Scale / Zoom <span class="val" id="scale-value">1.05</span></div>
+          <input type="range" id="hover-scale" min="0.90" max="1.15" step="0.01" value="1.05" />
+        </div>
+        <div class="input-group">
+          <div class="input-label">Hover Shift Y-Axis <span class="val" id="shift-value">-2px</span></div>
+          <input type="range" id="hover-shift" min="-10" max="10" value="-2" />
+        </div>
+      </div>
+
+      <div class="mt-6 border-t border-white/10 pt-6">
+        <div class="input-group flex gap-4">
+          <div class="w-1/2">
+            <div class="input-label">Duration <span class="val" id="duration-value">0.3s</span></div>
+            <input type="range" id="transition-duration" min="0.1" max="1.5" step="0.1" value="0.3" />
+          </div>
+          <div class="w-1/2">
+            <div class="input-label">Easing</div>
+            <select id="timing-function" class="select-input p-2">
+              <option value="ease">ease</option>
+              <option value="cubic-bezier(0.4, 0, 0.2, 1)">ease-out (Snappy)</option>
+              <option value="linear">linear</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COL 3: PREVIEW & EXPORT -->
+    <div class="panel">
+      <h2 class="panel-title">3. Preview & Export</h2>
+      
+      <div class="preview-box">
+        <button id="live-button" class="my-button"><span>Get Started</span></button>
+      </div>
+
+      <div style="position: relative; z-index: 2; margin-bottom: 1.5rem;">
+        <button onclick="copyCode('css-output')" class="btn-copy">Copy CSS</button>
+        <textarea id="css-output" readonly class="code-area"></textarea>
+      </div>
+
+      <div style="position: relative; z-index: 2;">
+        <button onclick="copyCode('html-output')" class="btn-copy">Copy HTML</button>
+        <textarea id="html-output" readonly class="code-area" style="min-height: 80px;"></textarea>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Web Online Tools. Built for Modern UI Development.</p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Code copied!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const inputs = [
+    "button-text","base-bg-color-1","base-bg-color-2","base-text-color","border-radius",
+    "base-shadow-h-offset","base-shadow-v-offset","base-shadow-blur","base-shadow-color",
+    "hover-scale","hover-shift","hover-text-color","transition-duration","timing-function",
+    "effect-type","slide-color"
+  ];
+  
+  const liveButton = document.getElementById("live-button");
+  const cssOutput = document.getElementById("css-output");
+  const htmlOutput = document.getElementById("html-output");
+  const dynamicCssPreview = document.getElementById("dynamic-css-preview");
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // Each colour has a picker and a hex text field; this keeps the pair in sync.
+  const colorPairs = {
+    "base-bg-1": ["base-bg-color-1", "base-bg-hex-1"],
+    "base-bg-2": ["base-bg-color-2", "base-bg-hex-2"],
+    "base-text": ["base-text-color", "base-text-hex"],
+    "base-shadow": ["base-shadow-color", "base-shadow-hex"],
+    "hover-text": ["hover-text-color", "hover-text-hex"],
+    "slide": ["slide-color", "slide-hex"],
+  };
+
+  function updateColorFromHex(key, fromPicker) {
+    const [colId, hexId] = colorPairs[key];
+    const col = document.getElementById(colId);
+    const hex = document.getElementById(hexId);
+    if (fromPicker) {
+      hex.value = col.value.toUpperCase();
+    } else {
+      let v = hex.value.trim().replace(/^#/, "");
+      if (!/^([0-9a-f]{3}|[0-9a-f]{6})$/i.test(v)) return; // wait for a complete code
+      if (v.length === 3) v = [...v].map(c => c + c).join("");
+      col.value = "#" + v.toLowerCase();
+    }
+    updatePreview();
+  }
+
+  const escapeHtml = str => str.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  function generateCSS(className = "my-button") {
+    // Collect Data
+    const bg1 = document.getElementById("base-bg-color-1").value;
+    const bg2 = document.getElementById("base-bg-color-2").value;
+    const tCol = document.getElementById("base-text-color").value;
+    const rad = document.getElementById("border-radius").value;
+    
+    const sh = document.getElementById("base-shadow-h-offset").value;
+    const sv = document.getElementById("base-shadow-v-offset").value;
+    const sb = document.getElementById("base-shadow-blur").value;
+    const sc = document.getElementById("base-shadow-color").value;
+
+    const hScale = document.getElementById("hover-scale").value;
+    const hShift = document.getElementById("hover-shift").value;
+    
+    const htCol = document.getElementById("hover-text-color").value;
+    const dur = document.getElementById("transition-duration").value;
+    const tim = document.getElementById("timing-function").value;
+    const txt = document.getElementById("button-text").value;
+    const fx = document.getElementById("effect-type").value;
+    const sCol = document.getElementById("slide-color").value;
+
+    // Update UI Labels
+    document.getElementById("radius-value").textContent = `${rad}px`;
+    document.getElementById("duration-value").textContent = `${dur}s`;
+    document.getElementById("shadow-h-value").textContent = `${sh}px`;
+    document.getElementById("shadow-v-value").textContent = `${sv}px`;
+    document.getElementById("shadow-blur-value").textContent = `${sb}px`;
+    document.getElementById("scale-value").textContent = `${parseFloat(hScale).toFixed(2)}`;
+    document.getElementById("shift-value").textContent = `${hShift}px`;
+    liveButton.querySelector("span").textContent = txt;
+
+    // Calculate complex strings
+    const baseShadow = (sh !== "0" || sv !== "0" || sb !== "0") 
+      ? `${sh}px ${sv}px ${sb}px rgba(${parseInt(sc.slice(1,3),16)}, ${parseInt(sc.slice(3,5),16)}, ${parseInt(sc.slice(5,7),16)}, 0.4)`
+      : "none";
+    const baseGradient = `linear-gradient(135deg, ${bg1}, ${bg2})`;
+
+    let transformHover = "";
+    if (Number(hScale) !== 1 || Number(hShift) !== 0) {
+      transformHover = `scale(${hScale}) translateY(${hShift}px)`;
+    }
+
+    const isAdvanced = fx.startsWith("slide-");
+
+    // Build Base CSS
+    let baseCSS = `
+.${className} {
+  background-image: ${baseGradient};
+  color: ${tCol};
+  border-radius: ${rad}px;
+  box-shadow: ${baseShadow};
+  padding: 1rem 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  display: inline-block;
+  position: relative;
+  transition: all ${dur}s ${tim};
+}`.trim();
+
+    let hoverCSS = ""; 
+    let pseudoCSS = ""; 
+    let liveButtonClass = className;
+
+    if (isAdvanced) {
+      baseCSS = baseCSS.replace(/}\s*$/g, "") + `\n  overflow: hidden;\n  z-index: 1;\n}`;
+      baseCSS += `\n\n.${className} > span {\n  position: relative;\n  z-index: 2;\n  transition: color ${dur}s ${tim};\n}`;
+
+      let initTrans = "";
+      if (fx === "slide-left") initTrans = "translateX(-100%)";
+      else if (fx === "slide-right") initTrans = "translateX(100%)";
+      else if (fx === "slide-top") initTrans = "translateY(-100%)";
+      else if (fx === "slide-bottom") initTrans = "translateY(100%)";
+
+      pseudoCSS = `
+.${className}::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: ${sCol};
+  border-radius: ${rad}px;
+  transform: ${initTrans};
+  transition: transform ${dur}s ${tim};
+  z-index: 0;
+}`.trim();
+
+      hoverCSS = `
+.${className}:hover::before { transform: translate(0, 0); }
+.${className}:hover { transform: ${transformHover || 'none'}; }
+.${className}:hover > span { color: ${htCol}; }`.trim();
+    } 
+    else if (fx === "simple-color") {
+      hoverCSS = `
+.${className}:hover {
+  background-image: linear-gradient(135deg, ${sCol}, ${sCol});
+  color: ${htCol};
+  transform: ${transformHover || 'none'};
+}`.trim();
+    } 
+    else {
+      hoverCSS = `
+.${className}:hover {
+  transform: ${transformHover || 'none'};
+}`.trim();
+    }
+
+    const fullCSS = baseCSS + (pseudoCSS ? "\n\n" + pseudoCSS : "") + "\n\n" + hoverCSS;
+    
+    // Output
+    cssOutput.value = fullCSS;
+    htmlOutput.value = `<button class="${className}"><span>${escapeHtml(txt)}</span></button>`;
+    dynamicCssPreview.textContent = fullCSS;
+    liveButton.className = liveButtonClass;
+  }
+
+  function updatePreview() {
+    generateCSS();
+    const fx = document.getElementById("effect-type").value;
+    document.getElementById("slide-color-label").textContent = fx.startsWith('slide-') ? 'Wipe Fill Color' : 'Hover BG Color';
+    document.getElementById("color-fill-controls").style.opacity = fx === 'none' ? '0.3' : '1';
+    document.getElementById("color-fill-controls").style.pointerEvents = fx === 'none' ? 'none' : 'auto';
+  }
+
+  window.onload = function () {
+    inputs.forEach(id => { 
+      const el = document.getElementById(id); 
+      if(el) el.addEventListener("input", updatePreview); 
+    });
+    Object.entries(colorPairs).forEach(([key, [colId, hexId]]) => {
+      document.getElementById(hexId).addEventListener("input", () => updateColorFromHex(key, false));
+      document.getElementById(colId).addEventListener("input", () => updateColorFromHex(key, true));
+    });
+    document.getElementById("effect-type").addEventListener("change", updatePreview);
+    updatePreview();
+  };
+
+  // ── FIX: Modern Clipboard API ──
+  async function copyCode(elementId) {
+    const el = document.getElementById(elementId);
+    if (!el.value) return;
+    try {
+      await navigator.clipboard.writeText(el.value);
+      showToast(elementId === 'css-output' ? "CSS copied!" : "HTML copied!");
+    } catch (err) {
+      el.select();
+      document.execCommand('copy');
+      showToast(elementId === 'css-output' ? "CSS copied!" : "HTML copied!");
+    }
+  }
+</script>
+</body>
+</html>

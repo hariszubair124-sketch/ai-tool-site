@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ SEO ESSENTIALS ══ -->
+  <title>Color Converter — Hex, RGB, & HSL Online Tool</title>
+  <meta name="description" content="Instantly convert color codes between Hex, RGB, and HSL formats. Free, fast, and client-side color picker and converter for developers and designers." />
+  <meta name="keywords" content="color converter, hex to rgb, rgb to hex, hsl to rgb, online color picker, css color codes" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://webonlinetools.com/tools/color-converter/" />
+  
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#060b18" />
+  <meta name="google-site-verification" content="2yOkCxBls80UcV_za_vpGqbxg_nIOjhLNQqcEFoGEZc" />
+  <link rel="icon" type="image/svg+xml" href="https://webonlinetools.com/favicon.svg" />
+
+  <!-- ══ STRUCTURED DATA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Color Converter Tool",
+    "operatingSystem": "All",
+    "applicationCategory": "DeveloperApplication",
+    "offers": { "@type": "Offer", "price": "0" },
+    "description": "Convert color codes between Hex, RGB, and HSL formats instantly with a visual preview."
+  }
+  </script>
+
+  <!-- ══ FONTS & TAILWIND ══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+
+    /* Inputs */
+    .input-label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--t2); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    
+    .text-input {
+      width: 100%; padding: 0.9rem 1.25rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+      border-radius: 12px; color: var(--t1); font-family: var(--font-mono); font-size: 1rem;
+      outline: none; transition: border-color .2s, box-shadow .2s;
+    }
+    .text-input:focus { border-color: var(--border-act); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+    .text-input[readonly] { background: rgba(255,255,255,0.02); cursor: pointer; color: #a5b4fc; }
+    
+    /* Native Color Picker Override */
+    .color-swatch-wrap {
+      width: 60px; height: 60px; border-radius: 12px; overflow: hidden; flex-shrink: 0;
+      border: 2px solid var(--border); transition: border-color .2s; position: relative;
+    }
+    .color-swatch-wrap:focus-within { border-color: var(--border-act); }
+    .color-picker {
+      width: 200%; height: 200%; transform: translate(-25%, -25%); cursor: pointer; border: none; padding: 0;
+    }
+
+    /* Output Strings & Copy */
+    .copy-group { position: relative; display: flex; align-items: center; }
+    .copy-btn {
+      position: absolute; right: 0.5rem; background: rgba(255,255,255,0.05); color: var(--t2);
+      border: 1px solid var(--border); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.75rem;
+      font-weight: 700; cursor: pointer; transition: all .2s;
+    }
+    .copy-btn:hover { background: var(--border-act); color: #fff; }
+
+    /* Live Preview Box */
+    .preview-box {
+      width: 100%; height: 100%; min-height: 300px; border-radius: 16px; border: 1px solid var(--border);
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.2); transition: background-color 0.1s;
+      background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 20px 20px;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border);
+      color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000;
+      opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <span class="logo-text">Web <em>Online</em> Tools</span>
+      </a>
+      <nav class="hidden md:flex gap-6 font-semibold text-sm">
+        <a href="/tools/" class="text-slate-400 hover:text-white transition">All Tools</a>
+        <a href="/ai-news/" class="text-slate-400 hover:text-white transition">Blog</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-sec">
+    <h1>Color Converter Tool</h1>
+    <p>Type a HEX, RGB or HSL value, or pick a color, and get the same color in every format, ready to paste into CSS.</p>
+  </section>
+
+  <section class="app-card">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 relative z-10">
+      
+      <!-- LEFT: Inputs & Controls -->
+      <div class="space-y-8">
+        
+        <!-- HEX -->
+        <div>
+          <label class="input-label">1. Primary Hex Color</label>
+          <div class="flex gap-4">
+            <div class="color-swatch-wrap">
+              <input type="color" id="input-color-picker" value="#3b82f6" class="color-picker" oninput="handleColorPickerChange(this.value)" />
+            </div>
+            <div class="flex-1">
+              <input type="text" id="input-hex" value="#3B82F6" maxlength="9" class="text-input uppercase" placeholder="#RRGGBB or #RRGGBBAA" oninput="handleHexChange(this.value)" />
+            </div>
+          </div>
+        </div>
+
+        <hr class="border-white/10" />
+
+        <!-- RGB -->
+        <div>
+          <label class="input-label">2. RGB Values</label>
+          <div class="grid grid-cols-3 gap-3 mb-3">
+            <div>
+              <span class="block text-xs text-center text-red-400 mb-1 font-bold">R</span>
+              <input type="number" id="input-r" min="0" max="255" value="59" class="text-input text-center" oninput="handleRGBChange()" />
+            </div>
+            <div>
+              <span class="block text-xs text-center text-green-400 mb-1 font-bold">G</span>
+              <input type="number" id="input-g" min="0" max="255" value="130" class="text-input text-center" oninput="handleRGBChange()" />
+            </div>
+            <div>
+              <span class="block text-xs text-center text-blue-400 mb-1 font-bold">B</span>
+              <input type="number" id="input-b" min="0" max="255" value="246" class="text-input text-center" oninput="handleRGBChange()" />
+            </div>
+          </div>
+          <div class="copy-group">
+            <input type="text" id="output-rgb-string" readonly class="text-input pr-24" value="rgb(59, 130, 246)" onclick="copyCode('output-rgb-string')" />
+            <button class="copy-btn" onclick="copyCode('output-rgb-string')">Copy</button>
+          </div>
+        </div>
+
+        <hr class="border-white/10" />
+
+        <!-- HSL -->
+        <div>
+          <label class="input-label">3. HSL Values</label>
+          <div class="grid grid-cols-3 gap-3 mb-3">
+            <div>
+              <span class="block text-xs text-center text-gray-400 mb-1 font-bold">Hue</span>
+              <input type="text" id="output-h" readonly class="text-input text-center" value="217" />
+            </div>
+            <div>
+              <span class="block text-xs text-center text-gray-400 mb-1 font-bold">Sat %</span>
+              <input type="text" id="output-s" readonly class="text-input text-center" value="90%" />
+            </div>
+            <div>
+              <span class="block text-xs text-center text-gray-400 mb-1 font-bold">Light %</span>
+              <input type="text" id="output-l" readonly class="text-input text-center" value="60%" />
+            </div>
+          </div>
+          <div class="copy-group">
+            <input type="text" id="output-hsl-string" readonly class="text-input pr-24" value="hsl(217, 90%, 60%)" onclick="copyCode('output-hsl-string')" />
+            <button class="copy-btn" onclick="copyCode('output-hsl-string')">Copy</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Live Preview -->
+      <div class="flex flex-col">
+        <label class="input-label">Visual Preview</label>
+        <div id="color-preview" class="preview-box" style="background-color: #3B82F6;"></div>
+        
+        <!-- Quick Action Grid -->
+        <div class="grid grid-cols-3 gap-3 mt-4">
+          <button onclick="copyCode('input-hex')" class="bg-gray-800 hover:bg-gray-700 text-white py-3 rounded-xl text-sm font-bold border border-gray-700 transition">Copy HEX</button>
+          <button onclick="copyCode('output-rgb-string')" class="bg-gray-800 hover:bg-gray-700 text-white py-3 rounded-xl text-sm font-bold border border-gray-700 transition">Copy RGB</button>
+          <button onclick="copyCode('output-hsl-string')" class="bg-gray-800 hover:bg-gray-700 text-white py-3 rounded-xl text-sm font-bold border border-gray-700 transition">Copy HSL</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec">
+    <h2>Understanding Hex, RGB, and HSL Color Models</h2>
+    <p>As a web designer or developer, transitioning between color models is crucial for consistency across CSS, graphics, and UI frameworks. Our Color Converter provides a fast, accurate way to translate the most common digital formats without manual math.</p>
+    
+    <h3>The Differences Between Formats</h3>
+    <div class="space-y-4 mt-4">
+      <div class="p-5 border border-white/10 bg-black/30 rounded-xl">
+        <strong class="text-white">RGB (Red, Green, Blue)</strong>
+        <p class="text-sm mt-1">An additive color model based on the intensity of light channels, scaled from 0 to 255. It is the core language of digital screens.</p>
+      </div>
+      <div class="p-5 border border-white/10 bg-black/30 rounded-xl">
+        <strong class="text-white">Hexadecimal (Hex)</strong>
+        <p class="text-sm mt-1">A six-digit alphanumeric shorthand for RGB. It is widely used in CSS because of its compact nature. For example, `#FF0000` tells the browser to max out Red (FF) and turn off Green (00) and Blue (00).</p>
+      </div>
+      <div class="p-5 border border-white/10 bg-black/30 rounded-xl">
+        <strong class="text-white">HSL (Hue, Saturation, Lightness)</strong>
+        <p class="text-sm mt-1">The most intuitive model for humans. Instead of mixing light, you pick a color on a 360-degree wheel (Hue), decide how vibrant it is (Saturation), and how bright it is (Lightness). It's the absolute best model for building dark modes or programmatic color palettes.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-3 mt-10">
+      <a href="/tools/css-gradient-generator/" class="tag-link">CSS Gradient Generator</a>
+      <a href="/tools/css-box-shadow/" class="tag-link">Box Shadow Generator</a>
+      <a href="/tools/" class="tag-link">View All Tools &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Web Online Tools. Processed client-side for maximum speed.</p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Value copied!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ── Modern Clipboard API ──
+  async function copyCode(elementId) {
+    const el = document.getElementById(elementId);
+    if (!el.value) return;
+    try {
+      await navigator.clipboard.writeText(el.value);
+      showToast(`${el.value} copied to clipboard!`);
+    } catch (err) {
+      el.select();
+      document.execCommand('copy');
+      showToast(`${el.value} copied to clipboard!`);
+    }
+  }
+
+  // ── Color Math ──
+  function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+
+    if (max === min) {
+      h = s = 0; // achromatic
+    } else {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        case b: h = (r - g) / d + 4; break;
+      }
+      h /= 6;
+    }
+    return [ Math.round(h * 360), Math.round(s * 100), Math.round(l * 100) ];
+  }
+
+  // Accepts #RGB, #RGBA, #RRGGBB and #RRGGBBAA (with or without #).
+  function hexToRgb(hex) {
+    let h = hex.trim().replace(/^#/, "");
+    if (!/^([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(h)) return null;
+    if (h.length <= 4) h = [...h].map(c => c + c).join("");
+    const n = i => parseInt(h.slice(i, i + 2), 16);
+    return { r: n(0), g: n(2), b: n(4), a: h.length === 8 ? Math.round((n(6) / 255) * 100) / 100 : 1 };
+  }
+
+  const toHex2 = v => v.toString(16).padStart(2, "0").toUpperCase();
+
+  // source = which field the user is editing, so we never rewrite the field under the cursor.
+  function updateUI(r, g, b, a, source) {
+    const hex6 = `#${toHex2(r)}${toHex2(g)}${toHex2(b)}`;
+    const hexFull = a < 1 ? hex6 + toHex2(Math.round(a * 255)) : hex6;
+    if (source !== "hex") document.getElementById("input-hex").value = hexFull;
+    document.getElementById("input-color-picker").value = hex6.toLowerCase();
+    if (source !== "rgb") {
+      document.getElementById("input-r").value = r;
+      document.getElementById("input-g").value = g;
+      document.getElementById("input-b").value = b;
+    }
+    const [h, s, l] = rgbToHsl(r, g, b);
+    document.getElementById("output-rgb-string").value = a < 1 ? `rgba(${r}, ${g}, ${b}, ${a})` : `rgb(${r}, ${g}, ${b})`;
+    document.getElementById("output-h").value = h;
+    document.getElementById("output-s").value = `${s}%`;
+    document.getElementById("output-l").value = `${l}%`;
+    document.getElementById("output-hsl-string").value = a < 1 ? `hsla(${h}, ${s}%, ${l}%, ${a})` : `hsl(${h}, ${s}%, ${l}%)`;
+    document.getElementById("color-preview").style.backgroundColor = a < 1 ? `rgba(${r}, ${g}, ${b}, ${a})` : hex6;
+  }
+
+  let currentAlpha = 1;
+
+  function handleColorPickerChange(hex) {
+    const c = hexToRgb(hex);
+    if (c) updateUI(c.r, c.g, c.b, currentAlpha, "picker");
+  }
+
+  function handleHexChange(hex) {
+    const c = hexToRgb(hex);
+    if (!c) return; // wait until the user has typed a complete code
+    currentAlpha = c.a;
+    updateUI(c.r, c.g, c.b, c.a, "hex");
+  }
+
+  function handleRGBChange() {
+    const read = id => Math.min(255, Math.max(0, parseInt(document.getElementById(id).value, 10) || 0));
+    updateUI(read("input-r"), read("input-g"), read("input-b"), currentAlpha, "rgb");
+  }
+
+  // Initialize
+  window.onload = function () {
+    handleHexChange("#3B82F6");
+    document.getElementById("input-hex").value = "#3B82F6";
+  };
+</script>
+</body>
+</html>

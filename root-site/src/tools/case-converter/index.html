@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ SEO ESSENTIALS ══ -->
+  <title>Case Converter — Convert to Lowercase, Uppercase & Title Case</title>
+  <meta name="description" content="Instantly convert text to lowercase, UPPERCASE, Title Case, Sentence case, and alternating case. Free, client-side developer text utility." />
+  <meta name="keywords" content="case converter, lowercase to uppercase, title case generator, sentence case converter, alternating case" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://webonlinetools.com/tools/case-converter/" />
+  
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#060b18" />
+  <link rel="icon" type="image/svg+xml" href="https://webonlinetools.com/favicon.svg" />
+
+  <!-- ══ STRUCTURED DATA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Case Converter Tool",
+    "operatingSystem": "All",
+    "applicationCategory": "DeveloperApplication",
+    "offers": { "@type": "Offer", "price": "0" },
+    "description": "A browser-based text utility to convert text between various casing formats instantly."
+  }
+  </script>
+
+  <!-- ══ FONTS & TAILWIND ══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+
+    .text-area {
+      width: 100%; min-height: 220px; padding: 1.25rem; font-family: var(--font-mono); font-size: 0.95rem;
+      background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 14px;
+      color: var(--t1); outline: none; transition: border-color .2s, box-shadow .2s;
+      resize: vertical; line-height: 1.6; position: relative; z-index: 2;
+    }
+    .text-area::placeholder { color: var(--t3); font-family: var(--font-body); }
+    .text-area:focus { border-color: var(--border-act); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+    .text-area[readonly] { background: rgba(255,255,255,0.015); border-color: rgba(255,255,255,0.04); cursor: pointer; }
+
+    /* Buttons */
+    .controls-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1.5rem 0; position: relative; z-index: 2;
+    }
+    @media (min-width: 640px) { .controls-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1024px) { .controls-grid { grid-template-columns: repeat(6, 1fr); } }
+
+    .btn {
+      font-family: var(--font-body); font-weight: 600; font-size: 0.85rem;
+      padding: 0.9rem 0.5rem; border-radius: 12px; cursor: pointer; text-align: center;
+      transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
+      border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--t2);
+    }
+    .btn:hover { background: rgba(255,255,255,0.08); color: var(--t1); border-color: rgba(255,255,255,0.15); }
+    .btn:active { transform: scale(0.96); }
+    
+    .btn-action { background: var(--grad-main); color: #fff; border: none; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 12px; transition: transform .2s, box-shadow .2s; }
+    .btn-action:hover { box-shadow: 0 0 20px rgba(37,99,235,0.4); }
+    .btn-action:active { transform: scale(0.98); }
+
+    .btn-clear { background: transparent; border: 1px solid #ef4444; color: #fca5a5; }
+    .btn-clear:hover { background: rgba(239,68,68,0.1); color: #fef2f2; }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border);
+      color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000;
+      opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <span class="logo-text">Web <em>Online</em> Tools</span>
+      </a>
+      <nav class="hidden md:flex gap-6 font-semibold text-sm">
+        <a href="/tools/" class="text-slate-400 hover:text-white transition">All Tools</a>
+        <a href="/ai-news/" class="text-slate-400 hover:text-white transition">Blog</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-sec">
+    <h1>Case Converter</h1>
+    <p>Paste text and switch it to UPPERCASE, lowercase, Title Case, Sentence case and more. Handy for fixing caps lock and tidying headings.</p>
+  </section>
+
+  <section class="app-card">
+    
+    <label for="text-input" class="block font-bold text-white mb-3 tracking-wide text-sm uppercase relative z-10">Input Text</label>
+    <textarea id="text-input" class="text-area" placeholder="Paste or type your text here to convert its case..."></textarea>
+    
+    <div class="controls-grid">
+      <button onclick="convertTo('lower')" class="btn" style="text-transform: lowercase;">lowercase</button>
+      <button onclick="convertTo('upper')" class="btn" style="text-transform: uppercase;">UPPERCASE</button>
+      <button onclick="convertTo('title')" class="btn" style="text-transform: capitalize;">Title Case</button>
+      <button onclick="convertTo('sentence')" class="btn">Sentence case.</button>
+      <button onclick="convertTo('alternating')" class="btn">aLtErNaTiNg</button>
+      <button onclick="convertTo('inverse')" class="btn">iNvErSe CaSe</button>
+    </div>
+
+    <label for="text-output" class="block font-bold text-white mb-3 mt-6 tracking-wide text-sm uppercase relative z-10">Converted Output</label>
+    <textarea id="text-output" readonly class="text-area" placeholder="Your converted text will appear here..." onclick="copyToClipboard()"></textarea>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-6 relative z-10">
+      <button onclick="copyToClipboard()" class="btn-action flex-1">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Result
+      </button>
+      <button onclick="clearText()" class="btn btn-clear sm:w-auto px-8">
+        Clear All
+      </button>
+    </div>
+
+  </section>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec">
+    <h2>The Importance of Text Case Formatting</h2>
+    <p>In web development, technical writing, and data entry, consistent <strong>text case</strong> is vital for professionalism and readability. Whether you are standardizing a database of names, formatting blog post headlines, or recovering from leaving CAPS LOCK on, our Case Converter tool handles it instantly.</p>
+    
+    <h3>Understanding the Formats</h3>
+    <div class="space-y-4 mt-4">
+      <div class="p-5 border border-white/10 bg-black/30 rounded-xl">
+        <strong class="text-white">Sentence case</strong>
+        <p class="text-sm mt-1">Capitalizes only the very first letter of a sentence. It automatically detects periods, exclamation marks, and question marks to start the next sentence correctly.</p>
+      </div>
+      <div class="p-5 border border-white/10 bg-black/30 rounded-xl">
+        <strong class="text-white">Title Case</strong>
+        <p class="text-sm mt-1">Capitalizes the first letter of every major word. It intelligently ignores minor words like "a", "an", "the", and "of" unless they begin the sentence.</p>
+      </div>
+      <div class="p-5 border border-white/10 bg-black/30 rounded-xl">
+        <strong class="text-white">Alternating & Inverse Case</strong>
+        <p class="text-sm mt-1">Alternating case swaps between upper and lowercase purely on letters (ignoring spaces), popularized by internet culture. Inverse case swaps whatever case is currently applied to its exact opposite.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-3 mt-10">
+      <a href="/tools/url-encoder/" class="tag-link">URL Encoder/Decoder</a>
+      <a href="/tools/word-counter/" class="tag-link">Word Counter</a>
+      <a href="/tools/" class="tag-link">View All Tools &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Web Online Tools. Processed entirely in your browser.</p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Text copied to clipboard!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  function clearText() {
+    document.getElementById('text-input').value = '';
+    document.getElementById('text-output').value = '';
+  }
+
+  // ── LOGIC FIXES ──
+
+  const isLetter = ch => ch.toLowerCase() !== ch.toUpperCase();
+  const capFirst = w => {
+    const chars = [...w];
+    const i = chars.findIndex(isLetter);
+    if (i < 0) return w;
+    chars[i] = chars[i].toUpperCase();
+    return chars.join("");
+  };
+
+  // Title case per line: capitalise every word except short minor words,
+  // but always the first and last word and any word after a colon.
+  function toTitleCase(str) {
+    if (!str) return "";
+    const minor = new Set(["a","an","and","as","at","but","by","for","in","nor","of","on","or","so","the","to","up","via","vs","with","yet"]);
+    return str.split("\n").map(line => {
+      const parts = line.toLowerCase().split(/(\s+)/);
+      const wordIdx = parts.map((p, i) => (/\S/.test(p) ? i : -1)).filter(i => i >= 0);
+      const first = wordIdx[0], last = wordIdx[wordIdx.length - 1];
+      return parts.map((p, i) => {
+        if (!/\S/.test(p)) return p;
+        const bare = p.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, "");
+        const prev = wordIdx[wordIdx.indexOf(i) - 1];
+        const afterColon = prev !== undefined && /[:—–]$/.test(parts[prev]);
+        if (i === first || i === last || afterColon || !minor.has(bare)) {
+          return p.split("-").map(capFirst).join("-");
+        }
+        return p;
+      }).join("");
+    }).join("\n");
+  }
+
+  // Sentence case: lower everything, then capitalise the start of each line and each sentence,
+  // and the pronoun "I".
+  function toSentenceCase(str) {
+    if (!str) return "";
+    let out = str.toLowerCase();
+    out = out.replace(/(^|\n|[.!?]\s+)(["'(\[]*)(\p{L})/gu, (m, lead, open, ch) => lead + open + ch.toUpperCase());
+    out = out.replace(/(^|[^\p{L}])i(?=$|[^\p{L}])/gu, (m, before) => before + "I");
+    return out;
+  }
+
+  function toAlternatingCase(str) {
+    if (!str) return "";
+    let out = "";
+    let toLower = true;
+    for (const ch of str) {
+      if (isLetter(ch)) {
+        out += toLower ? ch.toLowerCase() : ch.toUpperCase();
+        toLower = !toLower;
+      } else {
+        out += ch;
+      }
+    }
+    return out;
+  }
+
+  function toInverseCase(str) {
+    if (!str) return "";
+    let out = "";
+    for (const ch of str) {
+      if (!isLetter(ch)) out += ch;
+      else out += ch === ch.toLowerCase() ? ch.toUpperCase() : ch.toLowerCase();
+    }
+    return out;
+  }
+
+  function convertTo(type) {
+    const input = document.getElementById('text-input').value;
+    if (!input.trim()) {
+      showToast("Please enter some text first.");
+      return;
+    }
+
+    let out = input;
+    switch (type) {
+      case 'lower': out = input.toLowerCase(); break;
+      case 'upper': out = input.toUpperCase(); break;
+      case 'title': out = toTitleCase(input); break;
+      case 'sentence': out = toSentenceCase(input); break;
+      case 'alternating': out = toAlternatingCase(input); break;
+      case 'inverse': out = toInverseCase(input); break;
+    }
+    document.getElementById('text-output').value = out;
+  }
+
+  // ── MODERN CLIPBOARD API ──
+  async function copyToClipboard() {
+    const output = document.getElementById('text-output').value;
+    if (!output) { 
+      showToast("Nothing to copy."); 
+      return; 
+    }
+    
+    try {
+      await navigator.clipboard.writeText(output);
+      showToast("Converted text copied!");
+    } catch (err) {
+      // Fallback
+      const el = document.getElementById('text-output');
+      el.select();
+      document.execCommand('copy');
+      showToast("Converted text copied!");
+    }
+  }
+
+  // Initial load state
+  window.onload = function() {
+    if (document.getElementById('text-input').value) {
+      convertTo('sentence');
+    }
+  };
+</script>
+</body>
+</html>

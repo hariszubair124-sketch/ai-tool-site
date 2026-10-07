@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ SEO ESSENTIALS ══ -->
+  <title>JSON Formatter & Validator Online Tool | Web Online Tools</title>
+  <meta name="description" content="Instantly validate, format, and beautify your JSON data. Convert messy JSON strings into clean, indented structures. 100% free and client-side." />
+  <meta name="keywords" content="json formatter, json validator, json beautifier, minify json, format json online, developer tools" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://webonlinetools.com/tools/json-formatter/" />
+  
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#060b18" />
+  <meta name="google-site-verification" content="2yOkCxBls80UcV_za_vpGqbxg_nIOjhLNQqcEFoGEZc" />
+  <link rel="icon" type="image/svg+xml" href="https://webonlinetools.com/favicon.svg" />
+
+  <!-- ══ STRUCTURED DATA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "JSON Formatter & Validator",
+    "operatingSystem": "All",
+    "applicationCategory": "DeveloperApplication",
+    "offers": { "@type": "Offer", "price": "0" },
+    "description": "Validate, format, and beautify JSON data securely in your browser."
+  }
+  </script>
+
+  <!-- ══ FONTS & TAILWIND ══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+
+    /* Text Areas */
+    .panel-title { font-family: var(--font-body); font-weight: 700; color: var(--t1); border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1rem; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+    
+    .code-area {
+      width: 100%; min-height: 450px; padding: 1.5rem; font-family: var(--font-mono); font-size: 0.9rem;
+      background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 16px;
+      color: #a5b4fc; outline: none; transition: border-color .2s, box-shadow .2s;
+      resize: vertical; line-height: 1.6; tab-size: 4; position: relative; z-index: 2;
+    }
+    .code-area::placeholder { color: var(--t3); font-family: var(--font-body); }
+    .code-area:focus { border-color: var(--border-act); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+    .code-area[readonly] { background: rgba(255,255,255,0.02); }
+
+    /* Buttons */
+    .controls-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; position: relative; z-index: 2; }
+    
+    .btn {
+      font-family: var(--font-body); font-weight: 600; font-size: 0.85rem;
+      padding: 0.75rem 1.25rem; border-radius: 10px; cursor: pointer; text-align: center;
+      transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+    }
+    .btn:active { transform: scale(0.96); }
+    
+    .btn-action { background: var(--grad-main); color: #fff; border: none; font-weight: 700; font-size: 0.95rem; box-shadow: 0 0 15px rgba(37,99,235,0.3); }
+    .btn-action:hover { box-shadow: 0 0 25px rgba(37,99,235,0.5); }
+    
+    .btn-ghost { background: rgba(255,255,255,0.04); color: var(--t2); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); color: var(--t1); border-color: rgba(255,255,255,0.15); }
+    
+    .select-input {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--t1);
+      padding: 0.75rem 1rem; border-radius: 10px; font-family: var(--font-body); font-weight: 600; font-size: 0.85rem; outline: none; cursor: pointer;
+    }
+    .select-input option { background-color: var(--card); color: var(--t1); }
+
+    /* Error Box */
+    .error-box {
+      background: rgba(239,68,68,0.1); border-left: 4px solid #ef4444; color: #fca5a5;
+      padding: 1.25rem; border-radius: 8px; font-family: var(--font-mono); font-size: 0.85rem;
+      margin-top: 1rem; position: relative; z-index: 2; white-space: pre-wrap;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border);
+      color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000;
+      opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.error { border-color: #ef4444; color: #fca5a5; }
+
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <span class="logo-text">Web <em>Online</em> Tools</span>
+      </a>
+      <nav class="hidden md:flex gap-6 font-semibold text-sm">
+        <a href="/tools/" class="text-slate-400 hover:text-white transition">All Tools</a>
+        <a href="/ai-news/" class="text-slate-400 hover:text-white transition">Blog</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-sec">
+    <h1>JSON Formatter & Validator</h1>
+    <p style="max-width: 650px; margin: 0 auto;">Paste JSON to check it for errors and format it. If something is wrong, you'll see the exact line and column. Your data stays in your browser.</p>
+  </section>
+
+  <section class="app-card">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10">
+      
+      <!-- LEFT: Input Area -->
+      <div class="flex flex-col">
+        <h2 class="panel-title">Input JSON String</h2>
+        <textarea id="json-input" class="code-area flex-grow" placeholder='Paste your raw JSON string here...' spellcheck="false"></textarea>
+        
+        <div id="error-box" class="error-box hidden"></div>
+
+        <div class="controls-row mt-4">
+          <input type="file" id="file-upload" class="hidden" accept=".json, text/plain" />
+          <button class="btn btn-ghost" onclick="document.getElementById('file-upload').click()">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload File
+          </button>
+          <button class="btn btn-ghost" onclick="loadExample()">Load Example</button>
+          <button class="btn btn-ghost text-red-400 border-red-500/30 hover:bg-red-500/10 hover:text-red-300" onclick="clearText()">Clear</button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Output Area -->
+      <div class="flex flex-col">
+        <h2 class="panel-title">
+          Formatted Result
+          <span id="output-char-count" class="text-xs font-mono text-gray-500 font-normal tracking-wide">0 Bytes</span>
+        </h2>
+        <textarea id="json-output" readonly class="code-area flex-grow" placeholder="Formatted JSON will appear here after validation..."></textarea>
+
+        <div class="controls-row mt-4 flex-nowrap">
+          <select id="indent-level" class="select-input" onchange="formatJson()">
+            <option value="2">2 Spaces</option>
+            <option value="4" selected>4 Spaces</option>
+            <option value="1">1 Space</option>
+            <option value="0">Minified</option>
+          </select>
+          
+          <button class="btn btn-action flex-grow" onclick="formatJson()">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Format & Validate
+          </button>
+        </div>
+
+        <div class="controls-row mt-2">
+          <button class="btn btn-ghost flex-1" onclick="copyToClipboard('json-output')">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+          <button class="btn btn-ghost flex-1" onclick="downloadJson()">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download .json
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec">
+    <h2>The Essential Developer Tool: JSON Validation and Formatting</h2>
+    <p>JSON (JavaScript Object Notation) is the industry-standard format for transmitting data across web applications, REST APIs, and NoSQL databases. When working with large datasets, it's easy for formatting to become messy or for syntax errors (like a missing comma or trailing quote) to break your application. Our online tool solves this by providing instant validation and beautification.</p>
+    
+    <h3>Validation vs. Formatting</h3>
+    <ul class="space-y-2 mt-4">
+      <li><strong>Validator:</strong> Checks if the input string conforms to the strict JSON specification. If it fails, it provides a precise terminal-style error output, saving valuable debugging time.</li>
+      <li><strong>Formatter (Beautifier):</strong> Takes valid JSON and applies structural indentation (using 1, 2, or 4 spaces) for hierarchical human readability.</li>
+      <li><strong>Minifier:</strong> Takes valid JSON and strips out all whitespace and line breaks, creating the smallest possible file footprint for fast network transmission.</li>
+    </ul>
+
+    <div class="space-y-4 mt-8 border-t border-white/10 pt-6">
+      <div class="p-5 border border-white/10 bg-black/30 rounded-xl">
+        <strong class="text-white">Is my data secure?</strong>
+        <p class="text-sm mt-1 text-slate-400">Yes. This JSON Formatter operates entirely <strong>client-side</strong> using JavaScript. Your sensitive configuration files, API responses, or user data are never uploaded, stored, or transmitted to any backend server.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-3 mt-10">
+      <a href="/tools/base64-encoder/" class="tag-link">Base64 Encoder/Decoder</a>
+      <a href="/tools/url-encoder/" class="tag-link">URL Encoder</a>
+      <a href="/tools/" class="tag-link">View All Tools &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Web Online Tools. Highly optimized local processing.</p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Action completed!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // E-commerce focused Example JSON
+  const exampleJson = {
+    "store": "Web Online Tools",
+    "orderId": "ORD-2026-8891",
+    "customer": {
+      "name": "Ahmad Khan",
+      "city": "Lahore",
+      "isReturning": true
+    },
+    "items": [
+      { "product": "Luxury Rose Bouquet", "sku": "BQT-001", "price": 4500, "qty": 1 },
+      { "product": "Vanilla Scented Candle", "sku": "CND-045", "price": 1200, "qty": 2 }
+    ],
+    "payment": {
+      "method": "Cash on Delivery",
+      "subtotal": 6900,
+      "shipping": 250,
+      "total": 7150
+    },
+    "status": "processing"
+  };
+
+  function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show ' + (isError ? 'error' : '');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  function clearText() {
+    document.getElementById("json-input").value = "";
+    document.getElementById("json-output").value = "";
+    document.getElementById("output-char-count").textContent = "0 Bytes";
+    document.getElementById("error-box").classList.add("hidden");
+  }
+
+  function loadExample() {
+    document.getElementById("json-input").value = JSON.stringify(exampleJson);
+    formatJson();
+    showToast("Example loaded.");
+  }
+
+  function formatJson() {
+    const inputEl = document.getElementById("json-input");
+    const outputEl = document.getElementById("json-output");
+    const errorBox = document.getElementById("error-box");
+    const indent = parseInt(document.getElementById("indent-level").value, 10);
+
+    const raw = inputEl.value.trim();
+    outputEl.value = "";
+    document.getElementById("output-char-count").textContent = "0 Bytes";
+    errorBox.classList.add("hidden");
+
+    if (!raw) {
+      showToast("Input is empty.", true);
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(raw);
+      const formatted = indent === 0 
+        ? JSON.stringify(parsed) 
+        : JSON.stringify(parsed, null, indent);
+
+      outputEl.value = formatted;
+      
+      // Calculate byte size
+      const bytes = new Blob([formatted]).size;
+      document.getElementById("output-char-count").textContent = formatBytes(bytes);
+
+      showToast("JSON successfully formatted!");
+    } catch (error) {
+      errorBox.textContent = describeJsonError(raw, error);
+      errorBox.classList.remove("hidden");
+      showToast("JSON validation failed.", true);
+    }
+  }
+
+  // Finds where a JSON syntax error is. Browsers word their errors differently and some give no
+  // position at all, so we scan the text ourselves to find the first character that breaks the rules.
+  function findJsonErrorOffset(t) {
+    let i = 0;
+    const ws = () => { while (i < t.length && " \t\n\r".includes(t[i])) i++; };
+    const fail = () => { throw i; };
+    const lit = w => { if (t.startsWith(w, i)) i += w.length; else fail(); };
+    function str() {
+      i++;
+      while (i < t.length && t[i] !== '"') {
+        if (t[i] === "\\") {
+          i++;
+          if (t[i] === "u") { if (!/^[0-9a-fA-F]{4}$/.test(t.substr(i + 1, 4))) fail(); i += 5; continue; }
+          if (!'"\\/bfnrt'.includes(t[i])) fail();
+        } else if (t.charCodeAt(i) < 32) fail();
+        i++;
+      }
+      if (t[i] !== '"') fail();
+      i++;
+    }
+    function num() {
+      const m = /^-?(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d+)?/.exec(t.slice(i));
+      if (!m || !m[0]) fail();
+      i += m[0].length;
+    }
+    function val() {
+      ws();
+      const c = t[i];
+      if (c === "{") {
+        i++; ws();
+        if (t[i] === "}") { i++; return; }
+        for (;;) { ws(); if (t[i] !== '"') fail(); str(); ws(); if (t[i] !== ":") fail(); i++; val(); ws();
+          if (t[i] === ",") { i++; continue; } if (t[i] === "}") { i++; return; } fail(); }
+      }
+      if (c === "[") {
+        i++; ws();
+        if (t[i] === "]") { i++; return; }
+        for (;;) { val(); ws(); if (t[i] === ",") { i++; continue; } if (t[i] === "]") { i++; return; } fail(); }
+      }
+      if (c === '"') return str();
+      if (c === "t") return lit("true");
+      if (c === "f") return lit("false");
+      if (c === "n") return lit("null");
+      return num();
+    }
+    try { val(); ws(); if (i < t.length) fail(); return null; } catch (pos) { return typeof pos === "number" ? pos : null; }
+  }
+
+  function describeJsonError(text, error) {
+    const msg = error.message || String(error);
+    const offset = findJsonErrorOffset(text);
+    if (offset === null) return `Syntax error: ${msg}`;
+    const before = text.slice(0, offset);
+    const line = before.split("\n").length;
+    const col = offset - before.lastIndexOf("\n");
+    const src = text.split("\n")[line - 1] || "";
+    const start = Math.max(0, col - 40);
+    const found = offset < text.length ? `"${text[offset]}"` : "the end of the text";
+    return `Syntax error at line ${line}, column ${col}: unexpected ${found}.\n\n${src.slice(start, col + 40)}\n${" ".repeat(Math.max(0, col - 1 - start))}^`;
+  }
+
+  // File Upload Logic
+  document.getElementById('file-upload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById("json-input").value = e.target.result;
+      formatJson();
+    };
+    reader.onerror = function() {
+      showToast("Error reading file.", true);
+    };
+    reader.readAsText(file);
+    // Reset input so the same file can be uploaded again if needed
+    e.target.value = ''; 
+  });
+
+  // File Download Logic
+  function downloadJson() {
+    const content = document.getElementById("json-output").value;
+    if (!content) {
+      showToast("Nothing to download. Format JSON first.", true);
+      return;
+    }
+
+    const blob = new Blob([content], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `formatted-${Date.now()}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    showToast("Download started!");
+  }
+
+  // Modern Clipboard API
+  async function copyToClipboard(elementId) {
+    const el = document.getElementById(elementId);
+    if (!el.value) {
+      showToast("Nothing to copy.", true);
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(el.value);
+      showToast("Copied to clipboard!");
+    } catch (err) {
+      // Fallback
+      el.select();
+      document.execCommand("copy");
+      showToast("Copied to clipboard!");
+    }
+  }
+</script>
+</body>
+</html>

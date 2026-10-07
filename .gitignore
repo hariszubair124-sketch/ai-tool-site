@@ -1,2 +1,4 @@
 __pycache__/
 *.pyc
+root-site/dist/
+root-site/*.zip

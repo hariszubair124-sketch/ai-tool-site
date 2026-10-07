@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ SEO ESSENTIALS ══ -->
+  <title>Word & Character Counter — SEO & Content Tool | Web Online Tools</title>
+  <meta name="description" content="Instantly calculate word count, characters, reading time, and keyword density. Essential for optimizing SEO meta descriptions, ad copy, and articles." />
+  <meta name="keywords" content="word counter, character counter, keyword density tool, reading time calculator, seo text analyzer" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://webonlinetools.com/tools/word-counter/" />
+  
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#060b18" />
+  <meta name="google-site-verification" content="2yOkCxBls80UcV_za_vpGqbxg_nIOjhLNQqcEFoGEZc" />
+  <link rel="icon" type="image/svg+xml" href="https://webonlinetools.com/favicon.svg" />
+
+  <!-- ══ STRUCTURED DATA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Word & Character Counter",
+    "operatingSystem": "All",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": { "@type": "Offer", "price": "0" },
+    "description": "Real-time text analyzer offering word counts, character limits, reading time, and SEO keyword density."
+  }
+  </script>
+
+  <!-- ══ FONTS & TAILWIND ══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 24px;
+      padding: 2.5rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+    @media (max-width: 640px) { .app-card { padding: 1.5rem; border-radius: 16px; } }
+
+    .panel-title { font-family: var(--font-body); font-weight: 700; color: var(--t1); border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1.5rem; font-size: 1.1rem; position: relative; z-index: 2;}
+
+    /* Text Area */
+    .text-area {
+      width: 100%; min-height: 380px; padding: 1.5rem; font-family: var(--font-body); font-size: 1.1rem;
+      background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 16px;
+      color: var(--t1); outline: none; transition: border-color .2s, box-shadow .2s;
+      resize: vertical; line-height: 1.7; position: relative; z-index: 2;
+    }
+    .text-area::placeholder { color: var(--t3); }
+    .text-area:focus { border-color: var(--border-act); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+
+    /* Buttons */
+    .controls-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; position: relative; z-index: 2; }
+    
+    .btn-action { background: var(--grad-main); color: #fff; border: none; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 1.5rem; border-radius: 12px; transition: transform .2s, box-shadow .2s; cursor: pointer; flex: 1; }
+    .btn-action:hover { box-shadow: 0 0 20px rgba(37,99,235,0.4); }
+    .btn-action:active { transform: scale(0.98); }
+
+    .btn-ghost { background: rgba(255,255,255,0.04); color: var(--t2); border: 1px solid var(--border); font-family: var(--font-body); font-weight: 600; font-size: 0.9rem; padding: 0.9rem 1.5rem; border-radius: 12px; cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; flex: 1;}
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); color: var(--t1); border-color: rgba(255,255,255,0.15); }
+
+    /* Metric Cards */
+    .metric-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; position: relative; z-index: 2; }
+    .metric-card { background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 16px; border: 1px solid var(--border); text-align: left; display: flex; flex-direction: column; justify-content: center; }
+    .metric-val { display: block; font-family: var(--font-mono); font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.25rem; line-height: 1; }
+    .metric-label { font-size: 0.8rem; font-weight: 700; color: var(--t3); text-transform: uppercase; letter-spacing: 0.05em; }
+    
+    /* Keyword Density */
+    .keyword-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .keyword-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.9rem; }
+    .keyword-word { color: var(--t1); font-weight: 600; }
+    .keyword-count { background: rgba(37,99,235,0.2); color: #60a5fa; padding: 0.2rem 0.6rem; border-radius: 6px; font-family: var(--font-mono); font-weight: 700; font-size: 0.8rem; }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border); color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000; opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.error { border-color: #ef4444; color: #fca5a5; }
+
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .article-sec ul { list-style: none; padding: 0; margin-bottom: 2rem; }
+    .article-sec li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; color: var(--t2); }
+    .article-sec li::before { content: '•'; position: absolute; left: 0; color: #3b82f6; font-weight: bold; font-size: 1.2rem; line-height: 1; top: 2px; }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <span class="logo-text">Web <em>Online</em> Tools</span>
+      </a>
+      <nav class="hidden md:flex gap-6 font-semibold text-sm">
+        <a href="/tools/" class="text-slate-400 hover:text-white transition">All Tools</a>
+        <a href="/ai-news/" class="text-slate-400 hover:text-white transition">Blog</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-sec">
+    <h1>Word & Character Counter</h1>
+    <p style="max-width: 650px; margin: 0 auto;">Type or paste text to count words, characters, sentences and paragraphs as you go, with reading time and the words you use most.</p>
+  </section>
+
+  <div class="app-card">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10">
+      
+      <!-- LEFT: Editor -->
+      <div class="lg:col-span-2 flex flex-col">
+        <h2 class="panel-title">Content Editor</h2>
+        <textarea id="text-input" class="text-area" placeholder="Start typing or paste your content here to see real-time analysis..." oninput="analyzeText()"></textarea>
+        
+        <div class="controls-row">
+          <input type="file" id="file-upload" class="hidden" accept=".txt,.md,.html,.csv" onchange="handleFileUpload(event)" />
+          <button class="btn-ghost" onclick="document.getElementById('file-upload').click()">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload File
+          </button>
+          <button class="btn-ghost" onclick="copyText()">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy Text
+          </button>
+          <button class="btn-ghost text-red-400 border-red-500/30 hover:bg-red-500/10 hover:text-red-300" onclick="clearText()">
+            Clear
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Statistics & Keywords -->
+      <div class="flex flex-col space-y-8">
+        
+        <div>
+          <h2 class="panel-title">Live Metrics</h2>
+          <div class="metric-grid">
+            <div class="metric-card">
+              <span id="word-count" class="metric-val text-blue-400">0</span>
+              <span class="metric-label">Words</span>
+            </div>
+            <div class="metric-card">
+              <span id="char-count" class="metric-val">0</span>
+              <span class="metric-label">Chars (Spaces)</span>
+            </div>
+            <div class="metric-card">
+              <span id="char-nospace-count" class="metric-val">0</span>
+              <span class="metric-label">Chars (No Spaces)</span>
+            </div>
+            <div class="metric-card">
+              <span id="sentence-count" class="metric-val">0</span>
+              <span class="metric-label">Sentences</span>
+            </div>
+            <div class="metric-card">
+              <span id="paragraph-count" class="metric-val">0</span>
+              <span class="metric-label">Paragraphs</span>
+            </div>
+            <div class="metric-card">
+              <span id="reading-time" class="metric-val text-emerald-400">0m</span>
+              <span class="metric-label">Reading Time</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEO Keyword Density -->
+        <div>
+          <h2 class="panel-title flex justify-between items-center">
+            Top Keywords
+            <span class="text-xs font-medium text-slate-500 normal-case tracking-normal">Excludes stop words</span>
+          </h2>
+          <div id="keyword-list" class="keyword-list">
+            <div class="text-slate-500 text-sm italic py-4 text-center border border-white/5 rounded-lg bg-black/20">Add content to analyze density.</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec">
+    <h2>The Essential Text Analytics Tool</h2>
+    <p>Whether you are drafting ad copy with strict length restrictions, preparing an essay with a minimum word limit, or optimizing meta tags for SEO performance, a reliable analytics tool is indispensable. Our application provides immediate, client-side metrics without sending your proprietary content to a remote server.</p>
+
+    <h3>Advanced Metrics Explained</h3>
+    <ul>
+      <li><strong>Word & Character Limits:</strong> Crucial for digital marketers navigating character constraints on platforms like X (Twitter), Google Search snippets, and SMS campaigns. Our tool properly accounts for apostrophes and hyphenated words, ensuring accurate counts.</li>
+      <li><strong>Reading Time Estimation:</strong> Evaluates your content against the industry-standard reading speed of ~225 words per minute. This metric is incredibly useful for content creators aiming for specific engagement targets on blogs or Medium articles.</li>
+      <li><strong>Keyword Density (SEO):</strong> Automatically strips out common English stop words (like "the", "and", "is") and ranks your most frequently used terms. This ensures your copy remains highly relevant to search intent without falling into keyword stuffing.</li>
+    </ul>
+
+    <div class="flex flex-wrap gap-3 mt-10 border-t border-white/10 pt-6">
+      <a href="/tools/case-converter/" class="tag-link">Text Case Converter</a>
+      <a href="/tools/list-cleaner/" class="tag-link">List Cleaner & Sorter</a>
+      <a href="/tools/" class="tag-link">View All Tools &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Web Online Tools. Processed strictly on your device.</p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Action completed!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show ' + (isError ? 'error' : '');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ── CORE TEXT ANALYSIS ──
+  function analyzeText() {
+    const text = document.getElementById("text-input").value;
+
+    // 1. Character Counts
+    // Count user-perceived characters, so an emoji or accented letter counts once.
+    const seg = typeof Intl !== "undefined" && Intl.Segmenter ? new Intl.Segmenter(undefined, { granularity: "grapheme" }) : null;
+    const countChars = str => seg ? [...seg.segment(str)].length : [...str].length;
+    const charCount = countChars(text);
+    const charNoSpaceCount = countChars(text.replace(/\s/g, ""));
+
+    // 2. Word Count (Using split by whitespace to handle all languages and apostrophes safely)
+    const wordsArray = text.trim().split(/\s+/).filter(word => word.length > 0);
+    const wordCount = wordsArray.length;
+
+    // 3. Sentence Count (Split by . ! ? followed by space or EOF)
+    const sentences = text.split(/[.!?]+(?=\s|$)/).filter(s => s.trim().length > 0);
+    const sentenceCount = text.trim() === "" ? 0 : sentences.length;
+
+    // 4. Paragraph Count
+    const paragraphs = text.split(/\n+/).filter(p => p.trim() !== "");
+    const paragraphCount = paragraphs.length;
+
+    // 5. Reading Time (Standard 225 WPM)
+    const readingTimeMins = wordCount > 0 ? Math.max(1, Math.ceil(wordCount / 225)) : 0;
+
+    // ── UPDATE DOM ──
+    document.getElementById("word-count").textContent = wordCount.toLocaleString();
+    document.getElementById("char-count").textContent = charCount.toLocaleString();
+    document.getElementById("char-nospace-count").textContent = charNoSpaceCount.toLocaleString();
+    document.getElementById("sentence-count").textContent = sentenceCount.toLocaleString();
+    document.getElementById("paragraph-count").textContent = paragraphCount.toLocaleString();
+    document.getElementById("reading-time").textContent = `${readingTimeMins}m`;
+
+    // ── KEYWORD DENSITY ──
+    extractKeywords(wordsArray, wordCount);
+  }
+
+  const escapeHtml = str => str.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  function extractKeywords(wordsArray, totalWords) {
+    const listContainer = document.getElementById("keyword-list");
+    if (wordsArray.length === 0) {
+      listContainer.innerHTML = `<div class="text-slate-500 text-sm italic py-4 text-center border border-white/5 rounded-lg bg-black/20">Add content to analyze density.</div>`;
+      return;
+    }
+
+    // Common English Stop Words
+    const stopWords = new Set(["the", "and", "a", "to", "of", "in", "i", "is", "that", "it", "on", "you", "this", "for", "but", "with", "are", "have", "be", "at", "or", "as", "was", "so", "if", "out", "not", "we", "my", "your", "they", "from", "an", "will", "by", "what", "all", "can", "do", "about", "up", "one", "there", "which"]);
+    
+    const counts = {};
+    wordsArray.forEach(w => {
+      // Clean word: remove punctuation, lowercase
+      // Keep letters and numbers in any language; drop surrounding punctuation.
+      const cleanWord = w.toLocaleLowerCase().replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, "").replace(/['’]s$/u, "");
+      if ([...cleanWord].length > 2 && !stopWords.has(cleanWord)) {
+        counts[cleanWord] = (counts[cleanWord] || 0) + 1;
+      }
+    });
+
+    // Sort by frequency and take the top 5
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+    if (sorted.length === 0) {
+      listContainer.innerHTML = `<div class="text-slate-500 text-sm italic py-4 text-center border border-white/5 rounded-lg bg-black/20">Not enough unique keywords.</div>`;
+      return;
+    }
+
+    listContainer.innerHTML = sorted.map(([word, count]) => `
+      <div class="keyword-item">
+        <span class="keyword-word">${escapeHtml(word)}</span>
+        <span class="keyword-count" title="${count} of ${totalWords} words">${count} · ${(count / totalWords * 100).toFixed(1)}%</span>
+      </div>
+    `).join("");
+  }
+
+  // ── FILE UPLOAD ──
+  function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById("text-input").value = e.target.result;
+      analyzeText();
+      showToast("File loaded successfully.");
+    };
+    reader.onerror = function() {
+      showToast("Error reading file.", true);
+    };
+    reader.readAsText(file);
+    event.target.value = ''; // Reset input
+  }
+
+  // ── UTILITIES ──
+  function clearText() {
+    document.getElementById("text-input").value = "";
+    analyzeText();
+  }
+
+  async function copyText() {
+    const textarea = document.getElementById("text-input");
+    if (!textarea.value) {
+      showToast("Nothing to copy.", true);
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(textarea.value);
+      showToast("Text copied to clipboard!");
+    } catch (err) {
+      textarea.select();
+      document.execCommand("copy");
+      showToast("Text copied to clipboard!");
+    }
+  }
+
+  // Initialize on load
+  window.onload = function () {
+    const defaultText = "The Word Counter tool is an essential utility for modern digital marketing and technical SEO. It ensures that critical elements like meta descriptions, title tags, and ad copy strictly adhere to platform character limits to prevent truncation. This tool operates entirely within the browser, calculating lengths instantly without compromising data privacy. Furthermore, analyzing keyword density helps copywriters maintain context relevance without resorting to penalizable keyword stuffing tactics.";
+    document.getElementById("text-input").value = defaultText;
+    analyzeText();
+  };
+</script>
+</body>
+</html>

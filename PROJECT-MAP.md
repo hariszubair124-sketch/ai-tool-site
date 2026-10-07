@@ -65,3 +65,20 @@ scripts/write-post.py       daily Gemini writer with source, freshness and dupli
 - A hub page and menu link appear automatically once a company has HUB_MIN stories.
 - New stories are rejected if any 2-3 word phrase makes up more than 2.5% of the text (keyword stuffing).
 - Legacy posts (`"status": "legacy"`) predate sourcing and show a note instead of a Sources list.
+
+## Root site (everything outside /ai-news/)
+
+The homepage, `/tools/` and the tool pages are hosted directly on Hostinger, not deployed from this repo.
+Their source lives in `root-site/` (blocked from public access) so changes are made here and uploaded.
+
+| To change | Edit | Then |
+| --- | --- | --- |
+| A tool's name, title tag, meta description, H1, card text, category, related tools | `root-site/tools.json` | build and upload |
+| A tool's interface or logic | `root-site/src/tools/<slug>/index.html` | build and upload |
+| Shared header, footer, fonts, homepage and tools-index layout | `root-site/build-root.py`, `root-site/src/assets/tools.css` | build and upload |
+| Add a new tool | add its page under `root-site/src/tools/<slug>/` and an entry in `root-site/tools.json` | build and upload |
+
+Build: `python root-site/build-root.py` writes `root-site/dist/`, then upload its contents to `public_html`
+(see `root-site/UPLOAD-GUIDE.md`). The build regenerates the homepage tool grid, tools index, footer menus,
+`sitemap.xml` (an index that includes `/ai-news/sitemap.xml`), `sitemap-pages.xml` and `robots.txt`.
+`root-site/lastmod.json` records when each page last changed so sitemap dates stay honest.

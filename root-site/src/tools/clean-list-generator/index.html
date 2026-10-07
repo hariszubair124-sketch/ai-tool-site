@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ SEO ESSENTIALS ══ -->
+  <title>Online List Cleaner & Deduplicator — Web Online Tools</title>
+  <meta name="description" content="Instantly clean and format text lists. Remove duplicate lines, sort alphabetically, clear blank lines, and change case with this free, client-side utility." />
+  <meta name="keywords" content="list cleaner, remove duplicates online, sort list alphabetically, text formatter, deduplicator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://webonlinetools.com/tools/list-cleaner/" />
+  
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#060b18" />
+  <meta name="google-site-verification" content="2yOkCxBls80UcV_za_vpGqbxg_nIOjhLNQqcEFoGEZc" />
+  <link rel="icon" type="image/svg+xml" href="https://webonlinetools.com/favicon.svg" />
+
+  <!-- ══ STRUCTURED DATA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "List Cleaner & Deduplicator",
+    "operatingSystem": "All",
+    "applicationCategory": "DeveloperApplication",
+    "offers": { "@type": "Offer", "price": "0" },
+    "description": "Instantly clean and format text lists, remove duplicates, and sort data client-side."
+  }
+  </script>
+
+  <!-- ══ FONTS & TAILWIND ══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+
+    .text-area {
+      width: 100%; min-height: 250px; padding: 1.25rem; font-family: var(--font-mono); font-size: 0.95rem;
+      background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 14px;
+      color: var(--t1); outline: none; transition: border-color .2s, box-shadow .2s;
+      resize: vertical; line-height: 1.6; position: relative; z-index: 2; white-space: pre;
+    }
+    .text-area::placeholder { color: var(--t3); font-family: var(--font-body); }
+    .text-area:focus { border-color: var(--border-act); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+    .text-area[readonly] { background: rgba(255,255,255,0.015); border-color: rgba(255,255,255,0.04); cursor: pointer; }
+
+    /* Buttons */
+    .controls-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 1.5rem 0; position: relative; z-index: 2;
+    }
+    @media (min-width: 640px) { .controls-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .btn {
+      font-family: var(--font-body); font-weight: 600; font-size: 0.85rem;
+      padding: 0.9rem 0.5rem; border-radius: 12px; cursor: pointer; text-align: center;
+      transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
+      border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--t2);
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+    }
+    .btn:hover { background: rgba(255,255,255,0.08); color: var(--t1); border-color: rgba(255,255,255,0.15); }
+    .btn:active { transform: scale(0.96); }
+    
+    .btn-action { background: var(--grad-main); color: #fff; border: none; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 12px; transition: transform .2s, box-shadow .2s; }
+    .btn-action:hover { box-shadow: 0 0 20px rgba(37,99,235,0.4); }
+    .btn-action:active { transform: scale(0.98); }
+
+    .btn-clear { background: transparent; border: 1px solid #ef4444; color: #fca5a5; }
+    .btn-clear:hover { background: rgba(239,68,68,0.1); color: #fef2f2; }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border);
+      color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000;
+      opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.error { border-color: #ef4444; color: #fca5a5; }
+
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <span class="logo-text">Web <em>Online</em> Tools</span>
+      </a>
+      <nav class="hidden md:flex gap-6 font-semibold text-sm">
+        <a href="/tools/" class="text-slate-400 hover:text-white transition">All Tools</a>
+        <a href="/ai-news/" class="text-slate-400 hover:text-white transition">Blog</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-sec">
+    <h1>List Cleaner & Deduplicator</h1>
+    <p>Paste a list to remove duplicate and blank lines, trim stray spaces, sort it or change its case. Buttons can be used one after another on the same list.</p>
+  </section>
+
+  <section class="app-card">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10">
+      
+      <!-- Input & Controls -->
+      <div>
+        <label for="input-text" class="block font-bold text-white mb-3 tracking-wide text-sm uppercase">1. Input List</label>
+        <textarea id="input-text" class="text-area mb-6" placeholder="Paste your messy list of emails, keywords, or names here..." oninput="resetOutput()">Apple
+Banana
+Apple
+ORANGE
+banana
+Cherry
+</textarea>
+        
+        <label class="block font-bold text-white mb-3 tracking-wide text-sm uppercase">2. Actions (Chainable)</label>
+        <div class="flex flex-wrap gap-4 mb-4 text-sm text-slate-300">
+          <label class="inline-flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-ignore-case" checked> Ignore case when removing duplicates</label>
+          <label class="inline-flex items-center gap-2 cursor-pointer"><input type="checkbox" id="opt-trim" checked> Trim spaces at line start and end</label>
+        </div>
+        <div class="controls-grid">
+          <button id="btn-dedupe" class="btn">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Remove Duplicates
+          </button>
+          <button id="btn-remove-blank" class="btn">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="9" x2="3" y2="9"/><line x1="21" y1="15" x2="3" y2="15"/><line x1="14" y1="3" x2="10" y2="3"/><line x1="14" y1="21" x2="10" y2="21"/></svg>
+            Remove Blanks
+          </button>
+          <button id="btn-trim" class="btn">Trim Spaces</button>
+          <button id="btn-sort-az" class="btn">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+            Sort A-Z
+          </button>
+          <button id="btn-sort-za" class="btn">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+            Sort Z-A
+          </button>
+          <button id="btn-lowercase" class="btn">
+            <span class="font-mono font-bold tracking-widest">abc</span> To Lowercase
+          </button>
+          <button id="btn-uppercase" class="btn">
+            <span class="font-mono font-bold tracking-widest">ABC</span> To Uppercase
+          </button>
+        </div>
+      </div>
+
+      <!-- Output -->
+      <div class="flex flex-col">
+        <label for="output-text" class="block font-bold text-white mb-3 tracking-wide text-sm uppercase">3. Output Preview</label>
+        <textarea id="output-text" readonly class="text-area flex-grow" placeholder="Your clean list will appear here..." onclick="copyToClipboard()"></textarea>
+        
+        <div class="flex flex-col sm:flex-row gap-4 mt-6">
+          <button id="btn-copy" class="btn-action flex-1" onclick="copyToClipboard()">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy Output
+          </button>
+          <button id="btn-clear" class="btn btn-clear sm:w-auto px-8" onclick="clearAll()">
+            Clear All
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec">
+    <h2>Why You Need a Text List Cleaner</h2>
+    <p>In any data-driven task, data hygiene is the first, most crucial step. Whether you're configuring a multi-vendor marketplace, managing keyword lists, or compiling email leads, messy data introduces fatal errors. A simple copy-paste can bring in duplicates, unwanted empty lines, and mixed capitalization.</p>
+    
+    <h3>Practical Data Formatting Use-Cases</h3>
+    <ul>
+      <li><strong>Email Marketers:</strong> Before uploading a list of new subscribers to your CRM, run it through this tool to remove any duplicate emails or empty rows.</li>
+      <li><strong>SEO Optimization:</strong> Deduplicate keyword lists from multiple sources and sort them alphabetically to easily spot themes, cannibalization, and content opportunities.</li>
+      <li><strong>Developers:</strong> Clean up log files or format a list of items for a JSON array. Standardize casing to avoid fatal matching errors in case-sensitive programming languages.</li>
+    </ul>
+
+    <div class="space-y-4 mt-8">
+      <div class="p-5 border border-white/10 bg-black/30 rounded-xl">
+        <strong class="text-white">Is my data safe and private?</strong>
+        <p class="text-sm mt-1">Absolutely. All processing is executed client-side via JavaScript directly inside your browser. Your list data is never serialized or transmitted to a backend server.</p>
+      </div>
+      <div class="p-5 border border-white/10 bg-black/30 rounded-xl">
+        <strong class="text-white">What does 'case-sensitive' mean in deduplication?</strong>
+        <p class="text-sm mt-1">By default, deduplication is case-sensitive, meaning <code class="bg-gray-800 px-1 rounded text-white">Apple</code> and <code class="bg-gray-800 px-1 rounded text-white">apple</code> are treated as two unique items. If you want to merge them, simply click the "To Lowercase" button before removing duplicates.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-3 mt-10">
+      <a href="/tools/case-converter/" class="tag-link">Case Converter</a>
+      <a href="/tools/word-counter/" class="tag-link">Word Counter</a>
+      <a href="/tools/" class="tag-link">View All Tools &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Web Online Tools. Processed entirely in your browser.</p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Action completed!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const inputText = document.getElementById("input-text");
+  const outputText = document.getElementById("output-text");
+
+  function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show ' + (isError ? 'error' : '');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // Resets output if user starts typing fresh data
+  function resetOutput() {
+    outputText.value = "";
+  }
+
+  function clearAll() {
+    inputText.value = "";
+    outputText.value = "";
+  }
+
+  // Each button works on the latest result, so actions can be chained.
+  // Typing in the input clears the result, so the next action starts fresh.
+  function getLines() {
+    const source = outputText.value.trim() ? outputText.value : inputText.value;
+    const lines = source.split(/\r?\n/);
+    return document.getElementById("opt-trim").checked ? lines.map(l => l.trim()) : lines;
+  }
+
+  function setOutput(lines, note) {
+    outputText.value = lines.join("\n");
+    showToast(note || `${lines.length.toLocaleString()} lines`);
+  }
+
+  document.getElementById("btn-dedupe").addEventListener("click", () => {
+    const lines = getLines();
+    const ignoreCase = document.getElementById("opt-ignore-case").checked;
+    const seen = new Set();
+    const unique = lines.filter(line => {
+      const key = ignoreCase ? line.toLocaleLowerCase() : line;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+    setOutput(unique, `Removed ${(lines.length - unique.length).toLocaleString()} duplicate lines`);
+  });
+
+  document.getElementById("btn-trim").addEventListener("click", () => {
+    setOutput(getLines().map(l => l.trim()), "Trimmed spaces");
+  });
+
+  document.getElementById("btn-sort-az").addEventListener("click", () => {
+    const lines = getLines();
+    lines.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
+    outputText.value = lines.join("\n");
+  });
+
+  document.getElementById("btn-sort-za").addEventListener("click", () => {
+    const lines = getLines();
+    lines.sort((a, b) => b.localeCompare(a, undefined, { numeric: true, sensitivity: "base" }));
+    outputText.value = lines.join("\n");
+  });
+
+  document.getElementById("btn-lowercase").addEventListener("click", () => {
+    outputText.value = getLines().join("\n").toLowerCase();
+  });
+
+  document.getElementById("btn-uppercase").addEventListener("click", () => {
+    outputText.value = getLines().join("\n").toUpperCase();
+  });
+
+  document.getElementById("btn-remove-blank").addEventListener("click", () => {
+    const lines = getLines();
+    const filteredLines = lines.filter((line) => line.trim() !== "");
+    setOutput(filteredLines, `Removed ${(lines.length - filteredLines.length).toLocaleString()} blank lines`);
+  });
+
+  async function copyToClipboard() {
+    if (!outputText.value) {
+      showToast("Output is empty, nothing to copy.", true);
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(outputText.value);
+      showToast("Copied to clipboard!");
+    } catch (err) {
+      outputText.select();
+      document.execCommand("copy");
+      showToast("Copied to clipboard!");
+    }
+  }
+</script>
+</body>
+</html>

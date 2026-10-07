@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ SEO ESSENTIALS ══ -->
+  <title>Instagram Font Changer — Cool & Stylish Bio Fonts</title>
+  <meta name="description" content="Generate cool, stylish, and fancy fonts for your Instagram bio, captions, and comments. Copy and paste the best Unicode fonts to make your profile stand out." />
+  <meta name="keywords" content="instagram fonts, fancy font generator, copy paste fonts, cool text generator, stylish bio fonts" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://webonlinetools.com/tools/instagram-font-changer/" />
+  
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#060b18" />
+  <meta name="google-site-verification" content="2yOkCxBls80UcV_za_vpGqbxg_nIOjhLNQqcEFoGEZc" />
+  <link rel="icon" type="image/svg+xml" href="https://webonlinetools.com/favicon.svg" />
+
+  <!-- ══ STRUCTURED DATA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Instagram Font Changer",
+    "operatingSystem": "All",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": { "@type": "Offer", "price": "0" },
+    "description": "Convert standard text into stylish, copy-and-paste Unicode fonts for social media profiles."
+  }
+  </script>
+
+  <!-- ══ FONTS & TAILWIND ══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    
+    .input-wrapper { margin-bottom: 3rem; position: relative; z-index: 10; }
+    .text-area {
+      width: 100%; min-height: 160px; padding: 1.5rem; font-family: var(--font-body); font-size: 1.2rem;
+      background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 20px;
+      color: var(--t1); outline: none; transition: border-color .2s, box-shadow .2s;
+      resize: vertical; line-height: 1.6; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .text-area::placeholder { color: var(--t3); }
+    .text-area:focus { border-color: var(--border-act); box-shadow: 0 0 0 4px rgba(37,99,235,0.1), 0 20px 40px rgba(0,0,0,0.4); }
+
+    /* Font Cards */
+    .fonts-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 4rem; position: relative; z-index: 10; }
+    @media (min-width: 768px) { .fonts-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .font-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden; transition: transform .2s, border-color .2s;
+    }
+    .font-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+    .font-card:hover { transform: translateY(-3px); border-color: rgba(96, 165, 250, 0.3); }
+
+    .font-output {
+      font-size: 1.5rem; color: var(--t1); min-height: 3rem; margin-bottom: 1.5rem;
+      word-break: break-word; line-height: 1.4; position: relative; z-index: 2;
+    }
+    .font-meta { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; border-top: 1px solid var(--border); padding-top: 1rem; }
+    .font-name { font-size: 0.85rem; font-weight: 700; color: var(--t3); text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Buttons */
+    .btn-copy {
+      background: rgba(37,99,235,0.1); color: #60a5fa; border: 1px solid rgba(37,99,235,0.2);
+      font-family: var(--font-body); font-weight: 700; font-size: 0.85rem;
+      padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; transition: all .2s;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .btn-copy:hover { background: var(--grad-main); color: #fff; border-color: transparent; }
+    .btn-copy.success { background: #10b981; color: #fff; border-color: transparent; }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border);
+      color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000;
+      opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; background: var(--card); padding: 3rem; border-radius: 24px; border: 1px solid var(--border); }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .article-sec ol { padding-left: 1.5rem; margin-bottom: 2rem; }
+    .article-sec li { margin-bottom: 0.5rem; color: var(--t2); }
+    .article-sec strong { color: var(--t1); }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <span class="logo-text">Web <em>Online</em> Tools</span>
+      </a>
+      <nav class="hidden md:flex gap-6 font-semibold text-sm">
+        <a href="/tools/" class="text-slate-400 hover:text-white transition">All Tools</a>
+        <a href="/ai-news/" class="text-slate-400 hover:text-white transition">Blog</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-sec">
+    <h1>Instagram Font Changer</h1>
+    <p style="max-width: 650px; margin: 0 auto;">Type your text and copy it in bold, italic, script and other Unicode styles for Instagram bios, captions and comments.</p>
+  </section>
+
+  <div class="input-wrapper">
+    <textarea id="input-text" class="text-area" placeholder="Type or paste your text here to stylize..."></textarea>
+  </div>
+
+  <div id="fonts-container" class="fonts-grid">
+    <!-- Font cards injected via JS on load to prevent DOM thrashing -->
+  </div>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec">
+    <h2>Why Use Custom Instagram Fonts?</h2>
+    <p>In a sea of millions of users, standing out on social media is key. While platforms like Instagram and Twitter lock you into a single default system font, using custom stylish fonts bypasses these restrictions, making your profile immediately more engaging and memorable. It helps you express your personality, reinforce your brand identity, and capture your audience's attention instantly.</p>
+
+    <h3>How to Use the Font Changer</h3>
+    <ol class="list-decimal text-slate-300 space-y-2">
+      <li><strong>Type Your Text:</strong> Enter the text you want to stylize into the input box at the top of the page.</li>
+      <li><strong>Browse the Fonts:</strong> The tool instantly maps your text in real-time across dozens of unique mathematical and alphabetic Unicode styles.</li>
+      <li><strong>Copy and Paste:</strong> Find a font you love, click "Copy", and paste it directly into your Instagram bio, TikTok name, or YouTube comment.</li>
+    </ol>
+
+    <h2>Frequently Asked Questions</h2>
+    <h3>How do these fonts work without installing anything?</h3>
+    <p>These aren't actually "fonts" (like Arial or Helvetica). They are special characters from the <strong>Unicode standard</strong>. Unicode is an international computing standard that includes tens of thousands of characters, including specialized mathematical alphanumeric symbols (like bold, italic, script, and fraktur). Because they are just text characters, any modern device knows exactly how to render them without requiring a font file download.</p>
+
+    <h3>Will these fonts work on all devices?</h3>
+    <p>Yes, the vast majority of modern smartphones, tablets, and desktop operating systems support these Unicode blocks. Occasionally, on extremely outdated operating systems, a user might see placeholder boxes (often called "tofu") instead of the styled text, but this is increasingly rare today.</p>
+
+    <div class="flex flex-wrap gap-3 mt-10 border-t border-white/10 pt-6">
+      <a href="/tools/case-converter/" class="tag-link">Text Case Converter</a>
+      <a href="/tools/list-cleaner/" class="tag-link">List Cleaner</a>
+      <a href="/tools/" class="tag-link">View All Tools &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Web Online Tools. Highly optimized local processing.</p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Font copied to clipboard!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ── FONT MAPS ──
+  const fontMaps = [
+    { name: "Bold Serif", map: { a:"𝐚",b:"𝐛",c:"𝐜",d:"𝐝",e:"𝐞",f:"𝐟",g:"𝐠",h:"𝐡",i:"𝐢",j:"𝐣",k:"𝐤",l:"𝐥",m:"𝐦",n:"𝐧",o:"𝐨",p:"𝐩",q:"𝐪",r:"𝐫",s:"𝐬",t:"𝐭",u:"𝐮",v:"𝐯",w:"𝐰",x:"𝐱",y:"𝐲",z:"𝐳", A:"𝐀",B:"𝐁",C:"𝐂",D:"𝐃",E:"𝐄",F:"𝐅",G:"𝐆",H:"𝐇",I:"𝐈",J:"𝐉",K:"𝐊",L:"𝐋",M:"𝐌",N:"𝐍",O:"𝐎",P:"𝐏",Q:"𝐐",R:"𝐑",S:"𝐒",T:"𝐓",U:"𝐔",V:"𝐕",W:"𝐖",X:"𝐗",Y:"𝐘",Z:"𝐙", 0:"𝟎",1:"𝟏",2:"𝟐",3:"𝟑",4:"𝟒",5:"𝟓",6:"𝟔",7:"𝟕",8:"𝟖",9:"𝟗" } },
+    { name: "Serif Italic", map: { a:"𝑎",b:"𝑏",c:"𝑐",d:"𝑑",e:"𝑒",f:"𝑓",g:"𝑔",h:"ℎ",i:"𝑖",j:"𝑗",k:"𝑘",l:"𝑙",m:"𝑚",n:"𝑛",o:"𝑜",p:"𝑝",q:"𝑞",r:"𝑟",s:"𝑠",t:"𝑡",u:"𝑢",v:"𝑣",w:"𝑤",x:"𝑥",y:"𝑦",z:"𝑧",A:"𝐴",B:"𝐵",C:"𝐶",D:"𝐷",E:"𝐸",F:"𝐹",G:"𝐺",H:"𝐻",I:"𝐼",J:"𝐽",K:"𝐾",L:"𝐿",M:"𝑀",N:"𝑁",O:"𝑂",P:"𝑃",Q:"𝑄",R:"𝑅",S:"𝑆",T:"𝑇",U:"𝑈",V:"𝑉",W:"𝑊",X:"𝑋",Y:"𝑌",Z:"𝑍" } },
+    { name: "Sans Italic", map: { a:"𝘢",b:"𝘣",c:"𝘤",d:"𝘥",e:"𝘦",f:"𝘧",g:"𝘨",h:"𝘩",i:"𝘪",j:"𝘫",k:"𝘬",l:"𝘭",m:"𝘮",n:"𝘯",o:"𝘰",p:"𝘱",q:"𝘲",r:"𝘳",s:"𝘴",t:"𝘵",u:"𝘶",v:"𝘷",w:"𝘸",x:"𝘹",y:"𝘺",z:"𝘻", A:"𝘈",B:"𝘉",C:"𝘊",D:"𝘋",E:"𝘌",F:"𝘍",G:"𝘎",H:"𝘏",I:"𝘐",J:"𝘑",K:"𝘒",L:"𝘓",M:"𝘔",N:"𝘕",O:"𝘖",P:"𝘗",Q:"𝘘",R:"𝘙",S:"𝘚",T:"𝘛",U:"𝘜",V:"𝘝",W:"𝘞",X:"𝘟",Y:"𝘠",Z:"𝘡" } },
+    { name: "Script", map: { a:"𝒶",b:"𝒷",c:"𝒸",d:"𝒹",e:"𝑒",f:"𝒻",g:"𝑔",h:"𝒽",i:"𝒾",j:"𝒿",k:"𝓀",l:"𝓁",m:"𝓂",n:"𝓃",o:"𝑜",p:"𝓅",q:"𝓆",r:"𝓇",s:"𝓈",t:"𝓉",u:"𝓊",v:"𝓋",w:"𝓌",x:"𝓍",y:"𝓎",z:"𝓏", A:"𝒜",B:"ℬ",C:"𝒞",D:"𝒟",E:"ℰ",F:"ℱ",G:"𝒢",H:"ℋ",I:"ℐ",J:"𝒥",K:"𝒦",L:"ℒ",M:"ℳ",N:"𝒩",O:"𝒪",P:"𝒫",Q:"𝒬",R:"ℛ",S:"𝒮",T:"𝒯",U:"𝒰",V:"𝒱",W:"𝒲",X:"𝒳",Y:"𝒴",Z:"𝒵" } },
+    { name: "Bold Script", map: { a:"𝓪",b:"𝓫",c:"𝓬",d:"𝓭",e:"𝓮",f:"𝓯",g:"𝓰",h:"𝓱",i:"𝓲",j:"𝓳",k:"𝓴",l:"𝓵",m:"𝓶",n:"𝓷",o:"𝓸",p:"𝓹",q:"𝓺",r:"𝓻",s:"𝓼",t:"𝓽",u:"𝓾",v:"𝓿",w:"𝔀",x:"𝔁",y:"𝔂",z:"𝔃", A:"𝓐",B:"𝓑",C:"𝓒",D:"𝓓",E:"𝓔",F:"𝓕",G:"𝓖",H:"𝓗",I:"𝓘",J:"𝓙",K:"𝓚",L:"𝓛",M:"𝓜",N:"𝓝",O:"𝓞",P:"𝓟",Q:"𝓠",R:"𝓡",S:"𝓢",T:"𝓣",U:"𝓤",V:"𝓥",W:"𝓦",X:"𝓧",Y:"𝓨",Z:"𝓩" } },
+    { name: "Fraktur", map: { a:"𝔞",b:"𝔟",c:"𝔠",d:"𝔡",e:"𝔢",f:"𝔣",g:"𝔤",h:"𝔥",i:"𝔦",j:"𝔧",k:"𝔨",l:"𝔩",m:"𝔪",n:"𝔫",o:"𝔬",p:"𝔭",q:"𝔮",r:"𝔯",s:"𝔰",t:"𝔱",u:"𝔲",v:"𝔳",w:"𝔴",x:"𝔵",y:"𝔶",z:"𝔷", A:"𝔄",B:"𝔅",C:"ℭ",D:"𝔇",E:"𝔈",F:"𝔉",G:"𝔊",H:"ℌ",I:"ℑ",J:"𝔍",K:"𝔎",L:"𝔏",M:"𝔐",N:"𝔑",O:"𝔒",P:"𝔓",Q:"𝔔",R:"ℜ",S:"𝔖",T:"𝔗",U:"𝔘",V:"𝔙",W:"𝔚",X:"𝔛",Y:"𝔜",Z:"ℨ" } },
+    { name: "Monospace", map: { a:"𝚊",b:"𝚋",c:"𝚌",d:"𝚍",e:"𝚎",f:"𝚏",g:"𝚐",h:"𝚑",i:"𝚒",j:"𝚓",k:"𝚔",l:"𝚕",m:"𝚖",n:"𝚗",o:"𝚘",p:"𝚙",q:"𝚚",r:"𝚛",s:"𝚜",t:"𝚝",u:"𝚞",v:"𝚟",w:"𝚠",x:"𝚡",y:"𝚢",z:"𝚣", A:"𝙰",B:"𝙱",C:"𝙲",D:"𝙳",E:"𝙴",F:"𝙵",G:"𝙶",H:"𝙷",I:"𝙸",J:"𝙹",K:"𝙺",L:"𝙻",M:"𝙼",N:"𝙽",O:"𝙾",P:"𝙿",Q:"𝚀",R:"𝚁",S:"𝚂",T:"𝚃",U:"𝚄",V:"𝚅",W:"𝚆",X:"𝚇",Y:"𝚈",Z:"𝚉", 0:"𝟶",1:"𝟷",2:"𝟸",3:"𝟹",4:"𝟺",5:"𝟻",6:"𝟼",7:"𝟽",8:"𝟾",9:"𝟿" } },
+    { name: "Double Struck", map: { a:"𝕒",b:"𝕓",c:"𝕔",d:"𝕕",e:"𝕖",f:"𝕗",g:"𝕘",h:"𝕙",i:"𝕚",j:"𝕛",k:"𝕜",l:"𝕝",m:"𝕞",n:"𝕟",o:"𝕠",p:"𝕡",q:"𝕢",r:"𝕣",s:"𝕤",t:"𝕥",u:"𝕦",v:"𝕧",w:"𝕨",x:"𝕩",y:"𝕪",z:"𝕫", A:"𝔸",B:"𝔹",C:"ℂ",D:"𝔻",E:"𝔼",F:"𝔽",G:"𝔾",H:"ℍ",I:"𝕀",J:"𝕁",K:"𝕂",L:"𝕃",M:"𝕄",N:"ℕ",O:"𝕆",P:"ℙ",Q:"ℚ",R:"ℝ",S:"𝕊",T:"𝕋",U:"𝕌",V:"𝕍",W:"𝕎",X:"𝕏",Y:"𝕐",Z:"ℤ", 0:"𝟘",1:"𝟙",2:"𝟚",3:"𝟛",4:"𝟜",5:"𝟝",6:"𝟞",7:"𝟟",8:"𝟠",9:"𝟡" } },
+    { name: "Squared", map: { a:"🅰",b:"🅱",c:"🅲",d:"🅳",e:"🅴",f:"🅵",g:"🅶",h:"🅷",i:"🅸",j:"🅹",k:"🅺",l:"🅻",m:"🅼",n:"🅽",o:"🅾",p:"🅿",q:"🆀",r:"🆁",s:"🆂",t:"🆃",u:"🆄",v:"🆅",w:"🆆",x:"🆇",y:"🆈",z:"🆉", A:"🅰",B:"🅱",C:"🅲",D:"🅳",E:"🅴",F:"🅵",G:"🅶",H:"🅷",I:"🅸",J:"🅹",K:"🅺",L:"🅻",M:"🅼",N:"🅽",O:"🅾",P:"🅿",Q:"🆀",R:"🆁",S:"🆂",T:"🆃",U:"🆄",V:"🆅",W:"🆆",X:"🆇",Y:"🆈",Z:"🆉" } },
+    { name: "Old English", map: { a:"𝖆",b:"𝖇",c:"𝖈",d:"𝖉",e:"𝖊",f:"𝖋",g:"𝖌",h:"𝖍",i:"𝖎",j:"𝖏",k:"𝖐",l:"𝖑",m:"𝖒",n:"𝖓",o:"𝖔",p:"𝖕",q:"𝖖",r:"𝖗",s:"𝖘",t:"𝖙",u:"𝖚",v:"𝖛",w:"𝖜",x:"𝖝",y:"𝖞",z:"𝖟", A:"𝕬",B:"𝕭",C:"𝕮",D:"𝕯",E:"𝕰",F:"𝕱",G:"𝕲",H:"𝕳",I:"𝕴",J:"𝕵",K:"𝕶",L:"𝕷",M:"𝕸",N:"𝕹",O:"𝕺",P:"𝕻",Q:"𝕼",R:"𝕽",S:"𝕾",T:"𝕿",U:"𝖀",V:"𝖁",W:"𝖂",X:"𝖃",Y:"𝖄",Z:"𝖅" } },
+  ];
+
+  // ── OPTIMIZED DOM RENDERING ──
+  // Instead of destroying and recreating HTML strings on every keystroke, we build the elements
+  // once on load, store their references, and update their textContent.
+  
+  const container = document.getElementById("fonts-container");
+  const inputEl = document.getElementById("input-text");
+  
+  // Store references to the output div and the copy button's data attribute
+  const outputNodes = [];
+
+  function initDOM() {
+    fontMaps.forEach((font, index) => {
+      const card = document.createElement("div");
+      card.className = "font-card";
+      
+      const outputDiv = document.createElement("div");
+      outputDiv.className = "font-output";
+      outputDiv.textContent = "Start typing..."; // Initial placeholder
+
+      const metaDiv = document.createElement("div");
+      metaDiv.className = "font-meta";
+      
+      const title = document.createElement("h3");
+      title.className = "font-name";
+      title.textContent = font.name;
+
+      const copyBtn = document.createElement("button");
+      copyBtn.className = "btn-copy";
+      copyBtn.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+
+      // Copy logic using modern async clipboard
+      copyBtn.addEventListener("click", async () => {
+        const textToCopy = outputDiv.textContent;
+        if (!textToCopy || textToCopy === "Start typing...") return;
+
+        try {
+          await navigator.clipboard.writeText(textToCopy);
+          
+          // Visual Success Feedback
+          copyBtn.classList.add("success");
+          copyBtn.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+          
+          setTimeout(() => {
+            copyBtn.classList.remove("success");
+            copyBtn.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
+          }, 2000);
+          
+          showToast("Font copied to clipboard!");
+        } catch (err) {
+          showToast("Failed to copy text.", true);
+        }
+      });
+
+      metaDiv.appendChild(title);
+      metaDiv.appendChild(copyBtn);
+      card.appendChild(outputDiv);
+      card.appendChild(metaDiv);
+      container.appendChild(card);
+
+      // Save reference to update rapidly on keypress
+      outputNodes.push({ element: outputDiv, map: font.map });
+    });
+  }
+
+  // ── FIX: SAFE EMOJI & SURROGATE PAIR HANDLING ──
+  function updateFonts(text) {
+    if (!text) {
+      outputNodes.forEach(node => node.element.textContent = "Start typing...");
+      return;
+    }
+
+    // [...text] safely iterates through surrogate pairs (like emojis 🚀) without breaking them.
+    // The old text.split("") would corrupt emojis.
+    const chars = [...text]; 
+
+    outputNodes.forEach(node => {
+      // Map over characters. If map doesn't have the char, keep original.
+      node.element.textContent = chars.map(char => node.map[char] || char).join("");
+    });
+  }
+
+  // Bind the fast-updater to the input
+  inputEl.addEventListener("input", (e) => updateFonts(e.target.value));
+
+  // Initialize
+  window.onload = function() {
+    initDOM();
+    const defaultText = "Hello World 🚀";
+    inputEl.value = defaultText;
+    updateFonts(defaultText);
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ SEO ESSENTIALS ══ -->
+  <title>Password Security Tool — Generator & Policy Checker | Web Online Tools</title>
+  <meta name="description" content="Generate cryptographically strong passwords and validate user input against customizable security policies. Export rules instantly as JavaScript objects." />
+  <meta name="keywords" content="password generator, password strength checker, password policy validator, secure password maker, developer security tools" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://webonlinetools.com/tools/password-security/" />
+  
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#060b18" />
+  <meta name="google-site-verification" content="2yOkCxBls80UcV_za_vpGqbxg_nIOjhLNQqcEFoGEZc" />
+  <link rel="icon" type="image/svg+xml" href="https://webonlinetools.com/favicon.svg" />
+
+  <!-- ══ STRUCTURED DATA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Password Security Tool",
+    "operatingSystem": "All",
+    "applicationCategory": "SecurityApplication",
+    "offers": { "@type": "Offer", "price": "0" },
+    "description": "Generate secure passwords and test them against customizable security policies."
+  }
+  </script>
+
+  <!-- ══ FONTS & TAILWIND ══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+
+    .panel-title { font-family: var(--font-body); font-weight: 700; color: var(--t1); border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1.5rem; font-size: 1.1rem; position: relative; z-index: 2;}
+
+    /* Inputs */
+    .input-label { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; color: var(--t2); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; position: relative; z-index: 2;}
+    .input-label span.val { color: var(--t1); font-family: var(--font-mono); font-weight: 500; }
+    
+    .text-input {
+      width: 100%; padding: 1rem 1.25rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+      border-radius: 12px; color: var(--t1); font-family: var(--font-mono); font-size: 1.1rem;
+      outline: none; transition: border-color .2s, box-shadow .2s; position: relative; z-index: 2;
+    }
+    .text-input:focus { border-color: var(--border-act); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+    .text-input[readonly] { cursor: pointer; color: #a5b4fc; }
+
+    /* Custom Range Sliders */
+    input[type="range"] { -webkit-appearance: none; width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; outline: none; margin-top: 0.5rem; position: relative; z-index: 2;}
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; background: #60a5fa; cursor: pointer; border-radius: 50%; box-shadow: 0 0 10px rgba(96,165,250,0.5); transition: transform .1s; }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+    /* Custom Checkboxes */
+    .checkbox-wrap { display: flex; align-items: center; gap: 0.5rem; position: relative; z-index: 2; cursor: pointer; padding: 0.5rem; border-radius: 8px; transition: background .2s; }
+    .checkbox-wrap:hover { background: rgba(255,255,255,0.03); }
+    .checkbox-wrap input { width: 1.2rem; height: 1.2rem; accent-color: #3b82f6; cursor: pointer; }
+    .checkbox-wrap span { font-weight: 600; color: var(--t1); font-size: 0.9rem; }
+
+    /* Buttons */
+    .btn-action { background: var(--grad-main); color: #fff; border: none; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 1.5rem; border-radius: 12px; transition: transform .2s, box-shadow .2s; cursor: pointer; width: 100%; position: relative; z-index: 2;}
+    .btn-action:hover { box-shadow: 0 0 20px rgba(37,99,235,0.4); }
+    .btn-action:active { transform: scale(0.98); }
+
+    .btn-ghost { background: rgba(255,255,255,0.04); color: var(--t2); border: 1px solid var(--border); font-family: var(--font-body); font-weight: 600; font-size: 0.9rem; padding: 0.9rem 1.5rem; border-radius: 12px; cursor: pointer; transition: all .2s; width: 100%; position: relative; z-index: 2;}
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); color: var(--t1); border-color: rgba(255,255,255,0.15); }
+
+    /* Strength Bar */
+    .strength-track { width: 100%; height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; margin-top: 0.5rem; position: relative; z-index: 2;}
+    .strength-bar { height: 100%; width: 0%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s; border-radius: 10px; }
+
+    /* Validation Items */
+    .validation-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.85rem; font-weight: 500; transition: color .3s; position: relative; z-index: 2;}
+    .icon-pass { color: #10b981; }
+    .icon-fail { color: #ef4444; }
+
+    /* Code Output */
+    .code-area {
+      width: 100%; min-height: 120px; padding: 1.25rem; font-family: var(--font-mono); font-size: 0.85rem;
+      background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 14px;
+      color: #a5b4fc; outline: none; resize: vertical; position: relative; z-index: 2; white-space: pre;
+    }
+    
+    .btn-copy {
+      position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(37,99,235,0.15); color: #60a5fa;
+      border: 1px solid rgba(37,99,235,0.3); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.8rem;
+      font-weight: 700; cursor: pointer; transition: all .2s; z-index: 10;
+    }
+    .btn-copy:hover { background: var(--grad-main); color: #fff; border-color: transparent; }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border);
+      color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000;
+      opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.error { border-color: #ef4444; color: #fca5a5; }
+
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .article-sec ul { list-style: none; padding: 0; margin-bottom: 2rem; }
+    .article-sec li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; color: var(--t2); }
+    .article-sec li::before { content: '•'; position: absolute; left: 0; color: #3b82f6; font-weight: bold; font-size: 1.2rem; line-height: 1; top: 2px; }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <span class="logo-text">Web <em>Online</em> Tools</span>
+      </a>
+      <nav class="hidden md:flex gap-6 font-semibold text-sm">
+        <a href="/tools/" class="text-slate-400 hover:text-white transition">All Tools</a>
+        <a href="/ai-news/" class="text-slate-400 hover:text-white transition">Blog</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-sec">
+    <h1>Password Security Toolkit</h1>
+    <p style="max-width: 650px; margin: 0 auto;">Set your password rules and get a regex and HTML pattern to paste into a sign-up form. Test passwords against the rules, or generate strong passwords that meet them.</p>
+  </section>
+
+  <div class="app-card">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10">
+      
+      <!-- COL 1: Generator -->
+      <div class="space-y-6">
+        <h2 class="panel-title">1. Password Generator</h2>
+        
+        <div>
+          <input type="text" id="password-output" class="text-input mb-4" placeholder="Generated Password" readonly onclick="copyGeneratedPassword()" />
+          <div class="flex gap-3">
+            <button onclick="generatePassword()" class="btn-action flex-grow">Generate</button>
+            <button onclick="copyGeneratedPassword()" class="btn-ghost flex-none w-auto">Copy</button>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-white/10">
+          <label class="input-label">Password Length <span class="val" id="length-value">16</span></label>
+          <input type="range" id="password-length" min="8" max="64" value="16" oninput="document.getElementById('length-value').textContent=this.value; generatePassword();" />
+        </div>
+
+        <div>
+          <h3 class="input-label mb-2 mt-4">Character Sets</h3>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="checkbox-wrap">
+              <input type="checkbox" id="gen-uppercase" checked onchange="generatePassword()" />
+              <span>A-Z (Upper)</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input type="checkbox" id="gen-lowercase" checked onchange="generatePassword()" />
+              <span>a-z (Lower)</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input type="checkbox" id="gen-numbers" checked onchange="generatePassword()" />
+              <span>0-9 (Digits)</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input type="checkbox" id="gen-symbols" checked onchange="generatePassword()" />
+              <span>!@# (Symbols)</span>
+            </label>
+          </div>
+          <!-- NEW FEATURE: Exclude Ambiguous -->
+          <label class="checkbox-wrap mt-4 bg-white/5 border border-white/10">
+            <input type="checkbox" id="gen-exclude" onchange="generatePassword()" />
+            <span>Exclude ambiguous characters (i, l, I, L, 1, o, O, 0)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- COL 2: Policy Checker -->
+      <div class="space-y-6">
+        <h2 class="panel-title">2. Policy Checker</h2>
+        
+        <div>
+          <input type="text" id="password-check-input" class="text-input mb-4" placeholder="Type password to evaluate..." oninput="checkPasswordStrength()" />
+          
+          <div class="mb-4">
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-sm font-bold text-gray-400">Strength Evaluation</span>
+              <span id="strength-text" class="text-sm font-bold text-white uppercase tracking-wider">N/A</span>
+            </div>
+            <div class="strength-track">
+              <div id="strength-bar" class="strength-bar" style="width: 0%; background-color: #374151;"></div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-white/10">
+            <h3 class="input-label mb-3">Live Policy Checklist</h3>
+            <div id="validation-list" class="space-y-3">
+              <div id="check-length" class="validation-item text-gray-500">
+                <svg class="validation-icon icon-fail w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <span id="length-label">Minimum 8 characters</span>
+              </div>
+              <div id="check-uppercase" class="validation-item text-gray-500">
+                <svg class="validation-icon icon-fail w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <span id="uppercase-label">At least 1 uppercase letter</span>
+              </div>
+              <div id="check-lowercase" class="validation-item text-gray-500">
+                <svg class="validation-icon icon-fail w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <span id="lowercase-label">At least 1 lowercase letter</span>
+              </div>
+              <div id="check-numbers" class="validation-item text-gray-500">
+                <svg class="validation-icon icon-fail w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <span id="numbers-label">At least 1 number</span>
+              </div>
+              <div id="check-symbols" class="validation-item text-gray-500">
+                <svg class="validation-icon icon-fail w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <span id="symbols-label">At least 1 symbol</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COL 3: Policy Settings & Export -->
+      <div class="space-y-6">
+        <h2 class="panel-title">3. Policy Settings & Export</h2>
+        
+        <div class="bg-black/30 p-5 rounded-xl border border-white/5 space-y-5">
+          <div>
+            <label class="input-label">Min Length <span class="val" id="min-length-value">8</span></label>
+            <input type="range" id="policy-min-length" min="4" max="32" value="8" oninput="updatePolicyUI(); checkPasswordStrength();" />
+          </div>
+          <div>
+            <label class="input-label">Min Uppercase <span class="val" id="min-uppercase-value">1</span></label>
+            <input type="range" id="policy-min-uppercase" min="0" max="4" value="1" oninput="updatePolicyUI(); checkPasswordStrength();" />
+          </div>
+          <div>
+            <label class="input-label">Min Lowercase <span class="val" id="min-lowercase-value">1</span></label>
+            <input type="range" id="policy-min-lowercase" min="0" max="4" value="1" oninput="updatePolicyUI(); checkPasswordStrength();" />
+          </div>
+          <div>
+            <label class="input-label">Min Numbers <span class="val" id="min-numbers-value">1</span></label>
+            <input type="range" id="policy-min-numbers" min="0" max="4" value="1" oninput="updatePolicyUI(); checkPasswordStrength();" />
+          </div>
+          <div>
+            <label class="input-label">Min Symbols <span class="val" id="min-symbols-value">1</span></label>
+            <input type="range" id="policy-min-symbols" min="0" max="4" value="1" oninput="updatePolicyUI(); checkPasswordStrength();" />
+          </div>
+        </div>
+
+        <div class="pt-4">
+          <label class="input-label mb-2" for="policy-regex">Password policy regex</label>
+          <div style="position: relative; z-index: 2;" class="mb-4">
+            <input type="text" id="policy-regex" class="text-input font-mono" readonly onclick="this.select()" />
+            <button onclick="copyToClipboard(document.getElementById('policy-regex').value, 'Regex copied!')" class="btn-copy">Copy regex</button>
+          </div>
+          <label class="input-label mb-2" for="policy-output">Ready-to-use code (HTML, JavaScript, rules)</label>
+          <div style="position: relative; z-index: 2;">
+            <button onclick="copyPolicyCode()" class="btn-copy">Copy code</button>
+            <textarea id="policy-output" class="code-area" readonly></textarea>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec">
+    <h2>How to turn a password policy into a regex</h2>
+    <p>Set the minimum length and how many uppercase letters, lowercase letters, numbers and symbols a password needs. The tool writes a regular expression that enforces exactly those rules, plus an HTML <code>pattern</code> attribute and a short JavaScript check you can paste into a sign-up form. Type a password into the checker to see which rules it passes before you ship the policy.</p>
+
+    <h3>How the regex works</h3>
+    <p>Each rule becomes a lookahead at the start of the pattern. For example, <code>(?=(?:.*[A-Z]){2})</code> means "somewhere in the password there are at least two uppercase letters". The final <code>.{12,}</code> sets the minimum length. Because lookaheads don't consume characters, the rules can appear in any order in the password. A symbol is any character that is not an A–Z letter, a digit or a space, so accented letters such as é also count as symbols.</p>
+
+    <h3>Validate on the server too</h3>
+    <p>Browser checks can be bypassed, so use the same regex or rules on your server. Length matters more than complexity: current NIST guidance favours longer passwords and checking against lists of breached passwords over strict character rules, so consider a minimum of 12 or more characters.</p>
+
+    <h3>Frequently asked questions</h3>
+    <ul>
+      <li><strong>Is the generated password truly random?</strong> Yes. Characters are chosen with your browser's cryptographic random generator (<code>crypto.getRandomValues</code>), and the result is shuffled with an unbiased Fisher–Yates shuffle.</li>
+      <li><strong>How is strength measured?</strong> The meter estimates entropy from the password's length and the kinds of characters it uses. It is shown separately from your policy, because a password can meet a weak policy and still be easy to guess.</li>
+      <li><strong>What does "Exclude ambiguous characters" do?</strong> It leaves out characters that are easy to confuse: lowercase l and i, capital I and L, the letter O and o, and the digits 1 and 0.</li>
+      <li><strong>Is my password stored or sent anywhere?</strong> No. Generating and checking happen in your browser, and nothing is sent to a server.</li>
+    </ul>
+
+    <div class="flex flex-wrap gap-3 mt-10 border-t border-white/10 pt-6">
+      <a href="/tools/base64-encoder/" class="tag-link">Base64 Encoder</a>
+      <a href="/tools/json-formatter/" class="tag-link">JSON Formatter</a>
+      <a href="/tools/" class="tag-link">View All Tools &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Web Online Tools. Processed strictly on your device.</p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Action completed!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const SYMBOLS = "!@#$%^&*()-=+[]{}|;:,.<>?";
+  const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
+  const NUMBERS = "0123456789";
+  const AMBIGUOUS = /[ilIL1oO0]/g;
+
+  function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show ' + (isError ? 'error' : '');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ── MODERN CLIPBOARD API ──
+  async function copyToClipboard(text, successMsg) {
+    if (!text) {
+      showToast("Nothing to copy.", true);
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast(successMsg || "Copied to clipboard!");
+    } catch (err) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = 'fixed'; 
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        showToast(successMsg || "Copied to clipboard!");
+      } catch (e) {
+        showToast("Copy Failed!", true);
+      }
+      document.body.removeChild(textarea);
+    }
+  }
+
+  function copyGeneratedPassword() {
+    const pass = document.getElementById("password-output").value;
+    copyToClipboard(pass, "Password Copied!");
+  }
+
+  function copyPolicyCode() {
+    const code = document.getElementById("policy-output").value;
+    copyToClipboard(code, "Policy Object Copied!");
+  }
+
+  // ── SECURE RANDOMNESS ──
+  function randomIndex(n) {
+    const buf = new Uint32Array(1);
+    const limit = Math.floor(2 ** 32 / n) * n; // reject values that would bias the result
+    do { crypto.getRandomValues(buf); } while (buf[0] >= limit);
+    return buf[0] % n;
+  }
+
+  function shuffle(chars) {
+    for (let i = chars.length - 1; i > 0; i--) {
+      const j = randomIndex(i + 1);
+      [chars[i], chars[j]] = [chars[j], chars[i]];
+    }
+    return chars;
+  }
+
+  // ── PASSWORD GENERATION ──
+  function generatePassword() {
+    const length = parseInt(document.getElementById("password-length").value, 10);
+    const excludeAmb = document.getElementById("gen-exclude").checked;
+    const strip = str => excludeAmb ? str.replace(AMBIGUOUS, "") : str;
+    const sets = [
+      ["gen-uppercase", UPPERCASE], ["gen-lowercase", LOWERCASE], ["gen-numbers", NUMBERS], ["gen-symbols", SYMBOLS],
+    ].filter(([id]) => document.getElementById(id).checked).map(([, chars]) => strip(chars)).filter(Boolean);
+
+    if (!sets.length) {
+      document.getElementById("password-output").value = "Select at least one character set.";
+      return;
+    }
+    const pool = sets.join("");
+    // One character from each chosen set (up to the length), then fill from the whole pool.
+    const chars = sets.slice(0, length).map(set => set[randomIndex(set.length)]);
+    while (chars.length < length) chars.push(pool[randomIndex(pool.length)]);
+    const password = shuffle(chars).join("");
+
+    document.getElementById("password-output").value = password;
+    document.getElementById("password-check-input").value = password;
+    checkPasswordStrength();
+  }
+
+  // ── POLICY MANAGEMENT ──
+  function getPolicyRules() {
+    const num = id => parseInt(document.getElementById(id).value, 10);
+    return {
+      minLength: num("policy-min-length"),
+      minUppercase: num("policy-min-uppercase"),
+      minLowercase: num("policy-min-lowercase"),
+      minNumbers: num("policy-min-numbers"),
+      minSymbols: num("policy-min-symbols"),
+    };
+  }
+
+  // Same character classes are used by the checker and the exported regex, so they always agree.
+  const CLASSES = { upper: "[A-Z]", lower: "[a-z]", number: "[0-9]", symbol: "[^A-Za-z0-9\\s]" };
+
+  function buildPattern(r) {
+    const look = (n, cls) => n > 0 ? `(?=(?:.*${cls}){${n}})` : "";
+    return look(r.minUppercase, CLASSES.upper) + look(r.minLowercase, CLASSES.lower)
+         + look(r.minNumbers, CLASSES.number) + look(r.minSymbols, CLASSES.symbol)
+         + `.{${r.minLength},}`;
+  }
+
+  const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
+
+  function updatePolicyUI() {
+    const r = getPolicyRules();
+    document.getElementById("min-length-value").textContent = r.minLength;
+    document.getElementById("min-uppercase-value").textContent = r.minUppercase;
+    document.getElementById("min-lowercase-value").textContent = r.minLowercase;
+    document.getElementById("min-numbers-value").textContent = r.minNumbers;
+    document.getElementById("min-symbols-value").textContent = r.minSymbols;
+
+    document.getElementById("length-label").textContent = `At least ${r.minLength} characters`;
+    document.getElementById("uppercase-label").textContent = `At least ${plural(r.minUppercase, "uppercase letter")}`;
+    document.getElementById("lowercase-label").textContent = `At least ${plural(r.minLowercase, "lowercase letter")}`;
+    document.getElementById("numbers-label").textContent = `At least ${plural(r.minNumbers, "number")}`;
+    document.getElementById("symbols-label").textContent = `At least ${plural(r.minSymbols, "symbol")}`;
+
+    const pattern = buildPattern(r);
+    document.getElementById("policy-regex").value = `/^${pattern}$/`;
+    document.getElementById("policy-output").value =
+`<!-- HTML: the browser checks the pattern before the form is sent -->
+<input type="password" name="password" required minlength="${r.minLength}"
+       pattern="${pattern}"
+       title="At least ${r.minLength} characters, ${plural(r.minUppercase, "uppercase letter")}, ${plural(r.minLowercase, "lowercase letter")}, ${plural(r.minNumbers, "number")} and ${plural(r.minSymbols, "symbol")}">
+
+// JavaScript (use the same check on your server)
+const passwordPolicy = /^${pattern}$/;
+function meetsPolicy(password) {
+  return passwordPolicy.test(password);
+}
+
+// Rules as data
+const passwordRules = ${JSON.stringify(r, null, 2)};`;
+  }
+
+  function copyPolicyCode() {
+    copyToClipboard(document.getElementById("policy-output").value, "Code copied!");
+  }
+
+  // ── CHECKER ──
+  function updateCheck(elementId, passed) {
+    const item = document.getElementById(elementId);
+    const icon = item.querySelector(".validation-icon");
+    item.classList.remove("text-red-500", "text-emerald-400", "text-gray-500");
+    item.classList.add(passed ? "text-emerald-400" : "text-red-500");
+    icon.classList.remove("icon-fail", "icon-pass");
+    icon.classList.add(passed ? "icon-pass" : "icon-fail");
+    icon.innerHTML = passed
+      ? `<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9.59l-8 8z"/>`
+      : `<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>`;
+  }
+
+  // Rough entropy: length × log2(size of the character pool actually used), reduced for heavy repetition.
+  function estimateBits(pw) {
+    if (!pw) return 0;
+    let pool = 0;
+    if (/[a-z]/.test(pw)) pool += 26;
+    if (/[A-Z]/.test(pw)) pool += 26;
+    if (/[0-9]/.test(pw)) pool += 10;
+    if (/[^A-Za-z0-9\s]/.test(pw)) pool += 33;
+    if (/\s/.test(pw)) pool += 1;
+    const length = [...pw].length;
+    let bits = length * Math.log2(Math.max(pool, 2));
+    const unique = new Set(pw).size;
+    if (unique < length / 2) bits *= unique / (length / 2);
+    return bits;
+  }
+
+  function checkPasswordStrength() {
+    const password = document.getElementById("password-check-input").value;
+    const r = getPolicyRules();
+    const count = cls => (password.match(new RegExp(cls, "g")) || []).length;
+
+    const checks = {
+      "check-length": [...password].length >= r.minLength,
+      "check-uppercase": count(CLASSES.upper) >= r.minUppercase,
+      "check-lowercase": count(CLASSES.lower) >= r.minLowercase,
+      "check-numbers": count(CLASSES.number) >= r.minNumbers,
+      "check-symbols": count(CLASSES.symbol) >= r.minSymbols,
+    };
+    Object.entries(checks).forEach(([id, ok]) => updateCheck(id, ok));
+    const meets = Object.values(checks).every(Boolean);
+
+    const bits = estimateBits(password);
+    let label = "N/A", color = "#374151";
+    if (password) {
+      if (bits < 28) { label = "Very weak"; color = "#ef4444"; }
+      else if (bits < 36) { label = "Weak"; color = "#f97316"; }
+      else if (bits < 60) { label = "Fair"; color = "#f59e0b"; }
+      else if (bits < 80) { label = "Strong"; color = "#3b82f6"; }
+      else { label = "Very strong"; color = "#10b981"; }
+      if (!meets) label += " · fails policy";
+    }
+    document.getElementById("strength-text").textContent = label;
+    const bar = document.getElementById("strength-bar");
+    bar.style.width = `${Math.min(100, Math.round(bits))}%`;
+    bar.style.backgroundColor = color;
+    bar.title = password ? `About ${Math.round(bits)} bits of entropy` : "";
+  }
+
+  // Init
+  window.onload = function () {
+    updatePolicyUI();
+    generatePassword();
+  };
+</script>
+</body>
+</html>

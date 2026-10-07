@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ SEO ESSENTIALS ══ -->
+  <title>CSS Gradient Generator — Create Cool Backgrounds | Web Online Tools</title>
+  <meta name="description" content="A free, interactive CSS gradient maker to create cool backgrounds. Instantly generate linear or radial UI gradients, find gradient palettes, and copy the code." />
+  <meta name="keywords" content="css gradient generator, gradient maker, ui gradients, linear gradient, radial gradient, background generator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://webonlinetools.com/tools/css-gradient-generator/" />
+  
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#060b18" />
+  <meta name="google-site-verification" content="2yOkCxBls80UcV_za_vpGqbxg_nIOjhLNQqcEFoGEZc" />
+  <link rel="icon" type="image/svg+xml" href="https://webonlinetools.com/favicon.svg" />
+
+  <!-- ══ STRUCTURED DATA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "CSS Gradient Generator",
+    "operatingSystem": "All",
+    "applicationCategory": "DeveloperApplication",
+    "offers": { "@type": "Offer", "price": "0" },
+    "description": "Interactive tool to generate linear and radial CSS backgrounds with unlimited color stops."
+  }
+  </script>
+
+  <!-- ══ FONTS & TAILWIND ══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+
+    .panel-title { font-family: var(--font-body); font-weight: 700; color: var(--t1); border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1.5rem; font-size: 1.1rem; position: relative; z-index: 2; }
+
+    /* Inputs */
+    .input-label { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; color: var(--t2); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; position: relative; z-index: 2;}
+    .input-label span.val { color: var(--t1); font-family: var(--font-mono); font-weight: 500; }
+    
+    /* Toggle Control */
+    .toggle-control { display: flex; border: 1px solid var(--border); border-radius: 12px; background-color: rgba(0,0,0,0.3); padding: 4px; position: relative; z-index: 2; }
+    .toggle-control button {
+      flex: 1; padding: 0.75rem; border: none; background: transparent; cursor: pointer;
+      font-weight: 600; color: var(--t2); border-radius: 8px; transition: all 0.2s; font-family: var(--font-body);
+    }
+    .toggle-control button.active { background: var(--grad-main); color: #fff; box-shadow: 0 4px 15px rgba(37,99,235,0.3); }
+
+    /* Custom Range Slider */
+    input[type="range"] { -webkit-appearance: none; width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; outline: none; margin-top: 0.5rem; position: relative; z-index: 2; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: #60a5fa; cursor: pointer; border-radius: 50%; box-shadow: 0 0 10px rgba(96,165,250,0.5); transition: transform .1s; }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+    /* Color Swatches */
+    .color-swatch-wrap {
+      width: 48px; height: 48px; border-radius: 10px; overflow: hidden; flex-shrink: 0;
+      border: 2px solid var(--border); transition: border-color .2s; position: relative;
+    }
+    .color-swatch-wrap:focus-within { border-color: var(--border-act); }
+    .color-picker { width: 200%; height: 200%; transform: translate(-25%, -25%); cursor: pointer; border: none; padding: 0; }
+
+    /* Buttons */
+    .btn-action { background: var(--grad-main); color: #fff; border: none; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 12px; transition: transform .2s, box-shadow .2s; cursor: pointer; position: relative; z-index: 2; width: 100%; }
+    .btn-action:hover { box-shadow: 0 0 20px rgba(37,99,235,0.4); }
+    .btn-action:active { transform: scale(0.98); }
+
+    .btn-ghost { background: rgba(255,255,255,0.04); color: var(--t2); border: 1px solid var(--border); font-family: var(--font-body); font-weight: 600; font-size: 0.9rem; padding: 0.8rem 1rem; border-radius: 10px; cursor: pointer; transition: all .2s; width: 100%; position: relative; z-index: 2;}
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); color: var(--t1); border-color: rgba(255,255,255,0.15); }
+
+    /* Preview & Code */
+    .gradient-preview {
+      width: 100%; min-height: 400px; border-radius: 16px; border: 1px solid var(--border);
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.4);
+      transition: background 0.1s ease; position: relative; z-index: 2; margin-bottom: 2rem;
+    }
+
+    .code-area {
+      width: 100%; min-height: 100px; padding: 1.25rem; font-family: var(--font-mono); font-size: 0.85rem;
+      background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 14px;
+      color: #a5b4fc; outline: none; resize: vertical; position: relative; z-index: 2; white-space: pre; line-height: 1.6;
+    }
+    .btn-copy {
+      position: absolute; top: 1rem; right: 1rem; background: rgba(37,99,235,0.15); color: #60a5fa;
+      border: 1px solid rgba(37,99,235,0.3); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.8rem;
+      font-weight: 700; cursor: pointer; transition: all .2s; z-index: 10;
+    }
+    .btn-copy:hover { background: var(--grad-main); color: #fff; border-color: transparent; }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border);
+      color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000;
+      opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .article-sec ul { list-style: none; padding: 0; margin-bottom: 2rem; }
+    .article-sec li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; color: var(--t2); }
+    .article-sec li::before { content: '•'; position: absolute; left: 0; color: #3b82f6; font-weight: bold; font-size: 1.2rem; line-height: 1; top: 2px; }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <span class="logo-text">Web <em>Online</em> Tools</span>
+      </a>
+      <nav class="hidden md:flex gap-6 font-semibold text-sm">
+        <a href="/tools/" class="text-slate-400 hover:text-white transition">All Tools</a>
+        <a href="/ai-news/" class="text-slate-400 hover:text-white transition">Blog</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-sec">
+    <h1>CSS Gradient Generator</h1>
+    <p style="max-width: 650px; margin: 0 auto;">Pick up to six colors, choose linear or radial, set the angle and preview the result. Copy the CSS or a Tailwind class.</p>
+  </section>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+    
+    <!-- LEFT: Controls -->
+    <div class="app-card lg:col-span-1" style="margin-bottom: 0;">
+      
+      <div class="mb-8">
+        <h2 class="panel-title">1. Gradient Style</h2>
+        <div class="toggle-control mb-6">
+          <button id="linearBtn" class="active">Linear</button>
+          <button id="radialBtn">Radial</button>
+        </div>
+
+        <div class="input-group" id="angleControl">
+          <label class="input-label">Angle (Direction) <span class="val" id="angleValue">90°</span></label>
+          <input type="range" id="angleSlider" min="0" max="360" value="90" />
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <h2 class="panel-title">2. Color Stops</h2>
+        <div id="colorsList" class="flex flex-col gap-3 mb-4 relative z-10">
+          <!-- Dynamically populated -->
+        </div>
+        <button id="addColorBtn" class="btn-ghost">
+          + Add Color Stop
+        </button>
+      </div>
+
+      <div class="border-t border-white/10 pt-6 relative z-10">
+        <button id="randomizeButton" class="btn-action">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7m4-1 6 6m0-6-6 6"/></svg>
+          Surprise Me (Randomize)
+        </button>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Preview & Code Output -->
+    <div class="lg:col-span-2">
+      <div id="gradientPreview" class="gradient-preview"></div>
+      
+      <div class="relative">
+        <button id="copyButton" class="btn-copy">Copy CSS</button>
+        <textarea id="codeBox" readonly class="code-area"></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec mt-16">
+    <h2>The Ultimate CSS Gradient Maker</h2>
+    <p>This <strong>CSS gradient maker</strong> is a powerful tool for creating smooth transitions between colors. Instead of relying on heavy static images, our <strong>online gradient generator</strong> lets you create dynamic, beautiful, and fast-loading backgrounds directly with CSS code. This is essential for modern UI design and creating responsive website layouts.</p>
+
+    <h3>How to Make a CSS Gradient</h3>
+    <p>Our creator simplifies the syntax for the two main types of CSS gradients: <code class="text-blue-400">linear-gradient()</code> and <code class="text-blue-400">radial-gradient()</code>.</p>
+    <ul>
+      <li><strong>Linear Gradients:</strong> Colors transition along a straight line. By adjusting the Angle slider, you can easily create horizontal, vertical, or sharp diagonal blends.</li>
+      <li><strong>Radial Gradients:</strong> Colors emerge from a central point outwards in a circular or elliptical shape, perfect for creating subtle vignette lighting or spotlight effects.</li>
+    </ul>
+
+    <h3>Finding Gradient Palettes & Inspiration</h3>
+    <p>Stuck for ideas? Use the <strong>Surprise Me</strong> button as a discovery tool to uncover unique gradient color combinations. It automatically generates 2-3 stop gradients with random angles, serving as a great source of inspiration for your next SaaS dashboard, landing page hero, or mobile app UI.</p>
+
+    <div class="flex flex-wrap gap-3 mt-10">
+      <a href="/tools/color-palette-generator/" class="tag-link">Color Palette Generator</a>
+      <a href="/tools/color-converter/" class="tag-link">RGB/Hex Converter</a>
+      <a href="/tools/" class="tag-link">View All Tools &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Web Online Tools. Clean, fast, client-side utilities.</p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Code copied to clipboard!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Helper function to show notifications
+  function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.remove("error");
+    if (isError) t.classList.add("error");
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const DOM = {
+      colorsList: document.getElementById("colorsList"),
+      addColorBtn: document.getElementById("addColorBtn"),
+      gradientPreview: document.getElementById("gradientPreview"),
+      codeBox: document.getElementById("codeBox"),
+      copyButton: document.getElementById("copyButton"),
+      angleSlider: document.getElementById("angleSlider"),
+      angleValue: document.getElementById("angleValue"),
+      angleControl: document.getElementById("angleControl"),
+      linearBtn: document.getElementById("linearBtn"),
+      radialBtn: document.getElementById("radialBtn"),
+      randomizeButton: document.getElementById("randomizeButton"),
+    };
+
+    let state = {
+      colors: [
+        { id: Date.now() + 1, value: "#6366F1" },
+        { id: Date.now() + 2, value: "#EC4899" },
+      ],
+      angle: 135,
+      type: "linear",
+    };
+
+    function generateGradientCSS() {
+      const colorStops = state.colors.map(c => c.value).join(", ");
+      if (state.type === "linear") {
+        return `linear-gradient(${state.angle}deg, ${colorStops})`;
+      } else {
+        return `radial-gradient(circle, ${colorStops})`;
+      }
+    }
+
+    function updatePreviewAndCode() {
+      const css = generateGradientCSS();
+      DOM.gradientPreview.style.background = css;
+      const tailwind = `bg-[${css.replace(/,\s*/g, ",")}]`;
+      DOM.codeBox.value =
+        `/* CSS */\nbackground-color: ${state.colors[0].value}; /* fallback */\nbackground-image: ${css};\n\n` +
+        `/* Tailwind CSS class */\n${tailwind}`;
+      DOM.angleValue.textContent = `${state.angle}°`;
+    }
+
+    function renderColorList() {
+      DOM.colorsList.innerHTML = state.colors.map((color) => `
+        <div class="flex items-center gap-3 relative z-10 color-input-wrapper" data-id="${color.id}">
+          <div class="color-swatch-wrap">
+            <input type="color" class="color-picker" value="${color.value}">
+          </div>
+          <input type="text" class="text-input hex-input font-mono uppercase" value="${color.value}" maxlength="7">
+          ${state.colors.length > 2 
+            ? `<button class="remove-color-btn text-red-400 hover:text-red-300 p-2 text-xl font-bold transition flex-shrink-0">&times;</button>` 
+            : `<div class="w-8 flex-shrink-0"></div>`
+          }
+        </div>
+      `).join("");
+    }
+
+    function fullRender() {
+      renderColorList();
+      updatePreviewAndCode();
+      DOM.angleControl.style.display = state.type === "linear" ? "block" : "none";
+      DOM.linearBtn.classList.toggle("active", state.type === "linear");
+      DOM.radialBtn.classList.toggle("active", state.type === "radial");
+    }
+
+    function handleColorChange(e) {
+      const wrapper = e.target.closest(".color-input-wrapper");
+      if (!wrapper) return;
+
+      const id = parseInt(wrapper.dataset.id);
+      const color = state.colors.find((c) => c.id === id);
+
+      if (e.target.matches(".color-picker") || e.target.matches(".hex-input")) {
+        let val = e.target.value.trim().toUpperCase();
+        if (!val.startsWith("#")) val = "#" + val;
+        // Wait for a complete code while typing, so half-typed values never reach the CSS.
+        if (!/^#([0-9A-F]{3}|[0-9A-F]{6})$/.test(val)) return;
+        if (val.length === 4) val = "#" + [...val.slice(1)].map(c => c + c).join("");
+
+        color.value = val;
+        if (e.target.matches(".color-picker")) {
+          wrapper.querySelector(".hex-input").value = val;
+        } else {
+          wrapper.querySelector(".color-picker").value = val.toLowerCase();
+        }
+        updatePreviewAndCode();
+      }
+
+      if (e.target.matches(".remove-color-btn")) {
+        state.colors = state.colors.filter((c) => c.id !== id);
+        fullRender(); 
+      }
+    }
+
+    function addColor() {
+      if (state.colors.length < 6) {
+        state.colors.push({ id: Date.now(), value: "#FFFFFF" });
+        fullRender();
+      } else {
+        showToast("Maximum of 6 colors allowed.", true);
+      }
+    }
+
+    function randomize() {
+      const numColors = Math.floor(Math.random() * 2) + 2; // 2 to 3 colors
+      state.colors = [];
+      for (let i = 0; i < numColors; i++) {
+        const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0").toUpperCase();
+        state.colors.push({ id: Date.now() + i, value: randomColor });
+      }
+      state.angle = Math.floor(Math.random() * 361);
+      state.type = Math.random() > 0.6 ? "radial" : "linear";
+      DOM.angleSlider.value = state.angle;
+      fullRender();
+    }
+
+    // --- Event Listeners ---
+    DOM.colorsList.addEventListener("input", handleColorChange);
+    DOM.colorsList.addEventListener("click", handleColorChange);
+    DOM.addColorBtn.addEventListener("click", addColor);
+
+    DOM.angleSlider.addEventListener("input", (e) => {
+      state.angle = Number(e.target.value);
+      updatePreviewAndCode();
+    });
+
+    DOM.linearBtn.addEventListener("click", () => {
+      state.type = "linear";
+      fullRender();
+    });
+
+    DOM.radialBtn.addEventListener("click", () => {
+      state.type = "radial";
+      fullRender();
+    });
+
+    // Modern Clipboard API
+    DOM.copyButton.addEventListener("click", async () => {
+      if (!DOM.codeBox.value) return;
+      try {
+        await navigator.clipboard.writeText(DOM.codeBox.value);
+        showToast("CSS copied to clipboard!");
+      } catch (err) {
+        DOM.codeBox.select();
+        document.execCommand("copy");
+        showToast("CSS copied to clipboard!");
+      }
+    });
+    
+    DOM.randomizeButton.addEventListener("click", randomize);
+
+    // Initial render
+    randomize(); 
+  });
+</script>
+</body>
+</html>

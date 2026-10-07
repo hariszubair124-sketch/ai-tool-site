@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ══ SEO ESSENTIALS ══ -->
+  <title>Base64 Encoder & Decoder Online Tool — Web Online Tools</title>
+  <meta name="description" content="Safely encode text to Base64 or decode Base64 strings to text. Free, instant, browser-based developer utility with full UTF-8 support.">
+  <meta name="keywords" content="base64 encoder, base64 decoder, online base64 tool, base64 converter, utf8 to base64">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://webonlinetools.com/tools/base64-encoder/">
+  <link rel="icon" type="image/svg+xml" href="https://webonlinetools.com/favicon.svg">
+
+  <!-- ══ FONTS ══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+
+    /* Ambient mesh */
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+
+    .code-area {
+      width: 100%; min-height: 200px; padding: 1.25rem; font-family: var(--font-mono); font-size: 0.9rem;
+      background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 14px;
+      color: var(--t1); outline: none; transition: border-color .2s, box-shadow .2s;
+      resize: vertical; line-height: 1.5; position: relative; z-index: 2;
+    }
+    .code-area::placeholder { color: var(--t3); }
+    .code-area:focus { border-color: var(--border-act); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+    .code-area[readonly] { background: rgba(255,255,255,0.015); border-color: rgba(255,255,255,0.04); }
+
+    .btn-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; position: relative; z-index: 2; }
+    @media (min-width: 768px) { .btn-row { grid-template-columns: repeat(4, 1fr); } }
+
+    .btn {
+      font-family: var(--font-body); font-weight: 700; font-size: 0.9rem;
+      padding: 0.9rem 1.2rem; border-radius: 12px; cursor: pointer; text-align: center;
+      transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--grad-main); color: #fff; box-shadow: 0 0 20px rgba(37,99,235,0.3); border: none; }
+    .btn-primary:hover { box-shadow: 0 0 30px rgba(37,99,235,0.5); }
+    .btn-ghost { background: rgba(255,255,255,0.04); color: var(--t2); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); color: var(--t1); border-color: rgba(255,255,255,0.15); }
+
+    .err-msg {
+      background: rgba(239,68,68,0.1); border-left: 3px solid #ef4444; color: #fca5a5;
+      padding: 1rem 1.25rem; border-radius: 8px; font-family: var(--font-mono); font-size: 0.85rem;
+      margin-top: 1rem; display: none; position: relative; z-index: 2;
+    }
+
+    /* ══ TOAST ══ */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border);
+      color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000;
+      opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.error { border-color: #ef4444; color: #fca5a5; }
+
+    /* ══ ARTICLE ══ */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .article-sec ul { list-style: none; padding: 0; margin-bottom: 2rem; }
+    .article-sec li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; }
+    .article-sec li::before { content: '•'; position: absolute; left: 0; color: #3b82f6; font-weight: bold; font-size: 1.2rem; line-height: 1; top: 2px; }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <span class="logo-text">Web <em>Online</em> Tools</span>
+      </a>
+      <nav class="hidden md:flex gap-6 font-semibold text-sm">
+        <a href="/tools/" class="text-slate-400 hover:text-white transition">All Tools</a>
+        <a href="/ai-news/" class="text-slate-400 hover:text-white transition">Blog</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-sec">
+    <h1>Base64 Encoder & Decoder</h1>
+    <p>Encode text or files to Base64 and decode Base64 back to text. Turn images into data URIs or a CSS background line. Everything runs in your browser.</p>
+  </section>
+
+  <section class="app-card">
+    <!-- Input -->
+    <label for="input-area" class="block font-bold text-white mb-3 tracking-wide text-sm uppercase">Input String</label>
+    <textarea id="input-area" class="code-area" placeholder="Paste your plain text or Base64 string here..." spellcheck="false"></textarea>
+    <div id="input-error" class="err-msg"></div>
+
+    <div class="flex flex-wrap items-center gap-4 mt-4 text-sm text-slate-300">
+      <label class="inline-flex items-center gap-2 cursor-pointer"><input type="checkbox" id="url-safe"> URL-safe Base64 (RFC 4648, no padding)</label>
+      <span class="inline-flex items-center gap-2">
+        <label for="file-format">File output:</label>
+        <select id="file-format" class="bg-black/40 border border-white/10 rounded-lg px-2 py-1 text-white">
+          <option value="data">Data URI</option>
+          <option value="css">CSS background-image</option>
+          <option value="raw">Plain Base64</option>
+        </select>
+      </span>
+      <input type="file" id="file-input" class="hidden">
+      <button type="button" onclick="document.getElementById('file-input').click()" class="btn btn-ghost">Encode a file or image</button>
+      <button type="button" id="download-decoded" onclick="downloadDecoded()" class="btn btn-ghost hidden">Download decoded file</button>
+    </div>
+
+    <!-- Actions -->
+    <div class="btn-row">
+      <button onclick="encodeText()" class="btn btn-primary">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Encode 
+      </button>
+      <button onclick="decodeText()" class="btn btn-primary" style="background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.2);">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Decode
+      </button>
+      <button onclick="copyToClipboard()" class="btn btn-ghost">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Result
+      </button>
+      <button onclick="clearAreas()" class="btn btn-ghost">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        Clear
+      </button>
+    </div>
+
+    <!-- Output -->
+    <label for="output-area" class="block font-bold text-white mb-3 mt-6 tracking-wide text-sm uppercase">Output Result</label>
+    <textarea id="output-area" class="code-area" readonly placeholder="Your converted output will appear here..."></textarea>
+  </section>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec">
+    <h2>What is Base64 Encoding?</h2>
+    <p>Base64 is an encoding scheme used to represent binary data in an ASCII string format. It works by translating groups of 24 bits into 4 printable characters. This tool natively supports <strong>UTF-8 text encoding</strong>, meaning emojis and special characters will translate perfectly without throwing errors.</p>
+    
+    <h3>Why do developers use Base64?</h3>
+    <ul>
+      <li><strong>Data URLs:</strong> Easily embed images, fonts, or SVGs directly into your HTML and CSS to reduce HTTP requests.</li>
+      <li><strong>Text-only channels:</strong> HTTP Basic Authentication headers and email attachments (MIME) use Base64 so binary data can travel through systems built for text.</li>
+      <li><strong>API Payloads:</strong> Wrapping complex or binary data structures (like PDF streams or Image buffers) inside a standard JSON response.</li>
+    </ul>
+
+    <h3>Encoding images for CSS and HTML</h3>
+    <p>Choose <strong>Encode a file or image</strong> to turn a PNG, SVG, icon or font into Base64. Pick <strong>Data URI</strong> for use in an <code>src</code> attribute, or <strong>CSS background-image</strong> to get a line you can paste into a stylesheet. Inlining suits small files such as icons; for large images a normal file is faster, because Base64 makes data about a third larger.</p>
+
+    <h3>Decoding tips</h3>
+    <p>The decoder accepts Base64 with line breaks, the URL-safe alphabet, missing padding and full <code>data:</code> URIs. If the decoded bytes are not readable text, for example an image or PDF, you can download them as a file instead.</p>
+
+    <p class="mt-8 text-sm text-slate-500 italic">Note: Base64 is an encoding format, not an encryption method. Never use Base64 to "hide" sensitive information or passwords, as it can be easily decoded by anyone.</p>
+
+    <div class="flex flex-wrap gap-3 mt-10">
+      <a href="/tools/url-encoder/" class="tag-link">URL Encoder/Decoder</a>
+      <a href="/tools/json-formatter/" class="tag-link">JSON Formatter</a>
+      <a href="/tools/" class="tag-link">View All Tools &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Web Online Tools. Processed strictly on your device.</p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Action completed.</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show ' + (isError ? 'error' : '');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  function clearAreas() {
+    document.getElementById('input-area').value = '';
+    document.getElementById('output-area').value = '';
+    document.getElementById('input-error').style.display = 'none';
+  }
+
+  let decodedBytes = null;
+
+  // Bytes -> Base64 in chunks, so large files do not overflow the call stack.
+  function bytesToBase64(bytes) {
+    let bin = "";
+    for (let i = 0; i < bytes.length; i += 0x8000) {
+      bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    }
+    return btoa(bin);
+  }
+
+  function toUrlSafe(b64) {
+    return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+
+  function encodeText() {
+    const input = document.getElementById('input-area').value;
+    const err = document.getElementById('input-error');
+    err.style.display = 'none';
+    if (!input) { showToast("Input is empty.", true); return; }
+    let out = bytesToBase64(new TextEncoder().encode(input));
+    if (document.getElementById('url-safe').checked) out = toUrlSafe(out);
+    document.getElementById('output-area').value = out;
+    document.getElementById('download-decoded').classList.add('hidden');
+    showToast("Encoded to Base64!");
+  }
+
+  // Accepts line breaks, URL-safe characters, missing padding and data: URIs.
+  function normaliseBase64(input) {
+    let b64 = input.trim().replace(/^data:[^,]*;base64,/i, "").replace(/\s+/g, "");
+    b64 = b64.replace(/-/g, "+").replace(/_/g, "/");
+    if (!/^[A-Za-z0-9+/]*={0,2}$/.test(b64)) throw new Error("The input contains characters that are not used in Base64.");
+    b64 = b64.replace(/=+$/, "");
+    if (b64.length % 4 === 1) throw new Error("The input length is not valid Base64. A character may be missing.");
+    return b64 + "=".repeat((4 - (b64.length % 4)) % 4);
+  }
+
+  function decodeText() {
+    const input = document.getElementById('input-area').value;
+    const err = document.getElementById('input-error');
+    const dl = document.getElementById('download-decoded');
+    err.style.display = 'none';
+    dl.classList.add('hidden');
+    decodedBytes = null;
+    if (!input.trim()) { showToast("Input is empty.", true); return; }
+    try {
+      const bin = atob(normaliseBase64(input));
+      const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+      try {
+        document.getElementById('output-area').value = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+        showToast("Decoded to text!");
+      } catch (notText) {
+        decodedBytes = bytes;
+        document.getElementById('output-area').value = `The decoded data is ${bytes.length.toLocaleString()} bytes of binary content (not text). Use "Download decoded file" to save it.`;
+        dl.classList.remove('hidden');
+        showToast("Decoded binary data.");
+      }
+    } catch (e) {
+      err.textContent = "Decoding error: " + e.message;
+      err.style.display = 'block';
+      showToast("Decoding failed.", true);
+    }
+  }
+
+  function guessExtension(bytes) {
+    const sig = Array.from(bytes.slice(0, 4)).map(b => b.toString(16).padStart(2, "0")).join("");
+    if (sig.startsWith("89504e47")) return "png";
+    if (sig.startsWith("ffd8ff")) return "jpg";
+    if (sig.startsWith("47494638")) return "gif";
+    if (sig.startsWith("25504446")) return "pdf";
+    if (sig.startsWith("504b0304")) return "zip";
+    if (sig.startsWith("52494646")) return "webp";
+    return "bin";
+  }
+
+  function downloadDecoded() {
+    if (!decodedBytes) return;
+    const url = URL.createObjectURL(new Blob([decodedBytes]));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `decoded.${guessExtension(decodedBytes)}`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  document.getElementById('file-input').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    e.target.value = "";
+    if (!file) return;
+    if (file.size > 10 * 1024 * 1024) { showToast("Please choose a file under 10 MB.", true); return; }
+    const bytes = new Uint8Array(await file.arrayBuffer());
+    let b64 = bytesToBase64(bytes);
+    const mime = file.type || "application/octet-stream";
+    const format = document.getElementById('file-format').value;
+    let out;
+    if (format === "raw") out = document.getElementById('url-safe').checked ? toUrlSafe(b64) : b64;
+    else if (format === "css") out = `background-image: url("data:${mime};base64,${b64}");`;
+    else out = `data:${mime};base64,${b64}`;
+    document.getElementById('output-area').value = out;
+    document.getElementById('download-decoded').classList.add('hidden');
+    showToast(`Encoded ${file.name} (${(out.length / 1024).toFixed(1)} KB of text).`);
+  });
+
+  // ── FIX: Modern Clipboard API ──
+  async function copyToClipboard() {
+    const output = document.getElementById('output-area').value;
+    if (!output) { showToast("Nothing to copy.", true); return; }
+    
+    try {
+      await navigator.clipboard.writeText(output);
+      showToast("Result copied to clipboard!");
+    } catch (err) {
+      // Fallback for older browsers
+      const el = document.getElementById('output-area');
+      el.select();
+      document.execCommand('copy');
+      showToast("Result copied to clipboard!");
+    }
+  }
+</script>
+</body>
+</html>

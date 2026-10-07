@@ -1,0 +1,78 @@
+{
+  "/": {
+    "hash": "75f45db7a90aff53",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/": {
+    "hash": "227cb9c48d801252",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/base64-encoder/": {
+    "hash": "ab7dfc9996384fbf",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/button-transition-generator/": {
+    "hash": "89b17dafb0e55a43",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/case-converter/": {
+    "hash": "cb542a53f3deda4e",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/clean-list-generator/": {
+    "hash": "b35bfb2c1d88e4df",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/color-code-converter/": {
+    "hash": "223bd8bb4c062fa9",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/color-palette-generator/": {
+    "hash": "5f974ce09fa21d73",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/css-box-shadow/": {
+    "hash": "51200c9b80d588a6",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/css-gradient-generator/": {
+    "hash": "6456204df33ca984",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/font-converter/": {
+    "hash": "68523cb5504959fe",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/json-formatter/": {
+    "hash": "08231c2823584cf3",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/password-rule-generator/": {
+    "hash": "24e8f2f632c044b8",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/pdf-to-jpeg/": {
+    "hash": "3b79b8129b27b662",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/random-number-generator/": {
+    "hash": "61f4bcde91444d8f",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/should-i-buy-this/": {
+    "hash": "98d424cad081fdcf",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/url-encoder/": {
+    "hash": "22a8eaabe2befae7",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/webp-converter/": {
+    "hash": "f0d694adc49278ae",
+    "lastmod": "2026-10-07"
+  },
+  "/tools/word-counter/": {
+    "hash": "8c9a5325bad8bd13",
+    "lastmod": "2026-10-07"
+  }
+}

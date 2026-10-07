@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ SEO ESSENTIALS ══ -->
+  <title>Should I Buy This? The Ultimate Time-Value Calculator | Web Online Tools</title>
+  <meta name="description" content="Use our free ROI calculator to run a cost-benefit analysis on any purchase. Frame your spending in terms of life hours to make smarter financial decisions." />
+  <meta name="keywords" content="worth it calculator, purchase decision tool, time value of money, cost benefit analysis, smart spending" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://webonlinetools.com/tools/should-i-buy-this/" />
+  
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#060b18" />
+  <meta name="google-site-verification" content="2yOkCxBls80UcV_za_vpGqbxg_nIOjhLNQqcEFoGEZc" />
+  <link rel="icon" type="image/svg+xml" href="https://webonlinetools.com/favicon.svg" />
+
+  <!-- ══ STRUCTURED DATA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Should I Buy This? Calculator",
+    "operatingSystem": "All",
+    "applicationCategory": "FinanceApplication",
+    "offers": { "@type": "Offer", "price": "0" },
+    "description": "Calculate the true cost of a purchase in terms of your time and potential investment returns."
+  }
+  </script>
+
+  <!-- ══ FONTS & TAILWIND ══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 24px;
+      padding: 2.5rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+    @media (max-width: 640px) { .app-card { padding: 1.5rem; border-radius: 16px; } }
+
+    /* Inputs */
+    .input-label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--t2); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; position: relative; z-index: 2;}
+    
+    .input-group { position: relative; z-index: 2; margin-bottom: 1.5rem; }
+    .input-with-icon { position: relative; display: flex; align-items: center; }
+    .input-icon { position: absolute; left: 1rem; color: var(--t3); font-weight: 700; font-size: 1.1rem; }
+    
+    .text-input {
+      width: 100%; padding: 1rem 1.25rem 1rem 2.5rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+      border-radius: 12px; color: var(--t1); font-family: var(--font-mono); font-size: 1.1rem;
+      outline: none; transition: border-color .2s, box-shadow .2s;
+    }
+    .text-input:focus { border-color: var(--border-act); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+    .text-input.no-icon { padding-left: 1.25rem; }
+
+    .select-input {
+      width: 100%; padding: 1rem 1.25rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+      border-radius: 12px; color: var(--t1); font-family: var(--font-body); font-size: 1rem;
+      outline: none; transition: border-color .2s; cursor: pointer; appearance: none;
+    }
+    .select-input option { background-color: var(--card); color: var(--t1); }
+
+    /* Custom Slider */
+    input[type="range"] { -webkit-appearance: none; width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; outline: none; margin-top: 0.5rem; position: relative; z-index: 2;}
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; background: #60a5fa; cursor: pointer; border-radius: 50%; box-shadow: 0 0 10px rgba(96,165,250,0.5); transition: transform .1s; }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    .slider-labels { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 600; color: var(--t3); margin-top: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;}
+    
+    #sliderValue { text-align: center; font-weight: 800; color: #60a5fa; font-size: 1.2rem; margin-top: 0.5rem; }
+
+    /* Buttons */
+    .btn-action { background: var(--grad-main); color: #fff; border: none; font-weight: 800; font-size: 1.1rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1.25rem 2rem; border-radius: 16px; transition: transform .2s, box-shadow .2s; cursor: pointer; width: 100%; position: relative; z-index: 2;}
+    .btn-action:hover { box-shadow: 0 0 30px rgba(37,99,235,0.4); }
+    .btn-action:active { transform: scale(0.98); }
+
+    /* Results */
+    #result-display { display: none; margin-top: 3rem; animation: fadeUp 0.5s ease forwards; position: relative; z-index: 2; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    .verdict-box { border-radius: 16px; padding: 2rem; text-align: center; margin-bottom: 2rem; border: 1px solid transparent; }
+    .verdict-box h2 { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .verdict-box p { font-size: 1.1rem; font-weight: 500; opacity: 0.9; }
+
+    .verdict-good { background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #34d399; }
+    .verdict-medium { background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #fbbf24; }
+    .verdict-bad { background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #fca5a5; }
+
+    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+    .metric-card { background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+    .metric-card h3 { font-size: 0.85rem; font-weight: 700; color: var(--t2); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .metric-card p { font-family: var(--font-mono); font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.25rem; }
+    .metric-card.accent p { color: #60a5fa; }
+    .metric-card span { font-size: 0.85rem; color: var(--t3); line-height: 1.4; }
+
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .article-sec ul { list-style: none; padding: 0; margin-bottom: 2rem; }
+    .article-sec li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; color: var(--t2); }
+    .article-sec li::before { content: '•'; position: absolute; left: 0; color: #3b82f6; font-weight: bold; font-size: 1.2rem; line-height: 1; top: 2px; }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <span class="logo-text">Web <em>Online</em> Tools</span>
+      </a>
+      <nav class="hidden md:flex gap-6 font-semibold text-sm">
+        <a href="/tools/" class="text-slate-400 hover:text-white transition">All Tools</a>
+        <a href="/ai-news/" class="text-slate-400 hover:text-white transition">Blog</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-sec">
+    <h1>Should I Buy This?</h1>
+    <p style="max-width: 650px; margin: 0 auto;">Find out how long a purchase takes to pay for itself in time saved, what it costs in hours of work, and what the same money could grow to if invested.</p>
+  </section>
+
+  <div class="app-card max-w-4xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+      
+      <div class="input-group">
+        <label class="input-label" for="itemCost">Cost of item (your currency)</label>
+        <div class="input-with-icon">
+          <span class="input-icon" aria-hidden="true">¤</span>
+          <input type="number" id="itemCost" class="text-input" placeholder="300" value="300" />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label" for="hourlyValue">Your hourly value (same currency)</label>
+        <div class="input-with-icon">
+          <span class="input-icon" aria-hidden="true">¤</span>
+          <input type="number" id="hourlyValue" class="text-input" placeholder="30" value="30" />
+        </div>
+        <p class="text-xs text-slate-500 mt-2 font-medium">Tip: if you are salaried, divide your yearly pay by your working hours per year (about 2,080 for a 40-hour week).</p>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label" for="timeSaved">Time Saved By Using It</label>
+        <div class="flex gap-2">
+          <input type="number" id="timeSaved" class="text-input no-icon w-1/3" placeholder="15" value="15" />
+          <div class="relative w-2/3">
+            <select id="timeUnit" class="select-input w-full">
+              <option value="day">Minutes per Day</option>
+              <option value="week">Minutes per Week</option>
+              <option value="month">Minutes per Month</option>
+            </select>
+            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label" for="itemLifespan">Expected Lifespan (Years)</label>
+        <input type="number" id="itemLifespan" class="text-input no-icon" placeholder="5" value="5" />
+      </div>
+
+      <div class="input-group md:col-span-2 mt-4 bg-black/20 p-6 rounded-2xl border border-white/5">
+        <label class="input-label mb-4 text-center">Enjoyment Factor for the Replaced Task</label>
+        <input type="range" id="enjoymentSlider" min="-5" max="5" value="0" />
+        <div class="slider-labels">
+          <span>Hate it</span>
+          <span>Neutral</span>
+          <span>Enjoy it</span>
+        </div>
+        <div id="sliderValue">Neutral</div>
+      </div>
+
+    </div>
+
+    <button id="calculateBtn" class="btn-action mt-6">
+      Calculate Worthiness
+    </button>
+
+    <!-- Results Section -->
+    <div id="result-display">
+      <div id="verdictBox" class="verdict-box">
+        <h2 id="verdictTitle">Your result</h2>
+        <p id="verdictText"></p>
+      </div>
+      
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <h3>Break-Even Point</h3>
+          <p id="breakEven"></p>
+          <span>How long until the purchase pays for itself in saved time.</span>
+        </div>
+        <div class="metric-card">
+          <h3>The True Cost</h3>
+          <p id="trueCost"></p>
+          <span>The cost of the item translated directly into your life hours.</span>
+        </div>
+        <div class="metric-card accent">
+          <h3>Time Dividend</h3>
+          <p id="timeDividend"></p>
+          <span>Net time profit over the item's lifespan.</span>
+        </div>
+        <!-- NEW FEATURE: Opportunity Cost -->
+        <div class="metric-card accent">
+          <h3>If invested instead</h3>
+          <p id="opportunityCost"></p>
+          <span>Value if this money was invested at 7% over the lifespan instead.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec">
+    <h2>Making Smart Financial Decisions</h2>
+    <p>This <strong>cost benefit calculator</strong> helps you justify a purchase by framing its cost against time and opportunity. It is an essential tool for <strong>smart spending</strong>, <strong>frugal living</strong>, and improving your <strong>personal finance</strong> mindset. By calculating the ROI of a purchase in terms of time, you remove emotional impulse and look purely at the data.</p>
+    
+    <h3>Understanding the Metrics</h3>
+    <ul>
+      <li><strong>Your Hourly Value:</strong> Your time is your most finite resource. By assigning a dollar value to your hour, you can quantify "convenience".</li>
+      <li><strong>Break-Even Point:</strong> If you buy a $400 robot vacuum that saves you 1 hour a week (valued at $30/hr), it takes roughly 13 weeks to "pay for itself" in time.</li>
+      <li><strong>If invested instead:</strong> Every purchase carries an <em>opportunity cost</em>. If you didn't buy this item, and instead invested the money in an index fund yielding a conservative 7% annual return, how much would you have at the end of the item's lifespan? This metric puts luxury purchases into stark perspective.</li>
+    </ul>
+
+    <h3>Is It Worth It? (Real Examples)</h3>
+    <ul>
+      <li>Is a <strong>premium coffee machine</strong> worth buying? (Cost: $500, Time Saved: 10 min/day avoiding the drive-thru).</li>
+      <li>Is a <strong>faster laptop</strong> worth the money? (Cost: $1500, Time Saved: 15 min/day waiting for renders).</li>
+      <li>Is hiring a <strong>cleaner</strong> worth it? (Calculate the value of regaining your free weekends).</li>
+    </ul>
+
+    <div class="flex flex-wrap gap-3 mt-10 border-t border-white/10 pt-6">
+      <a href="/tools/random-num/" class="tag-link">Random Number Generator</a>
+      <a href="/tools/word-counter/" class="tag-link">Word Counter</a>
+      <a href="/tools/" class="tag-link">View All Tools &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Web Online Tools. Logic-driven utilities.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Element References
+  const inputs = {
+    cost: document.getElementById("itemCost"),
+    hourlyValue: document.getElementById("hourlyValue"),
+    timeSaved: document.getElementById("timeSaved"),
+    timeUnit: document.getElementById("timeUnit"),
+    lifespan: document.getElementById("itemLifespan"),
+    enjoyment: document.getElementById("enjoymentSlider"),
+  };
+  const resultDisplay = document.getElementById("result-display");
+  const sliderValueDisplay = document.getElementById("sliderValue");
+  
+  const verdict = {
+    box: document.getElementById("verdictBox"),
+    title: document.getElementById("verdictTitle"),
+    text: document.getElementById("verdictText"),
+  };
+  
+  const metrics = {
+    breakEven: document.getElementById("breakEven"),
+    trueCost: document.getElementById("trueCost"),
+    timeDividend: document.getElementById("timeDividend"),
+    opportunityCost: document.getElementById("opportunityCost")
+  };
+
+  function getSliderLabel(value) {
+    const labels = {
+      "-5": "Hate it intensely",
+      "-4": "Strongly dislike",
+      "-3": "Dislike",
+      "-2": "Slightly dislike",
+      "-1": "Leaning negative",
+      "0": "Neutral",
+      "1": "Leaning positive",
+      "2": "Slightly enjoy",
+      "3": "Enjoy",
+      "4": "Strongly enjoy",
+      "5": "Love this task",
+    };
+    return labels[value] || "Neutral";
+  }
+
+  function updateSliderLabel() {
+    sliderValueDisplay.textContent = getSliderLabel(inputs.enjoyment.value);
+  }
+
+  function formatDays(days) {
+    if (days < 1) return "< 1 day";
+    if (days < 60) return `${Math.round(days)} days`;
+    if (days < 730) return `${(days / 30.44).toFixed(1)} months`;
+    return `${(days / 365.25).toFixed(1)} years`;
+  }
+
+  function formatHours(hours) {
+    const absHours = Math.abs(hours);
+    const sign = hours < 0 ? "-" : "";
+    if (absHours < 1) return `${sign}< 1 hour`;
+    if (absHours < 100) return `${sign}${absHours.toFixed(1)} hrs`;
+    if (absHours < 2000) return `${sign}${Math.round(absHours)} hrs`;
+    return `${sign}${Math.round(absHours / 24)} days`;
+  }
+
+  function formatMoney(amount) {
+    return amount.toLocaleString(undefined, { maximumFractionDigits: 0 });
+  }
+
+  function calculateAndDisplay() {
+    const cost = parseFloat(inputs.cost.value);
+    const hourlyValue = parseFloat(inputs.hourlyValue.value);
+    const time = parseFloat(inputs.timeSaved.value);
+    const unit = inputs.timeUnit.value;
+    const lifespan = parseFloat(inputs.lifespan.value);
+    const enjoyment = parseInt(inputs.enjoyment.value);
+
+    if ([cost, hourlyValue, time, lifespan].some(isNaN) || cost <= 0 || hourlyValue <= 0 || time <= 0 || lifespan <= 0) {
+      resultDisplay.style.display = "none";
+      return;
+    }
+
+    let dailyTimeSavedMinutes;
+    if (unit === "day") dailyTimeSavedMinutes = time;
+    else if (unit === "week") dailyTimeSavedMinutes = time / 7;
+    else dailyTimeSavedMinutes = time / 30.44;
+
+    const dailyValueSaved = (dailyTimeSavedMinutes / 60) * hourlyValue;
+    if (dailyValueSaved <= 0) {
+      resultDisplay.style.display = "none";
+      return;
+    }
+
+    // --- CALCULATIONS ---
+    const breakEvenDays = cost / dailyValueSaved;
+    const trueCostHours = cost / hourlyValue;
+    const totalDaysInLifespan = lifespan * 365.25;
+    const totalTimeSavedHours = (dailyTimeSavedMinutes / 60) * totalDaysInLifespan;
+    const timeDividendHours = totalTimeSavedHours - trueCostHours;
+    
+    // Investment Opportunity Cost (Compound Interest Formula: A = P(1+r)^t)
+    // Assuming a conservative 7% annual market return
+    const investmentReturn = cost * Math.pow(1 + 0.07, lifespan);
+
+    // --- DISPLAY METRICS ---
+    metrics.breakEven.textContent = formatDays(breakEvenDays);
+    metrics.trueCost.textContent = formatHours(trueCostHours);
+    metrics.timeDividend.textContent = formatHours(timeDividendHours);
+    metrics.opportunityCost.textContent = `${formatMoney(investmentReturn)} (+${formatMoney(investmentReturn - cost)} growth at 7% a year)`;
+
+    // --- DETERMINE VERDICT ---
+    let verdictClass = "verdict-medium";
+    let verdictTitle = "A Potential Time-Trap! ⚠️";
+    let verdictText = "The time saved is minimal for the cost. Consider if you truly need this.";
+
+    // If you enjoy the task the purchase replaces, saving that time is worth less to you,
+    // so the payback period is stretched; if you hate the task, it is shortened.
+    const enjoymentFactor = 1 + (enjoyment / 10);
+    const adjustedBreakEven = breakEvenDays * enjoymentFactor;
+    
+    if (timeDividendHours < 0) {
+        verdictClass = "verdict-bad";
+        verdictTitle = "Not Worth The Time! ❌";
+        verdictText = "This item will likely never pay for itself in time saved before it breaks. Look for cheaper alternatives.";
+    } else if (adjustedBreakEven < 90) {
+      verdictClass = "verdict-good";
+      verdictTitle = "Certified Time-Saver! ✅";
+      verdictText = "This purchase is a no-brainer. It pays for itself quickly and gives you massive time back.";
+    } else if (adjustedBreakEven < 365) {
+      verdictClass = "verdict-good";
+      verdictTitle = "A Smart Investment! 👍";
+      verdictText = "A solid choice. The adjusted payback period is reasonable, especially if it automates a task you dislike.";
+    } else if (adjustedBreakEven < totalDaysInLifespan) {
+      verdictClass = "verdict-medium";
+      verdictTitle = "A Considered Purchase 🤔";
+      verdictText = "This takes a while to pay off. Make sure you'll use it consistently for its entire lifespan.";
+    } 
+
+    verdict.box.className = `verdict-box ${verdictClass}`;
+    verdict.title.textContent = verdictTitle;
+    verdict.text.textContent = verdictText;
+
+    resultDisplay.style.display = "block";
+  }
+
+  // --- EVENT LISTENERS ---
+  document.getElementById("enjoymentSlider").addEventListener("input", updateSliderLabel);
+  document.getElementById("calculateBtn").addEventListener("click", calculateAndDisplay);
+
+  // Initialize
+  window.onload = () => {
+    updateSliderLabel();
+  };
+</script>
+</body>
+</html>
