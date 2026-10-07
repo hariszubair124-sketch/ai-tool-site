@@ -1,0 +1,21 @@
+[
+  {"name": "OpenAI", "slug": "openai", "match": ["openai", "chatgpt", "gpt-\\d", "gpt \\d", "sora", "o1 reasoning"], "about": "GPT models, ChatGPT, Sora and the company's business and safety decisions", "title": "OpenAI News: GPT, ChatGPT and Sora Updates"},
+  {"name": "Google", "slug": "google", "match": ["google", "gemini", "deepmind", "alphabet"], "about": "Gemini models, Google DeepMind research, Search and Google Cloud", "title": "Google AI News: Gemini, DeepMind and Search"},
+  {"name": "Anthropic", "slug": "anthropic", "match": ["anthropic", "claude", "mythos", "fable 5", "glasswing"], "about": "Claude models, Mythos and the company's safety and policy work", "title": "Anthropic News: Claude and Mythos Updates"},
+  {"name": "Microsoft", "slug": "microsoft", "match": ["microsoft", "copilot", "azure"], "about": "Copilot, AI in Windows and Microsoft 365, and its partnership with OpenAI", "title": "Microsoft AI News: Copilot and Windows"},
+  {"name": "Nvidia", "slug": "nvidia", "match": ["nvidia"], "about": "AI chips, data center systems and Nvidia's AI software", "title": "Nvidia AI News: Chips, Systems and Software"},
+  {"name": "Apple", "slug": "apple", "match": ["apple"], "about": "Apple's devices, AI features and AI strategy", "title": "Apple AI News: Devices and Strategy"},
+  {"name": "Meta", "slug": "meta", "match": ["meta", "llama"], "about": "Llama models, Meta's AI products and its AI spending", "title": "Meta AI News: Llama Models and Strategy"},
+  {"name": "Amazon", "slug": "amazon", "match": ["amazon", "aws"], "about": "AWS, Amazon's AI models and its AI infrastructure spending", "title": "Amazon AI News: AWS and Models"},
+  {"name": "IBM", "slug": "ibm", "match": ["ibm"], "about": "IBM's enterprise AI products and research"},
+  {"name": "Fujitsu", "slug": "fujitsu", "match": ["fujitsu"], "about": "Fujitsu's AI services and research"},
+  {"name": "DeepSeek", "slug": "deepseek", "match": ["deepseek"], "about": "DeepSeek's open AI models"},
+  {"name": "Alibaba", "slug": "alibaba", "match": ["alibaba", "qwen"], "about": "Alibaba's Qwen models and AI business"},
+  {"name": "xAI", "slug": "xai", "match": ["xai", "grok"], "about": "xAI's Grok models"},
+  {"name": "Mistral AI", "slug": "mistral", "match": ["mistral"], "about": "Mistral's open and commercial models"},
+  {"name": "Tencent", "slug": "tencent", "match": ["tencent"], "about": "Tencent's AI products and investments"},
+  {"name": "SoftBank", "slug": "softbank", "match": ["softbank"], "about": "SoftBank's AI investments"},
+  {"name": "Samsung", "slug": "samsung", "match": ["samsung"], "about": "Samsung's AI chips and devices"},
+  {"name": "Moonshot AI", "slug": "moonshot", "match": ["moonshot", "kimi"], "about": "Moonshot AI's Kimi models"},
+  {"name": "Policy and regulation", "slug": "policy", "kind": "topic", "match": ["white house", "government", "regulat\\w*", "congress", "federal", "eu ai act", "export controls?", "senate", "pentagon", "un global dialogue", "us house", "national ai", "policy framework", "lawsuit", "sues"], "about": "AI laws, government rules, export controls and court cases", "title": "AI Policy and Regulation News"}
+]

@@ -153,6 +153,7 @@ Return ONLY a JSON object, no markdown fences, with exactly these keys:
 {{
   "title": "Plain headline, 45-65 characters, written the way people search: '[Company] [does what]: [detail]'",
   "keyword": "the specific long-tail search query this story answers, 3-8 words, lowercase",
+  "company": "the main company the story is about, as its usual name (e.g. OpenAI, Google, Anthropic), or empty for government or policy stories",
   "description": "Meta description, 140-155 characters, states the main fact and the date",
   "facts": {{"Who": "...", "What": "...", "When": "date as 7 October 2026", "Status": "...", "Official source": "publisher name"}},
   "body": "HTML article body",
@@ -167,8 +168,11 @@ Rules for the body:
 - After every factual sentence, add a citation marker like [1] or [2] matching the source's "n".
 - Only state facts, figures, dates and quotes that appear in the sources. Never invent them.
 - Write in your own words; never copy sentences from a source. Quotes must be exact and under 20 words.
-- Natural, plain tone. Never use: unveils, unleashes, revolutionizing, new era, landmark, game-changer,
-  groundbreaking, unprecedented, redefines, reshaping, dawn, leap.
+- Natural, plain tone, written for a reader, not for search engines. Never use: unveils, unleashes,
+  revolutionizing, new era, landmark, game-changer, groundbreaking, unprecedented, redefines, reshaping, dawn, leap.
+- Do not repeat the product or company name in every sentence. After the first mention, use "it", "the model",
+  "the company" and similar, as a human reporter would. Never aim for a keyword density.
+- Do not mention webonlinetools.com or "online tools" unless the story is actually about them.
 
 Rules for sources:
 - At least 2 sources from different websites; at least 1 primary source; at least 1 published in the last 48 hours.
@@ -250,8 +254,32 @@ def renumber(body, mapping):
     return re.sub(r"\[(\d{1,2})\]", repl, body)
 
 
+def repeated_phrase(body):
+    """Returns (phrase, share of words) for the most repeated 2-3 word phrase, to catch keyword stuffing."""
+    text = re.sub(r"<[^>]+>", " ", body).lower()
+    tokens = re.findall(r"[a-z0-9][a-z0-9\-']*", text)
+    if len(tokens) < 100:
+        return "", 0.0
+    best = ("", 0.0)
+    for k in (2, 3):
+        counts = {}
+        for i in range(len(tokens) - k + 1):
+            if tokens[i] in STOP or tokens[i + k - 1] in STOP:
+                continue
+            phrase = " ".join(tokens[i:i + k])
+            counts[phrase] = counts.get(phrase, 0) + 1
+        for phrase, n in counts.items():
+            share = n * k / len(tokens)
+            if share > best[1]:
+                best = (phrase, share)
+    return best
+
+
 def check_story(story, registry, now):
     problems = []
+    phrase, share = repeated_phrase(story.get("body", ""))
+    if share > 0.025:
+        problems.append(f"'{phrase}' makes up {share:.1%} of the text (keyword stuffing)")
     title = story.get("title", "").strip()
     if not 25 <= len(title) <= 75:
         problems.append(f"title length {len(title)}")
@@ -274,6 +302,25 @@ def check_story(story, registry, now):
     return problems
 
 
+def register_company(name):
+    """Adds a company we have not covered before, so its hub and menu link appear once it has enough stories."""
+    if not name:
+        return
+    path = os.path.join(ROOT, "data", "companies.json")
+    companies = json.load(open(path, encoding="utf-8"))
+    known = {c["name"].lower() for c in companies} | {m for c in companies for m in c["match"]}
+    if name.lower() in known:
+        return
+    slug = slugify(name)
+    if not slug or slug in {c["slug"] for c in companies}:
+        return
+    companies.insert(len(companies) - 1, {"name": name, "slug": slug, "match": [re.escape(name.lower())],
+                                          "about": f"{name}'s AI products, research and business news"})
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("[\n" + ",\n".join("  " + json.dumps(c, ensure_ascii=False) for c in companies) + "\n]\n")
+    log(f"Added new company to data/companies.json: {name}")
+
+
 # ── main ──────────────────────────────────────────────────────────────
 
 SAMPLE = {
@@ -282,7 +329,18 @@ SAMPLE = {
     "description": "Example Corp released Model X on 7 October 2026 with a one-million-token context window and lower API prices for developers.",
     "facts": {"Who": "Example Corp", "What": "Released Model X", "When": "7 October 2026", "Status": "Available now"},
     "body": "<h1>dup</h1><p>Example Corp released Model X today. [1]</p><h2>What did Example Corp release?</h2>"
-            + "<p>" + "Model X handles long documents and code. [1] It is priced lower than the previous model. [2] " * 40 + "</p>"
+            + "".join(f"<p>{line} [{1 + n % 2}]</p>" for n, line in enumerate([
+                "The release targets developers who work with long contracts, research papers and large codebases.",
+                "Pricing starts lower than the previous generation, according to the company's announcement.",
+                "Independent testers reported faster responses on summarisation and retrieval tasks.",
+                "Availability begins in North America and Europe, with other regions following next quarter.",
+                "Enterprise customers can run it inside their own cloud accounts for data control.",
+                "Critics noted that benchmark gains on reasoning tasks were smaller than on coding tasks.",
+                "Analysts expect rival labs to respond with price cuts before the end of the year.",
+                "Safety documentation describes red-team testing on misuse scenarios before launch.",
+                "Existing applications can switch over by changing a single setting in their requests.",
+                "Support for image input arrives first, while audio is planned for a later update.",
+            ] * 4))
             + '<p><a href="https://evil.example">link</a><script>alert(1)</script>Done. [3]</p>',
     "sources": [{"n": 1, "title": "Introducing Model X", "publisher": "Example Corp", "date": "2026-10-07", "url": "https://example.com/model-x"},
                 {"n": 2, "title": "Model X pricing", "publisher": "Example News", "date": "2026-10-07", "url": "https://news.example.org/model-x"},
@@ -341,6 +399,7 @@ def main():
             "published": now.replace(microsecond=0).isoformat(),
             "updated": "",
             "facts": {k: str(v) for k, v in (story.get("facts") or {}).items() if v},
+            "company": (story.get("company") or "").strip(),
             "sources": sources,
             "related": [],
             "status": "verified",
@@ -354,6 +413,7 @@ def main():
         with open(path, "w", encoding="utf-8") as f:
             json.dump(post, f, indent=2, ensure_ascii=False)
         log(f"Saved {path} with {len(sources)} sources")
+        register_company(post["company"])
         subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "build-site.py")], check=True)
         return 0
 

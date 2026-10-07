@@ -1,7 +1,7 @@
 {
   "slug": "critical-ai-model-security-flaw-exposes-hidden-reasoning-in-leading-llms",
-  "title": "Critical AI Model Security Flaw Exposes Hidden Reasoning in Leading LLMs",
-  "description": "Discover the critical AI model security flaw recently uncovered in leading LLMs like Claude, GPT, and Gemini, exposing hidden reasoning and private data. Learn how this vulnerability impacts online tools and the future of AI safety.",
+  "title": "Security flaw exposed hidden reasoning in leading AI models",
+  "description": "Researchers found a flaw that exposed hidden reasoning and private data in models including Claude, GPT and Gemini.",
   "keyword": "",
   "published": "2026-08-14T04:49:31",
   "updated": "",
