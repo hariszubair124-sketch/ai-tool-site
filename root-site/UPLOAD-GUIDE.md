@@ -7,6 +7,7 @@ These files replace everything in `public_html` **except the `ai-news` folder**,
 1. In Hostinger, open **File Manager** and go to `public_html`.
 2. Upload `webonlinetools-root-files.zip` and choose **Extract** into `public_html`.
 3. Choose **Replace** when asked about existing files.
+4. If an earlier upload created `assets/tools.css`, delete it; it is no longer used.
 
 The ZIP contains:
 
@@ -16,7 +17,7 @@ The ZIP contains:
 | `tools/index.html` | New tools directory, grouped by task |
 | `tools/<tool>/index.html` | All 17 tool pages, fixed and with new titles, descriptions and schema |
 | `tools/tools.json` | Tools list (now includes PDF to JPG) |
-| `assets/tools.css` | Shared fonts, header, footer and link styles (new folder) |
+| `assets/ui.css` | The site's design: header, footer, cards, fonts and animation (new folder) |
 | `sitemap.xml` | Sitemap index that covers the tools and the AI news |
 | `sitemap-pages.xml` | Homepage, tools directory and all tool pages |
 | `robots.txt` | New: allows crawling and points to the sitemap |

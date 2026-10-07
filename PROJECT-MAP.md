@@ -7,8 +7,9 @@ on every push to `main`. Pages are generated; never edit a generated file by han
 
 | To change | Edit | Then |
 | --- | --- | --- |
-| Look of every page (colors, fonts, spacing) | `assets/site.css` | push; the workflow rebuilds |
-| Header, footer, meta tags shared by all pages | `templates/page.html` | push |
+| Look of every page on the whole site (colors, fonts, cards, animation) | `assets/ui.css` (also copied to the root site) | push; rebuild root and upload |
+| Header, footer and icons on every page (blog and tools) | `scripts/uikit.py` | push; rebuild root and upload |
+| Blog page head and meta tags | `render_page` in `scripts/build-site.py` | push |
 | Post layout, schema, related links, archive, sitemap, feed, redirects, access rules | `scripts/build-site.py` | push |
 | Editorial policy text | `templates/editorial-policy.html` | push |
 | What the daily writer asks Gemini, and its publishing checks | `scripts/write-post.py` | runs next morning |
@@ -26,8 +27,9 @@ data/redirects.json         merged duplicates, old slug -> kept slug (hand-maint
 data/companies.json         companies and topics; the writer adds new companies automatically
 data/hubs.json              hubs built last time, generated; used to remove hubs that no longer qualify
 data/keywords.json          keyword registry, generated; the writer reads it to avoid duplicates
-templates/                  page shell and the editorial policy body
-assets/site.css             the only stylesheet
+templates/                  editorial policy body
+assets/ui.css               the one stylesheet for the whole site
+scripts/uikit.py            shared header, footer, icons and scroll animation
 scripts/build-site.py       renders everything below from the data
 scripts/write-post.py       daily Gemini writer with source, freshness and duplicate checks
 ```
@@ -75,7 +77,7 @@ Their source lives in `root-site/` (blocked from public access) so changes are m
 | --- | --- | --- |
 | A tool's name, title tag, meta description, H1, card text, category, related tools | `root-site/tools.json` | build and upload |
 | A tool's interface or logic | `root-site/src/tools/<slug>/index.html` | build and upload |
-| Shared header, footer, fonts, homepage and tools-index layout | `root-site/build-root.py`, `root-site/src/assets/tools.css` | build and upload |
+| Homepage and tools-index layout | `root-site/build-root.py` (header, footer and styles come from `scripts/uikit.py` and `assets/ui.css`) | build and upload |
 | Add a new tool | add its page under `root-site/src/tools/<slug>/` and an entry in `root-site/tools.json` | build and upload |
 
 Build: `python root-site/build-root.py` writes `root-site/dist/`, then upload its contents to `public_html`

@@ -1,130 +1,308 @@
 {
   "categories": [
-    {"slug": "developer", "name": "Developer tools", "about": "Format, encode and generate data for code and APIs."},
-    {"slug": "design", "name": "CSS and design", "about": "Build CSS and pick colors with a live preview."},
-    {"slug": "text", "name": "Text tools", "about": "Count, convert and clean up text."},
-    {"slug": "files", "name": "Images and files", "about": "Convert images and documents without uploading them."},
-    {"slug": "calculators", "name": "Calculators", "about": "Quick answers to everyday decisions."}
+    {
+      "slug": "developer",
+      "name": "Developer tools",
+      "about": "Format, encode and generate data for code and APIs.",
+      "icon": "code"
+    },
+    {
+      "slug": "design",
+      "name": "CSS and design",
+      "about": "Build CSS and pick colors with a live preview.",
+      "icon": "pen"
+    },
+    {
+      "slug": "text",
+      "name": "Text tools",
+      "about": "Count, convert and clean up text.",
+      "icon": "type"
+    },
+    {
+      "slug": "files",
+      "name": "Images and files",
+      "about": "Convert images and documents without uploading them.",
+      "icon": "folder"
+    },
+    {
+      "slug": "calculators",
+      "name": "Calculators",
+      "about": "Quick answers to everyday decisions.",
+      "icon": "calculator"
+    }
   ],
   "tools": [
-    {"slug": "json-formatter", "category": "developer", "featured": true,
-     "name": "JSON Formatter and Validator",
-     "card": "Check JSON for errors, see the exact line and column, then format or minify it.",
-     "title": "JSON Formatter and Validator Online",
-     "h1": "JSON Formatter and Validator",
-     "description": "Paste JSON to check it for errors and format it with 2 or 4 space indents, or minify it. Errors show the line and column. Runs in your browser.",
-     "related": ["base64-encoder", "url-encoder", "clean-list-generator"]},
-    {"slug": "base64-encoder", "category": "developer", "featured": true,
-     "name": "Base64 Encoder and Decoder",
-     "card": "Encode text or files to Base64, decode it back, or turn images into data URIs for CSS.",
-     "title": "Base64 Encode and Decode: Text, Files and Images",
-     "h1": "Base64 Encoder and Decoder",
-     "description": "Encode text or files to Base64, decode Base64 back to text, and turn images into data URIs for CSS. UTF-8 and URL-safe Base64 supported.",
-     "related": ["url-encoder", "json-formatter", "webp-converter"]},
-    {"slug": "url-encoder", "category": "developer", "featured": false,
-     "name": "URL Encoder and Decoder",
-     "card": "Percent-encode text for links and query strings, or decode encoded URLs.",
-     "title": "URL Encoder and Decoder (Percent-Encoding)",
-     "h1": "URL Encoder and Decoder",
-     "description": "Percent-encode text for URLs and query strings, or decode encoded URLs back to plain text. Handles UTF-8, strict RFC 3986 mode and + as space.",
-     "related": ["base64-encoder", "json-formatter", "case-converter"]},
-    {"slug": "password-rule-generator", "category": "developer", "featured": true,
-     "name": "Password Policy Regex Generator",
-     "card": "Turn password rules into a regex and HTML pattern, test passwords and generate strong ones.",
-     "title": "Password Policy Regex Generator and Checker",
-     "h1": "Password Policy Regex Generator",
-     "description": "Set password rules and get a ready-made regex and HTML pattern, test passwords against them, and generate strong passwords with secure randomness.",
-     "related": ["random-number-generator", "base64-encoder", "url-encoder"]},
-    {"slug": "random-number-generator", "category": "developer", "featured": false,
-     "name": "Random Number Generator",
-     "card": "Pick one or many random numbers in any range, with or without duplicates.",
-     "title": "Random Number Generator: Any Range, No Duplicates",
-     "h1": "Random Number Generator",
-     "description": "Generate one or many random numbers between any two values, with or without duplicates, sorted or not. Uses your browser's secure random source.",
-     "related": ["password-rule-generator", "clean-list-generator", "word-counter"]},
-    {"slug": "css-gradient-generator", "category": "design", "featured": true,
-     "name": "CSS Gradient Generator",
-     "card": "Build linear and radial gradients with up to six colors and copy CSS or a Tailwind class.",
-     "title": "CSS Gradient Generator with Tailwind Code",
-     "h1": "CSS Gradient Generator",
-     "description": "Build linear and radial CSS gradients with up to 6 colors and a live preview. Copy the CSS or a Tailwind class for your project.",
-     "related": ["css-box-shadow", "color-palette-generator", "button-transition-generator"]},
-    {"slug": "css-box-shadow", "category": "design", "featured": true,
-     "name": "CSS Box Shadow Generator",
-     "card": "Adjust offset, blur, spread and color, then copy CSS or a Tailwind class.",
-     "title": "CSS Box Shadow Generator with Tailwind Code",
-     "h1": "CSS Box Shadow Generator",
-     "description": "Set offset, blur, spread, color and opacity for a CSS box shadow and see it live. Copy plain CSS or the matching Tailwind arbitrary class.",
-     "related": ["css-gradient-generator", "button-transition-generator", "color-code-converter"]},
-    {"slug": "button-transition-generator", "category": "design", "featured": false,
-     "name": "CSS Button Hover Effect Generator",
-     "card": "Design a button with gradient, shadow and hover animations, then copy the CSS and HTML.",
-     "title": "CSS Button Hover Effect Generator",
-     "h1": "CSS Button Hover Effect Generator",
-     "description": "Design a CSS button with gradient, shadow and hover effects such as slide fills, lift and scale. Live preview, then copy the CSS and HTML.",
-     "related": ["css-box-shadow", "css-gradient-generator", "color-palette-generator"]},
-    {"slug": "color-palette-generator", "category": "design", "featured": true,
-     "name": "Color Palette Generator",
-     "card": "Generate 5-color palettes from real color schemes and check text contrast.",
-     "title": "Color Palette Generator with Contrast Checker",
-     "h1": "Color Palette Generator",
-     "description": "Generate 5-color palettes from analogous, triadic, complementary or monochrome schemes, lock colors you like and check WCAG contrast.",
-     "related": ["color-code-converter", "css-gradient-generator", "css-box-shadow"]},
-    {"slug": "color-code-converter", "category": "design", "featured": false,
-     "name": "HEX to RGB and HSL Converter",
-     "card": "Convert colors between HEX, RGB and HSL, including transparency.",
-     "title": "HEX to RGB and HSL Color Converter",
-     "h1": "HEX, RGB and HSL Color Converter",
-     "description": "Convert colors between HEX, RGB and HSL, including 8-digit HEX with transparency and RGBA. Pick a color or type a code to convert.",
-     "related": ["color-palette-generator", "css-gradient-generator", "css-box-shadow"]},
-    {"slug": "word-counter", "category": "text", "featured": true,
-     "name": "Word and Character Counter",
-     "card": "Count words, characters, sentences and reading time as you type.",
-     "title": "Word Counter and Character Counter",
-     "h1": "Word and Character Counter",
-     "description": "Count words, characters with and without spaces, sentences and paragraphs as you type, with reading time and the words you use most.",
-     "related": ["case-converter", "clean-list-generator", "font-converter"]},
-    {"slug": "case-converter", "category": "text", "featured": false,
-     "name": "Case Converter",
-     "card": "Switch text between UPPERCASE, lowercase, Title Case and Sentence case.",
-     "title": "Case Converter: Upper, Lower, Title and Sentence",
-     "h1": "Case Converter",
-     "description": "Change text to UPPERCASE, lowercase, Title Case, Sentence case, alternating or inverse case. Works with accented letters and many paragraphs.",
-     "related": ["word-counter", "clean-list-generator", "font-converter"]},
-    {"slug": "clean-list-generator", "category": "text", "featured": false,
-     "name": "List Cleaner",
-     "card": "Remove duplicate and blank lines, trim spaces and sort any list.",
-     "title": "Remove Duplicate Lines and Clean Up Lists",
-     "h1": "Remove Duplicate Lines and Clean Up a List",
-     "description": "Paste a list to remove duplicate and blank lines, trim spaces, sort A to Z or Z to A and change case. Ignores case and spacing if you want.",
-     "related": ["case-converter", "word-counter", "random-number-generator"]},
-    {"slug": "font-converter", "category": "text", "featured": false,
-     "name": "Fancy Font Generator",
-     "card": "Write in bold, italic, script and other Unicode styles for social media bios.",
-     "title": "Fancy Font Generator for Instagram Bios",
-     "h1": "Fancy Font Generator for Instagram",
-     "description": "Type your text and copy it in bold, italic, script, fraktur and other Unicode styles for Instagram bios, captions and comments. No app needed.",
-     "related": ["case-converter", "word-counter", "clean-list-generator"]},
-    {"slug": "webp-converter", "category": "files", "featured": true,
-     "name": "WebP Converter",
-     "card": "Convert images between WebP, PNG and JPG and resize them, without uploading.",
-     "title": "WebP Converter: WebP to PNG and JPG to WebP",
-     "h1": "WebP, PNG and JPG Image Converter",
-     "description": "Convert images between WebP, PNG and JPG, resize them and set quality, with transparency kept. Images are processed in your browser, never uploaded.",
-     "related": ["pdf-to-jpeg", "base64-encoder", "color-code-converter"]},
-    {"slug": "pdf-to-jpeg", "category": "files", "featured": true,
-     "name": "PDF to JPG Converter",
-     "card": "Turn every page of a PDF into a JPG and download them as one ZIP.",
-     "title": "PDF to JPG Converter: All Pages to a ZIP",
-     "h1": "PDF to JPG Converter",
-     "description": "Turn every page of a PDF into a JPG image and download them together as a ZIP. Choose image quality and size. Your PDF never leaves your device.",
-     "related": ["webp-converter", "base64-encoder", "word-counter"]},
-    {"slug": "should-i-buy-this", "category": "calculators", "featured": false,
-     "name": "Should I Buy This? Calculator",
-     "card": "See how long a purchase takes to pay for itself in time saved.",
-     "title": "Should I Buy This? Time-Saving Purchase Calculator",
-     "h1": "Should I Buy This?",
-     "description": "See how long a purchase takes to pay for itself in time saved, what it costs in hours of work, and what the money could grow to if invested.",
-     "related": ["random-number-generator", "word-counter", "color-palette-generator"]}
+    {
+      "slug": "json-formatter",
+      "category": "developer",
+      "featured": true,
+      "name": "JSON Formatter and Validator",
+      "card": "Check JSON for errors, see the exact line and column, then format or minify it.",
+      "title": "JSON Formatter and Validator Online",
+      "h1": "JSON Formatter and Validator",
+      "description": "Paste JSON to check it for errors and format it with 2 or 4 space indents, or minify it. Errors show the line and column. Runs in your browser.",
+      "related": [
+        "base64-encoder",
+        "url-encoder",
+        "clean-list-generator"
+      ],
+      "icon": "braces"
+    },
+    {
+      "slug": "base64-encoder",
+      "category": "developer",
+      "featured": true,
+      "name": "Base64 Encoder and Decoder",
+      "card": "Encode text or files to Base64, decode it back, or turn images into data URIs for CSS.",
+      "title": "Base64 Encode and Decode: Text, Files and Images",
+      "h1": "Base64 Encoder and Decoder",
+      "description": "Encode text or files to Base64, decode Base64 back to text, and turn images into data URIs for CSS. UTF-8 and URL-safe Base64 supported.",
+      "related": [
+        "url-encoder",
+        "json-formatter",
+        "webp-converter"
+      ],
+      "icon": "binary"
+    },
+    {
+      "slug": "url-encoder",
+      "category": "developer",
+      "featured": false,
+      "name": "URL Encoder and Decoder",
+      "card": "Percent-encode text for links and query strings, or decode encoded URLs.",
+      "title": "URL Encoder and Decoder (Percent-Encoding)",
+      "h1": "URL Encoder and Decoder",
+      "description": "Percent-encode text for URLs and query strings, or decode encoded URLs back to plain text. Handles UTF-8, strict RFC 3986 mode and + as space.",
+      "related": [
+        "base64-encoder",
+        "json-formatter",
+        "case-converter"
+      ],
+      "icon": "link"
+    },
+    {
+      "slug": "password-rule-generator",
+      "category": "developer",
+      "featured": true,
+      "name": "Password Policy Regex Generator",
+      "card": "Turn password rules into a regex and HTML pattern, test passwords and generate strong ones.",
+      "title": "Password Policy Regex Generator and Checker",
+      "h1": "Password Policy Regex Generator",
+      "description": "Set password rules and get a ready-made regex and HTML pattern, test passwords against them, and generate strong passwords with secure randomness.",
+      "related": [
+        "random-number-generator",
+        "base64-encoder",
+        "url-encoder"
+      ],
+      "icon": "key"
+    },
+    {
+      "slug": "random-number-generator",
+      "category": "developer",
+      "featured": false,
+      "name": "Random Number Generator",
+      "card": "Pick one or many random numbers in any range, with or without duplicates.",
+      "title": "Random Number Generator: Any Range, No Duplicates",
+      "h1": "Random Number Generator",
+      "description": "Generate one or many random numbers between any two values, with or without duplicates, sorted or not. Uses your browser's secure random source.",
+      "related": [
+        "password-rule-generator",
+        "clean-list-generator",
+        "word-counter"
+      ],
+      "icon": "dice"
+    },
+    {
+      "slug": "css-gradient-generator",
+      "category": "design",
+      "featured": true,
+      "name": "CSS Gradient Generator",
+      "card": "Build linear and radial gradients with up to six colors and copy CSS or a Tailwind class.",
+      "title": "CSS Gradient Generator with Tailwind Code",
+      "h1": "CSS Gradient Generator",
+      "description": "Build linear and radial CSS gradients with up to 6 colors and a live preview. Copy the CSS or a Tailwind class for your project.",
+      "related": [
+        "css-box-shadow",
+        "color-palette-generator",
+        "button-transition-generator"
+      ],
+      "icon": "blend"
+    },
+    {
+      "slug": "css-box-shadow",
+      "category": "design",
+      "featured": true,
+      "name": "CSS Box Shadow Generator",
+      "card": "Adjust offset, blur, spread and color, then copy CSS or a Tailwind class.",
+      "title": "CSS Box Shadow Generator with Tailwind Code",
+      "h1": "CSS Box Shadow Generator",
+      "description": "Set offset, blur, spread, color and opacity for a CSS box shadow and see it live. Copy plain CSS or the matching Tailwind arbitrary class.",
+      "related": [
+        "css-gradient-generator",
+        "button-transition-generator",
+        "color-code-converter"
+      ],
+      "icon": "layers"
+    },
+    {
+      "slug": "button-transition-generator",
+      "category": "design",
+      "featured": false,
+      "name": "CSS Button Hover Effect Generator",
+      "card": "Design a button with gradient, shadow and hover animations, then copy the CSS and HTML.",
+      "title": "CSS Button Hover Effect Generator",
+      "h1": "CSS Button Hover Effect Generator",
+      "description": "Design a CSS button with gradient, shadow and hover effects such as slide fills, lift and scale. Live preview, then copy the CSS and HTML.",
+      "related": [
+        "css-box-shadow",
+        "css-gradient-generator",
+        "color-palette-generator"
+      ],
+      "icon": "pointer"
+    },
+    {
+      "slug": "color-palette-generator",
+      "category": "design",
+      "featured": true,
+      "name": "Color Palette Generator",
+      "card": "Generate 5-color palettes from real color schemes and check text contrast.",
+      "title": "Color Palette Generator with Contrast Checker",
+      "h1": "Color Palette Generator",
+      "description": "Generate 5-color palettes from analogous, triadic, complementary or monochrome schemes, lock colors you like and check WCAG contrast.",
+      "related": [
+        "color-code-converter",
+        "css-gradient-generator",
+        "css-box-shadow"
+      ],
+      "icon": "palette"
+    },
+    {
+      "slug": "color-code-converter",
+      "category": "design",
+      "featured": false,
+      "name": "HEX to RGB and HSL Converter",
+      "card": "Convert colors between HEX, RGB and HSL, including transparency.",
+      "title": "HEX to RGB and HSL Color Converter",
+      "h1": "HEX, RGB and HSL Color Converter",
+      "description": "Convert colors between HEX, RGB and HSL, including 8-digit HEX with transparency and RGBA. Pick a color or type a code to convert.",
+      "related": [
+        "color-palette-generator",
+        "css-gradient-generator",
+        "css-box-shadow"
+      ],
+      "icon": "pipette"
+    },
+    {
+      "slug": "word-counter",
+      "category": "text",
+      "featured": true,
+      "name": "Word and Character Counter",
+      "card": "Count words, characters, sentences and reading time as you type.",
+      "title": "Word Counter and Character Counter",
+      "h1": "Word and Character Counter",
+      "description": "Count words, characters with and without spaces, sentences and paragraphs as you type, with reading time and the words you use most.",
+      "related": [
+        "case-converter",
+        "clean-list-generator",
+        "font-converter"
+      ],
+      "icon": "text"
+    },
+    {
+      "slug": "case-converter",
+      "category": "text",
+      "featured": false,
+      "name": "Case Converter",
+      "card": "Switch text between UPPERCASE, lowercase, Title Case and Sentence case.",
+      "title": "Case Converter: Upper, Lower, Title and Sentence",
+      "h1": "Case Converter",
+      "description": "Change text to UPPERCASE, lowercase, Title Case, Sentence case, alternating or inverse case. Works with accented letters and many paragraphs.",
+      "related": [
+        "word-counter",
+        "clean-list-generator",
+        "font-converter"
+      ],
+      "icon": "type"
+    },
+    {
+      "slug": "clean-list-generator",
+      "category": "text",
+      "featured": false,
+      "name": "List Cleaner",
+      "card": "Remove duplicate and blank lines, trim spaces and sort any list.",
+      "title": "Remove Duplicate Lines and Clean Up Lists",
+      "h1": "Remove Duplicate Lines and Clean Up a List",
+      "description": "Paste a list to remove duplicate and blank lines, trim spaces, sort A to Z or Z to A and change case. Ignores case and spacing if you want.",
+      "related": [
+        "case-converter",
+        "word-counter",
+        "random-number-generator"
+      ],
+      "icon": "list"
+    },
+    {
+      "slug": "font-converter",
+      "category": "text",
+      "featured": false,
+      "name": "Fancy Font Generator",
+      "card": "Write in bold, italic, script and other Unicode styles for social media bios.",
+      "title": "Fancy Font Generator for Instagram Bios",
+      "h1": "Fancy Font Generator for Instagram",
+      "description": "Type your text and copy it in bold, italic, script, fraktur and other Unicode styles for Instagram bios, captions and comments. No app needed.",
+      "related": [
+        "case-converter",
+        "word-counter",
+        "clean-list-generator"
+      ],
+      "icon": "sparkles"
+    },
+    {
+      "slug": "webp-converter",
+      "category": "files",
+      "featured": true,
+      "name": "WebP Converter",
+      "card": "Convert images between WebP, PNG and JPG and resize them, without uploading.",
+      "title": "WebP Converter: WebP to PNG and JPG to WebP",
+      "h1": "WebP, PNG and JPG Image Converter",
+      "description": "Convert images between WebP, PNG and JPG, resize them and set quality, with transparency kept. Images are processed in your browser, never uploaded.",
+      "related": [
+        "pdf-to-jpeg",
+        "base64-encoder",
+        "color-code-converter"
+      ],
+      "icon": "image"
+    },
+    {
+      "slug": "pdf-to-jpeg",
+      "category": "files",
+      "featured": true,
+      "name": "PDF to JPG Converter",
+      "card": "Turn every page of a PDF into a JPG and download them as one ZIP.",
+      "title": "PDF to JPG Converter: All Pages to a ZIP",
+      "h1": "PDF to JPG Converter",
+      "description": "Turn every page of a PDF into a JPG image and download them together as a ZIP. Choose image quality and size. Your PDF never leaves your device.",
+      "related": [
+        "webp-converter",
+        "base64-encoder",
+        "word-counter"
+      ],
+      "icon": "file-image"
+    },
+    {
+      "slug": "should-i-buy-this",
+      "category": "calculators",
+      "featured": false,
+      "name": "Should I Buy This? Calculator",
+      "card": "See how long a purchase takes to pay for itself in time saved.",
+      "title": "Should I Buy This? Time-Saving Purchase Calculator",
+      "h1": "Should I Buy This?",
+      "description": "See how long a purchase takes to pay for itself in time saved, what it costs in hours of work, and what the money could grow to if invested.",
+      "related": [
+        "random-number-generator",
+        "word-counter",
+        "color-palette-generator"
+      ],
+      "icon": "cart"
+    }
   ]
 }

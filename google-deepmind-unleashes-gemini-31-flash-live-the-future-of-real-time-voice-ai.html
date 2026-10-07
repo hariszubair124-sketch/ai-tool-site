@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js")</script>
 <title>Google DeepMind releases Gemini 3.1 Flash Live</title>
 <meta name="description" content="Gemini 3.1 Flash Live is Google DeepMind&#x27;s model for real-time voice conversations, available to users and developers.">
 <meta name="robots" content="index, follow">
@@ -13,12 +14,13 @@
 <meta property="og:description" content="Gemini 3.1 Flash Live is Google DeepMind&#x27;s model for real-time voice conversations, available to users and developers.">
 <meta property="og:url" content="https://webonlinetools.com/ai-news/google-deepmind-unleashes-gemini-31-flash-live-the-future-of-real-time-voice-ai.html">
 <meta name="twitter:card" content="summary">
-<link rel="icon" type="image/svg+xml" href="https://webonlinetools.com/favicon.svg">
+<meta name="theme-color" content="#060b18">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="alternate" type="application/rss+xml" title="Web Online Tools AI news" href="https://webonlinetools.com/ai-news/feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
-<link rel="stylesheet" href="/ai-news/assets/site.css?v=5a99119c">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/ai-news/assets/ui.css?v=605b0e79">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -77,24 +79,31 @@
 }
 </script>
 </head>
-<body>
-<header class="site-header">
-  <div class="site-header-inner">
-    <a class="brand" href="https://webonlinetools.com/">Web Online Tools</a>
-    <nav class="site-nav" aria-label="Main">
-      <a href="https://webonlinetools.com/tools/">Tools</a>
-      <a href="/ai-news/" aria-current="page">AI news</a>
-      <a href="/ai-news/editorial-policy.html">Editorial policy</a>
+<body class="ui">
+<header class="site-head" id="top">
+  <div class="site-head-inner">
+    <a class="ui-logo" href="/" aria-label="Web Online Tools home">
+      <span class="ui-logo-mark"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span><span class="ui-logo-text">Web Online Tools</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Main"><a href="/tools/" class="nav-link"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Tools</span></a><a href="/ai-news/" class="nav-link" aria-current="page"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg><span>AI news</span></a>
+      <a href="/tools/" class="nav-cta">Browse tools <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
     </nav>
+    <button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Open menu"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg></button>
   </div>
 </header>
-<nav class="topic-nav" aria-label="AI news by company and topic"><div class="topic-nav-inner"><a href="/ai-news/">All stories</a><a href="/ai-news/openai/">OpenAI</a><a href="/ai-news/google/" aria-current="page">Google</a><a href="/ai-news/anthropic/">Anthropic</a><a href="/ai-news/nvidia/">Nvidia</a><a href="/ai-news/microsoft/">Microsoft</a><a href="/ai-news/apple/">Apple</a><a href="/ai-news/meta/">Meta</a><a href="/ai-news/policy/">Policy and regulation</a></div></nav>
-<main class="page" id="content">
-<nav class="crumbs" aria-label="Breadcrumb"><a href="https://webonlinetools.com/">Home</a><span aria-hidden="true">/</span><a href="/ai-news/">AI news</a><span aria-hidden="true">/</span><a href="/ai-news/google/">Google</a></nav>
-<article class="story">
-<header><h1>Google DeepMind releases Gemini 3.1 Flash Live</h1><p class="dateline">Published <time datetime="2026-03-27">27 March 2026</time> by <a href="/ai-news/editorial-policy.html">Web Online Tools Editorial</a> in <a href="/ai-news/google/">Google</a></p><p class="lead">Gemini 3.1 Flash Live is Google DeepMind&#x27;s model for real-time voice conversations, available to users and developers.</p></header>
-
-<div class="story-body">
+<main id="content">
+<div class="container">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="/ai-news/">AI news</a><span class="sep">/</span><a href="/ai-news/google/">Google</a><span class="sep">/</span><span aria-current="page">Google DeepMind releases Gemini 3.1 Flash Live</span></nav>
+<header class="article-hero">
+  <div class="chips"><span class="badge" style="--badge:#3b82f6">Google</span></div>
+  <h1>Google DeepMind releases Gemini 3.1 Flash Live</h1>
+  <p class="lead">Gemini 3.1 Flash Live is Google DeepMind&#x27;s model for real-time voice conversations, available to users and developers.</p>
+  <div class="article-meta"><span class="meta-item"><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg><time datetime="2026-03-27">27 March 2026</time></span><span class="meta-item"><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>4 min read</span><span class="meta-item"><svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>By <a href="/ai-news/editorial-policy.html">Web Online Tools Editorial</a></span></div>
+</header>
+<div class="article-layout">
+  <article>
+    
+    <div class="prose">
 <p>Today, March 27, 2026, marks a pivotal moment in the evolution of artificial intelligence with the official launch of Google DeepMind's <a href="https://blog.google/technology/ai/gemini-3-1-flash-live-announcement" target="_blank" rel="noopener">Gemini 3.1 Flash Live</a>. This groundbreaking real-time audio and voice model is set to redefine how humans interact with AI, bringing unprecedented naturalness, speed, and emotional intelligence to conversational agents. For users of online tools and web utilities, this advancement promises a future where voice interactions are as fluid and intuitive as human conversations, significantly boosting productivity and accessibility across various platforms. Google DeepMind is rolling out this innovative technology across its own suite of products and simultaneously opening access for developers, fostering a new era of voice-first AI applications.</p>
     <h2>What is Gemini 3.1 Flash Live?</h2>
     <p>Gemini 3.1 Flash Live is Google DeepMind's newest and most advanced real-time audio and voice model, meticulously designed to overcome the long-standing challenges of voice assistants. Previous iterations often struggled with the subtle nuances of human speech, including natural rhythm, interruptions, and shifts in pitch. This latest model addresses these issues head-on, delivering what Google describes as its "highest-quality audio and voice model yet." The core innovation lies in its ability to process and generate speech with remarkable speed, enabling truly real-time, uninterrupted dialogue that mimics genuine human interaction. This is not merely about faster speech; it's about creating a more organic and less robotic conversational experience, laying the foundation for next-generation voice-first AI systems.</p>
@@ -114,17 +123,63 @@
     The rapid progress in conversational AI, exemplified by Gemini 3.1 Flash Live, indicates a clear trend towards making digital interactions more human-centric and less demanding, ultimately enhancing our daily workflows.</p>
     <h2>What's Next for Voice-First AI</h2>
     <p>The launch of Gemini 3.1 Flash Live is not an endpoint but a significant milestone. As Google continues to refine and expand this technology, we can anticipate even more sophisticated voice-first AI applications. Developers now have a powerful new tool at their disposal, which is expected to spur innovation in areas like customer service, virtual assistants, educational platforms, and creative tools. The focus on real-time, emotionally aware, and naturally responsive AI suggests a future where our digital companions are not just functional but genuinely intuitive partners, further blurring the lines between human and artificial intelligence. This advancement will undoubtedly influence future product development cycles for online tools, pushing boundaries on what can be achieved through voice interaction. We expect further details on Gemini's capabilities and widespread adoption to emerge in the coming months as developers begin integrating this cutting-edge model.</p>
+    </div>
+    <div class="callout callout-info" style="margin-top:40px"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><div>This story was published before we started listing sources and is being re-checked under our <a href="/ai-news/editorial-policy.html">editorial policy</a>.</div></div>
+  </article>
+  <aside class="side" aria-label="About this story"><div class="side-sticky"><section class="ui-panel" aria-labelledby="share-title"><h2 id="share-title"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98"/><path d="m15.41 6.51-6.82 3.98"/></svg>Share</h2><div class="share-row"><button class="share-btn" type="button" data-copy="https://webonlinetools.com/ai-news/google-deepmind-unleashes-gemini-31-flash-live-the-future-of-real-time-voice-ai.html"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><span>Copy link</span></button><a class="share-btn" href="https://twitter.com/intent/tweet?url=https://webonlinetools.com/ai-news/google-deepmind-unleashes-gemini-31-flash-live-the-future-of-real-time-voice-ai.html&amp;text=Google DeepMind releases Gemini 3.1 Flash Live" target="_blank" rel="noopener">X</a><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://webonlinetools.com/ai-news/google-deepmind-unleashes-gemini-31-flash-live-the-future-of-real-time-voice-ai.html" target="_blank" rel="noopener">LinkedIn</a></div></section><section class="ui-panel" aria-labelledby="more-title"><h2 id="more-title"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>More from Google</h2><ul style="list-style:none;margin:0;padding:0"><li style="padding:10px 0;border-top:1px solid var(--line)"><a href="/ai-news/google-unveils-gemini-pro-max-revolutionizing-productivity-with-deep-workspace-ai-integration.html" style="color:var(--t1);text-decoration:none;font-weight:500">Google launches Gemini Pro Max for Workspace</a><div style="font-size:.8rem;color:var(--t3);margin-top:2px">25 Sep 2026</div></li><li style="padding:10px 0;border-top:1px solid var(--line)"><a href="/ai-news/google-cloud-unveils-gemini-automation-suite-a-new-era-for-ai-workflow-automation.html" style="color:var(--t1);text-decoration:none;font-weight:500">Google Cloud launches the Gemini Automation Suite</a><div style="font-size:.8rem;color:var(--t3);margin-top:2px">23 Sep 2026</div></li><li style="padding:10px 0;border-top:1px solid var(--line)"><a href="/ai-news/google-deepmind-unveils-aura-a-new-era-for-multimodal-ai-assistants.html" style="color:var(--t1);text-decoration:none;font-weight:500">Google DeepMind introduces Aura, a multimodal assistant</a><div style="font-size:.8rem;color:var(--t3);margin-top:2px">20 Sep 2026</div></li><li style="padding:10px 0;border-top:1px solid var(--line)"><a href="/ai-news/google-unveils-gemini-swift-revolutionizing-on-device-ai-efficiency-for-unprecedented-local-processing.html" style="color:var(--t1);text-decoration:none;font-weight:500">Google announces Gemini Swift for on-device AI</a><div style="font-size:.8rem;color:var(--t3);margin-top:2px">18 Sep 2026</div></li></ul><p style="margin:12px 0 0"><a class="link-arrow" href="/ai-news/google/">All Google stories <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></p></section></div></aside>
 </div>
-<section class="sources" aria-labelledby="sources-title"><h2 id="sources-title">Sources</h2><p class="note">This story was published before we started listing sources. It is being re-checked under our <a href="/ai-news/editorial-policy.html">editorial policy</a>.</p></section>
-<nav class="related" aria-labelledby="related-title"><h2 id="related-title">Related stories</h2><ul><li><a href="/ai-news/google-search-transforms-with-gemini-35-flash-a-new-era-for-information-discovery-and-seo.html">Gemini 3.5 Flash comes to Google Search</a></li><li><a href="/ai-news/google-unleashes-gemini-35-omni-a-leap-forward-in-real-time-multimodal-ai.html">Google releases Gemini 3.5 Omni for real-time multimodal AI</a></li><li><a href="/ai-news/revolutionizing-workflows-google-deepmind-unveils-gemini-enterprise-pro-powering-next-gen-ai-productivity-tools.html">Google DeepMind launches Gemini Enterprise Pro</a></li><li><a href="/ai-news/googles-turboquant-algorithm-and-gemini-nano-4-redefine-ai-efficiency-for-productivity-tools.html">Google&#x27;s TurboQuant and Gemini Nano 4 make AI more efficient</a></li></ul></nav>
-</article>
+<section class="section" aria-labelledby="related-title" style="padding-top:24px">
+  <div class="section-head"><h2 id="related-title">Related stories</h2><a class="link-arrow" href="/ai-news/">All AI news <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  <ul class="ui-grid ui-grid-4"><li class="reveal" style="--d:0.00s" data-search="gemini 3.5 flash comes to google search google has built gemini 3.5 flash into search, changing how results are shown. what it means for searchers and for website owners. google"><a class="card news-card" href="/ai-news/google-search-transforms-with-gemini-35-flash-a-new-era-for-information-discovery-and-seo.html"><div class="meta"><span class="badge" style="--badge:#3b82f6">Google</span><span class="meta-item"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg><time datetime="2026-05-26">26 May 2026</time></span></div><h3>Gemini 3.5 Flash comes to Google Search</h3><p>Google has built Gemini 3.5 Flash into Search, changing how results are shown. What it means for searchers and for website owners.</p><div class="card-foot"><span class="meta-item"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 min read</span><span class="card-go">Read <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li><li class="reveal" style="--d:0.06s" data-search="google releases gemini 3.5 omni for real-time multimodal ai gemini 3.5 omni handles voice, video and text in real time. what google&#x27;s model can do and how it compares with earlier gemini versions. google"><a class="card news-card" href="/ai-news/google-unleashes-gemini-35-omni-a-leap-forward-in-real-time-multimodal-ai.html"><div class="meta"><span class="badge" style="--badge:#3b82f6">Google</span><span class="meta-item"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg><time datetime="2026-07-26">26 Jul 2026</time></span></div><h3>Google releases Gemini 3.5 Omni for real-time multimodal AI</h3><p>Gemini 3.5 Omni handles voice, video and text in real time. What Google&#x27;s model can do and how it compares with earlier Gemini versions.</p><div class="card-foot"><span class="meta-item"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>4 min read</span><span class="card-go">Read <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li><li class="reveal" style="--d:0.12s" data-search="google deepmind launches gemini enterprise pro gemini enterprise pro, announced 12 august 2026, connects google deepmind&#x27;s models to workspace for business users. google"><a class="card news-card" href="/ai-news/revolutionizing-workflows-google-deepmind-unveils-gemini-enterprise-pro-powering-next-gen-ai-productivity-tools.html"><div class="meta"><span class="badge" style="--badge:#3b82f6">Google</span><span class="meta-item"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg><time datetime="2026-08-12">12 Aug 2026</time></span></div><h3>Google DeepMind launches Gemini Enterprise Pro</h3><p>Gemini Enterprise Pro, announced 12 August 2026, connects Google DeepMind&#x27;s models to Workspace for business users.</p><div class="card-foot"><span class="meta-item"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>4 min read</span><span class="card-go">Read <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li><li class="reveal" style="--d:0.18s" data-search="google&#x27;s turboquant and gemini nano 4 make ai more efficient google&#x27;s turboquant compression method and gemini nano 4 model, announced 4 april 2026, make ai cheaper to run on devices. google"><a class="card news-card" href="/ai-news/googles-turboquant-algorithm-and-gemini-nano-4-redefine-ai-efficiency-for-productivity-tools.html"><div class="meta"><span class="badge" style="--badge:#3b82f6">Google</span><span class="meta-item"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg><time datetime="2026-04-04">4 Apr 2026</time></span></div><h3>Google&#x27;s TurboQuant and Gemini Nano 4 make AI more efficient</h3><p>Google&#x27;s TurboQuant compression method and Gemini Nano 4 model, announced 4 April 2026, make AI cheaper to run on devices.</p><div class="card-foot"><span class="meta-item"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>4 min read</span><span class="card-go">Read <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li></ul>
+</section>
+</div>
 </main>
-<footer class="site-footer">
-  <div class="site-footer-inner">
-    <span>© 2026 Web Online Tools</span>
-    <a href="/ai-news/editorial-policy.html">How we write and check stories</a>
-    <a href="/ai-news/feed.xml">RSS feed</a>
+<footer class="site-foot">
+  <div class="site-foot-inner">
+    <div class="foot-brand">
+      <a class="ui-logo" href="/"><span class="ui-logo-mark"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span><span class="ui-logo-text">Web Online Tools</span></a>
+      <p>Free tools that run in your browser, plus sourced news on AI models, companies and policy.</p>
+      <ul class="foot-points">
+        <li><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg> Your files and text never leave your device</li>
+        <li><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg> Free, no sign-up</li>
+      </ul>
+    </div>
+    <nav class="foot-col" aria-label="Popular tools"><h2>Popular tools</h2><ul><li><a href="/tools/json-formatter/">JSON Formatter and Validator</a></li><li><a href="/tools/base64-encoder/">Base64 Encoder and Decoder</a></li><li><a href="/tools/password-rule-generator/">Password Policy Regex Generator</a></li><li><a href="/tools/css-gradient-generator/">CSS Gradient Generator</a></li><li><a href="/tools/css-box-shadow/">CSS Box Shadow Generator</a></li><li><a href="/tools/color-palette-generator/">Color Palette Generator</a></li><li><a href="/tools/word-counter/">Word and Character Counter</a></li><li><a href="/tools/">All 17 tools</a></li></ul></nav>
+    <nav class="foot-col" aria-label="Tool categories"><h2>Categories</h2><ul><li><a href="/tools/#developer">Developer tools</a></li><li><a href="/tools/#design">CSS and design</a></li><li><a href="/tools/#text">Text tools</a></li><li><a href="/tools/#files">Images and files</a></li><li><a href="/tools/#calculators">Calculators</a></li></ul></nav>
+    <nav class="foot-col" aria-label="AI news"><h2>AI news</h2><ul><li><a href="/ai-news/">Latest stories</a></li><li><a href="/ai-news/openai/">OpenAI</a></li><li><a href="/ai-news/google/">Google</a></li><li><a href="/ai-news/anthropic/">Anthropic</a></li><li><a href="/ai-news/nvidia/">Nvidia</a></li><li><a href="/ai-news/microsoft/">Microsoft</a></li><li><a href="/ai-news/apple/">Apple</a></li><li><a href="/ai-news/meta/">Meta</a></li><li><a href="/ai-news/policy/">Policy and regulation</a></li></ul></nav>
+  </div>
+  <div class="foot-bottom">
+    <p>© <span id="year">2026</span> Web Online Tools</p>
+    <p class="foot-links"><a href="/ai-news/editorial-policy.html">Editorial policy</a><a href="/#about">About</a></p>
   </div>
 </footer>
+<script>
+(function () {
+  var btn = document.querySelector(".menu-btn"), nav = document.getElementById("main-nav");
+  if (btn && nav) btn.addEventListener("click", function () {
+    var open = nav.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+  var y = document.getElementById("year"); if (y) y.textContent = new Date().getFullYear();
+  var items = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    items.forEach(function (el) { el.classList.add("in"); }); return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+<script>
+document.querySelectorAll("[data-copy]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    navigator.clipboard.writeText(b.getAttribute("data-copy")).then(function () {
+      var s = b.querySelector("span"); s.textContent = "Copied"; setTimeout(function () { s.textContent = "Copy link"; }, 1800);
+    });
+  });
+});
+</script>
 </body>
 </html>

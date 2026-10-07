@@ -1,9 +1,9 @@
 """
 Builds the files that live at the root of webonlinetools.com (everything outside /ai-news/).
 
-Reads:   root-site/tools.json            the tools registry (names, titles, descriptions, categories)
+Reads:   root-site/tools.json            the tools registry (names, titles, descriptions, categories, icons)
          root-site/src/tools/<slug>/      each tool's page (its own UI and script)
-         root-site/src/assets/tools.css   shared header, footer and font styles
+         assets/ui.css, scripts/uikit.py  the shared design, header, footer and icons (same as the blog)
          data/companies.json, data/hubs.json, index.json   AI news hubs and latest stories (from the blog)
 Writes:  root-site/dist/                  upload this folder's contents to Hostinger public_html
          root-site/lastmod.json           remembers when each page last changed, for the sitemap
@@ -16,19 +16,24 @@ import json
 import os
 import re
 import shutil
+import sys
 from datetime import datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
+sys.path.insert(0, os.path.join(REPO, "scripts"))
+import uikit  # noqa: E402  (shared with the blog build)
+
 DIST = os.path.join(HERE, "dist")
 SITE = "https://webonlinetools.com"
 BRAND = " | Web Online Tools"
 VERIFY = '<meta name="google-site-verification" content="2yOkCxBls80UcV_za_vpGqbxg_nIOjhLNQqcEFoGEZc">'
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
-         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700'
+         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800'
          '&family=JetBrains+Mono:wght@400;500&display=swap">')
 TODAY = datetime.now(timezone.utc).date().isoformat()
+icon = uikit.icon
 
 
 def esc(text):
@@ -61,8 +66,9 @@ def write(rel, text):
 
 # ── shared pieces ─────────────────────────────────────────────────────
 
-def head_block(*, title, description, canonical, schema, ogtype="website", css_version="", verify=False):
+def head_block(*, title, description, canonical, schema, css_version, ogtype="website", verify=False):
     return "\n".join(filter(None, [
+        uikit.JS_FLAG,
         f"<title>{esc(seo_title(title))}</title>",
         f'<meta name="description" content="{esc(description)}">',
         '<meta name="robots" content="index, follow">',
@@ -73,46 +79,19 @@ def head_block(*, title, description, canonical, schema, ogtype="website", css_v
         f'<meta property="og:description" content="{esc(description)}">',
         f'<meta property="og:url" content="{canonical}">',
         '<meta name="twitter:card" content="summary">',
+        '<meta name="theme-color" content="#060b18">',
         VERIFY if verify else "",
         '<link rel="icon" type="image/svg+xml" href="/favicon.svg">',
         FONTS,
-        f'<link rel="stylesheet" href="/assets/tools.css?v={css_version}">',
+        f'<link rel="stylesheet" href="/assets/ui.css?v={css_version}">',
         schema,
     ]))
 
 
-def header(current=None):
-    def link(href, label, key):
-        return f'<a href="{href}"' + (' aria-current="page"' if key == current else "") + f">{label}</a>"
-    return ('<header class="wot-header"><div class="wot-header-inner">'
-            '<a class="wot-brand" href="/">Web Online Tools</a>'
-            '<nav class="wot-nav" aria-label="Main">'
-            + link("/tools/", "All tools", "tools") + link("/ai-news/", "AI news", "news")
-            + "</nav></div></header>")
-
-
-def footer(reg, hubs):
-    cols = []
-    for cat in reg["categories"]:
-        items = [t for t in reg["tools"] if t["category"] == cat["slug"]]
-        links = "".join(f'<li><a href="/tools/{t["slug"]}/">{esc(t["name"])}</a></li>' for t in items)
-        cols.append(f'<div><h2>{esc(cat["name"])}</h2><ul>{links}</ul></div>')
-    if hubs:
-        links = "".join(f'<li><a href="/ai-news/{h["slug"]}/">{esc(h["name"])}</a></li>' for h in hubs)
-        cols.append(f'<div><h2>AI news</h2><ul><li><a href="/ai-news/">All stories</a></li>{links}</ul></div>')
-    return ('<footer class="wot-footer"><div class="wot-footer-inner">'
-            f'<div class="wot-footer-cols">{"".join(cols)}</div>'
-            '<p class="wot-footer-note">© <span id="year">' + TODAY[:4] + '</span> Web Online Tools. '
-            'Every tool runs in your browser; your files and text are not uploaded. '
-            '<a href="/ai-news/editorial-policy.html">Editorial policy</a></p>'
-            "</div></footer>")
-
-
 def crumbs(items):
-    parts = []
-    for i, (name, href) in enumerate(items):
-        parts.append(f'<a href="{href}">{esc(name)}</a>' if i < len(items) - 1 else f'<span aria-current="page">{esc(name)}</span>')
-    return '<nav class="wot-crumbs" aria-label="Breadcrumb">' + '<span aria-hidden="true"> / </span>'.join(parts) + "</nav>"
+    parts = [f'<a href="{href}">{esc(name)}</a>' if i < len(items) - 1 else f'<span aria-current="page">{esc(name)}</span>'
+             for i, (name, href) in enumerate(items)]
+    return '<nav class="crumbs" aria-label="Breadcrumb">' + '<span class="sep">/</span>'.join(parts) + "</nav>"
 
 
 def breadcrumb_schema(items):
@@ -120,9 +99,24 @@ def breadcrumb_schema(items):
         {"@type": "ListItem", "position": i, "name": n, "item": SITE + h} for i, (n, h) in enumerate(items, 1)]}
 
 
-def tool_card(t, heading="h3"):
-    return (f'<li class="wot-card"><a href="/tools/{t["slug"]}/"><{heading}>{esc(t["name"])}</{heading}>'
-            f'<p>{esc(t["card"])}</p></a></li>')
+def tool_card(t, cats, delay=0.0):
+    cat = cats[t["category"]]
+    search = esc(f'{t["name"]} {t["card"]} {cat["name"]}'.lower())
+    return (f'<li class="reveal" style="--d:{delay:.2f}s" data-search="{search}">'
+            f'<a class="card" href="/tools/{t["slug"]}/"><span class="tool-icon">{icon(t["icon"], 24)}</span>'
+            f'<h3>{esc(t["name"])}</h3><p>{esc(t["card"])}</p>'
+            f'<div class="card-foot"><span>{esc(cat["name"])}</span><span class="card-go">Open {icon("arrow", 16)}</span></div>'
+            f"</a></li>")
+
+
+def news_card(p, delay=0.0):
+    color = uikit.hub_color(p.get("categorySlug", ""))
+    return (f'<li class="reveal" style="--d:{delay:.2f}s"><a class="card news-card" href="{esc(p["url"])}">'
+            f'<div class="meta"><span class="badge" style="--badge:{color}">{esc(p.get("category", "AI news"))}</span>'
+            f'<span class="meta-item">{icon("calendar", 14)}{esc(p["date"])}</span></div>'
+            f'<h3>{esc(p["title"])}</h3><p>{esc(p.get("excerpt", ""))}</p>'
+            f'<div class="card-foot"><span class="meta-item">{icon("clock", 14)}{p.get("readTime", 4)} min read</span>'
+            f'<span class="card-go">Read {icon("arrow", 16)}</span></div></a></li>')
 
 
 # ── tool pages ────────────────────────────────────────────────────────
@@ -132,7 +126,7 @@ APP_CATEGORY = {"developer": "DeveloperApplication", "design": "DesignApplicatio
 
 STRIP_HEAD = [
     r"<title>.*?</title>",
-    r'<meta\s+name="(?:description|keywords|robots|google-site-verification|twitter:[^"]*)"[^>]*>',
+    r'<meta\s+name="(?:description|keywords|robots|google-site-verification|theme-color|twitter:[^"]*)"[^>]*>',
     r'<meta\s+property="og:[^"]*"[^>]*>',
     r'<link\s+rel="canonical"[^>]*>',
     r'<link\s+rel="icon"[^>]*>',
@@ -147,7 +141,8 @@ STRIP_HEAD = [
 def build_tool(t, reg, hubs, css_version):
     src = open(os.path.join(HERE, "src", "tools", t["slug"], "index.html"), encoding="utf-8").read()
     url = f"{SITE}/tools/{t['slug']}/"
-    cat = next(c for c in reg["categories"] if c["slug"] == t["category"])
+    cats = {c["slug"]: c for c in reg["categories"]}
+    cat = cats[t["category"]]
     trail = [("Home", "/"), ("Tools", "/tools/"), (t["name"], f"/tools/{t['slug']}/")]
 
     head_end = src.index("</head>")
@@ -163,33 +158,29 @@ def build_tool(t, reg, hubs, css_version):
          "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
          "publisher": {"@type": "Organization", "name": "Web Online Tools", "url": SITE + "/"}},
         breadcrumb_schema(trail)]})
-    seo = head_block(title=t["title"], description=t["description"], canonical=url, schema=schema,
-                     ogtype="website", css_version=css_version)
+    seo = head_block(title=t["title"], description=t["description"], canonical=url, schema=schema, css_version=css_version)
     head = re.sub(r'(<meta\s+name="viewport"[^>]*>)', lambda m: m.group(1) + "\n" + seo, head, count=1)
 
-    # one shared header and footer on every page
-    body = re.sub(r'<header class="site-header".*?</header>', header("tools"), body, count=1, flags=re.S)
-    body = re.sub(r'<footer class="site-footer".*?</footer>', footer(reg, hubs), body, count=1, flags=re.S)
-    # the H1 says what the page is for, in the words people search
+    body = re.sub(r'<header class="site-header".*?</header>', uikit.header("tools"), body, count=1, flags=re.S)
+    body = re.sub(r'<footer class="site-footer".*?</footer>', uikit.footer(reg, hubs), body, count=1, flags=re.S)
     body = re.sub(r"(<h1[^>]*>).*?(</h1>)", lambda m: m.group(1) + esc(t["h1"]) + m.group(2), body, count=1, flags=re.S)
-    # breadcrumb at the top of main
     body = re.sub(r"(<main[^>]*>)", lambda m: m.group(1) + "\n  " + crumbs(trail), body, count=1)
-    # replace the old hand-made link chips with related tools from the registry
     body = re.sub(r'<div class="flex flex-wrap gap-3 mt-10[^"]*">\s*(?:<a [^>]*class="tag-link"[^>]*>.*?</a>\s*)+</div>',
                   "", body, flags=re.S)
     by_slug = {x["slug"]: x for x in reg["tools"]}
     related = [by_slug[s] for s in t.get("related", []) if s in by_slug]
-    block = ('<section class="wot-related" aria-labelledby="related-tools"><h2 id="related-tools">Related tools</h2>'
-             '<ul class="wot-grid">' + "".join(tool_card(r) for r in related) + "</ul>"
-             f'<p class="wot-more"><a href="/tools/#{cat["slug"]}">More {esc(cat["name"].lower())}</a> · '
-             '<a href="/tools/">All tools</a></p></section>')
+    block = (f'<section class="related-tools" aria-labelledby="related-tools-title">'
+             f'<div class="section-head"><h2 class="block-title" id="related-tools-title">{icon(cat["icon"], 22)}Related tools</h2>'
+             f'<a class="link-arrow" href="/tools/#{cat["slug"]}">More {esc(cat["name"].lower())} {icon("arrow", 16)}</a></div>'
+             f'<ul class="ui-grid ui-grid-3">{"".join(tool_card(r, cats, i * 0.06) for i, r in enumerate(related))}</ul></section>')
     body = body.replace("</main>", block + "\n</main>", 1)
+    body = body.replace("</body>", uikit.UI_SCRIPT + "\n</body>", 1)
     write(f"tools/{t['slug']}/index.html", head + body)
 
 
 # ── homepage and tools index ─────────────────────────────────────────
 
-def page(*, title, description, canonical, schema, main, current, reg, hubs, css_version, verify=False):
+def page(*, title, description, canonical, schema, main, current, reg, hubs, css_version, verify=False, script=""):
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -197,123 +188,164 @@ def page(*, title, description, canonical, schema, main, current, reg, hubs, css
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {head_block(title=title, description=description, canonical=canonical, schema=schema, css_version=css_version, verify=verify)}
 </head>
-<body class="wot-page">
-{header(current)}
-<main class="wot-main" id="content">
+<body class="ui">
+{uikit.header(current)}
+<main id="content">
 {main}
 </main>
-{footer(reg, hubs)}
+{uikit.footer(reg, hubs)}
+{uikit.UI_SCRIPT}
+{script}
 </body>
 </html>
 """
 
 
 def build_home(reg, hubs, news, css_version):
+    cats = {c["slug"]: c for c in reg["categories"]}
+    n = len(reg["tools"])
     featured = [t for t in reg["tools"] if t.get("featured")]
-    sections = []
-    for cat in reg["categories"]:
-        items = [t for t in reg["tools"] if t["category"] == cat["slug"]]
-        links = "".join(f'<li><a href="/tools/{t["slug"]}/">{esc(t["name"])}</a></li>' for t in items)
-        sections.append(f'<div><h3><a href="/tools/#{cat["slug"]}">{esc(cat["name"])}</a></h3><ul>{links}</ul></div>')
-    stories = "".join(
-        f'<li><a href="{esc(p["url"])}">{esc(p["title"])}</a><span>{esc(p["date"])}</span></li>' for p in news[:5])
-    hub_links = " ".join(f'<a href="/ai-news/{h["slug"]}/">{esc(h["name"])}</a>' for h in hubs)
-    main = f"""
-<section class="wot-hero">
-  <h1>Free online tools for developers, designers and writers</h1>
-  <p class="wot-lead">{len(reg["tools"])} small tools that do one job well: format JSON, build CSS, convert images and PDFs, clean up text and more. Everything runs in your browser, so nothing you paste or upload leaves your device.</p>
-  <p><a class="wot-button" href="/tools/">Browse all {len(reg["tools"])} tools</a></p>
+    cat_tiles = "".join(
+        f'<li class="reveal" style="--d:{i * 0.05:.2f}s"><a class="card cat-tile" href="/tools/#{c["slug"]}">'
+        f'<span class="tool-icon">{icon(c["icon"], 24)}</span><span><h3>{esc(c["name"])}</h3>'
+        f'<p>{sum(1 for t in reg["tools"] if t["category"] == c["slug"])} tools</p></span></a></li>'
+        for i, c in enumerate(reg["categories"]))
+    counts = {}
+    for p in news:
+        counts[p.get("categorySlug", "")] = counts.get(p.get("categorySlug", ""), 0) + 1
+    chips = "".join(
+        f'<li><a class="chip" style="--badge:{uikit.hub_color(h["slug"])}" href="/ai-news/{h["slug"]}/"><span class="dot"></span>{esc(h["name"])}</a></li>'
+        for h in hubs)
+    features = [
+        ("shield", "Private by design", "Everything runs in your browser. Text, images and PDFs are processed on your device and never uploaded."),
+        ("zap", "Instant results", "No waiting for a server. Tools respond as you type, even on a slow connection."),
+        ("gift", "Free, no sign-up", "No account, no trial and no paywall. Open a tool and use it."),
+        ("book", "Sourced AI news", "Daily AI stories that link to the announcements and reports they are based on."),
+    ]
+    feature_cards = "".join(
+        f'<li class="reveal" style="--d:{i * 0.06:.2f}s"><div class="card feature"><span class="tool-icon">{icon(ic, 24)}</span>'
+        f'<h3>{esc(h)}</h3><p>{esc(d)}</p></div></li>' for i, (ic, h, d) in enumerate(features))
+    main = f"""<section class="hero hero-center">
+  <div class="container">
+    <span class="pill reveal"><span class="dot">{icon("sparkles", 13)}</span>{n} free tools, no sign-up</span>
+    <h1 class="reveal" style="--d:.05s">Free online tools for<br><span class="grad-text">developers, designers and writers</span></h1>
+    <p class="lead reveal" style="--d:.1s">Format JSON, build CSS, convert images and PDFs, clean up text and more. Everything runs in your browser, so nothing you paste or upload leaves your device.</p>
+    <form class="search reveal" style="--d:.15s" action="/tools/" method="get" role="search">
+      {icon("search", 20)}<label class="is-hidden" for="home-search">Search tools</label>
+      <input type="search" id="home-search" name="q" placeholder="Search tools, for example: json, webp, password regex" autocomplete="off">
+    </form>
+    <div class="hero-actions reveal" style="--d:.2s;margin-top:22px">
+      <a class="ui-btn ui-btn-primary" href="/tools/">Browse all {n} tools {icon("arrow", 16)}</a>
+      <a class="ui-btn ui-btn-ghost" href="/ai-news/">{icon("news", 16)} Latest AI news</a>
+    </div>
+  </div>
 </section>
 
-<section aria-labelledby="popular">
-  <h2 id="popular">Popular tools</h2>
-  <ul class="wot-grid">{"".join(tool_card(t) for t in featured)}</ul>
-</section>
+<div class="container">
+  <section class="section" aria-labelledby="by-task" style="padding-top:20px">
+    <div class="section-head"><div><h2 id="by-task">Find a tool by task</h2><p>Five groups, each one a click away.</p></div></div>
+    <ul class="ui-grid ui-grid-4" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr))">{cat_tiles}</ul>
+  </section>
 
-<section aria-labelledby="by-task">
-  <h2 id="by-task">Tools by task</h2>
-  <div class="wot-columns">{"".join(sections)}</div>
-</section>
+  <section class="section" aria-labelledby="popular">
+    <div class="section-head"><div><h2 id="popular">Popular tools</h2><p>The tools people open most often.</p></div>
+      <a class="link-arrow" href="/tools/">All {n} tools {icon("arrow", 16)}</a></div>
+    <ul class="ui-grid ui-grid-4">{"".join(tool_card(t, cats, (i % 4) * 0.05) for i, t in enumerate(featured))}</ul>
+    <h3 style="font-size:1rem;color:var(--t2);margin:32px 0 14px">More tools</h3>
+    <ul class="chips reveal">{"".join(f'<li><a class="chip" href="/tools/{t["slug"]}/">{icon(t["icon"], 16)}{esc(t["name"])}</a></li>' for t in reg["tools"] if not t.get("featured"))}</ul>
+  </section>
 
-<section aria-labelledby="latest-news">
-  <h2 id="latest-news">Latest AI news</h2>
-  <p class="wot-muted">Short, sourced stories about AI models, companies and policy. Browse by company: {hub_links}</p>
-  <ul class="wot-news" id="news-list">{stories}</ul>
-  <p><a href="/ai-news/">All AI news</a></p>
-</section>
+  <section class="section" aria-labelledby="latest-news">
+    <div class="section-head"><div><h2 id="latest-news">Latest AI news</h2><p>Short, sourced stories about AI models, companies and policy.</p></div>
+      <a class="link-arrow" href="/ai-news/">All stories {icon("arrow", 16)}</a></div>
+    <ul class="chips reveal" style="margin-bottom:22px">{chips}</ul>
+    <ul class="ui-grid ui-grid-3" id="news-list">{"".join(news_card(p, i * 0.06) for i, p in enumerate(news[:3]))}</ul>
+  </section>
 
-<section aria-labelledby="about">
-  <h2 id="about">About Web Online Tools</h2>
-  <p>Web Online Tools is a free collection of browser-based utilities. Each tool processes your data with JavaScript on your own device: there is no account, no upload and no tracking of what you type. The AI news section is researched and drafted with AI assistance and checked against its sources before it is published; read the <a href="/ai-news/editorial-policy.html">editorial policy</a> for details.</p>
-</section>
-
-<script>
-// Refresh the news list with the newest stories; the list above already works without JavaScript.
-fetch("/ai-news/index.json").then(r => r.ok ? r.json() : []).then(posts => {{
-  if (!posts.length) return;
-  const esc = s => String(s).replace(/[&<>"']/g, c => ({{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}}[c]));
-  document.getElementById("news-list").innerHTML = posts.slice(0, 5)
-    .map(p => `<li><a href="${{esc(p.url)}}">${{esc(p.title)}}</a><span>${{esc(p.date)}}</span></li>`).join("");
-}}).catch(() => {{}});
-</script>"""
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="section-head"><div><h2 id="about-title">Why Web Online Tools</h2>
+      <p>A free collection of small, focused utilities, plus an AI news section checked against its sources. Read the <a href="/ai-news/editorial-policy.html">editorial policy</a>.</p></div></div>
+    <ul class="ui-grid ui-grid-4">{feature_cards}</ul>
+  </section>
+</div>"""
     schema = json_ld({"@context": "https://schema.org", "@graph": [
         {"@type": "WebSite", "@id": SITE + "/#website", "url": SITE + "/", "name": "Web Online Tools",
-         "description": "Free browser-based tools for developers, designers and writers, plus sourced AI news."},
-        {"@type": "Organization", "@id": SITE + "/#org", "name": "Web Online Tools", "url": SITE + "/",
-         "logo": SITE + "/favicon.svg"}]})
+         "description": "Free browser-based tools for developers, designers and writers, plus sourced AI news.",
+         "potentialAction": {"@type": "SearchAction", "target": {"@type": "EntryPoint", "urlTemplate": SITE + "/tools/?q={search_term_string}"},
+                             "query-input": "required name=search_term_string"}},
+        {"@type": "Organization", "@id": SITE + "/#org", "name": "Web Online Tools", "url": SITE + "/", "logo": SITE + "/favicon.svg"}]})
     write("index.html", page(
         title="Web Online Tools: Free Developer, Design and Text Tools",
-        description=f"{len(reg['tools'])} free tools that run in your browser: format JSON, build CSS gradients and shadows, "
+        description=f"{n} free tools that run in your browser: format JSON, build CSS gradients and shadows, "
                     "convert images and PDFs, clean lists and more. No sign-up, no uploads.",
         canonical=SITE + "/", schema=schema, main=main, current=None, reg=reg, hubs=hubs,
         css_version=css_version, verify=True))
 
 
-def build_tools_index(reg, hubs, css_version):
-    blocks = []
-    for cat in reg["categories"]:
-        items = [t for t in reg["tools"] if t["category"] == cat["slug"]]
-        blocks.append(f'<section id="{cat["slug"]}" class="wot-cat" aria-labelledby="h-{cat["slug"]}">'
-                      f'<h2 id="h-{cat["slug"]}">{esc(cat["name"])}</h2><p class="wot-muted">{esc(cat["about"])}</p>'
-                      f'<ul class="wot-grid">{"".join(tool_card(t) for t in items)}</ul></section>')
-    trail = [("Home", "/"), ("Tools", "/tools/")]
-    main = f"""{crumbs(trail)}
-<section class="wot-hero wot-hero-small">
-  <h1>All free online tools</h1>
-  <p class="wot-lead">{len(reg["tools"])} browser-based tools, grouped by task. Nothing to install, and your files stay on your device.</p>
-  <label class="wot-search"><span class="wot-visually-hidden">Filter tools</span>
-    <input type="search" id="tool-filter" placeholder="Filter tools, for example: json, color, pdf" autocomplete="off"></label>
-  <p id="no-match" class="wot-muted" hidden>No tools match that search.</p>
-</section>
-{"".join(blocks)}
-<script>
-// Optional filter; every tool link is already in the page for search engines and keyboard users.
-const box = document.getElementById("tool-filter");
-box.addEventListener("input", () => {{
-  const q = box.value.trim().toLowerCase();
-  let shown = 0;
-  document.querySelectorAll(".wot-cat").forEach(sec => {{
-    let any = false;
-    sec.querySelectorAll(".wot-card").forEach(card => {{
-      const hit = !q || card.textContent.toLowerCase().includes(q);
-      card.hidden = !hit; any = any || hit; if (hit) shown++;
-    }});
-    sec.hidden = !any;
-  }});
-  document.getElementById("no-match").hidden = shown > 0;
-}});
+TOOLS_SCRIPT = """<script>
+(function () {
+  var box = document.getElementById("tool-filter"), empty = document.getElementById("no-match");
+  function run() {
+    var q = box.value.trim().toLowerCase(), shown = 0;
+    document.querySelectorAll(".tool-section").forEach(function (sec) {
+      var any = false;
+      sec.querySelectorAll("li[data-search]").forEach(function (li) {
+        var hit = !q || li.getAttribute("data-search").indexOf(q) > -1;
+        li.classList.toggle("is-hidden", !hit); if (hit) { any = true; shown++; li.classList.add("in"); }
+      });
+      sec.classList.toggle("is-hidden", !any);
+    });
+    empty.style.display = shown ? "none" : "block";
+  }
+  var q = new URLSearchParams(location.search).get("q");
+  if (q) { box.value = q; }
+  box.addEventListener("input", run);
+  run();
+})();
 </script>"""
+
+
+def build_tools_index(reg, hubs, css_version):
+    cats = {c["slug"]: c for c in reg["categories"]}
+    n = len(reg["tools"])
+    chips = "".join(f'<li><a class="chip" href="#{c["slug"]}">{icon(c["icon"], 16)}{esc(c["name"])}</a></li>' for c in reg["categories"])
+    sections = []
+    for c in reg["categories"]:
+        items = [t for t in reg["tools"] if t["category"] == c["slug"]]
+        sections.append(
+            f'<section class="section tool-section" id="{c["slug"]}" aria-labelledby="h-{c["slug"]}" style="scroll-margin-top:80px;padding:36px 0">'
+            f'<div class="section-head"><div><h2 id="h-{c["slug"]}" style="display:flex;align-items:center;gap:12px">'
+            f'<span class="tool-icon" style="margin:0;width:40px;height:40px">{icon(c["icon"], 20)}</span>{esc(c["name"])}</h2>'
+            f'<p>{esc(c["about"])}</p></div></div>'
+            f'<ul class="ui-grid ui-grid-4">{"".join(tool_card(t, cats, (i % 4) * 0.05) for i, t in enumerate(items))}</ul></section>')
+    trail = [("Home", "/"), ("Tools", "/tools/")]
+    main = f"""<section class="hero hero-center" style="padding-bottom:20px">
+  <div class="container">
+    {crumbs(trail)}
+    <span class="pill reveal" style="margin-top:28px"><span class="dot">{icon("grid", 13)}</span>{n} tools in 5 groups</span>
+    <h1 class="reveal" style="--d:.05s">All free <span class="grad-text">online tools</span></h1>
+    <p class="lead reveal" style="--d:.1s">Browser-based tools for developers, designers and writers. Nothing to install, and your files stay on your device.</p>
+    <label class="search reveal" style="--d:.15s">{icon("search", 20)}<span class="is-hidden">Filter tools</span>
+      <input type="search" id="tool-filter" placeholder="Filter tools, for example: json, color, pdf" autocomplete="off"></label>
+    <ul class="chips reveal" style="--d:.2s;justify-content:center;margin-top:24px">{chips}</ul>
+  </div>
+</section>
+<div class="container">
+  {"".join(sections)}
+  <p class="empty-state" id="no-match">No tools match that search. Try another word, or <a href="/tools/">see all tools</a>.</p>
+</div>"""
     schema = json_ld({"@context": "https://schema.org", "@graph": [
         {"@type": "CollectionPage", "name": "All free online tools", "url": SITE + "/tools/",
-         "mainEntity": {"@type": "ItemList", "numberOfItems": len(reg["tools"]), "itemListElement": [
+         "mainEntity": {"@type": "ItemList", "numberOfItems": n, "itemListElement": [
              {"@type": "ListItem", "position": i, "name": t["name"], "url": f"{SITE}/tools/{t['slug']}/"}
              for i, t in enumerate(reg["tools"], 1)]}},
         breadcrumb_schema(trail)]})
     write("tools/index.html", page(
         title="All Free Online Tools",
-        description=f"Browse all {len(reg['tools'])} free browser-based tools for developers, designers and writers, "
+        description=f"Browse all {n} free browser-based tools for developers, designers and writers, "
                     "grouped by task. Nothing to install, and your files never leave your device.",
-        canonical=SITE + "/tools/", schema=schema, main=main, current="tools", reg=reg, hubs=hubs, css_version=css_version))
+        canonical=SITE + "/tools/", schema=schema, main=main, current="tools", reg=reg, hubs=hubs,
+        css_version=css_version, script=TOOLS_SCRIPT))
 
 
 def build_registry_json(reg):
@@ -365,9 +397,9 @@ def main():
     if os.path.exists(DIST):
         shutil.rmtree(DIST)
     os.makedirs(DIST)
-    css = open(os.path.join(HERE, "src", "assets", "tools.css"), encoding="utf-8").read()
+    css = open(os.path.join(REPO, "assets", "ui.css"), encoding="utf-8").read()
     css_version = hashlib.md5(css.encode()).hexdigest()[:8]
-    write("assets/tools.css", css)
+    write("assets/ui.css", css)
     shutil.copy(os.path.join(HERE, "src", "favicon.svg"), os.path.join(DIST, "favicon.svg"))
     for t in reg["tools"]:
         build_tool(t, reg, hubs, css_version)

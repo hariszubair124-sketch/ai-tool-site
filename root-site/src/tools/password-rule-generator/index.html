@@ -195,7 +195,7 @@
     <p style="max-width: 650px; margin: 0 auto;">Set your password rules and get a regex and HTML pattern to paste into a sign-up form. Test passwords against the rules, or generate strong passwords that meet them.</p>
   </section>
 
-  <div class="app-card">
+  <section class="app-card">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10">
       
       <!-- COL 1: Generator -->
@@ -206,7 +206,7 @@
           <input type="text" id="password-output" class="text-input mb-4" placeholder="Generated Password" readonly onclick="copyGeneratedPassword()" />
           <div class="flex gap-3">
             <button onclick="generatePassword()" class="btn-action flex-grow">Generate</button>
-            <button onclick="copyGeneratedPassword()" class="btn-ghost flex-none w-auto">Copy</button>
+            <button onclick="copyGeneratedPassword()" class="btn-ghost flex-none w-auto" style="width:auto">Copy</button>
           </div>
         </div>
 
