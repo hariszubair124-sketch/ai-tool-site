@@ -1,0 +1,10 @@
+# Keep build files private; only the blog pages and index.json/sitemap.xml are public.
+<FilesMatch "^(main\.py|template\.html|README\.md|files\.json|\.last-run|testing\.hmtl)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>

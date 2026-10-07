@@ -2,6 +2,7 @@ import os
 import re
 import time
 import json
+import html as html_lib
 import unicodedata
 import argparse
 from datetime import datetime
@@ -124,87 +125,104 @@ def build_full_page(save_dir, article_html, title, excerpt, filename, date_displ
     return page
 
 
-def update_manifests(save_dir, new_post):
-    """Updates files.json and index.json."""
-
-    # ── files.json ──
-    files_path = os.path.join(save_dir, 'files.json')
-    if os.path.exists(files_path):
-        with open(files_path, 'r', encoding='utf-8') as f:
-            files_list = json.load(f)
-    else:
-        files_list = sorted(
-            [fn for fn in os.listdir(save_dir)
-             if fn.endswith('.html') and os.path.isfile(os.path.join(save_dir, fn))],
-            key=lambda fn: os.path.getmtime(os.path.join(save_dir, fn))
-        )
-
-    filename = os.path.basename(new_post['url'])
-    if filename and filename not in files_list:
-        files_list.append(filename)
-
-    with open(files_path, 'w', encoding='utf-8') as f:
-        json.dump(files_list, f, indent=2)
-
-    # ── index.json ──
-    index_path = os.path.join(save_dir, 'index.json')
-    if os.path.exists(index_path):
-        with open(index_path, 'r', encoding='utf-8') as f:
-            index_list = json.load(f)
-    else:
-        index_list = []
-
-    index_list = [p for p in index_list if p.get('url') != new_post['url']]
-    index_list.insert(0, new_post)
-    index_list = index_list[:20]
-
-    with open(index_path, 'w', encoding='utf-8') as f:
-        json.dump(index_list, f, indent=2, ensure_ascii=False)
-
-    print(f"   📋 files.json → {len(files_list)} file(s)")
-    print(f"   📋 index.json → {len(index_list)} post(s)")
+SITE_URL      = "https://webonlinetools.com"
+NON_POST_HTML = {'index.html', 'template.html'}
 
 
-def update_sitemap(save_dir, filename, date_str):
+def collect_posts(save_dir):
+    """Reads every post file in save_dir and returns post records, newest first."""
+    posts = []
+    for fn in os.listdir(save_dir):
+        if not fn.endswith('.html') or fn in NON_POST_HTML:
+            continue
+        path = os.path.join(save_dir, fn)
+        if not os.path.isfile(path):
+            continue
+        with open(path, 'r', encoding='utf-8') as f:
+            html = f.read()
+
+        m = re.search(r'"datePublished":\s*"([^"]+)"', html)
+        try:
+            published = datetime.fromisoformat(m.group(1)) if m else None
+        except ValueError:
+            published = None
+        if published is None:
+            published = datetime.fromtimestamp(os.path.getmtime(path))
+
+        m = re.search(r'<meta\s+name="description"\s+content="([^"]*)"', html, re.IGNORECASE)
+        excerpt = html_lib.unescape(m.group(1)).strip() if m else ""
+        title = html_lib.unescape(extract_title(html)) or fn[:-5].replace('-', ' ').title()
+
+        posts.append({
+            "url":       f"/ai-news/{fn}",
+            "title":     title,
+            "excerpt":   excerpt,
+            "date":      published.strftime("%b %d, %Y"),
+            "_file":     fn,
+            "_published": published,
+        })
+    posts.sort(key=lambda p: p["_published"], reverse=True)
+    return posts
+
+
+def write_sitemap(save_dir, posts):
+    """Writes ai-news/sitemap.xml listing the blog index and every post."""
+    newest = posts[0]["_published"].strftime("%Y-%m-%d") if posts else datetime.now().strftime("%Y-%m-%d")
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+        f'  <url><loc>{SITE_URL}/ai-news/</loc><lastmod>{newest}</lastmod></url>',
+    ]
+    for p in posts:
+        loc = html_lib.escape(f"{SITE_URL}/ai-news/{p['_file']}")
+        lines.append(f'  <url><loc>{loc}</loc><lastmod>{p["_published"].strftime("%Y-%m-%d")}</lastmod></url>')
+    lines.append('</urlset>')
+    with open(os.path.join(save_dir, 'sitemap.xml'), 'w', encoding='utf-8') as f:
+        f.write("\n".join(lines) + "\n")
+    print(f"   🗺️  sitemap.xml → {len(posts)} post(s)")
+
+
+def write_static_archive(save_dir, posts):
     """
-    Adds the new blog post URL into sitemap.xml between
-    <!-- BLOG_POSTS_START --> and <!-- BLOG_POSTS_END --> markers.
-    Skips if the URL already exists in the sitemap.
+    Writes a plain-HTML list of every post into index.html between
+    <!-- STATIC_ARCHIVE_START --> and <!-- STATIC_ARCHIVE_END -->,
+    so search engines can follow links without running JavaScript.
     """
-    sitemap_path = os.path.join(save_dir, 'sitemap.xml')
+    index_path = os.path.join(save_dir, 'index.html')
+    if not os.path.exists(index_path):
+        print("   ⚠️  index.html not found — skipping static archive")
+        return
+    with open(index_path, 'r', encoding='utf-8') as f:
+        page = f.read()
 
-    if not os.path.exists(sitemap_path):
-        print("   ⚠️  sitemap.xml not found — skipping sitemap update")
+    start, end = '<!-- STATIC_ARCHIVE_START -->', '<!-- STATIC_ARCHIVE_END -->'
+    if start not in page or end not in page:
+        print("   ⚠️  index.html missing STATIC_ARCHIVE markers — skipping")
         return
 
-    with open(sitemap_path, 'r', encoding='utf-8') as f:
-        sitemap = f.read()
-
-    public_url = f"https://webonlinetools.com/ai-news/{filename}"
-
-    # Skip if already exists
-    if public_url in sitemap:
-        print(f"   ℹ️  Sitemap already contains this URL — skipping")
-        return
-
-    new_entry = (
-        f"  <url>\n"
-        f"    <loc>{public_url}</loc>\n"
-        f"    <lastmod>{date_str}</lastmod>\n"
-        f"    <changefreq>monthly</changefreq>\n"
-        f"    <priority>0.7</priority>\n"
-        f"  </url>\n"
-        f"  <!-- BLOG_POSTS_END -->"
+    items = "\n".join(
+        f'          <li><a href="{html_lib.escape(p["url"])}">{html_lib.escape(p["title"])}</a>'
+        f'<time datetime="{p["_published"].strftime("%Y-%m-%d")}">{p["date"]}</time></li>'
+        for p in posts
     )
+    block = f"{start}\n        <ul class=\"all-posts-list\">\n{items}\n        </ul>\n        {end}"
+    page = page[:page.index(start)] + block + page[page.index(end) + len(end):]
+    with open(index_path, 'w', encoding='utf-8') as f:
+        f.write(page)
+    print(f"   🔗 index.html static archive → {len(posts)} link(s)")
 
-    # Inject before the closing marker
-    if '<!-- BLOG_POSTS_END -->' in sitemap:
-        sitemap = sitemap.replace('<!-- BLOG_POSTS_END -->', new_entry)
-        with open(sitemap_path, 'w', encoding='utf-8') as f:
-            f.write(sitemap)
-        print(f"   🗺️  sitemap.xml updated → {public_url}")
-    else:
-        print("   ⚠️  sitemap.xml missing BLOG_POSTS_END marker — skipping")
+
+def rebuild_site_files(save_dir):
+    """Regenerates index.json, files.json, sitemap.xml and the static archive from the post files."""
+    posts = collect_posts(save_dir)
+    public = [{k: v for k, v in p.items() if not k.startswith('_')} for p in posts]
+    with open(os.path.join(save_dir, 'index.json'), 'w', encoding='utf-8') as f:
+        json.dump(public, f, indent=2, ensure_ascii=False)
+    with open(os.path.join(save_dir, 'files.json'), 'w', encoding='utf-8') as f:
+        json.dump([p["_file"] for p in reversed(posts)], f, indent=2)
+    print(f"   📋 index.json → {len(posts)} post(s)")
+    write_sitemap(save_dir, posts)
+    write_static_archive(save_dir, posts)
 
 
 # ══════════════════════════════════════════
@@ -273,10 +291,7 @@ def run_dry_run(save_dir):
         "excerpt": excerpt,
         "date":    datetime.now().strftime("%b %d, %Y"),
     }
-    update_manifests(save_dir, new_post)
-
-    print("\nSTEP 6 — Updating sitemap")
-    update_sitemap(save_dir, filename, date_str)
+    rebuild_site_files(save_dir)
 
     print("\nSTEP 7 — Verification")
     all_ok = True
@@ -451,8 +466,7 @@ Now write the blog post. RAW HTML only, starting with <!-- META: -->
             "excerpt": excerpt,
             "date":    datetime.now().strftime("%b %d, %Y"),
         }
-        update_manifests(save_dir, new_post)
-        update_sitemap(save_dir, filename, date_str)
+        rebuild_site_files(save_dir)
 
     except Exception as e:
         print(f"❌ Fatal error: {e}")
@@ -467,9 +481,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="AI Blog Writer for webonlinetools.com")
     parser.add_argument('--dry-run',   action='store_true', help='Test without API calls')
     parser.add_argument('--posts-dir', default='.',         help='Directory to save files (default: repo root)')
+    parser.add_argument('--rebuild',   action='store_true', help='Only regenerate index.json, sitemap.xml and the archive')
     args = parser.parse_args()
 
-    if args.dry_run:
+    if args.rebuild:
+        rebuild_site_files(args.posts_dir)
+    elif args.dry_run:
         run_dry_run(args.posts_dir)
     else:
         run_live(args.posts_dir)
