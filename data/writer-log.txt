@@ -1,8 +1,10 @@
-Writer run 2026-10-08 06:59 UTC
+Writer run 2026-10-08 07:10 UTC
 Attempt 1 of 3
-   Gemini returned 7318 characters and 0 search links
-   rejected 'Microsoft unveils Windows hybrid AI: Surface Laptop Ultra': hype word in title
+   Gemini returned 5981 characters and 2 search links
+   drop source (link did not resolve): https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG5kW2Mt7gJg9Z6e2ZaKLr
+   rejected 'OpenAI AI discovers 722 new math theorems': only 1 verified source(s) from different sites
 Attempt 2 of 3
-   Gemini returned 5997 characters and 3 search links
-   drop source (link did not resolve): https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGlF24_oNc1I_TWyNQIwz3
-Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/meta-enhances-ai-new-tools-fight-child-exploitation-in-ads.json with 2 sources
+   Gemini returned 5737 characters and 3 search links
+   drop source (link did not resolve): https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF88p7pP5ohT3P_pbLElvK
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/danaher-launches-ai-lab-accelerates-life-sciences-research.json with 2 sources
+Added new company to data/companies.json: Danaher

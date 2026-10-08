@@ -17,5 +17,6 @@
   {"name": "SoftBank", "slug": "softbank", "match": ["softbank"], "about": "SoftBank's AI investments"},
   {"name": "Samsung", "slug": "samsung", "match": ["samsung"], "about": "Samsung's AI chips and devices"},
   {"name": "Moonshot AI", "slug": "moonshot", "match": ["moonshot", "kimi"], "about": "Moonshot AI's Kimi models"},
+  {"name": "Danaher", "slug": "danaher", "match": ["danaher"], "about": "Danaher's AI products, research and business news"},
   {"name": "Policy and regulation", "slug": "policy", "kind": "topic", "match": ["white house", "government", "regulat\\w*", "congress", "federal", "eu ai act", "export controls?", "senate", "pentagon", "un global dialogue", "us house", "national ai", "policy framework", "lawsuit", "sues"], "about": "AI laws, government rules, export controls and court cases", "title": "AI Policy and Regulation News"}
 ]
