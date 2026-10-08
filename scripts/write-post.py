@@ -42,8 +42,19 @@ ALLOWED_TAGS = {"h2", "h3", "p", "ul", "ol", "li", "strong", "em", "blockquote",
 
 # ── helpers ───────────────────────────────────────────────────────────
 
+LOG_LINES = []
+
+
 def log(msg):
     print(msg, flush=True)
+    LOG_LINES.append(str(msg))
+
+
+def save_log():
+    """Keeps the latest run's log in data/writer-log.txt (blocked from the public site) for debugging."""
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    with open(os.path.join(ROOT, "data", "writer-log.txt"), "w", encoding="utf-8") as f:
+        f.write(f"Writer run {stamp}\n" + "\n".join(LOG_LINES) + "\n")
 
 
 def words(text):
@@ -413,10 +424,11 @@ def main():
             except Exception as e:
                 log(f"Gemini call failed: {e}. Skipping today.")
                 return 0
+        log(f"   Gemini returned {len(text)} characters and {len(grounded)} search links")
         try:
             story = parse_story(text)
         except (ValueError, json.JSONDecodeError) as e:
-            log(f"   rejected: unreadable response ({e})")
+            log(f"   rejected: unreadable response ({e}). Start of response: {text[:300]!r}")
             continue
 
         problems = check_story(story, registry, now)
@@ -465,4 +477,12 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        code = main()
+    except Exception as e:  # record unexpected crashes too, then fail the run
+        log(f"Crashed: {type(e).__name__}: {e}")
+        save_log()
+        raise
+    if not any(a == "--dry-run" for a in sys.argv):
+        save_log()
+    sys.exit(code)
