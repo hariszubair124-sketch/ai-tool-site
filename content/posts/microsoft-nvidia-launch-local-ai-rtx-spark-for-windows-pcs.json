@@ -1,0 +1,33 @@
+{
+  "slug": "microsoft-nvidia-launch-local-ai-rtx-spark-for-windows-pcs",
+  "title": "Microsoft, Nvidia launch local AI: RTX Spark for Windows PCs",
+  "description": "Microsoft and Nvidia announced new local AI models and RTX Spark hardware for Windows PCs, including the Surface Laptop Ultra, on 7 October 2026.",
+  "keyword": "microsoft nvidia local ai windows pcs",
+  "published": "2026-10-08T10:10:04+00:00",
+  "updated": "",
+  "facts": {
+    "Who": "Microsoft, NVIDIA",
+    "What": "Launched new local AI models and RTX Spark hardware for Windows PCs, including the Surface Laptop Ultra. Announced general availability of Microsoft Execution Containers (MXC).",
+    "When": "7 October 2026",
+    "Status": "Preorders open for Surface Laptop Ultra and other RTX Spark laptops, shipping October 16. Compact desktops available in November. MXC generally available.",
+    "Official source": "NVIDIA, Microsoft (via event reports)"
+  },
+  "company": "Microsoft",
+  "sources": [
+    {
+      "title": "NVIDIA, Microsoft Kick Off a New Beginning for Windows PCs with RTX Spark and AI Agents",
+      "publisher": "NVIDIA",
+      "date": "2026-10-07",
+      "url": "https://blogs.nvidia.com/blog/local-ai-rtx-spark-microsoft-windows-event/"
+    },
+    {
+      "title": "Surface Laptop Ultra, Local Copilot AI, and More: Everything Announced at Microsoft's Fall Event | PCMag",
+      "publisher": "PCMag",
+      "date": "2026-10-07",
+      "url": "https://www.pcmag.com/news/microsoft-surface-windows-event-2026-live-announcements-and-analysis"
+    }
+  ],
+  "related": [],
+  "status": "verified",
+  "body": "<p>Microsoft and NVIDIA announced a significant collaboration on 7 October 2026, to integrate advanced local artificial intelligence capabilities and new hardware into Windows PCs. This partnership aims to usher in a new era of AI agents running directly on personal computers, highlighted by the introduction of the Surface Laptop Ultra.</p>\n<h2>What did Microsoft and NVIDIA announce?</h2>\n<p>At a Microsoft event in San Francisco, Microsoft CEO Satya Nadella and NVIDIA CEO Jensen Huang detailed their joint efforts to co-engineer hardware and software for AI agents on Windows PCs. The core of this announcement was the NVIDIA RTX Spark platform, which brings a full NVIDIA AI stack to Windows laptops and compact desktops. Preorders for laptops featuring RTX Spark, including Microsoft's new Surface Laptop Ultra, began on the day of the announcement, with shipments expected to start on October 16. Compact desktops equipped with RTX Spark are anticipated to be available for sale in November.</p>\n<p>Microsoft also announced the general availability of Microsoft Execution Containers (MXC), an operating system-level infrastructure designed to allow AI agents to run securely and persistently in the background. This infrastructure provides the necessary controls for securing, observing, and governing these agents within the Windows environment.</p>\n<h2>How does RTX Spark enable local AI?</h2>\n<p>The NVIDIA RTX Spark platform is central to bringing advanced AI capabilities directly to personal computers. It combines an NVIDIA Blackwell RTX GPU, featuring up to 6,144 cores, with an NVIDIA Grace CPU that can have up to 20 cores. These components are connected at a high bandwidth of 600 GB/s. This powerful combination allows for significant AI compute power, with systems capable of up to a petaflop of AI compute and up to 128 gigabytes of unified memory.</p>\n<p>Pavan Davuluri, Windows chief, emphasized that this level of hardware allows users to run AI models on their laptops that would not fit on traditional machines. Beyond Microsoft's Surface Laptop Ultra, other manufacturers such as Acer, ASUS, Dell, HP, Lenovo, MSI, and Gigabyte are also expected to release systems featuring RTX Spark. These designs will range from thin laptops to compact desktops, all built to support always-on AI agents.</p>\n<h2>Why is local AI important for Windows PCs?</h2>\n<p>The integration of local AI directly into Windows PCs is set to redefine the computing experience. Microsoft has been incorporating its Copilot AI throughout its ecosystem, and local AI is seen as a crucial step in shaping the future of the PC. Running AI models locally on a device offers several advantages, including enhanced privacy, reduced latency, and the ability to function without a constant internet connection.</p>\n<p>NVIDIA CEO Jensen Huang highlighted the historical partnership between NVIDIA and Windows, stating that NVIDIA was founded because of Windows. He connected this history to the current \"agentic era,\" where AI agents are becoming a fundamental part of the Windows experience. Microsoft CEO Satya Nadella echoed this sentiment, emphasizing the need to make the desktop the most secure place for agents to execute.</p>\n<h2>What are Microsoft Execution Containers?</h2>\n<p>To ensure the safe and secure operation of AI agents on Windows, Microsoft introduced the general availability of Microsoft Execution Containers (MXC). This OS-level infrastructure is designed to enable agents to run persistently in the background while remaining under the operating system's control. MXC provides the foundational primitives directly within Windows to secure, observe, and govern these agents.</p>\n<p>This security framework, combined with Microsoft Security and Agent 365, is intended to unlock the full potential of agents on Windows. The focus on security and governance is particularly important as AI systems evolve to take autonomous actions, making trust a prerequisite for widespread adoption.</p>\n<h2>What's next for AI-powered Windows devices?</h2>\n<p>The announcements from Microsoft and NVIDIA signal a significant shift towards more powerful and integrated AI capabilities on personal computers. With preorders for the Surface Laptop Ultra and other RTX Spark-powered laptops now open, consumers will soon have access to devices designed from the ground up for the agentic AI era. The availability of compact desktops with RTX Spark in November will further expand the options for users seeking high-performance local AI.</p>\n<p>The collaboration between these technology giants aims to provide developers with the tools and hardware needed to create increasingly capable AI models that can run directly on PCs. This move is expected to bring local AI closer to everyday work, offering new possibilities for productivity, creativity, and secure computing.</p>"
+}
