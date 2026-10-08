@@ -28,7 +28,8 @@ from urllib.parse import urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
-MAX_CALLS = 2
+MAX_CALLS = 3
+REDIRECT_HOST = "vertexaisearch.cloud.google.com"  # Google search grounding links point here first
 FRESH_HOURS = 72
 UA = "Mozilla/5.0 (compatible; WebOnlineToolsBot/1.0; +https://webonlinetools.com/ai-news/editorial-policy.html)"
 HYPE = ["unveil", "unleash", "revolution", "new era", "landmark", "game-changer", "game changer", "dawn of",
@@ -149,16 +150,22 @@ Do NOT write about any of these stories, which we already covered:
 {covered}
 {("Also avoid these, which were rejected:" + chr(10) + extra) if extra else ""}
 
-Return ONLY a JSON object, no markdown fences, with exactly these keys:
+Return your answer in exactly two parts and nothing else.
+
+Part 1: a JSON object (no markdown fences) with exactly these keys. Do NOT put the article text in it:
 {{
   "title": "Plain headline, 45-65 characters, written the way people search: '[Company] [does what]: [detail]'",
   "keyword": "the specific long-tail search query this story answers, 3-8 words, lowercase",
   "company": "the main company the story is about, as its usual name (e.g. OpenAI, Google, Anthropic), or empty for government or policy stories",
   "description": "Meta description, 140-155 characters, states the main fact and the date",
   "facts": {{"Who": "...", "What": "...", "When": "date as 7 October 2026", "Status": "...", "Official source": "publisher name"}},
-  "body": "HTML article body",
-  "sources": [{{"n": 1, "title": "page title", "publisher": "site or organisation", "date": "YYYY-MM-DD", "url": "exact URL from your search results"}}]
+  "sources": [{{"n": 1, "title": "page title", "publisher": "site or organisation", "date": "YYYY-MM-DD", "url": "link from your search results"}}]
 }}
+
+Part 2: the article body as HTML, between these two marker lines:
+<<<BODY>>>
+...article HTML here...
+<<<END>>>
 
 Rules for the body:
 - 600-900 words. Allowed tags only: h2, h3, p, ul, ol, li, strong, em, blockquote. No h1, no links, no images.
@@ -176,7 +183,8 @@ Rules for the body:
 
 Rules for sources:
 - At least 2 sources from different websites; at least 1 primary source; at least 1 published in the last 48 hours.
-- Use the exact URLs of pages you found in search. Do not guess or construct URLs.
+- Copy each link exactly as your search results give it, even if it is a Google redirect link. Never guess or build a URL.
+- "date" is the date the source page was published.
 """
 
 
@@ -197,52 +205,87 @@ def call_gemini(prompt):
     return resp.text or "", grounded
 
 
-def parse_json(text):
-    text = re.sub(r"^```[a-z]*\s*|\s*```$", "", text.strip())
+def parse_story(text):
+    """Reads the JSON metadata and the HTML body, which comes between <<<BODY>>> and <<<END>>> markers.
+    Keeping HTML out of the JSON means a stray quote in the article can't break the JSON."""
+    text = text.strip()
+    body = ""
+    m = re.search(r"<<<BODY>>>(.*?)(?:<<<END>>>|$)", text, re.S)
+    if m:
+        body = m.group(1).strip()
+        text = text[:m.start()]
+    text = re.sub(r"```[a-z]*", "", text)
     start, end = text.find("{"), text.rfind("}")
     if start < 0 or end < 0:
         raise ValueError("no JSON object in the response")
-    return json.loads(text[start:end + 1])
+    raw = text[start:end + 1]
+    try:
+        data = json.loads(raw, strict=False)
+    except json.JSONDecodeError:
+        data = json.loads(re.sub(r",\s*([}\]])", r"\1", raw), strict=False)  # drop trailing commas
+    if body:
+        data["body"] = body
+    if not data.get("body"):
+        raise ValueError("no article body in the response")
+    return data
 
 
 # ── checks ────────────────────────────────────────────────────────────
 
+def parse_day(value):
+    m = re.match(r"(\d{4})-(\d{2})-(\d{2})", (value or "").strip())
+    return datetime(int(m[1]), int(m[2]), int(m[3]), tzinfo=timezone.utc) if m else None
+
+
 def verify_sources(story, grounded, now, offline=False):
-    """Returns (kept sources renumbered, mapping old n -> new n, fresh: bool)."""
-    grounded_domains = set()
-    grounded_urls = {}
-    grounded_finals = set()  # exact pages Google's search returned, even if they block our checker
+    """Keeps only sources that came from Gemini's Google search and that resolve to a real page.
+    Returns (kept sources renumbered, mapping old n -> new n, fresh: bool)."""
+    cache = {}
+
+    def resolve(url):
+        if url not in cache:
+            cache[url] = (url, 200, "") if offline else fetch(url)
+        return cache[url]
+
+    grounded_domains, grounded_finals = set(), set()
     for g in grounded:
-        final, status, _ = (g["uri"], 200, "") if offline else fetch(g["uri"])
-        d = domain(final) or g["title"].lower()
-        grounded_domains.add(d)
-        if domain(final):
+        final, _, _ = resolve(g["uri"])
+        d = domain(final)
+        if d and d != REDIRECT_HOST:
+            grounded_domains.add(d)
             grounded_finals.add(final.rstrip("/"))
-        if status == 200:
-            grounded_urls.setdefault(d, final)
+        elif g.get("title"):  # redirect could not be followed; Google gives the site name as the title
+            grounded_domains.add(domain("https://" + g["title"].strip().lower()))
+
     kept, mapping, fresh, seen = [], {}, False, set()
+    window_start, window_end = now - timedelta(hours=FRESH_HOURS), now + timedelta(days=1)
     for s in story.get("sources", []):
         url = (s.get("url") or "").strip()
-        d = domain(url)
-        if not url.startswith("http") or d not in grounded_domains:
-            log(f"   drop source (not from search results): {url}")
+        if not url.startswith("http"):
+            log(f"   drop source (no link): {s.get('title', '?')}")
             continue
-        final, status, page = (url, 200, "") if offline else fetch(url)
-        if status != 200 and d in grounded_urls:
-            final, status, page = grounded_urls[d], 200, ("" if offline else fetch(grounded_urls[d])[2])
-        if status in (401, 403, 429) and final.rstrip("/") in grounded_finals:
-            status = 200  # real page from search results; the site just blocks automated checks
+        from_redirect = domain(url) == REDIRECT_HOST
+        final, status, page = resolve(url)
+        d = domain(final)
+        if d == REDIRECT_HOST or not d:
+            log(f"   drop source (link did not resolve): {url[:90]}")
+            continue
+        if d not in grounded_domains and not from_redirect:
+            log(f"   drop source (not from search results): {final}")
+            continue
+        if status in (401, 403, 429) and (from_redirect or final.rstrip("/") in grounded_finals):
+            status, page = 200, ""  # a real page from Google's results; the site only blocks automated checks
         if status != 200 or final in seen:
-            log(f"   drop source (HTTP {status}): {url}")
+            log(f"   drop source (HTTP {status}): {final}")
             continue
         seen.add(final)
-        dates = page_dates(final, page)
-        if offline:
-            dates = [now]
-        if any(now - timedelta(hours=FRESH_HOURS) <= d0 <= now + timedelta(days=1) for d0 in dates):
+        dates = [now] if offline else page_dates(final, page)
+        if not dates and parse_day(s.get("date")):
+            dates = [parse_day(s.get("date"))]  # page had no machine-readable date; use the stated one
+        if any(window_start <= d0 <= window_end for d0 in dates):
             fresh = True
         mapping[int(s.get("n", 0))] = len(kept) + 1
-        kept.append({"title": s.get("title") or final, "publisher": s.get("publisher") or domain(final),
+        kept.append({"title": s.get("title") or final, "publisher": s.get("publisher") or d,
                      "date": s.get("date", ""), "url": final})
     return kept, mapping, fresh
 
@@ -371,7 +414,7 @@ def main():
                 log(f"Gemini call failed: {e}. Skipping today.")
                 return 0
         try:
-            story = parse_json(text)
+            story = parse_story(text)
         except (ValueError, json.JSONDecodeError) as e:
             log(f"   rejected: unreadable response ({e})")
             continue
