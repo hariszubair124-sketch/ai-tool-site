@@ -206,11 +206,16 @@ def call_gemini(prompt):
     resp = client.models.generate_content(
         model=MODEL, contents=prompt,
         config=types.GenerateContentConfig(tools=[types.Tool(google_search=types.GoogleSearch())], temperature=0.4))
-    grounded = []
+    # The search results Gemini actually used, with Google's own (uncorrupted) links.
+    # "supports" marks results Google says back up part of the answer.
+    grounded, supported = [], set()
     try:
-        for chunk in resp.candidates[0].grounding_metadata.grounding_chunks or []:
+        meta = resp.candidates[0].grounding_metadata
+        for sup in meta.grounding_supports or []:
+            supported.update(sup.grounding_chunk_indices or [])
+        for i, chunk in enumerate(meta.grounding_chunks or []):
             if chunk.web and chunk.web.uri:
-                grounded.append({"uri": chunk.web.uri, "title": chunk.web.title or ""})
+                grounded.append({"uri": chunk.web.uri, "title": chunk.web.title or "", "supports": i in supported})
     except (AttributeError, IndexError, TypeError):
         pass
     return resp.text or "", grounded
@@ -248,9 +253,19 @@ def parse_day(value):
     return datetime(int(m[1]), int(m[2]), int(m[3]), tzinfo=timezone.utc) if m else None
 
 
+def page_title(page):
+    m = re.search(r"<title[^>]*>(.*?)</title>", page or "", re.S | re.I)
+    return re.sub(r"\s+", " ", html.unescape(m.group(1))).strip()[:150] if m else ""
+
+
+def name_key(text):
+    return re.sub(r"[^a-z0-9]", "", (text or "").lower())
+
+
 def verify_sources(story, grounded, now, offline=False):
-    """Keeps only sources that came from Gemini's Google search and that resolve to a real page.
-    Returns (kept sources renumbered, mapping old n -> new n, fresh: bool)."""
+    """Builds the source list from Google's search results (which carry the real links), matching each of
+    Gemini's numbered sources to one of them. Gemini often garbles long links when copying them, so its
+    own URLs are only a hint. Returns (sources renumbered, mapping old n -> new n, fresh: bool)."""
     cache = {}
 
     def resolve(url):
@@ -258,46 +273,74 @@ def verify_sources(story, grounded, now, offline=False):
             cache[url] = (url, 200, "") if offline else fetch(url)
         return cache[url]
 
-    grounded_domains, grounded_finals = set(), set()
+    # 1. Resolve every search result to its real page.
+    results = []
     for g in grounded:
-        final, _, _ = resolve(g["uri"])
+        final, status, page = resolve(g["uri"])
         d = domain(final)
-        if d and d != REDIRECT_HOST:
-            grounded_domains.add(d)
-            grounded_finals.add(final.rstrip("/"))
-        elif g.get("title"):  # redirect could not be followed; Google gives the site name as the title
-            grounded_domains.add(domain("https://" + g["title"].strip().lower()))
+        if not d or d == REDIRECT_HOST:
+            log(f"   search result did not resolve: {g.get('title') or g['uri'][:80]}")
+            continue
+        if status in (401, 403, 429):
+            status, page = 200, ""  # real page from Google's results; the site only blocks automated checks
+        if status != 200:
+            log(f"   search result unavailable (HTTP {status}): {final}")
+            continue
+        results.append({"uri": g["uri"], "url": final, "domain": d, "page": page,
+                        "title": page_title(page) or g.get("title") or d, "supports": g.get("supports", False)})
 
-    kept, mapping, fresh, seen = [], {}, False, set()
+    def match(src):
+        url = (src.get("url") or "").strip()
+        for r in results:  # exact link
+            if url and (url == r["uri"] or url.rstrip("/") == r["url"].rstrip("/")):
+                return r
+        if url.startswith(f"https://{REDIRECT_HOST}/"):  # garbled or shortened Google link: longest shared start
+            best = max(results, key=lambda r: len(os.path.commonprefix([url, r["uri"]])), default=None)
+            if best and len(os.path.commonprefix([url, best["uri"]])) >= len(f"https://{REDIRECT_HOST}/grounding-api-redirect/") + 12:
+                return best
+        elif url.startswith("http"):  # a normal link: same site as a search result
+            for r in results:
+                if domain(url) == r["domain"]:
+                    return r
+        key = name_key(src.get("publisher")) or name_key(src.get("title"))
+        for r in results:  # by publisher name, e.g. "Reuters" -> reuters.com
+            label = name_key(r["domain"].split(".")[-2] if r["domain"].count(".") >= 1 else r["domain"])
+            if key and label and (label in key or key in label):
+                return r
+        return None
+
+    kept, mapping, used = [], {}, set()
+
+    def add(r, title=None, publisher=None, stated_date=""):
+        dates = [now] if offline else page_dates(r["url"], r["page"])
+        if not dates and parse_day(stated_date):
+            dates = [parse_day(stated_date)]  # page had no machine-readable date; use the stated one
+        kept.append({"title": title or r["title"], "publisher": publisher or r["domain"],
+                     "date": stated_date or (dates[0].date().isoformat() if dates else ""), "url": r["url"],
+                     "_dates": dates})
+        used.add(r["url"])
+        return len(kept)
+
+    # 2. Gemini's numbered sources, matched to real results (keeps the [n] citations in the text correct).
+    for src in story.get("sources", []):
+        r = match(src)
+        if not r:
+            log(f"   drop source (no matching search result): {src.get('publisher') or src.get('title') or src.get('url', '?')[:80]}")
+            continue
+        if r["url"] in used:
+            mapping[int(src.get("n", 0))] = next(i for i, k in enumerate(kept, 1) if k["url"] == r["url"])
+            continue
+        mapping[int(src.get("n", 0))] = add(r, src.get("title"), src.get("publisher"), src.get("date", ""))
+
+    # 3. Other results Google says support the answer are listed too (without [n] markers in the text).
+    for r in results:
+        if r["url"] not in used and r["supports"] and len(kept) < 6:
+            add(r)
+
     window_start, window_end = now - timedelta(hours=FRESH_HOURS), now + timedelta(days=1)
-    for s in story.get("sources", []):
-        url = (s.get("url") or "").strip()
-        if not url.startswith("http"):
-            log(f"   drop source (no link): {s.get('title', '?')}")
-            continue
-        from_redirect = domain(url) == REDIRECT_HOST
-        final, status, page = resolve(url)
-        d = domain(final)
-        if d == REDIRECT_HOST or not d:
-            log(f"   drop source (link did not resolve): {url[:90]}")
-            continue
-        if d not in grounded_domains and not from_redirect:
-            log(f"   drop source (not from search results): {final}")
-            continue
-        if status in (401, 403, 429) and (from_redirect or final.rstrip("/") in grounded_finals):
-            status, page = 200, ""  # a real page from Google's results; the site only blocks automated checks
-        if status != 200 or final in seen:
-            log(f"   drop source (HTTP {status}): {final}")
-            continue
-        seen.add(final)
-        dates = [now] if offline else page_dates(final, page)
-        if not dates and parse_day(s.get("date")):
-            dates = [parse_day(s.get("date"))]  # page had no machine-readable date; use the stated one
-        if any(window_start <= d0 <= window_end for d0 in dates):
-            fresh = True
-        mapping[int(s.get("n", 0))] = len(kept) + 1
-        kept.append({"title": s.get("title") or final, "publisher": s.get("publisher") or d,
-                     "date": s.get("date", ""), "url": final})
+    fresh = any(window_start <= d0 <= window_end for k in kept for d0 in k["_dates"])
+    for k in kept:
+        k.pop("_dates")
     return kept, mapping, fresh
 
 
