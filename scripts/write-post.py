@@ -332,13 +332,13 @@ def verify_sources(story, grounded, now, offline=False):
 
     kept, mapping, used = [], {}, set()
 
-    def add(r, title=None, publisher=None, stated_date=""):
+    def add(r, title=None, publisher=None, stated_date="", cited=True):
         dates = [now] if offline else page_dates(r["url"], r["page"])
         if not dates and parse_day(stated_date):
             dates = [parse_day(stated_date)]  # page had no machine-readable date; use the stated one
         kept.append({"title": title or r["title"], "publisher": publisher or r["domain"],
                      "date": stated_date or (dates[0].date().isoformat() if dates else ""), "url": r["url"],
-                     "_dates": dates})
+                     "_dates": dates, "_cited": cited})
         used.add(r["url"])
         return len(kept)
 
@@ -353,16 +353,21 @@ def verify_sources(story, grounded, now, offline=False):
             continue
         mapping[int(src.get("n", 0))] = add(r, src.get("title"), src.get("publisher"), src.get("date", ""))
 
-    # 3. Other results Google says support the answer are listed too (without [n] markers in the text).
+    # 3. Other results Google says support the answer, listed as extra reading only if clearly about the
+    #    same story (their title shares at least 3 topic words with the headline). They never count
+    #    toward the source minimum or freshness, and carry no [n] markers in the text.
+    topic = words(story.get("title", "") + " " + story.get("keyword", ""))
     for r in results:
-        if r["url"] not in used and r["supports"] and len(kept) < 6:
-            add(r)
+        if r["url"] not in used and r["supports"] and len(kept) < 6 and len(topic & words(r["title"])) >= 3:
+            add(r, cited=False)
 
+    cited = [k for k in kept if k["_cited"]]
     window_start, window_end = now - timedelta(hours=FRESH_HOURS), now + timedelta(days=1)
-    fresh = any(window_start <= d0 <= window_end for k in kept for d0 in k["_dates"])
+    fresh = any(window_start <= d0 <= window_end for k in cited for d0 in k["_dates"])
+    cited_domains = {domain(k["url"]) for k in cited}
     for k in kept:
-        k.pop("_dates")
-    return kept, mapping, fresh
+        k.pop("_dates"), k.pop("_cited")
+    return kept, mapping, fresh, cited_domains
 
 
 def renumber(body, mapping):
@@ -500,9 +505,9 @@ def main():
             continue
 
         problems = check_story(story, registry, now)
-        sources, mapping, fresh = verify_sources(story, grounded, now, offline=args.dry_run)
-        if len(sources) < 2 or len({domain(s['url']) for s in sources}) < 2:
-            problems.append(f"only {len(sources)} verified source(s) from different sites")
+        sources, mapping, fresh, cited_domains = verify_sources(story, grounded, now, offline=args.dry_run)
+        if len(cited_domains) < 2:
+            problems.append(f"only {len(cited_domains)} cited source(s) matched real search results from different sites")
         if not fresh:
             problems.append(f"no source dated within {FRESH_HOURS} hours")
         if problems:
