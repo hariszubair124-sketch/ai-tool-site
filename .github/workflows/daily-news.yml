@@ -2,7 +2,8 @@ name: Daily AI news
 
 on:
   schedule:
-    - cron: '0 3 * * *'   # 3:00 AM UTC = 8:00 AM PKT
+    - cron: '0 3 * * *'   # 3:00 AM UTC = 8:00 AM PKT (GitHub may start it a few hours late)
+    - cron: '30 12 * * *' # backup run; publishes only if nothing went out earlier today
   push:
     branches: [main]
     paths: ['templates/**', 'assets/**', 'content/**', 'data/redirects.json', 'scripts/build-site.py']
@@ -39,8 +40,13 @@ jobs:
         if: github.event_name == 'schedule' || github.event.inputs.mode == 'write'
         env:
           API_KEY: ${{ secrets.API_KEY }}
-        run: python scripts/write-post.py
-        timeout-minutes: 15
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            python scripts/write-post.py --if-none-today
+          else
+            python scripts/write-post.py
+          fi
+        timeout-minutes: 25
 
       - name: Test the writer without the API
         if: github.event.inputs.mode == 'dry-run'

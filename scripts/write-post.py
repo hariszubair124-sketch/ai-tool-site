@@ -20,6 +20,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 import unicodedata
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -27,7 +28,8 @@ from html.parser import HTMLParser
 from urllib.parse import urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+MODELS = [os.environ.get("GEMINI_MODEL", "gemini-2.5-flash"), "gemini-2.5-flash-lite"]  # second one if the first is busy
+RETRY_WAITS = [30, 60, 120]  # seconds to wait after a busy or rate-limit error
 MAX_CALLS = 3
 REDIRECT_HOST = "vertexaisearch.cloud.google.com"  # Google search grounding links point here first
 FRESH_HOURS = 72
@@ -199,13 +201,32 @@ Rules for sources:
 """
 
 
-def call_gemini(prompt):
+def generate(prompt):
+    """Calls Gemini with Google Search, retrying busy/rate-limit errors and falling back to a lighter model."""
     from google import genai
     from google.genai import types
     client = genai.Client(api_key=os.environ["API_KEY"])
-    resp = client.models.generate_content(
-        model=MODEL, contents=prompt,
-        config=types.GenerateContentConfig(tools=[types.Tool(google_search=types.GoogleSearch())], temperature=0.4))
+    config = types.GenerateContentConfig(tools=[types.Tool(google_search=types.GoogleSearch())], temperature=0.4)
+    last = None
+    for model in MODELS:
+        for wait in RETRY_WAITS + [None]:
+            try:
+                return client.models.generate_content(model=model, contents=prompt, config=config)
+            except Exception as e:
+                last = e
+                busy = any(code in str(e) for code in ("503", "UNAVAILABLE", "429", "RESOURCE_EXHAUSTED", "500", "INTERNAL"))
+                if not busy:
+                    raise
+                if wait is None:
+                    log(f"   {model} still busy; trying the next model")
+                    break
+                log(f"   {model} busy ({str(e)[:60]}...); waiting {wait}s")
+                time.sleep(wait)
+    raise last
+
+
+def call_gemini(prompt):
+    resp = generate(prompt)
     # The search results Gemini actually used, with Google's own (uncorrupted) links.
     # "supports" marks results Google says back up part of the answer.
     grounded, supported = [], set()
@@ -448,11 +469,15 @@ SAMPLE = {
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--if-none-today", action="store_true", help="exit quietly if a story was already published today (UTC)")
     args = ap.parse_args()
 
     now = datetime.now(timezone.utc)
     today = f"{now.day} {now.strftime('%B %Y')}"
     registry = load_registry()
+    if args.if_none_today and any(p.get("published") == now.date().isoformat() for p in registry):
+        log("A story was already published today. Nothing to do.")
+        return 0
     recent = [p for p in registry if p["published"] >= (now - timedelta(days=30)).date().isoformat()][:40]
     rejected = []
 
