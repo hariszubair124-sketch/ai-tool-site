@@ -1,0 +1,33 @@
+{
+  "slug": "koreai-autoloop-ai-agents-optimize-themselves-at-scale",
+  "title": "Kore.ai Autoloop: AI agents optimize themselves at scale",
+  "description": "Kore.ai launched Autoloop on 6 October 2026, an AI agent optimization engine designed for continuous self-improvement at production scale.",
+  "keyword": "kore.ai autoloop ai agent optimization",
+  "published": "2026-10-09T14:54:25+00:00",
+  "updated": "",
+  "facts": {
+    "Who": "Kore.ai",
+    "What": "Launched Autoloop, an AI agent optimization engine for its Agent Platform, Artemis edition. It enables AI agents to continuously self-improve against business goals.",
+    "When": "6 October 2026",
+    "Status": "Generally available to all customers of the Kore.ai Agent Platform, Artemis edition.",
+    "Official source": "Kore.ai"
+  },
+  "company": "Kore.ai",
+  "sources": [
+    {
+      "title": "Introducing Autoloop: AI Agent Optimization at Production Scale - Kore.ai",
+      "publisher": "Kore.ai",
+      "date": "2026-10-06",
+      "url": "https://www.kore.ai/blog/autoloop-continuous-ai-agent-optimization-for-production"
+    },
+    {
+      "title": "Kore.ai Launches Autoloop | APMdigest",
+      "publisher": "APMdigest",
+      "date": "2026-10-08",
+      "url": "https://www.apmdigest.com/koreai-launches-autoloop"
+    }
+  ],
+  "related": [],
+  "status": "verified",
+  "body": "<h2>What did Kore.ai announce?</h2>\n<p>Kore.ai, a leader in enterprise AI platforms, announced the general availability of Autoloop on 6 October 2026. This new optimization engine is part of the Kore.ai Agent Platform, Artemis edition, and is designed to enable AI agents to continuously improve their performance at production scale. The launch signifies a shift in how enterprise AI agents are managed, moving from manual tuning to automated self-improvement based on defined business goals.</p>\n<p>The company stated that Autoloop helps enterprises set specific goals for their AI agents, then builds and measures them against these objectives, continuously optimizing them from their initial draft through to production deployment. Raj Koneru, Founder and CEO of Kore.ai, emphasized that the companies that successfully scale AI will be those that use AI to build, govern, and optimize other AI systems.</p>\n<h2>How does Autoloop work?</h2>\n<p>Autoloop operates on a continuous loop that encompasses building, evaluating, diagnosing, optimizing, and re-verifying AI agents. Before an agent is launched, the system builds the agent and its test coverage using the enterprise's own operating procedures, iterating until all defined goals are met. Once in production, real-world interactions trigger new optimization cycles.</p>\n<p>The system starts by allowing teams to define what success looks like across various business dimensions. These goals can include task completion, ensuring the agent finishes its assigned job and only hands off to a human when necessary. Other critical objectives include accuracy and grounding, meaning every answer provided is correct and supported by the enterprise's data, without fabricating facts. Business-rule adherence, guardrails and safety, consistency across different scenarios, user experience, and cost efficiency are also among the metrics Autoloop optimizes for.</p>\n<p>Every proposed change is scored against all configured goals simultaneously. This ensures that an improvement in one area, such as reduced token usage, does not negatively impact another, like task completion or safety. The platform utilizes features like StateTrace, which records an agent's execution path to pinpoint where and why a goal was missed, and Agent Blueprint Language (ABL), which allows Autoloop to precisely modify the problematic component rather than making broad changes to the entire agent.</p>\n<h2>Why does this matter for businesses?</h2>\n<p>Many enterprises currently manage AI agents through a cycle of manually fixing individual failures, a method that often leads to new problems. The 2026 Kore.ai Agent Productivity Index revealed that 79% of enterprises have reversed an action taken by an AI agent, and 70% have encountered failures their teams could not trace. This highlights the challenges of maintaining reliable AI agent performance as complexity increases in production environments.</p>\n<p>Autoloop addresses these challenges by automating the optimization process, aiming to provide a more reliable and scalable approach to managing AI agents. Gartner predicts that by 2030, autonomous learning techniques will be present in a majority of AI agents, a significant increase from less than 5% in 2026. This indicates a broader industry shift towards self-improving AI systems, making Kore.ai's Autoloop relevant to future enterprise AI strategies.</p>\n<h2>What happens next?</h2>\n<p>Autoloop is currently available to all customers using the Kore.ai Agent Platform, Artemis edition. The company emphasizes that the system provides complete visibility into agent activity and precise control over how agents change, which is essential for automatic optimization. This approach allows enterprises to define governance from the outset, ensuring agents are built, deployed, managed, and optimized within a single, cohesive layer.</p>\n<p>By shifting the focus from manual, iterative tuning during development to continuous refinement throughout an agent's operational life, Kore.ai aims to help businesses achieve more consistent and effective AI agent performance. The company itself uses Autoloop internally, with its AI agents producing approximately 6,500 commits per month on a production codebase of 2.6 million lines, governed by 68 always-on guardrails.</p>"
+}

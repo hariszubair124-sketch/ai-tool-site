@@ -1,14 +1,5 @@
-Writer run 2026-10-09 10:13 UTC
+Writer run 2026-10-09 14:55 UTC
 Attempt 1 of 3
-   Gemini returned 5897 characters and 4 search links
-   drop source (link did not resolve): https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEFWsYtInP0DI2utw1PBEv
-   rejected 'OpenAI bans accounts: Russian, Iranian influence campaigns': only 1 verified source(s) from different sites
-Attempt 2 of 3
-   Gemini returned 6475 characters and 2 search links
-   drop source (link did not resolve): https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHzrwW2IuikdmF6qBdndsm
-   rejected 'Pentagon pilots AI for secrets: Automated classification system': only 1 verified source(s) from different sites
-Attempt 3 of 3
-   Gemini returned 7781 characters and 7 search links
-   drop source (link did not resolve): https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEg2ONcElKe0OrzfVTN1R7
-   rejected 'Logitech launches new enterprise video conferencing products for AI': only 1 verified source(s) from different sites
-No story passed the checks today. Nothing published.
+   Gemini returned 5894 characters and 3 search links
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/koreai-autoloop-ai-agents-optimize-themselves-at-scale.json with 2 sources
+Added new company to data/companies.json: Kore.ai
