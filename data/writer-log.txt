@@ -1,17 +1,13 @@
-Writer run 2026-10-09 15:10 UTC
+Writer run 2026-10-09 15:14 UTC
 Attempt 1 of 3
-   Gemini returned 5632 characters and 1 search links
-   drop source (no matching search result): Accenture
-   drop source (no matching search result): Solutions Review
-   rejected 'Accenture, Dell Technologies: Expand AI, Infrastructure Collaboration': 'business group' makes up 2.7% of the text (keyword stuffing); only 0 cited source(s) matched real search results from different sites; no source dated within 72 hours
-Attempt 2 of 3
-   Gemini returned 6014 characters and 2 search links
-   drop source (no matching search result): The Hacker News
-   drop source (no matching search result): Anthropic
-   rejected 'Anthropic Launches Free AI Scanner for Open-Source Security': only 0 cited source(s) matched real search results from different sites; no source dated within 72 hours
-Attempt 3 of 3
-   Gemini returned 6732 characters and 2 search links
-   drop source (no matching search result): Biohub
-   drop source (no matching search result): AI Breaking Wire
-   rejected 'Biohub, DOE, NIH, Tech Giants: $1.8B for AI Biology Data': only 0 cited source(s) matched real search results from different sites; no source dated within 72 hours
-No story passed the checks today. Nothing published.
+   story: Biohub, U.S. government, Google, and Meta commit $1.8 billion to AI-powered Virtual Biology Initiative (9 search results)
+   read americanbazaaronline.com: Biohub launches $1.8 billion AI biology initiative in major science pu
+   read biohub.org: AI-ready biological data: $1.8 billion global commitment
+   read pharmaphorum.com: Biohub raises $1.8bn for its 'virtual biology' initiative | pharmaphor
+   skip beckershospitalreview.com (HTTP 403; the site blocks automated reading)
+   read qz.com: Google, Meta, U.S. government join Biohub's $1.8B AI biology effort
+   read unite.ai: Biohub, DOE, NIH and Partners Commit $1.8B to Virtual Biology Initiati
+   read therundown.ai: Biohub expands AI cell research into a $1.8 billion effort | The Rundo
+   skip axios.com (HTTP 403; the site blocks automated reading)
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/biohub-us-gov-google-meta-18b-for-ai-biology.json with 5 sources: americanbazaaronline.com, biohub.org, qz.com, unite.ai, therundown.ai
+Added new company to data/companies.json: Biohub
