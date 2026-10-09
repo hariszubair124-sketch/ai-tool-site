@@ -539,6 +539,8 @@ def main():
             continue
 
         body = sanitize(story.get("body", ""))
+        # "[1, 2]" or "[1,2]" -> "[1][2]", so every citation can be linked and counted
+        body = re.sub(r"\[(\d{1,2}(?:\s*,\s*\d{1,2})+)\]", lambda m: "".join(f"[{n.strip()}]" for n in m.group(1).split(",")), body)
         cited = sorted({int(n) for n in re.findall(r"\[(\d{1,2})\]", body) if 1 <= int(n) <= len(sources[:6])})
         cited_sites = {sources[n - 1]["domain"] for n in cited}
         problems = check_story(story, registry, now)

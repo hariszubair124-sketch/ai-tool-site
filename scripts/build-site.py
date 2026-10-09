@@ -164,6 +164,7 @@ def link_citations(body, source_count):
         if 1 <= n <= source_count:
             return f'<sup class="cite"><a href="#source-{n}" aria-label="Source {n}">[{n}]</a></sup>'
         return ""
+    body = re.sub(r"\[(\d{1,2}(?:\s*,\s*\d{1,2})+)\]", lambda m: "".join(f"[{n.strip()}]" for n in m.group(1).split(",")), body)
     return re.sub(r"\[(\d{1,2})\](?![^<]*</a>)", repl, body)
 
 
