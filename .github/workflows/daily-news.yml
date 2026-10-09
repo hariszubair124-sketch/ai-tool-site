@@ -27,6 +27,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main   # latest main when the run starts, not when it was queued
 
       - uses: actions/setup-python@v5
         with:
@@ -62,5 +64,15 @@ jobs:
           git config user.email "robot@webonlinetools.com"
           echo "Last run: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" > .last-run
           git add -A
-          git diff --staged --quiet && echo "Nothing new to commit." || git commit -m "Site update $(date -u +'%Y-%m-%d')"
-          git push
+          git diff --staged --quiet && { echo "Nothing new to commit."; exit 0; }
+          git commit -q -m "Site update $(date -u +'%Y-%m-%d')"
+          # Another run may have pushed meanwhile: take its changes, rebuild, and try again.
+          for attempt in 1 2 3; do
+            git push && exit 0
+            echo "Push rejected (attempt $attempt); rebasing on the latest main"
+            git pull --rebase -X theirs origin main
+            python scripts/build-site.py
+            git add -A
+            git diff --staged --quiet || git commit -q --amend --no-edit
+          done
+          exit 1
