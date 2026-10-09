@@ -1,13 +1,16 @@
 """
 Daily AI news writer. Runs in GitHub Actions with the free Gemini API.
 
-1. Asks Gemini (with Google Search grounding) for one story from the last 48 hours, as JSON.
-2. Keeps only sources that Gemini's search actually returned AND that load right now.
-3. Publishes only if: 2+ sources from different sites, 1+ source dated within 72 hours,
-   the story is not one we already covered, and the title is plain (no hype words).
-4. Saves content/posts/<slug>.json, then scripts/build-site.py renders the site.
+1. Find: Gemini (with Google Search) picks one AI story from the last 48 hours.
+2. Read: this script opens the real pages from Google's search results and keeps readable pages
+   about the story, one per site. If fewer than two, it searches once more for other reports.
+3. Write: Gemini writes the article from ONLY those page texts, citing them as [1], [2]...
+   so every citation points to a page that was actually read.
+4. Publishes only if the article cites 2+ different sites, the pages are recent (72 hours),
+   the story is new to the site, the title is plain and no phrase is repeated (no keyword stuffing).
+5. Saves content/posts/<slug>.json, then scripts/build-site.py renders the site.
 
-If a check fails it retries once with a different story, then skips the day.
+If a check fails it tries a different story, up to three times, then skips the day.
 Skipping is a normal outcome (exit code 0), so a bad day never publishes a bad post.
 
 Usage:  python scripts/write-post.py            live run
@@ -150,63 +153,13 @@ def load_registry():
 
 # ── Gemini ────────────────────────────────────────────────────────────
 
-def build_prompt(today, recent, avoid):
-    covered = "\n".join(f"- {p['title']}" for p in recent)
-    extra = "\n".join(f"- {t}" for t in avoid)
-    return f"""You are a careful technology reporter writing for webonlinetools.com, a site of free web tools
-with a reference-style AI news section. Today is {today}.
-
-Use Google Search to find ONE significant, verifiable AI or technology story published in the last 48 hours.
-Prefer stories with an official primary source (company blog, press release, filing, paper, government page).
-
-Do NOT write about any of these stories, which we already covered:
-{covered}
-{("Also avoid these, which were rejected:" + chr(10) + extra) if extra else ""}
-
-Return your answer in exactly two parts and nothing else.
-
-Part 1: a JSON object (no markdown fences) with exactly these keys. Do NOT put the article text in it:
-{{
-  "title": "Plain headline, 45-65 characters, written the way people search: '[Company] [does what]: [detail]'",
-  "keyword": "the specific long-tail search query this story answers, 3-8 words, lowercase",
-  "company": "the main company the story is about, as its usual name (e.g. OpenAI, Google, Anthropic), or empty for government or policy stories",
-  "description": "Meta description, 140-155 characters, states the main fact and the date",
-  "facts": {{"Who": "...", "What": "...", "When": "date as 7 October 2026", "Status": "...", "Official source": "publisher name"}},
-  "sources": [{{"n": 1, "title": "page title", "publisher": "site or organisation", "date": "YYYY-MM-DD", "url": "link from your search results"}}]
-}}
-
-Part 2: the article body as HTML, between these two marker lines:
-<<<BODY>>>
-...article HTML here...
-<<<END>>>
-
-Rules for the body:
-- 600-900 words. Allowed tags only: h2, h3, p, ul, ol, li, strong, em, blockquote. No h1, no links, no images.
-- Open with two sentences that say who did what, and when.
-- Use 3-5 h2 sections phrased as reader questions, for example "What did OpenAI announce?", "How does it work?",
-  "Why does it matter?", "What happens next?". Use h3 only inside an h2 section.
-- After every factual sentence, add a citation marker like [1] or [2] matching the source's "n".
-- Only state facts, figures, dates and quotes that appear in the sources. Never invent them.
-- Write in your own words; never copy sentences from a source. Quotes must be exact and under 20 words.
-- Natural, plain tone, written for a reader, not for search engines. Never use: unveils, unleashes,
-  revolutionizing, new era, landmark, game-changer, groundbreaking, unprecedented, redefines, reshaping, dawn, leap.
-- Do not repeat the product or company name in every sentence. After the first mention, use "it", "the model",
-  "the company" and similar, as a human reporter would. Never aim for a keyword density.
-- Do not mention webonlinetools.com or "online tools" unless the story is actually about them.
-
-Rules for sources:
-- At least 2 sources from different websites; at least 1 primary source; at least 1 published in the last 48 hours.
-- Copy each link exactly as your search results give it, even if it is a Google redirect link. Never guess or build a URL.
-- "date" is the date the source page was published.
-"""
-
-
-def generate(prompt):
-    """Calls Gemini with Google Search, retrying busy/rate-limit errors and falling back to a lighter model."""
+def generate(prompt, search):
+    """Calls Gemini, retrying busy/rate-limit errors and falling back to a lighter model."""
     from google import genai
     from google.genai import types
     client = genai.Client(api_key=os.environ["API_KEY"])
-    config = types.GenerateContentConfig(tools=[types.Tool(google_search=types.GoogleSearch())], temperature=0.4)
+    tools = [types.Tool(google_search=types.GoogleSearch())] if search else None
+    config = types.GenerateContentConfig(tools=tools, temperature=0.3 if search else 0.5)
     last = None
     for model in MODELS:
         for wait in RETRY_WAITS + [None]:
@@ -225,22 +178,185 @@ def generate(prompt):
     raise last
 
 
-def call_gemini(prompt):
-    resp = generate(prompt)
-    # The search results Gemini actually used, with Google's own (uncorrupted) links.
-    # "supports" marks results Google says back up part of the answer.
-    grounded, supported = [], set()
+def ask(prompt, search=False):
+    """Returns (text, search results). Search results carry Google's real links to the pages it found."""
+    resp = generate(prompt, search)
+    grounded = []
     try:
-        meta = resp.candidates[0].grounding_metadata
-        for sup in meta.grounding_supports or []:
-            supported.update(sup.grounding_chunk_indices or [])
-        for i, chunk in enumerate(meta.grounding_chunks or []):
+        for chunk in resp.candidates[0].grounding_metadata.grounding_chunks or []:
             if chunk.web and chunk.web.uri:
-                grounded.append({"uri": chunk.web.uri, "title": chunk.web.title or "", "supports": i in supported})
+                grounded.append({"uri": chunk.web.uri, "title": chunk.web.title or ""})
     except (AttributeError, IndexError, TypeError):
         pass
     return resp.text or "", grounded
 
+
+def first_json(text):
+    text = re.sub(r"```[a-z]*", "", text or "")
+    start, end = text.find("{"), text.rfind("}")
+    if start < 0 or end < 0:
+        raise ValueError("no JSON object in the response")
+    raw = text[start:end + 1]
+    try:
+        return json.loads(raw, strict=False)
+    except json.JSONDecodeError:
+        return json.loads(re.sub(r",\s*([}\]])", r"\1", raw), strict=False)
+
+
+def find_prompt(today, covered, avoid):
+    return f"""Today is {today}. Use Google Search to find ONE significant, verifiable news story about AI
+(models, companies, products, research or policy) that was published in the last 48 hours.
+Pick a story that at least two independent news outlets have reported, ideally with an official announcement.
+
+Do not pick any of these stories, which are already covered:
+{covered}
+{("Also skip these, which were rejected:" + chr(10) + avoid) if avoid else ""}
+
+Reply with only a JSON object:
+{{"headline": "what happened, in plain words", "summary": "two sentences: who did what, and when",
+  "company": "main company involved, or empty for government or policy stories"}}"""
+
+
+def more_prompt(headline, summary):
+    return f"""Use Google Search to find news reports and the official announcement about this story:
+{headline}. {summary}
+List what you found as a JSON object: {{"reports": [{{"title": "...", "publisher": "..."}}]}}"""
+
+
+def write_prompt(today, headline, sources):
+    blocks = "\n\n".join(
+        f"[{i}] {s['title']} | {s['domain']} | {s['date'] or 'date unknown'}\n{s['text']}" for i, s in enumerate(sources, 1))
+    return f"""You are a careful technology reporter. Today is {today}.
+Write a news article about: {headline}
+
+Use ONLY the numbered source texts below. Every fact, figure, date and quote must come from them.
+Write in your own words; quotes must be exact and under 20 words. If the sources disagree, say so.
+
+Return exactly two parts and nothing else.
+Part 1, a JSON object (no markdown fences):
+{{
+  "title": "Plain headline, 45-65 characters, the way people search: '[Company] [does what]: [detail]'",
+  "keyword": "the specific long-tail search query this story answers, 3-8 words, lowercase",
+  "company": "main company the story is about, or empty for government or policy stories",
+  "description": "Meta description, 140-155 characters, states the main fact and the date",
+  "facts": {{"Who": "...", "What": "...", "When": "date as 7 October 2026", "Status": "..."}}
+}}
+Part 2, the article body as HTML between these marker lines:
+<<<BODY>>>
+...article HTML...
+<<<END>>>
+
+Rules for the body:
+- 600-900 words. Allowed tags only: h2, h3, p, ul, ol, li, strong, em, blockquote. No h1, no links.
+- Start with a paragraph (not a heading) of two sentences saying who did what, and when.
+- Then 3-5 h2 sections phrased as reader questions, such as "What did the company announce?",
+  "How does it work?", "Why does it matter?", "What happens next?".
+- After every factual sentence put the number of the source it comes from, like [1] or [2].
+  Use only the numbers listed below. Use as many different sources as genuinely support the facts.
+- Natural, plain tone written for readers, not search engines. Never use: unveils, unleashes,
+  revolutionizing, new era, landmark, game-changer, groundbreaking, unprecedented, redefines, reshaping.
+- Don't repeat the company or product name in every sentence; after the first mention use "it", "the
+  company", "the model" and so on. Never aim for a keyword density.
+- Do not mention webonlinetools.com or "online tools".
+
+SOURCES:
+{blocks}"""
+
+
+# ── reading the source pages ─────────────────────────────────────────
+
+class TextExtractor(HTMLParser):
+    """Collects readable paragraph text from a news page, skipping menus, scripts and footers."""
+    SKIP = {"script", "style", "nav", "header", "footer", "aside", "form", "noscript", "svg", "figure"}
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.skip, self.in_p, self.parts, self.cur = 0, 0, [], []
+
+    def handle_starttag(self, tag, attrs):
+        if tag in self.SKIP:
+            self.skip += 1
+        elif tag in ("p", "li", "h2", "h3") and not self.skip:
+            self.in_p += 1
+
+    def handle_endtag(self, tag):
+        if tag in self.SKIP:
+            self.skip = max(0, self.skip - 1)
+        elif tag in ("p", "li", "h2", "h3") and self.in_p:
+            self.in_p -= 1
+            text = re.sub(r"\s+", " ", "".join(self.cur)).strip()
+            if len(text.split()) >= 6:
+                self.parts.append(text)
+            self.cur = []
+
+    def handle_data(self, data):
+        if self.in_p and not self.skip:
+            self.cur.append(data)
+
+
+def page_text(page, max_words=900):
+    t = TextExtractor()
+    try:
+        t.feed(page)
+    except Exception:
+        pass
+    seen, out = set(), []
+    for p in t.parts:  # drop repeated boilerplate lines
+        if p not in seen:
+            seen.add(p)
+            out.append(p)
+    text = "\n".join(out)
+    tokens = text.split(" ")
+    return " ".join(tokens[:max_words])
+
+
+def page_title(page):
+    m = re.search(r"<title[^>]*>(.*?)</title>", page or "", re.S | re.I)
+    return re.sub(r"\s+", " ", html.unescape(m.group(1))).strip()[:150] if m else ""
+
+
+def read_sources(grounded, topic, have):
+    """Opens each search result, keeps readable pages about the story (one per site)."""
+    sites = {s["domain"] for s in have}
+    out = []
+    for g in grounded:
+        final, status, page = fetch(g["uri"])
+        d = domain(final)
+        if not d or d == REDIRECT_HOST:
+            log(f"   skip result (link did not open): {g.get('title') or '?'}")
+            continue
+        if d in sites:
+            continue
+        if status != 200:
+            log(f"   skip {d} (HTTP {status}; the site blocks automated reading)")
+            continue
+        text = page_text(page)
+        title = page_title(page) or g.get("title") or d
+        overlap = len(topic & words(title + " " + text[:1500]))
+        if len(text.split()) < 120:
+            log(f"   skip {d} (too little readable text)")
+            continue
+        if overlap < 3:
+            log(f"   skip {d} (not about this story: {title[:60]})")
+            continue
+        dates = page_dates(final, page)
+        sites.add(d)
+        out.append({"url": final, "domain": d, "title": title, "text": text, "dates": dates,
+                    "date": max(dates).date().isoformat() if dates else ""})
+        log(f"   read {d}: {title[:70]}")
+    return out
+
+
+def renumber(body, mapping):
+    def repl(m):
+        new = mapping.get(int(m.group(1)))
+        return f"[{new}]" if new else ""
+    return re.sub(r"\[(\d{1,2})\]", repl, body)
+
+
+
+
+# ── checks ────────────────────────────────────────────────────────────
 
 def parse_story(text):
     """Reads the JSON metadata and the HTML body, which comes between <<<BODY>>> and <<<END>>> markers.
@@ -265,116 +381,6 @@ def parse_story(text):
     if not data.get("body"):
         raise ValueError("no article body in the response")
     return data
-
-
-# ── checks ────────────────────────────────────────────────────────────
-
-def parse_day(value):
-    m = re.match(r"(\d{4})-(\d{2})-(\d{2})", (value or "").strip())
-    return datetime(int(m[1]), int(m[2]), int(m[3]), tzinfo=timezone.utc) if m else None
-
-
-def page_title(page):
-    m = re.search(r"<title[^>]*>(.*?)</title>", page or "", re.S | re.I)
-    return re.sub(r"\s+", " ", html.unescape(m.group(1))).strip()[:150] if m else ""
-
-
-def name_key(text):
-    return re.sub(r"[^a-z0-9]", "", (text or "").lower())
-
-
-def verify_sources(story, grounded, now, offline=False):
-    """Builds the source list from Google's search results (which carry the real links), matching each of
-    Gemini's numbered sources to one of them. Gemini often garbles long links when copying them, so its
-    own URLs are only a hint. Returns (sources renumbered, mapping old n -> new n, fresh: bool)."""
-    cache = {}
-
-    def resolve(url):
-        if url not in cache:
-            cache[url] = (url, 200, "") if offline else fetch(url)
-        return cache[url]
-
-    # 1. Resolve every search result to its real page.
-    results = []
-    for g in grounded:
-        final, status, page = resolve(g["uri"])
-        d = domain(final)
-        if not d or d == REDIRECT_HOST:
-            log(f"   search result did not resolve: {g.get('title') or g['uri'][:80]}")
-            continue
-        if status in (401, 403, 429):
-            status, page = 200, ""  # real page from Google's results; the site only blocks automated checks
-        if status != 200:
-            log(f"   search result unavailable (HTTP {status}): {final}")
-            continue
-        results.append({"uri": g["uri"], "url": final, "domain": d, "page": page,
-                        "title": page_title(page) or g.get("title") or d, "supports": g.get("supports", False)})
-
-    def match(src):
-        url = (src.get("url") or "").strip()
-        for r in results:  # exact link
-            if url and (url == r["uri"] or url.rstrip("/") == r["url"].rstrip("/")):
-                return r
-        if url.startswith(f"https://{REDIRECT_HOST}/"):  # garbled or shortened Google link: longest shared start
-            best = max(results, key=lambda r: len(os.path.commonprefix([url, r["uri"]])), default=None)
-            if best and len(os.path.commonprefix([url, best["uri"]])) >= len(f"https://{REDIRECT_HOST}/grounding-api-redirect/") + 12:
-                return best
-        elif url.startswith("http"):  # a normal link: same site as a search result
-            for r in results:
-                if domain(url) == r["domain"]:
-                    return r
-        key = name_key(src.get("publisher")) or name_key(src.get("title"))
-        for r in results:  # by publisher name, e.g. "Reuters" -> reuters.com
-            label = name_key(r["domain"].split(".")[-2] if r["domain"].count(".") >= 1 else r["domain"])
-            if key and label and (label in key or key in label):
-                return r
-        return None
-
-    kept, mapping, used = [], {}, set()
-
-    def add(r, title=None, publisher=None, stated_date="", cited=True):
-        dates = [now] if offline else page_dates(r["url"], r["page"])
-        if not dates and parse_day(stated_date):
-            dates = [parse_day(stated_date)]  # page had no machine-readable date; use the stated one
-        kept.append({"title": title or r["title"], "publisher": publisher or r["domain"],
-                     "date": stated_date or (dates[0].date().isoformat() if dates else ""), "url": r["url"],
-                     "_dates": dates, "_cited": cited})
-        used.add(r["url"])
-        return len(kept)
-
-    # 2. Gemini's numbered sources, matched to real results (keeps the [n] citations in the text correct).
-    for src in story.get("sources", []):
-        r = match(src)
-        if not r:
-            log(f"   drop source (no matching search result): {src.get('publisher') or src.get('title') or src.get('url', '?')[:80]}")
-            continue
-        if r["url"] in used:
-            mapping[int(src.get("n", 0))] = next(i for i, k in enumerate(kept, 1) if k["url"] == r["url"])
-            continue
-        mapping[int(src.get("n", 0))] = add(r, src.get("title"), src.get("publisher"), src.get("date", ""))
-
-    # 3. Other results Google says support the answer, listed as extra reading only if clearly about the
-    #    same story (their title shares at least 3 topic words with the headline). They never count
-    #    toward the source minimum or freshness, and carry no [n] markers in the text.
-    topic = words(story.get("title", "") + " " + story.get("keyword", ""))
-    for r in results:
-        if r["url"] not in used and r["supports"] and len(kept) < 6 and len(topic & words(r["title"])) >= 3:
-            add(r, cited=False)
-
-    cited = [k for k in kept if k["_cited"]]
-    window_start, window_end = now - timedelta(hours=FRESH_HOURS), now + timedelta(days=1)
-    fresh = any(window_start <= d0 <= window_end for k in cited for d0 in k["_dates"])
-    cited_domains = {domain(k["url"]) for k in cited}
-    for k in kept:
-        k.pop("_dates"), k.pop("_cited")
-    return kept, mapping, fresh, cited_domains
-
-
-def renumber(body, mapping):
-    def repl(m):
-        new = mapping.get(int(m.group(1)))
-        return f"[{new}]" if new else ""
-    return re.sub(r"\[(\d{1,2})\]", repl, body)
 
 
 def repeated_phrase(body):
@@ -446,29 +452,32 @@ def register_company(name):
 
 # ── main ──────────────────────────────────────────────────────────────
 
-SAMPLE = {
-    "title": "Example Corp releases Model X with a 1M-token context window",
-    "keyword": "model x context window",
-    "description": "Example Corp released Model X on 7 October 2026 with a one-million-token context window and lower API prices for developers.",
-    "facts": {"Who": "Example Corp", "What": "Released Model X", "When": "7 October 2026", "Status": "Available now"},
-    "body": "<h1>dup</h1><p>Example Corp released Model X today. [1]</p><h2>What did Example Corp release?</h2>"
-            + "".join(f"<p>{line} [{1 + n % 2}]</p>" for n, line in enumerate([
-                "The release targets developers who work with long contracts, research papers and large codebases.",
-                "Pricing starts lower than the previous generation, according to the company's announcement.",
-                "Independent testers reported faster responses on summarisation and retrieval tasks.",
-                "Availability begins in North America and Europe, with other regions following next quarter.",
-                "Enterprise customers can run it inside their own cloud accounts for data control.",
-                "Critics noted that benchmark gains on reasoning tasks were smaller than on coding tasks.",
-                "Analysts expect rival labs to respond with price cuts before the end of the year.",
-                "Safety documentation describes red-team testing on misuse scenarios before launch.",
-                "Existing applications can switch over by changing a single setting in their requests.",
-                "Support for image input arrives first, while audio is planned for a later update.",
-            ] * 4))
-            + '<p><a href="https://evil.example">link</a><script>alert(1)</script>Done. [3]</p>',
-    "sources": [{"n": 1, "title": "Introducing Model X", "publisher": "Example Corp", "date": "2026-10-07", "url": "https://example.com/model-x"},
-                {"n": 2, "title": "Model X pricing", "publisher": "Example News", "date": "2026-10-07", "url": "https://news.example.org/model-x"},
-                {"n": 3, "title": "Made up", "publisher": "Nowhere", "date": "2026-10-07", "url": "https://invented.example.net/x"}],
-}
+SAMPLE_FIND = {"headline": "Example Corp releases Model X", "summary": "Example Corp released Model X on 9 October 2026.",
+               "company": "Example Corp"}
+SAMPLE_SOURCES = [
+    {"url": "https://example.com/model-x", "domain": "example.com", "title": "Introducing Model X",
+     "text": "Example Corp released Model X today.", "dates": [], "date": ""},
+    {"url": "https://news.example.org/model-x", "domain": "news.example.org", "title": "Example Corp's Model X",
+     "text": "Reporters tested Model X.", "dates": [], "date": ""},
+]
+SAMPLE_ARTICLE = """{"title": "Example Corp releases Model X with a 1M-token context window",
+ "keyword": "model x context window", "company": "Example Corp",
+ "description": "Example Corp released Model X on 9 October 2026 with a one-million-token context window and lower prices for developers.",
+ "facts": {"Who": "Example Corp", "What": "Released Model X", "When": "9 October 2026", "Status": "Available now"}}
+<<<BODY>>>
+<p>Example Corp released Model X on 9 October 2026. [1] Reporters tested it the same day. [2]</p>
+""" + "".join(f"<p>{line} [{1 + n % 2}]</p>" for n, line in enumerate([
+    "The release targets developers who work with long contracts, research papers and large codebases.",
+    "Pricing starts lower than the previous generation, according to the company's announcement.",
+    "Independent testers reported faster responses on summarisation and retrieval tasks.",
+    "Availability begins in North America and Europe, with other regions following next quarter.",
+    "Enterprise customers can run it inside their own cloud accounts for data control.",
+    "Critics noted that benchmark gains on reasoning tasks were smaller than on coding tasks.",
+    "Analysts expect rival labs to respond with price cuts before the end of the year.",
+    "Safety documentation describes red-team testing on misuse scenarios before launch.",
+    "Existing applications can switch over by changing a single setting in their requests.",
+    "Support for image input arrives first, while audio is planned for a later update.",
+] * 4)) + "\n<<<END>>>"
 
 
 def main():
@@ -484,40 +493,67 @@ def main():
         log("A story was already published today. Nothing to do.")
         return 0
     recent = [p for p in registry if p["published"] >= (now - timedelta(days=30)).date().isoformat()][:40]
+    covered = "\n".join(f"- {p['title']}" for p in recent)
     rejected = []
+    window_start, window_end = now - timedelta(hours=FRESH_HOURS), now + timedelta(days=1)
 
     for attempt in range(1, MAX_CALLS + 1):
         log(f"Attempt {attempt} of {MAX_CALLS}")
-        if args.dry_run:
-            text, grounded = json.dumps(SAMPLE), [{"uri": "https://example.com/model-x", "title": "example.com"},
-                                                   {"uri": "https://news.example.org/model-x", "title": "news.example.org"}]
-        else:
-            try:
-                text, grounded = call_gemini(build_prompt(today, recent, rejected))
-            except Exception as e:
-                log(f"Gemini call failed: {e}. Skipping today.")
-                return 0
-        log(f"   Gemini returned {len(text)} characters and {len(grounded)} search links")
         try:
+            # Step 1: find a story (search on).
+            if args.dry_run:
+                pick, grounded = SAMPLE_FIND, []
+            else:
+                text, grounded = ask(find_prompt(today, covered, "\n".join(f"- {t}" for t in rejected)), search=True)
+                pick = first_json(text)
+            headline = (pick.get("headline") or "").strip()
+            if not headline:
+                log("   no story found in the response")
+                continue
+            log(f"   story: {headline} ({len(grounded)} search results)")
+            topic = words(headline + " " + pick.get("summary", "") + " " + pick.get("company", ""))
+
+            # Step 2: read the real pages; search again if fewer than two sites are readable.
+            sources = SAMPLE_SOURCES if args.dry_run else read_sources(grounded, topic, [])
+            if len(sources) < 2 and not args.dry_run:
+                _, more = ask(more_prompt(headline, pick.get("summary", "")), search=True)
+                log(f"   searching for more reports ({len(more)} results)")
+                sources += read_sources(more, topic, sources)
+            if len(sources) < 2:
+                log(f"   rejected '{headline}': only {len(sources)} readable source page(s) about it")
+                rejected.append(headline)
+                continue
+            dated = [d for s in sources for d in s["dates"]]
+            if dated and not any(window_start <= d <= window_end for d in dated):
+                log(f"   rejected '{headline}': the source pages are older than {FRESH_HOURS} hours")
+                rejected.append(headline)
+                continue
+            if not dated:
+                log("   note: no publication dates found on the source pages")
+
+            # Step 3: write only from those pages (search off).
+            text = SAMPLE_ARTICLE if args.dry_run else ask(write_prompt(today, headline, sources[:6]))[0]
             story = parse_story(text)
-        except (ValueError, json.JSONDecodeError) as e:
-            log(f"   rejected: unreadable response ({e}). Start of response: {text[:300]!r}")
+        except Exception as e:
+            log(f"   attempt failed: {type(e).__name__}: {str(e)[:200]}")
             continue
 
+        body = sanitize(story.get("body", ""))
+        cited = sorted({int(n) for n in re.findall(r"\[(\d{1,2})\]", body) if 1 <= int(n) <= len(sources[:6])})
+        cited_sites = {sources[n - 1]["domain"] for n in cited}
         problems = check_story(story, registry, now)
-        sources, mapping, fresh, cited_domains = verify_sources(story, grounded, now, offline=args.dry_run)
-        if len(cited_domains) < 2:
-            problems.append(f"only {len(cited_domains)} cited source(s) matched real search results from different sites")
-        if not fresh:
-            problems.append(f"no source dated within {FRESH_HOURS} hours")
+        if len(cited_sites) < 2:
+            problems.append(f"the article cites only {len(cited_sites)} of the source sites")
         if problems:
-            log(f"   rejected '{story.get('title', '?')}': {'; '.join(problems)}")
-            rejected.append(story.get("title", "?"))
+            log(f"   rejected '{story.get('title', headline)}': {'; '.join(problems)}")
+            rejected.append(headline)
             continue
 
+        mapping = {old: new for new, old in enumerate(cited, 1)}
+        post_sources = [{"title": sources[n - 1]["title"], "publisher": sources[n - 1]["domain"],
+                         "date": sources[n - 1]["date"], "url": sources[n - 1]["url"]} for n in cited]
         slug = slugify(story["title"])
-        existing = {p["slug"] for p in registry}
-        if slug in existing:
+        if slug in {p["slug"] for p in registry}:
             slug = f"{slug}-{now.strftime('%Y-%m-%d')}"
         post = {
             "slug": slug,
@@ -527,20 +563,20 @@ def main():
             "published": now.replace(microsecond=0).isoformat(),
             "updated": "",
             "facts": {k: str(v) for k, v in (story.get("facts") or {}).items() if v},
-            "company": (story.get("company") or "").strip(),
-            "sources": sources,
+            "company": (story.get("company") or pick.get("company") or "").strip(),
+            "sources": post_sources,
             "related": [],
             "status": "verified",
-            "body": renumber(sanitize(story.get("body", "")), mapping),
+            "body": renumber(body, mapping),
         }
         if args.dry_run:
-            log(json.dumps({k: (v if k != "body" else v[:300] + "…") for k, v in post.items()}, indent=2))
+            log(json.dumps({k: (v if k != "body" else v[:200] + "…") for k, v in post.items()}, indent=2))
             log("Dry run passed. Nothing written.")
             return 0
         path = os.path.join(ROOT, "content", "posts", slug + ".json")
         with open(path, "w", encoding="utf-8") as f:
             json.dump(post, f, indent=2, ensure_ascii=False)
-        log(f"Saved {path} with {len(sources)} sources")
+        log(f"Saved {path} with {len(post_sources)} sources: {', '.join(s['publisher'] for s in post_sources)}")
         register_company(post["company"])
         subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "build-site.py")], check=True)
         return 0
