@@ -1,0 +1,33 @@
+{
+  "slug": "biohub-us-government-tech-giants-fund-ai-biology-data-18b",
+  "title": "Biohub, US Government, Tech Giants Fund AI Biology Data: $1.8B",
+  "description": "Biohub, US Department of Energy, NIH, Google DeepMind, Isomorphic Labs, and Meta commit $1.8 billion to create AI-ready biological data on 7 October 2026.",
+  "keyword": "ai-ready biological data initiative",
+  "published": "2026-10-09T15:04:15+00:00",
+  "updated": "",
+  "facts": {
+    "Who": "Biohub, U.S. Department of Energy (DOE), National Institutes of Health (NIH), Google DeepMind, Isomorphic Labs, Meta",
+    "What": "A major expansion of an international effort to generate and make accessible data for predictive AI models of biology, with a total investment of $1.8 billion.",
+    "When": "7 October 2026",
+    "Status": "Initiative launched, funding committed",
+    "Official source": "Biohub, The White House"
+  },
+  "company": "Biohub",
+  "sources": [
+    {
+      "title": "AI News for October 7, 2026 — Daily Edition | AI Weekly",
+      "publisher": "aiweekly.co",
+      "date": "2026-10-07",
+      "url": "https://aiweekly.co/ai-news-today/edition/2026-10-07"
+    },
+    {
+      "title": "US suspends Microsoft and Adobe from visa programme amid fraud claims | Business and Economy News | Al Jazeera",
+      "publisher": "aljazeera.com",
+      "date": "2026-10-08",
+      "url": "https://www.aljazeera.com/economy/2026/10/8/us-suspends-microsoft-and-adobe-from-visa-programme-amid-fraud-claims"
+    }
+  ],
+  "related": [],
+  "status": "verified",
+  "body": "<h2>What is this new initiative?</h2>\n<p>Biohub, in collaboration with the U.S. Department of Energy (DOE) and the National Institutes of Health (NIH), along with technology companies Google DeepMind, Isomorphic Labs, and Meta, announced a significant expansion of an international effort on October 7, 2026. This initiative aims to generate and make accessible data that will enable predictive artificial intelligence models of biology. The collective commitment for this endeavor totals $1.8 billion, representing the largest coordinated investment to date in creating AI-ready biological data.</p>\n<p>The goal is to establish an open resource for the research community, providing a foundational dataset that will enhance the understanding and treatment of human diseases. This effort is part of a broader \"Virtual Biology Initiative\" which was first announced in April 2026, designed to coordinate data generation across various institutions and disciplines to build these crucial AI-ready open datasets.</p>\n<h2>Who is contributing to this funding?</h2>\n<p>The $1.8 billion commitment comes from a diverse group of partners. The U.S. Department of Energy will invest over $500 million across five years, focusing on lab measurement, modeling, and computation to support the international effort to build an AI-ready open data resource. The National Institutes of Health will coordinate the contribution of relevant datasets, repositories, and knowledge bases, leveraging more than $500 million in prior federal investments aligned with this initiative. Biohub will work directly with the NIH to standardize these datasets, making them suitable for AI model training.</p>\n<p>Additionally, private sector leaders Google DeepMind, Isomorphic Labs, and Meta are collectively investing $300 million into the Virtual Biology Initiative. Their contribution is specifically aimed at developing the technologies and multimodal datasets necessary for constructing predictive models of life. The White House also highlighted this initiative as part of broader science investments, noting that it will support \"Bio Genesis,\" a national mission to double the pace of biomedical innovation within the next five to ten years.</p>\n<h2>Why is this data important for AI in biology?</h2>\n<p>The creation of accurate predictive models of biology has the potential to dramatically accelerate scientific discovery by allowing scientists to perform experiments digitally. This approach could significantly shorten the path to new methods for preventing and treating diseases. The initiative will deliver foundational measurements needed to train these models, expanding cell response data to interventions across a much wider range of cell types and conditions than previously studied. It will also involve building and validating technologies for studying cells and cellular interactions with greater scale, speed, and accuracy.</p>\n<p>The datasets generated will empower the global scientific community to collaboratively build and utilize AI models. These models will enable researchers to digitally ask, predict, and answer biological questions, thereby speeding up the development of new treatments.</p>\n<h2>What are the expected outcomes?</h2>\n<p>The ultimate goal is the creation of a \"virtual cell,\" which is considered one of the most critical challenges for the next era of science. This will require coordinated data generation efforts on both national and international scales. By providing comprehensive, standardized, and accessible biological data, the initiative aims to foster a new era of scientific discovery driven by artificial intelligence.</p>\n<p>The collaboration underscores a shared belief that equipping scientists with advanced tools, particularly those powered by AI, is essential for addressing complex biological questions and driving innovation in health and medicine.</p>"
+}

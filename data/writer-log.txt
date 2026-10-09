@@ -1,3 +1,7 @@
-Writer run 2026-10-09 15:03 UTC
+Writer run 2026-10-09 15:04 UTC
 Attempt 1 of 3
-Gemini call failed: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}. Skipping today.
+   Gemini returned 5729 characters and 2 search links
+   drop source (no matching search result): Biohub
+   drop source (no matching search result): The White House
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/biohub-us-government-tech-giants-fund-ai-biology-data-18b.json with 2 sources
+Added new company to data/companies.json: Biohub
