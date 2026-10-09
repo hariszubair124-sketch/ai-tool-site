@@ -1,7 +1,17 @@
-Writer run 2026-10-09 15:04 UTC
+Writer run 2026-10-09 15:10 UTC
 Attempt 1 of 3
-   Gemini returned 5729 characters and 2 search links
+   Gemini returned 5632 characters and 1 search links
+   drop source (no matching search result): Accenture
+   drop source (no matching search result): Solutions Review
+   rejected 'Accenture, Dell Technologies: Expand AI, Infrastructure Collaboration': 'business group' makes up 2.7% of the text (keyword stuffing); only 0 cited source(s) matched real search results from different sites; no source dated within 72 hours
+Attempt 2 of 3
+   Gemini returned 6014 characters and 2 search links
+   drop source (no matching search result): The Hacker News
+   drop source (no matching search result): Anthropic
+   rejected 'Anthropic Launches Free AI Scanner for Open-Source Security': only 0 cited source(s) matched real search results from different sites; no source dated within 72 hours
+Attempt 3 of 3
+   Gemini returned 6732 characters and 2 search links
    drop source (no matching search result): Biohub
-   drop source (no matching search result): The White House
-Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/biohub-us-government-tech-giants-fund-ai-biology-data-18b.json with 2 sources
-Added new company to data/companies.json: Biohub
+   drop source (no matching search result): AI Breaking Wire
+   rejected 'Biohub, DOE, NIH, Tech Giants: $1.8B for AI Biology Data': only 0 cited source(s) matched real search results from different sites; no source dated within 72 hours
+No story passed the checks today. Nothing published.
