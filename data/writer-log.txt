@@ -1,5 +1,3 @@
-Writer run 2026-10-09 14:55 UTC
+Writer run 2026-10-09 15:03 UTC
 Attempt 1 of 3
-   Gemini returned 5894 characters and 3 search links
-Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/koreai-autoloop-ai-agents-optimize-themselves-at-scale.json with 2 sources
-Added new company to data/companies.json: Kore.ai
+Gemini call failed: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}. Skipping today.
