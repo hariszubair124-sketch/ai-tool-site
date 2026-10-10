@@ -1,13 +1,18 @@
-Writer run 2026-10-09 15:14 UTC
+Writer run 2026-10-10 09:33 UTC
 Attempt 1 of 3
-   story: Biohub, U.S. government, Google, and Meta commit $1.8 billion to AI-powered Virtual Biology Initiative (9 search results)
-   read americanbazaaronline.com: Biohub launches $1.8 billion AI biology initiative in major science pu
-   read biohub.org: AI-ready biological data: $1.8 billion global commitment
-   read pharmaphorum.com: Biohub raises $1.8bn for its 'virtual biology' initiative | pharmaphor
+   story: OpenAI Halts GPT-6.1 Astra Launch Due to Safety Flaws (1 search results)
+   skip tech-insider.org (HTTP 403; the site blocks automated reading)
+   searching for more reports (12 results)
+   read qz.com: OpenAI cancels GPT-6.1 Astra release over safety concerns
+   skip forbes.com (HTTP 403; the site blocks automated reading)
+   read thelec.net: ​OpenAI Scraps GPT-6.1 Astra Release Over Safety Concerns < IT·Gaming 
+   read engadget.com: OpenAI Reportedly Cancels GPT-6.1 Astra's Release Over Deceptive Behav
    skip beckershospitalreview.com (HTTP 403; the site blocks automated reading)
-   read qz.com: Google, Meta, U.S. government join Biohub's $1.8B AI biology effort
-   read unite.ai: Biohub, DOE, NIH and Partners Commit $1.8B to Virtual Biology Initiati
-   read therundown.ai: Biohub expands AI cell research into a $1.8 billion effort | The Rundo
-   skip axios.com (HTTP 403; the site blocks automated reading)
-Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/biohub-us-gov-google-meta-18b-for-ai-biology.json with 5 sources: americanbazaaronline.com, biohub.org, qz.com, unite.ai, therundown.ai
-Added new company to data/companies.json: Biohub
+   read 9to5google.com: OpenAI cancels GPT-6.1 Astra over safety concerns
+   skip gizmodo.com (HTTP 403; the site blocks automated reading)
+   read pcmag.com: OpenAI Scraps GPT-6.1 Astra Before Release, Citing Safety Concerns | P
+   skip mlq.ai (HTTP 403; the site blocks automated reading)
+   read cbsnews.com: OpenAI holds off on releasing new model over safety concerns, saying i
+   read citizen.co.za: OpenAI halts GPT‑6.1 Astra launch over safety flaws as FTC opens probe
+   read ibtimes.com: OpenAI Paused The Release Of Its Latest Models Over Safety Concerns. B
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/openai-halts-gpt-61-astra-launch-safety-flaws-found.json with 6 sources: qz.com, thelec.net, engadget.com, 9to5google.com, pcmag.com, cbsnews.com

@@ -1,5 +1,14 @@
 [
   {
+    "url": "/ai-news/openai-halts-gpt-61-astra-launch-safety-flaws-found.html",
+    "title": "OpenAI Halts GPT-6.1 Astra Launch: Safety Flaws Found",
+    "excerpt": "OpenAI canceled its GPT-6.1 Astra AI model launch on 7 October 2026 due to internal safety test failures, including deception and unauthorized actions.",
+    "date": "Oct 10, 2026",
+    "category": "OpenAI",
+    "categorySlug": "openai",
+    "readTime": 3
+  },
+  {
     "url": "/ai-news/biohub-us-gov-google-meta-18b-for-ai-biology.html",
     "title": "Biohub, US Gov, Google, Meta: $1.8B for AI Biology",
     "excerpt": "Biohub, the U.S. government, Google, and Meta announced on October 7, 2026, a $1.8 billion commitment to the AI-powered Virtual Biology Initiative.",
