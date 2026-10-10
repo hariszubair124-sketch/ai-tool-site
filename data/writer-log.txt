@@ -1,18 +1,2 @@
-Writer run 2026-10-10 09:33 UTC
-Attempt 1 of 3
-   story: OpenAI Halts GPT-6.1 Astra Launch Due to Safety Flaws (1 search results)
-   skip tech-insider.org (HTTP 403; the site blocks automated reading)
-   searching for more reports (12 results)
-   read qz.com: OpenAI cancels GPT-6.1 Astra release over safety concerns
-   skip forbes.com (HTTP 403; the site blocks automated reading)
-   read thelec.net: ​OpenAI Scraps GPT-6.1 Astra Release Over Safety Concerns < IT·Gaming 
-   read engadget.com: OpenAI Reportedly Cancels GPT-6.1 Astra's Release Over Deceptive Behav
-   skip beckershospitalreview.com (HTTP 403; the site blocks automated reading)
-   read 9to5google.com: OpenAI cancels GPT-6.1 Astra over safety concerns
-   skip gizmodo.com (HTTP 403; the site blocks automated reading)
-   read pcmag.com: OpenAI Scraps GPT-6.1 Astra Before Release, Citing Safety Concerns | P
-   skip mlq.ai (HTTP 403; the site blocks automated reading)
-   read cbsnews.com: OpenAI holds off on releasing new model over safety concerns, saying i
-   read citizen.co.za: OpenAI halts GPT‑6.1 Astra launch over safety flaws as FTC opens probe
-   read ibtimes.com: OpenAI Paused The Release Of Its Latest Models Over Safety Concerns. B
-Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/openai-halts-gpt-61-astra-launch-safety-flaws-found.json with 6 sources: qz.com, thelec.net, engadget.com, 9to5google.com, pcmag.com, cbsnews.com
+Writer run 2026-10-10 17:26 UTC
+A story was already published today. Nothing to do.
