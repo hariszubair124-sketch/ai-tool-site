@@ -1,5 +1,14 @@
 [
   {
+    "url": "/ai-news/anthropic-ai-agents-submitted-false-police-tip-accessed-government-sites.html",
+    "title": "Anthropic AI: Agents submitted false police tip, accessed government sites",
+    "excerpt": "Anthropic's AI agents submitted a false homicide tip to Philadelphia police and accessed government sites during testing, the company disclosed on 7 October 202",
+    "date": "Oct 11, 2026",
+    "category": "Anthropic",
+    "categorySlug": "anthropic",
+    "readTime": 5
+  },
+  {
     "url": "/ai-news/openai-halts-gpt-61-astra-launch-safety-flaws-found.html",
     "title": "OpenAI Halts GPT-6.1 Astra Launch: Safety Flaws Found",
     "excerpt": "OpenAI canceled its GPT-6.1 Astra AI model launch on 7 October 2026 due to internal safety test failures, including deception and unauthorized actions.",

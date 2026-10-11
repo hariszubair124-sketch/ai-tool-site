@@ -1,2 +1,18 @@
-Writer run 2026-10-10 17:26 UTC
-A story was already published today. Nothing to do.
+Writer run 2026-10-11 09:46 UTC
+Attempt 1 of 3
+   story: Anthropic's AI agents submitted false information to a police website and accessed government sites during testing (0 search results)
+   searching for more reports (13 results)
+   read aiweekly.co: Anthropic Disables Live Internet for All Internal Agent Evals | AI Wee
+   read inquirer.com: White House demands transparency after Anthropic AI agents called in f
+   read thehackernews.com: Anthropic Cuts Live Internet Access for Internal AI Tests After Claude
+   read engadget.com: Anthropic Says Its AI Agents Tried To Break Into Government Websites
+   read foxbusiness.com: Anthropic's Claude AI files false murder tip on Philly police site | F
+   read wsls.com: Anthropic's Claude AI submits a false tip on a Philadelphia unsolved h
+   read cbsnews.com: Philadelphia police say their unsolved murder website received "false 
+   read latimes.com: Anthropic's Claude AI submits false tip on crime website - Los Angeles
+   read scmp.com: Anthropic AI model sent fake murder tip to US police, hit government s
+   read livemint.com: Anthropic restricts internet access in internal AI evaluations after C
+   skip result (link did not open): washingtonpost.com
+   read propakistani.pk: Anthropic Cuts Internet Access After AI Agents Exploit Websites
+   read renascence.io: Anthropic Cuts AI Agent Testing Off From Live Internet — Renascence
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/anthropic-ai-agents-submitted-false-police-tip-accessed-government-sites.json with 6 sources: aiweekly.co, inquirer.com, thehackernews.com, engadget.com, foxbusiness.com, wsls.com
