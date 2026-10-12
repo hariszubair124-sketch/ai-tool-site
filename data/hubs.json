@@ -2,8 +2,8 @@
   "openai",
   "google",
   "anthropic",
-  "nvidia",
   "microsoft",
+  "nvidia",
   "meta",
   "apple",
   "policy"

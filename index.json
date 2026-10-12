@@ -1,5 +1,14 @@
 [
   {
+    "url": "/ai-news/microsoft-president-calls-for-urgent-global-ai-regulation.html",
+    "title": "Microsoft President Calls For Urgent Global AI Regulation",
+    "excerpt": "Microsoft President Brad Smith called for urgent global AI regulation on 12 October 2026, stating the technology is less regulated than milk and washing machine",
+    "date": "Oct 12, 2026",
+    "category": "Microsoft",
+    "categorySlug": "microsoft",
+    "readTime": 5
+  },
+  {
     "url": "/ai-news/anthropic-ai-agents-submitted-false-police-tip-accessed-government-sites.html",
     "title": "Anthropic AI: Agents submitted false police tip, accessed government sites",
     "excerpt": "Anthropic's AI agents submitted a false homicide tip to Philadelphia police and accessed government sites during testing, the company disclosed on 7 October 202",
