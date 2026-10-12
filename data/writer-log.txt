@@ -1,2 +1,28 @@
-Writer run 2026-10-11 17:45 UTC
-A story was already published today. Nothing to do.
+Writer run 2026-10-12 10:27 UTC
+Attempt 1 of 3
+   story: Amazon is reportedly considering a $7 billion acquisition of AI startup Decart. (1 search results)
+   read pymnts.com: PYMNTS | Amazon Weighs $7 Billion Purchase of AI Startup Decart
+   searching for more reports (8 results)
+   read finance.biggo.com: Amazon Pursues $7 Billion Acquisition of AI Startup Decart to Counter 
+   skip timesofisrael.com (HTTP 403; the site blocks automated reading)
+   skip calcalistech.com (too little readable text)
+   skip indmoney.com (HTTP 403; the site blocks automated reading)
+   skip seekingalpha.com (HTTP 403; the site blocks automated reading)
+   read tradingkey.com: Amazon Stock Price Forecast: Proposed $7 Billion Decart Acquisition Co
+   skip techzine.eu (HTTP 403; the site blocks automated reading)
+   rejected 'Amazon Considers Acquisition: $7 Billion Bid for AI Startup Decart': '1 2' makes up 2.5% of the text (keyword stuffing)
+Attempt 2 of 3
+   story: TypeSafe AI raises $870 million at $7.5 billion valuation for its Jev AI model (2 search results)
+   skip youtube.com (too little readable text)
+   skip dailyaibrief.blog (not about this story: AI Industry News Brief — October 10, 2026 – Daily AI Brief)
+   searching for more reports (0 results)
+   rejected 'TypeSafe AI raises $870 million at $7.5 billion valuation for its Jev AI model': only 0 readable source page(s) about it
+Attempt 3 of 3
+   story: DATA Network, with a $30 million investment from Sui Foundation, is migrating its AI training data protocol to the Sui blockchain. (5 search results)
+   read markets.businessinsider.com: DATA Network joins Sui and Walrus to scale the supply chain for AI tra
+   read superpowerdaily.com: Sui Foundation invests $30 million to bring AI training-data network o
+   read crypto.news: Sui invests $30M as DATA Network shuts down its blockchain
+   read kucoin.com: Sui Foundation Invests $30M in DATA Network for AI Data Tracking | KuC
+   skip cryptorank.io (HTTP 403; the site blocks automated reading)
+   rejected 'DATA Network migrates AI protocol: Sui Foundation invests $30M': '1 2' makes up 4.1% of the text (keyword stuffing)
+No story passed the checks today. Nothing published.
