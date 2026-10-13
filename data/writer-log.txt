@@ -1,17 +1,2 @@
-Writer run 2026-10-13 10:16 UTC
-Attempt 1 of 3
-   story: Microsoft plans multi-gigawatt expansion for its Azure Maia AI infrastructure (1 search results)
-   read blogs.microsoft.com: Microsoft to expand Azure Maia system to multi-gigawatt deployments - 
-   searching for more reports (0 results)
-   rejected 'Microsoft plans multi-gigawatt expansion for its Azure Maia AI infrastructure': only 1 readable source page(s) about it
-Attempt 2 of 3
-   story: Amazon Weighs $7 Billion Purchase of AI Startup Decart (3 search results)
-   read americanbazaaronline.com: Amazon in talks to acquire AI startup Decart in $7 billion deal
-   read qz.com: Amazon in talks to acquire AI startup Decart for $7 billion
-   read pymnts.com: PYMNTS | Amazon Weighs $7 Billion Purchase of AI Startup Decart
-   rejected 'Amazon Weighs: $7 Billion Purchase of AI Startup Decart': '1 2 3' makes up 6.6% of the text (keyword stuffing)
-Attempt 3 of 3
-   story: IMF warns AI share price crash threatens global financial stability (2 search results)
-   read theguardian.com: Threat of AI share crash puts world financial stability at risk, says 
-   read bworldonline.com: IMF cites AI slowdown, spiking yields as looming global market risks -
-Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/imf-warns-ai-stock-crash-threatens-global-financial-stability.json with 2 sources: theguardian.com, bworldonline.com
+Writer run 2026-10-13 19:28 UTC
+A story was already published today. Nothing to do.
