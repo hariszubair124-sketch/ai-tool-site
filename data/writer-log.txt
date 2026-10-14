@@ -1,16 +1,2 @@
-Writer run 2026-10-14 08:29 UTC
-Attempt 1 of 3
-   story: Anthropic's IPO Prospectus Warns of Catastrophic AI Risks (1 search results)
-   read asiatimes.com: Postpone AI public offerings until US Congress acts - Asia Times
-   searching for more reports (10 results)
-   skip tomshardware.com (too little readable text)
-   read latimes.com: Anthropic says its AI models could manipulate, blackmail and harm huma
-   read qz.com: Anthropic IPO prospectus warns of existential AI risk
-   read webull.com: Anthropic IPO Prospectus Spends 80 Of 261 Pages On Risk, Warns AI Coul
-   read theguardian.com: Anthropic ‘warns of existential AI risks to humanity’ in IPO document 
-   read dealroom.co: Anthropic warns of ‘existential risks to humanity’ in IPO prospectus |
-   read economictimes.indiatimes.com: Anthropic warns IPO investors AI could pose 'catastrophic' risks to hu
-   skip seekingalpha.com (HTTP 403; the site blocks automated reading)
-   read thelegalwire.ai: Anthropic warns of “existential” AI risks in IPO prospectus - The Lega
-   skip facebook.com (too little readable text)
-Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/anthropic-ipo-warns-of-catastrophic-ai-risks.json with 6 sources: asiatimes.com, latimes.com, qz.com, webull.com, theguardian.com, dealroom.co
+Writer run 2026-10-14 17:30 UTC
+A story was already published today. Nothing to do.
