@@ -1,13 +1,2 @@
-Writer run 2026-10-15 08:05 UTC
-Attempt 1 of 3
-   story: OpenAI used its own AI to catch an employee who allegedly planted a hidden recording device in its office (2 search results)
-   skip theneuron.ai (HTTP 403; the site blocks automated reading)
-   skip instagram.com (too little readable text)
-   searching for more reports (0 results)
-   rejected 'OpenAI used its own AI to catch an employee who allegedly planted a hidden recording device in its office': only 0 readable source page(s) about it
-Attempt 2 of 3
-   story: Anthropic warns that small AI models could soon spread autonomously among smart home devices (3 search results)
-   read computerworld.com: Anthropic warns: AI models may soon spread among smart devices in the 
-   skip aiweekly.co (too little readable text)
-   read cbsnews.com: Artificial Intelligence: The latest news, interviews and videos about 
-Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/anthropic-warns-ai-models-could-infect-smart-home-devices.json with 2 sources: computerworld.com, cbsnews.com
+Writer run 2026-10-15 17:17 UTC
+A story was already published today. Nothing to do.
