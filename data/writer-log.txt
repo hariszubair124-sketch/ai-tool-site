@@ -1,8 +1,2 @@
-Writer run 2026-10-17 07:36 UTC
-Attempt 1 of 3
-   story: FTC Issues Extensive Demands to OpenAI and Anthropic Over AI Safety (3 search results)
-   skip aiweekly.co (not about this story: AI News for October 16, 2026 — Daily Edition | AI Weekly)
-   read usecarly.com: AI News, Oct 16: China Moves to Control AI Model Exports
-   read apollotechnologiesus.com: Top 10 AI News — October 15, 2026 | The Neural Dispatch
-Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/ftc-demands-data-from-openai-anthropic-ai-safety-probe-escalates.json with 2 sources: usecarly.com, apollotechnologiesus.com
-Added new company to data/companies.json: OpenAI, Anthropic
+Writer run 2026-10-17 15:51 UTC
+A story was already published today. Nothing to do.
