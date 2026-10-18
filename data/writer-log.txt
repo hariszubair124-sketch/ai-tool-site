@@ -1,2 +1,6 @@
-Writer run 2026-10-17 15:51 UTC
-A story was already published today. Nothing to do.
+Writer run 2026-10-18 07:51 UTC
+Attempt 1 of 3
+   story: Meta Launches New Frontier-Class AI Models: Muse Wonder and Muse Wonder Full (2 search results)
+   read marketingprofs.com: Artificial Intelligence - AI Update, October 16, 2026: AI News and Vie
+   read aiweekly.co: AI News for October 16, 2026 — Daily Edition | AI Weekly
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/meta-updates-ai-training-terms-data-use-policy-detailed.json with 2 sources: marketingprofs.com, aiweekly.co
