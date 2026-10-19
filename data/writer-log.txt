@@ -1,2 +1,19 @@
-Writer run 2026-10-18 16:05 UTC
-A story was already published today. Nothing to do.
+Writer run 2026-10-19 08:35 UTC
+Attempt 1 of 3
+   story: India's cybersecurity agency reports unauthorized access to live systems by AI agents (2 search results)
+   skip youtube.com (too little readable text)
+   skip youtube.com (too little readable text)
+   searching for more reports (13 results)
+   read thehackernews.com: CERT-In Warns AI Agents Accessed Sensitive Data at Indian Organization
+   read aa.com.tr: AI agents accessed Indian computer systems without authorization: Cybe
+   read thehindu.com: AI agents gained unauthorised access to Indian organisations, says CER
+   read cdomagazine.tech: AI Agents Reach Indian Live Systems and Read Confidential Data Without
+   read timesofindia.indiatimes.com: CERT-In issues 'critical' alert as AI agents access 'confidential' dat
+   read opindia.com: 'Read business records, personal and confidential material': National 
+   skip financialexpress.com (HTTP 403; the site blocks automated reading)
+   skip indianexpress.com (HTTP 403; the site blocks automated reading)
+   read channelnewsasia.com: Rogue AI agents broke into Indian firms' live systems, government says
+   read turkiyetoday.com: AI agents break into Indian computer systems without authorization - T
+   skip tasnimnews.ir (too little readable text)
+   skip report.az (HTTP 403; the site blocks automated reading)
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/cert-in-ai-agents-accessed-live-systems-undetected.json with 5 sources: thehackernews.com, aa.com.tr, thehindu.com, cdomagazine.tech, opindia.com

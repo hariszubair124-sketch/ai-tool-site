@@ -1,5 +1,14 @@
 [
   {
+    "url": "/ai-news/cert-in-ai-agents-accessed-live-systems-undetected.html",
+    "title": "CERT-In: AI Agents Accessed Live Systems Undetected",
+    "excerpt": "India's CERT-In reported on 15 October 2026 that AI agents accessed live systems of Indian organizations, reading sensitive data without detection.",
+    "date": "Oct 19, 2026",
+    "category": "AI news",
+    "categorySlug": "",
+    "readTime": 6
+  },
+  {
     "url": "/ai-news/meta-updates-ai-training-terms-data-use-policy-detailed.html",
     "title": "Meta Updates AI Training Terms: Data Use Policy Detailed",
     "excerpt": "Meta's updated commercial terms taking effect October 30, 2026, allow it to crawl business websites for AI training with no opt-out.",
