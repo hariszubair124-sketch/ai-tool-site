@@ -1,2 +1,7 @@
-Writer run 2026-10-19 18:48 UTC
-A story was already published today. Nothing to do.
+Writer run 2026-10-20 08:16 UTC
+Attempt 1 of 3
+   story: Anthropic commits 5% of its equity to a new Public Benefit Fund ahead of its IPO (3 search results)
+   read aiweekly.co: AI News for October 19, 2026 — Daily Edition | AI Weekly
+   read bworldonline.com: Musk, Anthropic outline dueling approaches to AI-era philanthropy - Bu
+   skip theguardian.com (not about this story: Is this the beginning of the end of the AI stock market boom)
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/anthropic-commits-equity-public-benefit-fund-ahead-of-ipo.json with 2 sources: aiweekly.co, bworldonline.com

@@ -1,5 +1,14 @@
 [
   {
+    "url": "/ai-news/anthropic-commits-equity-public-benefit-fund-ahead-of-ipo.html",
+    "title": "Anthropic Commits Equity: Public Benefit Fund Ahead of IPO",
+    "excerpt": "Anthropic commits 5% of its equity to a new Public Benefit Fund ahead of its November IPO, aiming to balance public interests with profitability.",
+    "date": "Oct 20, 2026",
+    "category": "Anthropic",
+    "categorySlug": "anthropic",
+    "readTime": 5
+  },
+  {
     "url": "/ai-news/cert-in-ai-agents-accessed-live-systems-undetected.html",
     "title": "CERT-In: AI Agents Accessed Live Systems Undetected",
     "excerpt": "India's CERT-In reported on 15 October 2026 that AI agents accessed live systems of Indian organizations, reading sensitive data without detection.",
