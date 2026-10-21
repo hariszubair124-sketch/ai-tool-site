@@ -1,0 +1,56 @@
+{
+  "slug": "deepseek-banned-us-agencies-ordered-to-remove-products",
+  "title": "DeepSeek Banned: US Agencies Ordered to Remove Products",
+  "description": "The US Department of Homeland Security has ordered federal civilian agencies to remove Chinese AI developer DeepSeek's products by 21 October 2026 due to securi",
+  "keyword": "dhs deepseek ban federal agencies",
+  "published": "2026-10-21T08:20:57+00:00",
+  "updated": "",
+  "facts": {
+    "Who": "US Department of Homeland Security (DHS), Secretary Markwayne Mullin",
+    "What": "Ordered federal civilian agencies to stop acquiring products and services from Chinese AI developer DeepSeek, and to remove DeepSeek offerings and DeepSeek-based third-party tools from their IT systems.",
+    "When": "20 October 2026",
+    "Status": "Agencies must immediately exclude covered products from procurement and remove them from IT systems, or seek an exception within 60 days. The order will be reviewed annually."
+  },
+  "company": "DeepSeek",
+  "sources": [
+    {
+      "title": "US bans use of China’s DeepSeek AI tools by government agencies | Trump administration | The Guardian",
+      "publisher": "theguardian.com",
+      "date": "2026-10-20",
+      "url": "https://www.theguardian.com/us-news/2026/oct/20/us-bans-china-deepseek-ai-tools-government-agencies"
+    },
+    {
+      "title": "DHS Orders Federal Agencies to Remove DeepSeek Products",
+      "publisher": "executivegov.com",
+      "date": "2026-10-20",
+      "url": "https://www.executivegov.com/articles/dhs-deepseek-removal-order-civilian-agencies-it-systems"
+    },
+    {
+      "title": "US bans DeepSeek across federal agencies, putting AI supply chains under scrutiny | CIO",
+      "publisher": "cio.com",
+      "date": "2026-10-21",
+      "url": "https://www.cio.com/article/4238132/us-bans-deepseek-across-federal-agencies-putting-ai-supply-chains-under-scrutiny.html"
+    },
+    {
+      "title": "PYMNTS | DHS Bans DeepSeek Across Federal Government Networks",
+      "publisher": "pymnts.com",
+      "date": "2026-10-19",
+      "url": "https://www.pymnts.com/news/artificial-intelligence/2026/dhs-bans-deepseek-across-federal-government-networks/"
+    },
+    {
+      "title": "DHS bans DeepSeek products across US federal civilian agencies",
+      "publisher": "bleepingcomputer.com",
+      "date": "2026-10-20",
+      "url": "https://www.bleepingcomputer.com/news/security/dhs-bans-deepseek-products-across-us-federal-civilian-agencies/"
+    },
+    {
+      "title": "U.S. Orders DeepSeek Removed From Federal Civilian Systems, Bans New Purchases",
+      "publisher": "thehackernews.com",
+      "date": "",
+      "url": "https://thehackernews.com/2026/10/us-orders-deepseek-removed-from-federal.html"
+    }
+  ],
+  "related": [],
+  "status": "verified",
+  "body": "The US Department of Homeland Security (DHS) has ordered federal civilian agencies to remove products and services from Chinese artificial intelligence (AI) developer DeepSeek, citing significant data security risks [1][2][4][5]. This directive, which also bans future acquisitions of the company's offerings, was published in the Federal Register on October 20, 2026 [2][4][5][6].\n<h2>What did the Department of Homeland Security order?</h2>\nThe DHS has directed federal civilian executive branch agencies to cease acquiring products and services from DeepSeek, including those from its affiliated entities [2][3][5][6]. Furthermore, agencies must remove all DeepSeek offerings and any third-party tools created using DeepSeek implementations from their information technology (IT) systems [1][2][3][5][6]. This comprehensive ban extends to all acquisition channels, such as approved product lists and online marketplaces [2][5].\nThe order applies to federal civilian executive branch agencies, which include departments like Treasury, State, and Justice [3]. However, it does not cover national security systems, secure compartmented information systems, military, or intelligence services [1][2][3][6]. The directive is also not a general ban for private consumers, the general public, or state and local governments [3][5][6].\nHomeland Security Secretary Markwayne Mullin issued the order on July 24, 2026, under the authority of the Federal Acquisition Supply Chain Security Act of 2018 [2][4][6]. This 2018 law allows the DHS to manage supply chain risks by recommending the exclusion or removal of risky products or services from federal procurement or IT systems [4]. Government contractors are also affected; a federal contract containing FAR clause 52.204-30 prohibits the contractor from providing or using any product or service covered by a FASCSA order, unless a waiver is granted [6].\n<h2>Why was the order issued?</h2>\nThe DHS cited multiple security concerns as the basis for its action, primarily focusing on data security risks [1][2][3][4][5]. A key issue is that DeepSeek stores data on servers located in the People's Republic of China (PRC), where the legal system grants the government \"extensive authority\" to access private company infrastructure [1][3][4][5].\nThe department warned that the use of DeepSeek AI tools \"may result in the transfer of sensitive data to [China] if used by US government employees or vendors\" [1]. DeepSeek's account generation process collects personally identifiable information (PII), and its prompt-and-response process requires users to present information to the model [2][3][4][5]. The transfer of this information to the PRC, either independently or combined with publicly available data, \"could produce actionable intelligence on U.S. persons and/or government programs,\" the DHS stated [3][4].\nConcerns also extend to the models themselves, which \"may contain malware or other security vulnerabilities\" [3][4][5]. The DHS pointed to open-source security research published in February 2025 that uncovered multiple critical vulnerabilities in DeepSeek's iOS mobile application [3][4][5]. This research identified issues such as unencrypted data transmissions, weak encryption algorithms, insecure local storage, user fingerprinting risks, and data sharing with ByteDance [5].\nErik Avakian, a technical counselor at Infotech, explained the broader concern, stating, \"When organizations use any type of hosted AI service, they’re potentially sending intellectual property, confidential business information, or other sensitive data into an environment where they may have very little visibility or control over what happens to it\" [3]. He also noted a January 2025 incident where DeepSeek reportedly leaked over one million log entries, including chat histories and API secrets, through an unsecured database, which raised questions about the platform's overall security practices [3].\nThe DHS notice also follows a September advisory from the National Security Agency (NSA), the FBI, and the Cybersecurity and Infrastructure Security Agency (CISA), which warned that China-based AI companies, including DeepSeek, are conducting \"industrial-scale knowledge distillation campaigns\" against U.S. frontier AI models, likely with the Chinese government's awareness [2]. The US has also accused DeepSeek and other top Chinese AI firms of systematically stealing the capabilities of American rivals [1].\n<h2>What are the compliance requirements and exceptions?</h2>\nFederal civilian agencies are required to take immediate action to exclude DeepSeek products from procurement channels and remove them from IT systems [5]. Those agencies that cannot comply immediately may request an exception [5].\nAgencies must submit written requests for exceptions, waivers, or extensions of time to comply within 60 days of the order's issuance [2][3][5]. These requests should be directed to the DHS issuing official or CISA [2][3][5]. Each request must identify the order, describe the exception sought, name the affected product or service, and explain why the exception is warranted, such as the order's effect on mission-critical functions or national interest considerations [2][3][6]. Agencies must also outline any alternative steps they plan to take to reduce risks [2]. CISA will evaluate each request and issue a written approval or denial [2][5].\nUntil DeepSeek products are fully removed, the DHS encourages agencies to implement interim cybersecurity measures [2]. These include monitoring network traffic, strengthening logging, and adding data exfiltration controls on affected systems [2][3]. CISA is prepared to provide technical assistance to agencies that lack the in-house capabilities to comply with the order [2][5]. The Secretary of Homeland Security will review the order within one year and annually thereafter [2][6].\n<h2>What is the broader context for this ban?</h2>\nThis directive represents a significant escalation in efforts to restrict DeepSeek's presence within federal settings, which date back to early 2025 [2]. By February 2025, Congress, NASA, the Navy, the Pentagon, and the state of Texas had already barred DeepSeek from government devices [4][6]. The US Department of Commerce also banned the use of DeepSeek's AI model on government-furnished equipment in March 2025 [4]. Bipartisan House and Senate bills proposing bans on DeepSeek on government devices were introduced in February 2025 [2][6].\nDeepSeek, a Chinese startup, garnered significant attention in January 2025 with the release of a low-cost, high-performance chatbot that challenged assumptions of US dominance in the AI sector [1]. The company continued to innovate, releasing a new model, V4, in April, and an updated, faster, and more lightweight version of V4 earlier in October [1]. DeepSeek is also open-sourcing DeepInfer, its in-house inference framework that powers DeepSeek-V4.1-Flash [3].\nThe ban underscores the fierce competition between the US and China in the rapidly evolving AI sector [1]. Despite this rivalry, leaders Xi Jinping and Donald Trump agreed to establish a \"communication channel\" for AI incidents during their September meeting at the White House [1]. This topic is expected to be revisited at a summit scheduled for November in Shenzhen, China [1].\nIn response to the ban, China's foreign ministry spokesperson Mao Ning stated on October 20 that \"China consistently opposes the overstretching of the concept of national security\" and that Beijing will \"resolutely safeguard the legitimate rights and interests of Chinese companies\" [6].\nAnalyst Erik Avakian noted that enterprises are increasingly exploring DeepSeek, with some models even made available through platforms like Microsoft Azure and AWS [3]. He advises organizations to seriously assess associated risks, starting with low-risk use cases and validating security controls within sandboxed environments [3]."
+}
