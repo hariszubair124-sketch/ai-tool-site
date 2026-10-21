@@ -1,14 +1,2 @@
-Writer run 2026-10-21 08:21 UTC
-Attempt 1 of 3
-   story: US Department of Homeland Security orders federal agencies to remove Chinese AI developer DeepSeek's products (10 search results)
-   read theguardian.com: US bans use of China’s DeepSeek AI tools by government agencies | Trum
-   read executivegov.com: DHS Orders Federal Agencies to Remove DeepSeek Products
-   read cio.com: US bans DeepSeek across federal agencies, putting AI supply chains und
-   read pymnts.com: PYMNTS | DHS Bans DeepSeek Across Federal Government Networks
-   read bleepingcomputer.com: DHS bans DeepSeek products across US federal civilian agencies
-   read thehackernews.com: U.S. Orders DeepSeek Removed From Federal Civilian Systems, Bans New P
-   read siliconrepublic.com: US plans to remove DeepSeek from government agency systems
-   read forkast.news: DHS Ordered Every Federal Agency to Purge DeepSeek. The Exclusion Foll
-   read techtimes.com: DHS Filed DeepSeek Ban 28 Days After Agencies Lost Right to Request Ex
-   read vanderbiltreport.com: DeepSeek Federal Ban: DHS Orders AI Removed From Agencies
-Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/deepseek-banned-us-agencies-ordered-to-remove-products.json with 6 sources: theguardian.com, executivegov.com, cio.com, pymnts.com, bleepingcomputer.com, thehackernews.com
+Writer run 2026-10-21 17:34 UTC
+A story was already published today. Nothing to do.
