@@ -1,2 +1,39 @@
-Writer run 2026-10-21 17:34 UTC
-A story was already published today. Nothing to do.
+Writer run 2026-10-22 08:25 UTC
+Attempt 1 of 3
+   story: OpenAI acquires Orchestra Bio to expand into drug development (2 search results)
+   skip theneuron.ai (HTTP 403; the site blocks automated reading)
+   read mmm-online.com: Five things for pharma marketers to know for Thursday, October 22, 202
+   searching for more reports (12 results)
+   skip openai.com (HTTP 403; the site blocks automated reading)
+   read trial.medpath.com: OpenAI Acquires Orchestra Bio to Extend Rosalind AI Suite Into Drug Pr
+   read unite.ai: OpenAI Acquires Orchestra Bio to Expand Rosalind Life Sciences Tools –
+   skip htworld.co.uk (HTTP 403; the site blocks automated reading)
+   skip beckershospitalreview.com (HTTP 403; the site blocks automated reading)
+   read the-decoder.com: OpenAI acquires Orchestra Bio to build AI agents that speed up drug de
+   skip axios.com (HTTP 403; the site blocks automated reading)
+   skip seekingalpha.com (HTTP 403; the site blocks automated reading)
+   read kingy.ai: OpenAI Acquires Orchestra Bio to Accelerate Drug Development With AI-P
+   skip tipranks.com (HTTP 403; the site blocks automated reading)
+   read siliconangle.com: OpenAI acquires Orchestra Bio to bring AI agents into drug development
+   read pharmtech.com: OpenAI Bets on Accelerating Drug Development Timelines With Orchestra 
+   rejected 'OpenAI acquires Orchestra Bio: Expands into drug development': '2 3' makes up 2.5% of the text (keyword stuffing)
+Attempt 2 of 3
+   story: OpenAI's advanced AI models, including GPT-6 Astra, are now available on Google Cloud (10 search results)
+   skip openai.com (HTTP 403; the site blocks automated reading)
+   read cloud.google.com: Google Cloud brings OpenAI models to customers | Google Cloud Blog
+   read ksl.com: OpenAI to sell its top models on Google Cloud in latest enterprise pus
+   read siliconangle.com: OpenAI to make its most advanced AI models available in Google Cloud -
+   read shattered.io: OpenAI Google Cloud Partnership: 3 GPT-6 Models Land
+   read pymnts.com: CPI | OpenAI Strikes Google Cloud Deal in Push Beyond Microsoft
+   read thenextweb.com: OpenAI brings GPT-6 Astra and Codex to Google Cloud, a rival’s platfor
+   read unite.ai: Google Cloud Adds OpenAI’s GPT-Astra and GPT-6 Models to Model Garden 
+   read nokiapoweruser.com: Google Cloud & OpenAI Partner: GPT-6 Models Join Model Garden - NPower
+   read community.openai.com: OpenAI models are coming to Google Cloud - Announcements - OpenAI Deve
+   rejected 'OpenAI Offers Advanced AI Models: Now on Google Cloud': 'google cloud' makes up 3.4% of the text (keyword stuffing)
+Attempt 3 of 3
+   story: Volkswagen Group deploys Microsoft Copilot to over 330,000 employees (3 search results)
+   read unite.ai: Volkswagen Group Deploys Microsoft Copilot to Over 330,000 Employees –
+   read news.microsoft.com: Microsoft empowers more than 330,000 Volkswagen Group employees with C
+   skip gurufocus.com (HTTP 403; the site blocks automated reading)
+   rejected 'Volkswagen Group Deploys Copilot: 330,000 Employees Empowered': '1 2' makes up 5.4% of the text (keyword stuffing)
+No story passed the checks today. Nothing published.
