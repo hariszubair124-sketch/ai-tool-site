@@ -1,39 +1,29 @@
-Writer run 2026-10-22 08:25 UTC
+Writer run 2026-10-22 17:33 UTC
 Attempt 1 of 3
-   story: OpenAI acquires Orchestra Bio to expand into drug development (2 search results)
+   story: OpenAI acquires Orchestra Bio to advance AI in drug development (2 search results)
    skip theneuron.ai (HTTP 403; the site blocks automated reading)
-   read mmm-online.com: Five things for pharma marketers to know for Thursday, October 22, 202
-   searching for more reports (12 results)
    skip openai.com (HTTP 403; the site blocks automated reading)
-   read trial.medpath.com: OpenAI Acquires Orchestra Bio to Extend Rosalind AI Suite Into Drug Pr
+   searching for more reports (10 results)
+   skip openai.com (HTTP 403; the site blocks automated reading)
    read unite.ai: OpenAI Acquires Orchestra Bio to Expand Rosalind Life Sciences Tools –
-   skip htworld.co.uk (HTTP 403; the site blocks automated reading)
-   skip beckershospitalreview.com (HTTP 403; the site blocks automated reading)
-   read the-decoder.com: OpenAI acquires Orchestra Bio to build AI agents that speed up drug de
-   skip axios.com (HTTP 403; the site blocks automated reading)
-   skip seekingalpha.com (HTTP 403; the site blocks automated reading)
-   read kingy.ai: OpenAI Acquires Orchestra Bio to Accelerate Drug Development With AI-P
-   skip tipranks.com (HTTP 403; the site blocks automated reading)
-   read siliconangle.com: OpenAI acquires Orchestra Bio to bring AI agents into drug development
+   read trial.medpath.com: OpenAI Acquires Orchestra Bio to Extend Rosalind AI Suite Into Drug Pr
    read pharmtech.com: OpenAI Bets on Accelerating Drug Development Timelines With Orchestra 
-   rejected 'OpenAI acquires Orchestra Bio: Expands into drug development': '2 3' makes up 2.5% of the text (keyword stuffing)
+   read tribuneindia.com: OpenAI acquires drug development platform Orchestra Bio, expands life 
+   read pulse2.com: OpenAI Acquires Orchestra Bio To Expand AI-Powered Drug Development Pl
+   read the-decoder.com: OpenAI acquires Orchestra Bio to build AI agents that speed up drug de
+   skip beckershospitalreview.com (HTTP 403; the site blocks automated reading)
+   read channelinsider.com: OpenAI Acquires Orchestra Bio to Expand AI Agents for Drug Development
+   skip seekingalpha.com (HTTP 403; the site blocks automated reading)
+   rejected 'OpenAI acquires Orchestra Bio: Advances AI in drug development': '2 3' makes up 5.5% of the text (keyword stuffing)
 Attempt 2 of 3
-   story: OpenAI's advanced AI models, including GPT-6 Astra, are now available on Google Cloud (10 search results)
-   skip openai.com (HTTP 403; the site blocks automated reading)
-   read cloud.google.com: Google Cloud brings OpenAI models to customers | Google Cloud Blog
-   read ksl.com: OpenAI to sell its top models on Google Cloud in latest enterprise pus
-   read siliconangle.com: OpenAI to make its most advanced AI models available in Google Cloud -
-   read shattered.io: OpenAI Google Cloud Partnership: 3 GPT-6 Models Land
-   read pymnts.com: CPI | OpenAI Strikes Google Cloud Deal in Push Beyond Microsoft
-   read thenextweb.com: OpenAI brings GPT-6 Astra and Codex to Google Cloud, a rival’s platfor
-   read unite.ai: Google Cloud Adds OpenAI’s GPT-Astra and GPT-6 Models to Model Garden 
-   read nokiapoweruser.com: Google Cloud & OpenAI Partner: GPT-6 Models Join Model Garden - NPower
-   read community.openai.com: OpenAI models are coming to Google Cloud - Announcements - OpenAI Deve
-   rejected 'OpenAI Offers Advanced AI Models: Now on Google Cloud': 'google cloud' makes up 3.4% of the text (keyword stuffing)
-Attempt 3 of 3
-   story: Volkswagen Group deploys Microsoft Copilot to over 330,000 employees (3 search results)
-   read unite.ai: Volkswagen Group Deploys Microsoft Copilot to Over 330,000 Employees –
-   read news.microsoft.com: Microsoft empowers more than 330,000 Volkswagen Group employees with C
-   skip gurufocus.com (HTTP 403; the site blocks automated reading)
-   rejected 'Volkswagen Group Deploys Copilot: 330,000 Employees Empowered': '1 2' makes up 5.4% of the text (keyword stuffing)
-No story passed the checks today. Nothing published.
+   story: AI-assisted discovery of 'PHP2Shell' vulnerabilities leads to global website shutdowns and urgent patching (9 search results)
+   read shattered.io: php2shell: AI Finds PHP Flaw Hitting 70% of Sites
+   skip cnn.com (too little readable text)
+   read recordedfuture.com: PHP2Shell Exploitation: Two Critical PHP Flaws Explained
+   skip apnews.com (HTTP 403; the site blocks automated reading)
+   read aljazeera.com: World leaders warn of security flaws found in PHP programming language
+   skip cnn.com (too little readable text)
+   read timesofindia.indiatimes.com: PHP2Shell: Governments on high alert over critical website flaw; Wikip
+   read zafran.io: zafran.io
+   read cbsnews.com: What to know about the PHP bug affecting 70% of the world's websites -
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/ai-assisted-php2shell-discovery-triggers-global-website-shutdowns.json with 6 sources: shattered.io, recordedfuture.com, aljazeera.com, timesofindia.indiatimes.com, zafran.io, cbsnews.com
