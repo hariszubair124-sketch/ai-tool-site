@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>document.documentElement.classList.add("js")</script>
+<title>WebP Converter: WebP to PNG and JPG to WebP</title>
+<meta name="description" content="Convert images between WebP, PNG and JPG, resize them and set quality, with transparency kept. Images are processed in your browser, never uploaded.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://webonlinetools.com/tools/webp-converter/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Web Online Tools">
+<meta property="og:title" content="WebP Converter: WebP to PNG and JPG to WebP">
+<meta property="og:description" content="Convert images between WebP, PNG and JPG, resize them and set quality, with transparency kept. Images are processed in your browser, never uploaded.">
+<meta property="og:url" content="https://webonlinetools.com/tools/webp-converter/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#060b18">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/ui.css?v=605b0e79">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "WebP Converter",
+   "url": "https://webonlinetools.com/tools/webp-converter/",
+   "description": "Convert images between WebP, PNG and JPG, resize them and set quality, with transparency kept. Images are processed in your browser, never uploaded.",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Any (runs in a web browser)",
+   "browserRequirements": "Requires JavaScript",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Web Online Tools",
+    "url": "https://webonlinetools.com/"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://webonlinetools.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Tools",
+     "item": "https://webonlinetools.com/tools/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "WebP Converter",
+     "item": "https://webonlinetools.com/tools/webp-converter/"
+    }
+   ]
+  }
+ ]
+}
+</script>
+  <meta name="color-scheme" content="dark" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Inter', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 24px;
+      padding: 2.5rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+    /* Drag Drop Area */
+    .drop-zone {
+      border: 2px dashed var(--border); border-radius: 20px; padding: 4rem 2rem;
+      text-align: center; cursor: pointer; transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      background: rgba(255,255,255,0.01); position: relative; z-index: 10;
+    }
+    .drop-zone:hover, .drop-zone.active { border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+    .drop-zone svg { color: var(--t3); transition: color 0.3s; }
+    .drop-zone:hover svg { color: #60a5fa; }
+    /* Inputs */
+    .panel-title { font-family: var(--font-body); font-weight: 700; color: var(--t1); border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1.5rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; position: relative; z-index: 2;}
+    .input-label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--t2); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; position: relative; z-index: 2;}
+    .text-input, .select-input {
+      width: 100%; padding: 0.75rem 1.25rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+      border-radius: 12px; color: var(--t1); font-family: var(--font-mono); font-size: 1rem;
+      outline: none; transition: border-color .2s, box-shadow .2s;
+    }
+    .text-input:focus, .select-input:focus { border-color: var(--border-act); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+    .select-input { font-family: var(--font-body); }
+    .select-input option { background-color: var(--card); color: var(--t1); }
+    /* Range Slider */
+    input[type="range"] { -webkit-appearance: none; width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; outline: none; margin-top: 0.5rem; position: relative; z-index: 2;}
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: #60a5fa; cursor: pointer; border-radius: 50%; box-shadow: 0 0 10px rgba(96,165,250,0.5); transition: transform .1s; }
+    /* Metric Cards */
+    .metric-card { background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 16px; border: 1px solid var(--border); text-align: center; }
+    .metric-val { display: block; font-family: var(--font-mono); font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 0.25rem; transition: color 0.3s; }
+    .metric-label { font-size: 0.75rem; font-weight: 700; color: var(--t3); text-transform: uppercase; letter-spacing: 0.05em; }
+    /* Buttons */
+    .btn-action { background: var(--grad-main); color: #fff; border: none; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 1.5rem; border-radius: 12px; transition: transform .2s, box-shadow .2s; cursor: pointer; width: 100%; position: relative; z-index: 2;}
+    .btn-action:hover { box-shadow: 0 0 20px rgba(37,99,235,0.4); }
+    /* Preview */
+    .preview-container {
+      width: 100%; min-height: 250px; background: #000; border-radius: 16px; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+      background-image: linear-gradient(45deg, #111 25%, transparent 25%), linear-gradient(-45deg, #111 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #111 75%), linear-gradient(-45deg, transparent 75%, #111 75%);
+      background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    }
+    /* TOAST */
+    .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border); color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000; opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .article-sec ul { list-style: none; padding: 0; margin-bottom: 2rem; }
+    .article-sec li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; color: var(--t2); }
+    .article-sec li::before { content: '•'; position: absolute; left: 0; color: #3b82f6; font-weight: bold; font-size: 1.2rem; line-height: 1; top: 2px; }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-head" id="top">
+  <div class="site-head-inner">
+    <a class="ui-logo" href="/" aria-label="Web Online Tools home">
+      <span class="ui-logo-mark"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span><span class="ui-logo-text">Web Online Tools</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Main"><a href="/tools/" class="nav-link" aria-current="page"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Tools</span></a><a href="/ai-news/" class="nav-link"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg><span>AI news</span></a>
+      <a href="/tools/" class="nav-cta">Browse tools <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </nav>
+    <button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Open menu"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg></button>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="/tools/">Tools</a><span class="sep">/</span><span aria-current="page">WebP Converter</span></nav>
+  <section class="hero-sec">
+    <h1>WebP, PNG and JPG Image Converter</h1>
+    <p style="max-width: 650px; margin: 0 auto;">Convert images between WebP, PNG and JPG, resize them and set the quality, with a live preview of the new file size. Transparency is kept for WebP and PNG.</p>
+  </section>
+
+  <section class="app-card">
+    <!-- 1. DRAG & DROP -->
+    <div id="drop-zone" class="drop-zone mb-10">
+      <svg class="mx-auto h-16 w-16 mb-4" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h3 class="text-xl font-bold text-white mb-1" id="file-status">Upload or Drag Image</h3>
+      <p class="text-sm text-slate-500 font-medium">Supports PNG, JPG, WebP</p>
+      <input type="file" id="image-file-input" accept="image/*" class="hidden" onchange="handleFile(this.files)" />
+    </div>
+
+    <div id="editor-area" class="grid grid-cols-1 lg:grid-cols-2 gap-10 relative z-10 hidden">
+      
+      <!-- LEFT: Settings -->
+      <div class="space-y-8">
+        <div>
+          <h2 class="panel-title">1. Format & Quality</h2>
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="input-label">Output Format</label>
+              <select id="output-format" class="select-input" onchange="toggleJpgOptions(); renderPreview()">
+                <option value="image/webp">WebP (Best)</option>
+                <option value="image/png">PNG (Lossless)</option>
+                <option value="image/jpeg">JPG (No Alpha)</option>
+              </select>
+            </div>
+            <div>
+              <label class="input-label">Quality: <span id="quality-val" class="text-white">85</span>%</label>
+              <input type="range" id="output-quality" min="1" max="100" value="85" oninput="document.getElementById('quality-val').textContent=this.value; debounceRenderPreview();" />
+            </div>
+          </div>
+          
+          <!-- JPG Background Color -->
+          <div id="jpg-bg-panel" class="hidden bg-white/5 p-4 rounded-xl border border-white/10">
+            <label class="input-label">Background Fill (For JPG only)</label>
+            <div class="flex items-center gap-3">
+              <input type="color" id="bg-fill-color" value="#ffffff" class="w-10 h-10 border-none rounded bg-transparent cursor-pointer" oninput="debounceRenderPreview()" />
+              <span class="text-xs text-slate-400 font-medium leading-snug">Preserves visual integrity by replacing transparent areas.</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="panel-title">2. Dimensions</h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="input-label">Width (px)</label>
+              <input type="number" id="resize-w" class="text-input" oninput="resizing('w'); debounceRenderPreview();" />
+            </div>
+            <div>
+              <label class="input-label">Height (px)</label>
+              <input type="number" id="resize-h" class="text-input" oninput="resizing('h'); debounceRenderPreview();" />
+            </div>
+          </div>
+          <label class="flex items-center gap-2 mt-4 cursor-pointer relative z-10 w-max">
+            <input type="checkbox" id="lock-aspect" checked class="w-4 h-4 accent-blue-500" onchange="debounceRenderPreview()" />
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Lock Aspect Ratio</span>
+          </label>
+        </div>
+
+        <button onclick="downloadImage()" class="btn-action">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5 5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download Optimized Image
+        </button>
+      </div>
+
+      <!-- RIGHT: Statistics & Preview -->
+      <div class="flex flex-col">
+        <h2 class="panel-title">Real-Time Metrics</h2>
+        <div class="grid grid-cols-3 gap-3 mb-6">
+          <div class="metric-card">
+            <span class="metric-label">Original</span>
+            <span id="stat-orig" class="metric-val">0 KB</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Target</span>
+            <span id="stat-new" class="metric-val">0 KB</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Savings</span>
+            <span id="stat-save" class="metric-val text-emerald-400">0%</span>
+          </div>
+        </div>
+
+        <div class="preview-container">
+          <img id="converted-preview" class="max-w-full max-h-full transition-opacity duration-300" src="" alt="Converted Result" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec">
+    <h2>Why Convert Images to WebP?</h2>
+    <p>WebP is a modern image format developed by Google that provides superior lossless and lossy compression for web-based assets. By using WebP instead of traditional formats like PNG or JPEG, developers can reduce file sizes by <strong>25% to 35%</strong> while maintaining the same visual fidelity.</p>
+    <p>Faster load times directly impact your <strong>Core Web Vitals</strong> (specifically Largest Contentful Paint), which leads to improved SEO rankings and higher conversion rates for e-commerce sites.</p>
+
+    <h3>Correctly Handling Transparency</h3>
+    <p>One of the biggest challenges in image conversion is managing the <strong>alpha channel</strong>. PNGs allow for transparent backgrounds, while standard JPEGs do not. Our tool intelligently manages this:</p>
+    <ul>
+      <li><strong>WebP & PNG:</strong> Maintains full alpha transparency for overlays and logos.</li>
+      <li><strong>JPEG Conversion:</strong> Since JPEG doesn't support transparency, our "Background Fill" feature allows you to choose a custom hex color to fill transparent areas, preventing the "black block" effect common in basic converters.</li>
+    </ul>
+
+    
+  </article>
+<section class="related-tools" aria-labelledby="related-tools-title"><div class="section-head"><h2 class="block-title" id="related-tools-title"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Related tools</h2><a class="link-arrow" href="/tools/#files">More images and files <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div><ul class="ui-grid ui-grid-3"><li class="reveal" style="--d:0.00s" data-search="pdf to jpg converter turn every page of a pdf into a jpg and download them as one zip. images and files"><a class="card" href="/tools/pdf-to-jpeg/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><circle cx="10" cy="12" r="2"/><path d="m20 17-1.3-1.3a2.4 2.4 0 0 0-3.4 0L9 22"/></svg></span><h3>PDF to JPG Converter</h3><p>Turn every page of a PDF into a JPG and download them as one ZIP.</p><div class="card-foot"><span>Images and files</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li><li class="reveal" style="--d:0.06s" data-search="base64 encoder and decoder encode text or files to base64, decode it back, or turn images into data uris for css. developer tools"><a class="card" href="/tools/base64-encoder/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="14" width="4" height="6" rx="2"/><rect x="6" y="4" width="4" height="6" rx="2"/><path d="M6 20h4"/><path d="M14 10h4"/><path d="M6 14h2v6"/><path d="M14 4h2v6"/></svg></span><h3>Base64 Encoder and Decoder</h3><p>Encode text or files to Base64, decode it back, or turn images into data URIs for CSS.</p><div class="card-foot"><span>Developer tools</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li><li class="reveal" style="--d:0.12s" data-search="hex to rgb and hsl converter convert colors between hex, rgb and hsl, including transparency. css and design"><a class="card" href="/tools/color-code-converter/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 22 1-1h3l9-9"/><path d="M3 21v-3l9-9"/><path d="m15 6 3.4-3.4a2.1 2.1 0 1 1 3 3L18 9l.4.4a2.1 2.1 0 1 1-3 3l-3.8-3.8a2.1 2.1 0 1 1 3-3l.4.4Z"/></svg></span><h3>HEX to RGB and HSL Converter</h3><p>Convert colors between HEX, RGB and HSL, including transparency.</p><div class="card-foot"><span>CSS and design</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li></ul></section>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot-inner">
+    <div class="foot-brand">
+      <a class="ui-logo" href="/"><span class="ui-logo-mark"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span><span class="ui-logo-text">Web Online Tools</span></a>
+      <p>Free tools that run in your browser, plus sourced news on AI models, companies and policy.</p>
+      <ul class="foot-points">
+        <li><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg> Your files and text never leave your device</li>
+        <li><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg> Free, no sign-up</li>
+      </ul>
+    </div>
+    <nav class="foot-col" aria-label="Popular tools"><h2>Popular tools</h2><ul><li><a href="/tools/json-formatter/">JSON Formatter and Validator</a></li><li><a href="/tools/base64-encoder/">Base64 Encoder and Decoder</a></li><li><a href="/tools/password-rule-generator/">Password Policy Regex Generator</a></li><li><a href="/tools/css-gradient-generator/">CSS Gradient Generator</a></li><li><a href="/tools/css-box-shadow/">CSS Box Shadow Generator</a></li><li><a href="/tools/color-palette-generator/">Color Palette Generator</a></li><li><a href="/tools/word-counter/">Word and Character Counter</a></li><li><a href="/tools/">All 17 tools</a></li></ul></nav>
+    <nav class="foot-col" aria-label="Tool categories"><h2>Categories</h2><ul><li><a href="/tools/#developer">Developer tools</a></li><li><a href="/tools/#design">CSS and design</a></li><li><a href="/tools/#text">Text tools</a></li><li><a href="/tools/#files">Images and files</a></li><li><a href="/tools/#calculators">Calculators</a></li></ul></nav>
+    <nav class="foot-col" aria-label="AI news"><h2>AI news</h2><ul><li><a href="/ai-news/">Latest stories</a></li><li><a href="/ai-news/openai/">OpenAI</a></li><li><a href="/ai-news/google/">Google</a></li><li><a href="/ai-news/anthropic/">Anthropic</a></li><li><a href="/ai-news/microsoft/">Microsoft</a></li><li><a href="/ai-news/nvidia/">Nvidia</a></li><li><a href="/ai-news/meta/">Meta</a></li><li><a href="/ai-news/apple/">Apple</a></li><li><a href="/ai-news/policy/">Policy and regulation</a></li></ul></nav>
+  </div>
+  <div class="foot-bottom">
+    <p>© <span id="year">2026</span> Web Online Tools</p>
+    <p class="foot-links"><a href="/ai-news/editorial-policy.html">Editorial policy</a><a href="/#about">About</a></p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Conversion success!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  
+  let sourceImage = null;
+  let originalDimensions = { w: 0, h: 0 };
+  let originalFile = null;
+  let currentBlobUrl = null;
+  let renderTimeout;
+  let currentBlobType = "";
+
+  const DOM = {
+    drop: document.getElementById('drop-zone'),
+    editor: document.getElementById('editor-area'),
+    preview: document.getElementById('converted-preview'),
+    format: document.getElementById('output-format'),
+    quality: document.getElementById('output-quality'),
+    wInput: document.getElementById('resize-w'),
+    hInput: document.getElementById('resize-h'),
+    aspect: document.getElementById('lock-aspect'),
+    jpgPanel: document.getElementById('jpg-bg-panel'),
+    bgFill: document.getElementById('bg-fill-color'),
+    statOrig: document.getElementById('stat-orig'),
+    statNew: document.getElementById('stat-new'),
+    statSave: document.getElementById('stat-save')
+  };
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  // ── DRAG & DROP ──
+  DOM.drop.addEventListener('dragover', (e) => { e.preventDefault(); DOM.drop.classList.add('active'); });
+  DOM.drop.addEventListener('dragleave', () => DOM.drop.classList.remove('active'));
+  DOM.drop.addEventListener('drop', (e) => {
+    e.preventDefault();
+    DOM.drop.classList.remove('active');
+    handleFile(e.dataTransfer.files);
+  });
+  DOM.drop.onclick = () => document.getElementById('image-file-input').click();
+
+  function handleFile(files) {
+    if (!files.length) return;
+    const file = files[0];
+    if (!file.type.startsWith('image/')) return showToast("Please upload an image file.");
+    
+    originalFile = file;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      sourceImage = new Image();
+      sourceImage.onload = () => {
+        originalDimensions = { w: sourceImage.width, h: sourceImage.height };
+        DOM.wInput.value = sourceImage.width;
+        DOM.hInput.value = sourceImage.height;
+        DOM.statOrig.textContent = formatBytes(file.size);
+        DOM.editor.classList.remove('hidden');
+        DOM.editor.scrollIntoView({ behavior: 'smooth' });
+        showToast("Image loaded. Generating preview...");
+        renderPreview(); // Immediate render on load
+      };
+      sourceImage.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function resizing(type) {
+    if (!DOM.aspect.checked) return;
+    const ratio = originalDimensions.w / originalDimensions.h;
+    if (type === 'w') {
+      DOM.hInput.value = Math.round(DOM.wInput.value / ratio);
+    } else {
+      DOM.wInput.value = Math.round(DOM.hInput.value * ratio);
+    }
+  }
+
+  function toggleJpgOptions() {
+    if (DOM.format.value === 'image/jpeg') {
+      DOM.jpgPanel.classList.remove('hidden');
+    } else {
+      DOM.jpgPanel.classList.add('hidden');
+    }
+  }
+
+  // ── REAL-TIME BACKGROUND RENDERER ──
+  function debounceRenderPreview() {
+    clearTimeout(renderTimeout);
+    renderTimeout = setTimeout(renderPreview, 150); // 150ms debounce
+  }
+
+  function renderPreview() {
+    if (!sourceImage) return;
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    const clamp = v => Math.min(16384, Math.max(1, v));
+    const targetW = clamp(parseInt(DOM.wInput.value, 10) || originalDimensions.w);
+    const targetH = clamp(parseInt(DOM.hInput.value, 10) || originalDimensions.h);
+    if (targetW * targetH > 100000000) {
+      showToast("That size is too large for the browser. Try smaller dimensions.");
+      return;
+    }
+    
+    canvas.width = targetW;
+    canvas.height = targetH;
+
+    // 1. Clear everything for alpha-supporting formats
+    ctx.clearRect(0, 0, targetW, targetH);
+
+    // 2. If JPG, apply the custom background fill to prevent black boxes
+    if (DOM.format.value === 'image/jpeg') {
+      ctx.fillStyle = DOM.bgFill.value;
+      ctx.fillRect(0, 0, targetW, targetH);
+    }
+
+    // 3. Draw the image with high quality smoothing
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(sourceImage, 0, 0, targetW, targetH);
+
+    const quality = parseInt(DOM.quality.value) / 100;
+    
+    // 4. Generate Blob and update UI (No auto-download)
+    canvas.toBlob((blob) => {
+      if (!blob) { showToast("The browser could not create this image. Try smaller dimensions."); return; }
+      // Some browsers (older Safari) cannot encode WebP and silently return PNG instead.
+      if (blob.type !== DOM.format.value) {
+        showToast(`Your browser can't create ${DOM.format.value.split("/")[1].toUpperCase()} files, so this is ${blob.type.split("/")[1].toUpperCase()}. Try Chrome, Edge or Firefox for WebP.`);
+      }
+      currentBlobType = blob.type;
+      
+      // Clean up old memory
+      if (currentBlobUrl) URL.revokeObjectURL(currentBlobUrl);
+      
+      currentBlobUrl = URL.createObjectURL(blob);
+      DOM.preview.src = currentBlobUrl;
+      
+      DOM.statNew.textContent = formatBytes(blob.size);
+      
+      const savings = ((originalFile.size - blob.size) / originalFile.size) * 100;
+      DOM.statSave.textContent = Math.round(savings) + '%';
+      DOM.statSave.className = `metric-val ${savings > 0 ? 'text-emerald-400' : 'text-red-400'}`;
+    }, DOM.format.value, quality);
+  }
+
+  // ── EXPLICIT DOWNLOAD FUNCTION ──
+  function downloadImage() {
+    if (!currentBlobUrl) return showToast("No image to download.");
+    
+    const link = document.createElement('a');
+    link.href = currentBlobUrl;
+    
+    // Determine extension
+    const mimeMap = {
+      'image/webp': 'webp',
+      'image/jpeg': 'jpg',
+      'image/png': 'png'
+    };
+    const ext = mimeMap[currentBlobType] || mimeMap[DOM.format.value] || 'png';
+    const base = originalFile ? originalFile.name.replace(/\.[^.]+$/, "") : "image";
+    link.download = `${base}.${ext}`;
+    link.click();
+    
+    showToast("Download started!");
+  }
+</script>
+<script>
+(function () {
+  var btn = document.querySelector(".menu-btn"), nav = document.getElementById("main-nav");
+  if (btn && nav) btn.addEventListener("click", function () {
+    var open = nav.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+  var y = document.getElementById("year"); if (y) y.textContent = new Date().getFullYear();
+  var items = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    items.forEach(function (el) { el.classList.add("in"); }); return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>

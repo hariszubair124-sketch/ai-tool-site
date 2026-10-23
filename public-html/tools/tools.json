@@ -1,0 +1,146 @@
+[
+  {
+    "name": "JSON Formatter/Validator",
+    "url": "/tools/json-formatter/",
+    "category": "Developer & Data Converters",
+    "icon": "Braces",
+    "description": "Format, validate, and beautify messy JSON code instantly.",
+    "featured": true,
+    "tags": ["beautify", "pretty print", "lint"]
+  },
+  {
+    "name": "Base64 Encoder/Decoder",
+    "url": "/tools/base64-encoder/",
+    "category": "Developer & Data Converters",
+    "icon": "Code",
+    "description": "Encode or decode Base64 data instantly for web transfer and storage.",
+    "featured": true,
+    "tags": ["binary", "string", "convert"]
+  },
+  {
+    "name": "URL Encoder/Decoder",
+    "url": "/tools/url-encoder/",
+    "category": "Developer & Data Converters",
+    "icon": "Link",
+    "description": "Encode or decode URI components for reliable URL construction.",
+    "featured": false,
+    "tags": ["uri", "percent encoding", "slug"]
+  },
+  {
+    "name": "Random Number Generator",
+    "url": "/tools/random-number-generator/",
+    "category": "Developer & Data Converters",
+    "icon": "Dice3",
+    "description": "Generate truly random numbers within a specified range.",
+    "featured": false,
+    "tags": ["dice", "math", "randomize"]
+  },
+  {
+    "name": "CSS Gradient Generator",
+    "url": "/tools/css-gradient-generator/",
+    "category": "CSS & Design Code Generators",
+    "icon": "Feather",
+    "description": "Create beautiful linear and radial CSS gradients with live preview.",
+    "featured": true,
+    "tags": ["background", "style", "ui"]
+  },
+  {
+    "name": "CSS Box Shadow Generator",
+    "url": "/tools/css-box-shadow/",
+    "category": "CSS & Design Code Generators",
+    "icon": "Layers",
+    "description": "Visually create complex, multi-layered CSS box shadows.",
+    "featured": true,
+    "tags": ["elevation", "glow", "design"]
+  },
+  {
+    "name": "Button Transition Generator",
+    "url": "/tools/button-transition-generator/",
+    "category": "CSS & Design Code Generators",
+    "icon": "Zap",
+    "description": "Visually generate smooth CSS code for button hover transitions.",
+    "featured": false,
+    "tags": ["animation", "hover", "effects"]
+  },
+  {
+    "name": "Color Palette Generator",
+    "url": "/tools/color-palette-generator/",
+    "category": "CSS & Design Code Generators",
+    "icon": "LayoutGrid",
+    "description": "Generate beautiful, harmonious color palettes for your projects.",
+    "featured": true,
+    "tags": ["scheme", "theme", "contrast"]
+  },
+  {
+    "name": "Color Code Converter",
+    "url": "/tools/color-code-converter/",
+    "category": "CSS & Design Code Generators",
+    "icon": "Palette",
+    "description": "Convert colors between HEX, RGB, HSL, and other formats.",
+    "featured": false,
+    "tags": ["hex", "rgb", "hsl"]
+  },
+  {
+    "name": "Word Counter",
+    "url": "/tools/word-counter/",
+    "category": "Content & Text Utilities",
+    "icon": "TextCursor",
+    "description": "Real-time counting of words, characters, sentences, and paragraphs.",
+    "featured": true,
+    "tags": ["writing", "length", "seo"]
+  },
+  {
+    "name": "Case Converter",
+    "url": "/tools/case-converter/",
+    "category": "Content & Text Utilities",
+    "icon": "Type",
+    "description": "Convert text to lowercase, UPPERCASE, Title Case, and more.",
+    "featured": false,
+    "tags": ["format", "caps", "editing"]
+  },
+  {
+    "name": "Clean List Generator",
+    "url": "/tools/clean-list-generator/",
+    "category": "Content & Text Utilities",
+    "icon": "ListFilter",
+    "description": "Quickly clean up and filter lists, removing duplicates and blank lines.",
+    "featured": false,
+    "tags": ["filter", "dedupe", "sort"]
+  },
+  {
+    "name": "WebP Image Converter",
+    "url": "/tools/webp-converter/",
+    "category": "Essential Web & Media Tools",
+    "icon": "Image",
+    "description": "Convert images to the modern WebP format for improved web performance.",
+    "featured": true,
+    "tags": ["optimize", "png", "jpg"]
+  },
+  {
+    "name": "Password Rule Generator",
+    "url": "/tools/password-rule-generator/",
+    "category": "Essential Web & Media Tools",
+    "icon": "Lock",
+    "description": "Generate regex patterns for strong HTML password inputs.",
+    "featured": false,
+    "tags": ["security", "regex", "form"]
+  },
+  {
+    "name": "Font Converter",
+    "url": "/tools/font-converter/",
+    "category": "Essential Web & Media Tools",
+    "icon": "Ruler",
+    "description": "Convert fonts between different web formats (WOFF, TTF, EOT, etc.).",
+    "featured": false,
+    "tags": ["typography", "woff2", "otf"]
+  },
+  {
+    "name": "Should I Buy This?",
+    "url": "/tools/should-i-buy-this/",
+    "category": "Fun & Unique Tools",
+    "icon": "HelpCircle",
+    "description": "A fun decision-making tool to help you with purchase dilemmas.",
+    "featured": true,
+    "tags": ["finance", "shopping", "decision"]
+  }
+]

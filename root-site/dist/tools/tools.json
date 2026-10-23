@@ -1,0 +1,121 @@
+[
+  {
+    "name": "JSON Formatter and Validator",
+    "url": "/tools/json-formatter/",
+    "category": "Developer tools",
+    "description": "Check JSON for errors, see the exact line and column, then format or minify it.",
+    "featured": true
+  },
+  {
+    "name": "Base64 Encoder and Decoder",
+    "url": "/tools/base64-encoder/",
+    "category": "Developer tools",
+    "description": "Encode text or files to Base64, decode it back, or turn images into data URIs for CSS.",
+    "featured": true
+  },
+  {
+    "name": "URL Encoder and Decoder",
+    "url": "/tools/url-encoder/",
+    "category": "Developer tools",
+    "description": "Percent-encode text for links and query strings, or decode encoded URLs.",
+    "featured": false
+  },
+  {
+    "name": "Password Policy Regex Generator",
+    "url": "/tools/password-rule-generator/",
+    "category": "Developer tools",
+    "description": "Turn password rules into a regex and HTML pattern, test passwords and generate strong ones.",
+    "featured": true
+  },
+  {
+    "name": "Random Number Generator",
+    "url": "/tools/random-number-generator/",
+    "category": "Developer tools",
+    "description": "Pick one or many random numbers in any range, with or without duplicates.",
+    "featured": false
+  },
+  {
+    "name": "CSS Gradient Generator",
+    "url": "/tools/css-gradient-generator/",
+    "category": "CSS and design",
+    "description": "Build linear and radial gradients with up to six colors and copy CSS or a Tailwind class.",
+    "featured": true
+  },
+  {
+    "name": "CSS Box Shadow Generator",
+    "url": "/tools/css-box-shadow/",
+    "category": "CSS and design",
+    "description": "Adjust offset, blur, spread and color, then copy CSS or a Tailwind class.",
+    "featured": true
+  },
+  {
+    "name": "CSS Button Hover Effect Generator",
+    "url": "/tools/button-transition-generator/",
+    "category": "CSS and design",
+    "description": "Design a button with gradient, shadow and hover animations, then copy the CSS and HTML.",
+    "featured": false
+  },
+  {
+    "name": "Color Palette Generator",
+    "url": "/tools/color-palette-generator/",
+    "category": "CSS and design",
+    "description": "Generate 5-color palettes from real color schemes and check text contrast.",
+    "featured": true
+  },
+  {
+    "name": "HEX to RGB and HSL Converter",
+    "url": "/tools/color-code-converter/",
+    "category": "CSS and design",
+    "description": "Convert colors between HEX, RGB and HSL, including transparency.",
+    "featured": false
+  },
+  {
+    "name": "Word and Character Counter",
+    "url": "/tools/word-counter/",
+    "category": "Text tools",
+    "description": "Count words, characters, sentences and reading time as you type.",
+    "featured": true
+  },
+  {
+    "name": "Case Converter",
+    "url": "/tools/case-converter/",
+    "category": "Text tools",
+    "description": "Switch text between UPPERCASE, lowercase, Title Case and Sentence case.",
+    "featured": false
+  },
+  {
+    "name": "List Cleaner",
+    "url": "/tools/clean-list-generator/",
+    "category": "Text tools",
+    "description": "Remove duplicate and blank lines, trim spaces and sort any list.",
+    "featured": false
+  },
+  {
+    "name": "Fancy Font Generator",
+    "url": "/tools/font-converter/",
+    "category": "Text tools",
+    "description": "Write in bold, italic, script and other Unicode styles for social media bios.",
+    "featured": false
+  },
+  {
+    "name": "WebP Converter",
+    "url": "/tools/webp-converter/",
+    "category": "Images and files",
+    "description": "Convert images between WebP, PNG and JPG and resize them, without uploading.",
+    "featured": true
+  },
+  {
+    "name": "PDF to JPG Converter",
+    "url": "/tools/pdf-to-jpeg/",
+    "category": "Images and files",
+    "description": "Turn every page of a PDF into a JPG and download them as one ZIP.",
+    "featured": true
+  },
+  {
+    "name": "Should I Buy This? Calculator",
+    "url": "/tools/should-i-buy-this/",
+    "category": "Calculators",
+    "description": "See how long a purchase takes to pay for itself in time saved.",
+    "featured": false
+  }
+]

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>document.documentElement.classList.add("js")</script>
+<title>CSS Box Shadow Generator with Tailwind Code</title>
+<meta name="description" content="Set offset, blur, spread, color and opacity for a CSS box shadow and see it live. Copy plain CSS or the matching Tailwind arbitrary class.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://webonlinetools.com/tools/css-box-shadow/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Web Online Tools">
+<meta property="og:title" content="CSS Box Shadow Generator with Tailwind Code">
+<meta property="og:description" content="Set offset, blur, spread, color and opacity for a CSS box shadow and see it live. Copy plain CSS or the matching Tailwind arbitrary class.">
+<meta property="og:url" content="https://webonlinetools.com/tools/css-box-shadow/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#060b18">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/ui.css?v=605b0e79">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "CSS Box Shadow Generator",
+   "url": "https://webonlinetools.com/tools/css-box-shadow/",
+   "description": "Set offset, blur, spread, color and opacity for a CSS box shadow and see it live. Copy plain CSS or the matching Tailwind arbitrary class.",
+   "applicationCategory": "DesignApplication",
+   "operatingSystem": "Any (runs in a web browser)",
+   "browserRequirements": "Requires JavaScript",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Web Online Tools",
+    "url": "https://webonlinetools.com/"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://webonlinetools.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Tools",
+     "item": "https://webonlinetools.com/tools/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "CSS Box Shadow Generator",
+     "item": "https://webonlinetools.com/tools/css-box-shadow/"
+    }
+   ]
+  }
+ ]
+}
+</script>
+  <meta name="color-scheme" content="dark" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Inter', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+    /* Inputs */
+    .input-group { margin-bottom: 1.25rem; position: relative; z-index: 2; }
+    .input-label { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; color: var(--t2); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .input-label span.val { color: var(--t1); font-family: var(--font-mono); font-weight: 500; }
+    .text-input, .select-input {
+      width: 100%; padding: 0.75rem 1rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--t1); font-family: var(--font-body); font-size: 0.95rem;
+      outline: none; transition: border-color .2s, box-shadow .2s;
+    }
+    .text-input:focus, .select-input:focus { border-color: var(--border-act); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+    /* Fix for select dropdown visibility */
+    .select-input option { background-color: var(--card); color: var(--t1); font-weight: 500; padding: 10px; }
+    /* Color Picker */
+    .color-row { display: flex; gap: 0.75rem; align-items: center; }
+    .color-swatch-wrap {
+      width: 48px; height: 48px; border-radius: 10px; overflow: hidden; flex-shrink: 0;
+      border: 2px solid var(--border); transition: border-color .2s; position: relative;
+    }
+    .color-swatch-wrap:focus-within { border-color: var(--border-act); }
+    .color-picker { width: 200%; height: 200%; transform: translate(-25%, -25%); cursor: pointer; border: none; padding: 0; }
+    /* Custom Range Sliders */
+    input[type="range"] { -webkit-appearance: none; width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; outline: none; margin-top: 0.5rem; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; background: #60a5fa; cursor: pointer; border-radius: 50%; box-shadow: 0 0 10px rgba(96,165,250,0.5); transition: transform .1s; }
+    input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; background: #60a5fa; cursor: pointer; border-radius: 50%; border: none; box-shadow: 0 0 10px rgba(96,165,250,0.5); transition: transform .1s; }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    input[type="range"]::-moz-range-thumb:hover { transform: scale(1.2); }
+    /* Preview Box */
+    .preview-container {
+      display: flex; align-items: center; justify-content: center; min-height: 340px;
+      background-color: #000; border-radius: 16px; border: 1px solid var(--border);
+      background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 20px 20px; position: relative; z-index: 2; margin-bottom: 2rem;
+    }
+    #preview-box {
+      width: 200px; height: 200px; background-color: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: var(--t1); transition: box-shadow 0.1s ease-out; font-size: 1.1rem;
+    }
+    /* Code Output */
+    .code-area {
+      width: 100%; min-height: 100px; padding: 1.25rem; font-family: var(--font-mono); font-size: 0.85rem;
+      background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 14px;
+      color: #a5b4fc; outline: none; resize: vertical; position: relative; z-index: 2; white-space: pre;
+    }
+    .btn-copy {
+      position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(37,99,235,0.15); color: #60a5fa;
+      border: 1px solid rgba(37,99,235,0.3); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.8rem;
+      font-weight: 700; cursor: pointer; transition: all .2s; z-index: 10;
+    }
+    .btn-copy:hover { background: var(--grad-main); color: #fff; border-color: transparent; }
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border);
+      color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000;
+      opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-head" id="top">
+  <div class="site-head-inner">
+    <a class="ui-logo" href="/" aria-label="Web Online Tools home">
+      <span class="ui-logo-mark"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span><span class="ui-logo-text">Web Online Tools</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Main"><a href="/tools/" class="nav-link" aria-current="page"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Tools</span></a><a href="/ai-news/" class="nav-link"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg><span>AI news</span></a>
+      <a href="/tools/" class="nav-cta">Browse tools <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </nav>
+    <button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Open menu"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg></button>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="/tools/">Tools</a><span class="sep">/</span><span aria-current="page">CSS Box Shadow Generator</span></nav>
+  <section class="hero-sec">
+    <h1>CSS Box Shadow Generator</h1>
+    <p style="max-width: 650px; margin: 0 auto;">Adjust offset, blur, spread, color and opacity and see the shadow update live. Copy the CSS, or a Tailwind class if your project uses Tailwind.</p>
+  </section>
+
+  <section class="app-card">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 relative z-10">
+      
+      <!-- LEFT: Controls -->
+      <div class="space-y-6">
+        
+        <div>
+          <h2 class="text-lg font-bold text-white border-b border-white/10 pb-2 mb-4">1. Shadow Dimensions</h2>
+          
+          <div class="input-group">
+            <label class="input-label">Horizontal Offset (X) <span class="val" id="h-offset-value">5px</span></label>
+            <input type="range" id="h-offset" min="-30" max="30" value="5" oninput="updatePreview()" />
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">Vertical Offset (Y) <span class="val" id="v-offset-value">5px</span></label>
+            <input type="range" id="v-offset" min="-30" max="30" value="5" oninput="updatePreview()" />
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">Blur Radius <span class="val" id="blur-value">15px</span></label>
+            <input type="range" id="blur" min="0" max="50" value="15" oninput="updatePreview()" />
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">Spread Radius <span class="val" id="spread-value">0px</span></label>
+            <input type="range" id="spread" min="-20" max="30" value="0" oninput="updatePreview()" />
+          </div>
+
+          <div class="input-group mt-6">
+            <label class="input-label">Shadow Position Type</label>
+            <select id="shadow-type" class="select-input" onchange="updatePreview()">
+              <option value="outset">Outset (Drop Shadow)</option>
+              <option value="inset">Inset (Inner Shadow)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <h2 class="text-lg font-bold text-white border-b border-white/10 pb-2 mb-4">2. Color & Opacity</h2>
+          
+          <div class="input-group">
+            <label class="input-label">Shadow Color</label>
+            <div class="color-row">
+              <div class="color-swatch-wrap">
+                <input type="color" id="shadow-color-picker" value="#3b82f6" class="color-picker" oninput="updateColorFromPicker()" />
+              </div>
+              <input type="text" id="shadow-color-hex" value="#3B82F6" maxlength="7" class="text-input uppercase font-mono" oninput="updateColorFromHex()" />
+            </div>
+          </div>
+
+          <div class="input-group mt-6">
+            <label class="input-label">Opacity (Alpha) <span class="val" id="opacity-value">0.30</span></label>
+            <input type="range" id="opacity" min="0.0" max="1.0" step="0.01" value="0.30" oninput="updatePreview()" />
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Preview & Code -->
+      <div class="flex flex-col">
+        <h2 class="text-lg font-bold text-white border-b border-white/10 pb-2 mb-4">Live Preview</h2>
+        
+        <div class="preview-container">
+          <div id="preview-box">Shadow Target</div>
+        </div>
+
+        <h2 class="text-lg font-bold text-white border-b border-white/10 pb-2 mb-4 mt-6">Generated CSS</h2>
+        <div style="position: relative; z-index: 2;">
+          <button onclick="copyCode('css-output')" class="btn-copy">Copy CSS</button>
+          <textarea id="css-output" readonly class="code-area"></textarea>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec">
+    <h2>How to Use the CSS Box Shadow Generator</h2>
+    <p>The <code class="font-mono text-blue-400">box-shadow</code> property is one of the most effective ways to add depth, hierarchy, and dimension to your web elements. It accepts several values to define the shadow's appearance:</p>
+    
+    <ul>
+      <li class="mb-2"><strong>Horizontal & Vertical Offsets:</strong> Determine the shadow's light-source direction. Positive values push the shadow right/down, negative values push it left/up.</li>
+      <li class="mb-2"><strong>Blur Radius:</strong> Controls the sharpness. A value of 0 means the shadow is completely sharp and solid. Higher values diffuse the shadow across a wider area.</li>
+      <li class="mb-2"><strong>Spread Radius:</strong> Expands or contracts the physical size of the shadow before blur is applied.</li>
+    </ul>
+
+    <div class="space-y-4 mt-8">
+      <div class="p-5 border border-white/10 bg-black/30 rounded-xl">
+        <strong class="text-white">How do I create a glowing effect?</strong>
+        <p class="text-sm mt-1">To create a neon glow, set both the Horizontal and Vertical Offsets to <code class="bg-gray-800 px-1 rounded text-white">0px</code>. Choose a slight positive Spread Radius (e.g., 2px) and a high Blur Radius (e.g., 20px). Using a bright, vibrant color (like Cyan or Neon Pink) with high opacity will make the element appear to emit light.</p>
+      </div>
+      <div class="p-5 border border-white/10 bg-black/30 rounded-xl">
+        <strong class="text-white">What is an Inset shadow?</strong>
+        <p class="text-sm mt-1">By default, shadows are "outset" (falling outside the element's bounding box). Toggling the type to "Inset" draws the shadow <em>inside</em> the element, which is perfect for creating pressed buttons, hollow input fields, or etched text effects.</p>
+      </div>
+    </div>
+
+    
+  </article>
+<section class="related-tools" aria-labelledby="related-tools-title"><div class="section-head"><h2 class="block-title" id="related-tools-title"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.71 2.29a1 1 0 0 1 1.42 0l4.58 4.58a1 1 0 0 1 0 1.42l-2.3 2.3a1 1 0 0 1-1.42 0l-4.58-4.58a1 1 0 0 1 0-1.42Z"/><path d="m14 7-9.54 9.54a2 2 0 0 0-.46.83L3 21l3.63-1a2 2 0 0 0 .83-.46L17 10"/></svg>Related tools</h2><a class="link-arrow" href="/tools/#design">More css and design <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div><ul class="ui-grid ui-grid-3"><li class="reveal" style="--d:0.00s" data-search="css gradient generator build linear and radial gradients with up to six colors and copy css or a tailwind class. css and design"><a class="card" href="/tools/css-gradient-generator/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="7"/><circle cx="15" cy="15" r="7"/></svg></span><h3>CSS Gradient Generator</h3><p>Build linear and radial gradients with up to six colors and copy CSS or a Tailwind class.</p><div class="card-foot"><span>CSS and design</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li><li class="reveal" style="--d:0.06s" data-search="css button hover effect generator design a button with gradient, shadow and hover animations, then copy the css and html. css and design"><a class="card" href="/tools/button-transition-generator/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.1 12 6"/><path d="m5.1 8-2.9-.8"/><path d="m6 12-1.9 2"/><path d="M7.2 2.2 8 5.1"/><path d="M9.04 9.68a.5.5 0 0 1 .64-.64l11 4.5a.5.5 0 0 1-.06.94l-4.43 1.18a2 2 0 0 0-1.42 1.42l-1.18 4.43a.5.5 0 0 1-.94.06z"/></svg></span><h3>CSS Button Hover Effect Generator</h3><p>Design a button with gradient, shadow and hover animations, then copy the CSS and HTML.</p><div class="card-foot"><span>CSS and design</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li><li class="reveal" style="--d:0.12s" data-search="hex to rgb and hsl converter convert colors between hex, rgb and hsl, including transparency. css and design"><a class="card" href="/tools/color-code-converter/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 22 1-1h3l9-9"/><path d="M3 21v-3l9-9"/><path d="m15 6 3.4-3.4a2.1 2.1 0 1 1 3 3L18 9l.4.4a2.1 2.1 0 1 1-3 3l-3.8-3.8a2.1 2.1 0 1 1 3-3l.4.4Z"/></svg></span><h3>HEX to RGB and HSL Converter</h3><p>Convert colors between HEX, RGB and HSL, including transparency.</p><div class="card-foot"><span>CSS and design</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li></ul></section>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot-inner">
+    <div class="foot-brand">
+      <a class="ui-logo" href="/"><span class="ui-logo-mark"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span><span class="ui-logo-text">Web Online Tools</span></a>
+      <p>Free tools that run in your browser, plus sourced news on AI models, companies and policy.</p>
+      <ul class="foot-points">
+        <li><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg> Your files and text never leave your device</li>
+        <li><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg> Free, no sign-up</li>
+      </ul>
+    </div>
+    <nav class="foot-col" aria-label="Popular tools"><h2>Popular tools</h2><ul><li><a href="/tools/json-formatter/">JSON Formatter and Validator</a></li><li><a href="/tools/base64-encoder/">Base64 Encoder and Decoder</a></li><li><a href="/tools/password-rule-generator/">Password Policy Regex Generator</a></li><li><a href="/tools/css-gradient-generator/">CSS Gradient Generator</a></li><li><a href="/tools/css-box-shadow/">CSS Box Shadow Generator</a></li><li><a href="/tools/color-palette-generator/">Color Palette Generator</a></li><li><a href="/tools/word-counter/">Word and Character Counter</a></li><li><a href="/tools/">All 17 tools</a></li></ul></nav>
+    <nav class="foot-col" aria-label="Tool categories"><h2>Categories</h2><ul><li><a href="/tools/#developer">Developer tools</a></li><li><a href="/tools/#design">CSS and design</a></li><li><a href="/tools/#text">Text tools</a></li><li><a href="/tools/#files">Images and files</a></li><li><a href="/tools/#calculators">Calculators</a></li></ul></nav>
+    <nav class="foot-col" aria-label="AI news"><h2>AI news</h2><ul><li><a href="/ai-news/">Latest stories</a></li><li><a href="/ai-news/openai/">OpenAI</a></li><li><a href="/ai-news/google/">Google</a></li><li><a href="/ai-news/anthropic/">Anthropic</a></li><li><a href="/ai-news/microsoft/">Microsoft</a></li><li><a href="/ai-news/nvidia/">Nvidia</a></li><li><a href="/ai-news/meta/">Meta</a></li><li><a href="/ai-news/apple/">Apple</a></li><li><a href="/ai-news/policy/">Policy and regulation</a></li></ul></nav>
+  </div>
+  <div class="foot-bottom">
+    <p>© <span id="year">2026</span> Web Online Tools</p>
+    <p class="foot-links"><a href="/ai-news/editorial-policy.html">Editorial policy</a><a href="/#about">About</a></p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">CSS copied to clipboard!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const previewBox = document.getElementById("preview-box");
+  const cssOutput = document.getElementById("css-output");
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // Helper to convert hex to RGB
+  function hexToRgb(hex) {
+    const bigint = parseInt(hex.slice(1), 16);
+    return { r: (bigint >> 16) & 255, g: (bigint >> 8) & 255, b: bigint & 255 };
+  }
+
+  function updatePreview() {
+    const hOff = document.getElementById("h-offset").value;
+    const vOff = document.getElementById("v-offset").value;
+    const blur = document.getElementById("blur").value;
+    const spread = document.getElementById("spread").value;
+    const type = document.getElementById("shadow-type").value;
+    const hex = document.getElementById("shadow-color-picker").value;
+    const op = document.getElementById("opacity").value;
+
+    // Update Labels
+    document.getElementById("h-offset-value").textContent = `${hOff}px`;
+    document.getElementById("v-offset-value").textContent = `${vOff}px`;
+    document.getElementById("blur-value").textContent = `${blur}px`;
+    document.getElementById("spread-value").textContent = `${spread}px`;
+    document.getElementById("opacity-value").textContent = parseFloat(op).toFixed(2);
+
+    const rgb = hexToRgb(hex);
+    const colorStr = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${op})`;
+    
+    let cssValue = `${hOff}px ${vOff}px ${blur}px ${spread}px ${colorStr}`;
+    if (type === "inset") cssValue = `inset ${cssValue}`;
+
+    previewBox.style.boxShadow = cssValue;
+    // Tailwind arbitrary values use underscores in place of spaces.
+    const tailwind = `shadow-[${cssValue.replace(/,\s*/g, ",").replace(/\s+/g, "_")}]`;
+    cssOutput.value = `/* CSS */\nbox-shadow: ${cssValue};\n\n/* Tailwind CSS class */\n${tailwind}`;
+  }
+
+  function updateColorFromPicker() {
+    const picker = document.getElementById("shadow-color-picker");
+    const hexInput = document.getElementById("shadow-color-hex");
+    hexInput.value = picker.value.toUpperCase();
+    updatePreview();
+  }
+
+  function updateColorFromHex() {
+    const picker = document.getElementById("shadow-color-picker");
+    const hexInput = document.getElementById("shadow-color-hex");
+    let hex = hexInput.value.toUpperCase();
+    
+    if (/^#?([0-9A-F]{3}|[0-9A-F]{6})$/.test(hex)) {
+      hex = hex.replace(/^#/, "");
+      if (hex.length === 3) hex = [...hex].map(c => c + c).join("");
+      picker.value = "#" + hex.toLowerCase(); // colour inputs only accept 6-digit codes
+      updatePreview();
+    }
+  }
+
+  // ── Modern Clipboard API ──
+  async function copyCode(elementId) {
+    const el = document.getElementById(elementId);
+    if (!el.value) return;
+    try {
+      await navigator.clipboard.writeText(el.value);
+      showToast("CSS copied to clipboard!");
+    } catch (err) {
+      el.select();
+      document.execCommand('copy');
+      showToast("CSS copied to clipboard!");
+    }
+  }
+
+  window.onload = function () {
+    updatePreview();
+  };
+</script>
+<script>
+(function () {
+  var btn = document.querySelector(".menu-btn"), nav = document.getElementById("main-nav");
+  if (btn && nav) btn.addEventListener("click", function () {
+    var open = nav.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+  var y = document.getElementById("year"); if (y) y.textContent = new Date().getFullYear();
+  var items = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    items.forEach(function (el) { el.classList.add("in"); }); return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>

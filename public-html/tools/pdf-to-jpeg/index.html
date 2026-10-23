@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk PDF to JPEG Converter | WebOnlineTools</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
+    <style>
+        /* Premium, Minimalist Styling */
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+            background-color: #FAFAFA; 
+            color: #1A202C; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+        }
+        .tool-container { 
+            background: #FFFFFF; 
+            padding: 50px; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            text-align: center; 
+            max-width: 500px; 
+            width: 90%; 
+            border: 1px solid #E2E8F0; 
+        }
+        h1 { 
+            color: #15324D; 
+            margin-bottom: 15px; 
+            font-size: 24px;
+            letter-spacing: -0.5px;
+        }
+        p { 
+            color: #4A5568; 
+            margin-bottom: 35px; 
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .upload-area {
+            border: 2px dashed #E2E8F0;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 25px;
+            background-color: #F8FAFC;
+            transition: border 0.3s ease;
+        }
+        .upload-area:hover {
+            border-color: #15324D;
+        }
+        input[type="file"] { 
+            font-size: 14px;
+            color: #4A5568;
+        }
+        button { 
+            background-color: #15324D; 
+            color: #FFFFFF; 
+            border: none; 
+            padding: 14px 28px; 
+            font-size: 16px; 
+            font-weight: 600;
+            cursor: pointer; 
+            border-radius: 6px; 
+            transition: all 0.3s ease; 
+            width: 100%;
+        }
+        button:hover { 
+            background-color: #C8AA76; /* Champagne Gold Hover */
+            transform: translateY(-2px);
+        }
+        button:disabled {
+            background-color: #CBD5E0;
+            cursor: not-allowed;
+            transform: none;
+        }
+        #status { 
+            margin-top: 25px; 
+            font-weight: 500; 
+            font-size: 14px;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tool-container">
+        <h1>PDF to Bulk JPEG</h1>
+        <p>Upload any PDF document to instantly convert all of its pages into high-resolution JPEG images. Downloads automatically as a ZIP file.</p>
+        
+        <div class="upload-area">
+            <input type="file" id="pdf-upload" accept="application/pdf" />
+        </div>
+        
+        <button id="convert-btn">Convert & Download ZIP</button>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        // Initialize the PDF.js worker (Required for the library to function)
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+        document.getElementById('convert-btn').addEventListener('click', async () => {
+            const fileInput = document.getElementById('pdf-upload');
+            const statusDiv = document.getElementById('status');
+            const btn = document.getElementById('convert-btn');
+
+            if (fileInput.files.length === 0) {
+                statusDiv.innerText = "⚠️ Please select a PDF file first.";
+                statusDiv.style.color = "#d9534f"; // Red error
+                return;
+            }
+
+            const file = fileInput.files[0];
+            
+            // Lock the UI
+            btn.disabled = true;
+            statusDiv.style.color = "#4A5568";
+
+            try {
+                statusDiv.innerText = "Reading PDF document...";
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                
+                const zip = new JSZip();
+
+                // Loop through every page in the document
+                for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                    statusDiv.innerText = `Rendering page ${pageNum} of ${pdf.numPages}...`;
+                    const page = await pdf.getPage(pageNum);
+                    
+                    // Set scale to 2.0 for High-Definition JPEGs. (Change to 1.0 for smaller file sizes)
+                    const scale = 2.0; 
+                    const viewport = page.getViewport({ scale: scale });
+
+                    // Create a temporary canvas to draw the PDF page
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    // Fill background with white (PDFs are transparent by default)
+                    context.fillStyle = "#ffffff";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+
+                    // Render the page onto the canvas
+                    await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+                    // Convert the rendered canvas into a JPEG Blob (95% quality)
+                    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.95));
+                    
+                    // Add the JPEG file to our ZIP archive
+                    zip.file(`page-${pageNum}.jpg`, blob);
+                }
+
+                statusDiv.innerText = "Zipping your images...";
+                
+                // Generate the final ZIP file
+                const content = await zip.generateAsync({ type: "blob" });
+                
+                // Trigger the browser download
+                saveAs(content, `${file.name.replace('.pdf', '')}-Images.zip`);
+                
+                statusDiv.innerText = "✅ Success! Your ZIP file has been downloaded.";
+                statusDiv.style.color = "#3A6351"; // Botanical Sage success
+
+            } catch (error) {
+                console.error(error);
+                statusDiv.innerText = "❌ An error occurred. The PDF might be corrupted or password protected.";
+                statusDiv.style.color = "#d9534f";
+            } finally {
+                // Unlock the UI
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

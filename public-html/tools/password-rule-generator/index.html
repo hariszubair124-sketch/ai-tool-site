@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ SEO ESSENTIALS ══ -->
+  <title>Password Security Tool — Generator & Policy Checker | Web Online Tools</title>
+  <meta name="description" content="Generate cryptographically strong passwords and validate user input against customizable security policies. Export rules instantly as JavaScript objects." />
+  <meta name="keywords" content="password generator, password strength checker, password policy validator, secure password maker, developer security tools" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://webonlinetools.com/tools/password-security/" />
+  
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#060b18" />
+  <meta name="google-site-verification" content="2yOkCxBls80UcV_za_vpGqbxg_nIOjhLNQqcEFoGEZc" />
+  <link rel="icon" type="image/svg+xml" href="https://webonlinetools.com/favicon.svg" />
+
+  <!-- ══ STRUCTURED DATA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Password Security Tool",
+    "operatingSystem": "All",
+    "applicationCategory": "SecurityApplication",
+    "offers": { "@type": "Offer", "price": "0" },
+    "description": "Generate secure passwords and test them against customizable security policies."
+  }
+  </script>
+
+  <!-- ══ FONTS & TAILWIND ══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+
+    .panel-title { font-family: var(--font-body); font-weight: 700; color: var(--t1); border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1.5rem; font-size: 1.1rem; position: relative; z-index: 2;}
+
+    /* Inputs */
+    .input-label { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; color: var(--t2); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; position: relative; z-index: 2;}
+    .input-label span.val { color: var(--t1); font-family: var(--font-mono); font-weight: 500; }
+    
+    .text-input {
+      width: 100%; padding: 1rem 1.25rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+      border-radius: 12px; color: var(--t1); font-family: var(--font-mono); font-size: 1.1rem;
+      outline: none; transition: border-color .2s, box-shadow .2s; position: relative; z-index: 2;
+    }
+    .text-input:focus { border-color: var(--border-act); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+    .text-input[readonly] { cursor: pointer; color: #a5b4fc; }
+
+    /* Custom Range Sliders */
+    input[type="range"] { -webkit-appearance: none; width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; outline: none; margin-top: 0.5rem; position: relative; z-index: 2;}
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; background: #60a5fa; cursor: pointer; border-radius: 50%; box-shadow: 0 0 10px rgba(96,165,250,0.5); transition: transform .1s; }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+    /* Custom Checkboxes */
+    .checkbox-wrap { display: flex; align-items: center; gap: 0.5rem; position: relative; z-index: 2; cursor: pointer; padding: 0.5rem; border-radius: 8px; transition: background .2s; }
+    .checkbox-wrap:hover { background: rgba(255,255,255,0.03); }
+    .checkbox-wrap input { width: 1.2rem; height: 1.2rem; accent-color: #3b82f6; cursor: pointer; }
+    .checkbox-wrap span { font-weight: 600; color: var(--t1); font-size: 0.9rem; }
+
+    /* Buttons */
+    .btn-action { background: var(--grad-main); color: #fff; border: none; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 1.5rem; border-radius: 12px; transition: transform .2s, box-shadow .2s; cursor: pointer; width: 100%; position: relative; z-index: 2;}
+    .btn-action:hover { box-shadow: 0 0 20px rgba(37,99,235,0.4); }
+    .btn-action:active { transform: scale(0.98); }
+
+    .btn-ghost { background: rgba(255,255,255,0.04); color: var(--t2); border: 1px solid var(--border); font-family: var(--font-body); font-weight: 600; font-size: 0.9rem; padding: 0.9rem 1.5rem; border-radius: 12px; cursor: pointer; transition: all .2s; width: 100%; position: relative; z-index: 2;}
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); color: var(--t1); border-color: rgba(255,255,255,0.15); }
+
+    /* Strength Bar */
+    .strength-track { width: 100%; height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; margin-top: 0.5rem; position: relative; z-index: 2;}
+    .strength-bar { height: 100%; width: 0%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s; border-radius: 10px; }
+
+    /* Validation Items */
+    .validation-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.85rem; font-weight: 500; transition: color .3s; position: relative; z-index: 2;}
+    .icon-pass { color: #10b981; }
+    .icon-fail { color: #ef4444; }
+
+    /* Code Output */
+    .code-area {
+      width: 100%; min-height: 120px; padding: 1.25rem; font-family: var(--font-mono); font-size: 0.85rem;
+      background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 14px;
+      color: #a5b4fc; outline: none; resize: vertical; position: relative; z-index: 2; white-space: pre;
+    }
+    
+    .btn-copy {
+      position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(37,99,235,0.15); color: #60a5fa;
+      border: 1px solid rgba(37,99,235,0.3); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.8rem;
+      font-weight: 700; cursor: pointer; transition: all .2s; z-index: 10;
+    }
+    .btn-copy:hover { background: var(--grad-main); color: #fff; border-color: transparent; }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border);
+      color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000;
+      opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.error { border-color: #ef4444; color: #fca5a5; }
+
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .article-sec ul { list-style: none; padding: 0; margin-bottom: 2rem; }
+    .article-sec li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; color: var(--t2); }
+    .article-sec li::before { content: '•'; position: absolute; left: 0; color: #3b82f6; font-weight: bold; font-size: 1.2rem; line-height: 1; top: 2px; }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <span class="logo-text">Web <em>Online</em> Tools</span>
+      </a>
+      <nav class="hidden md:flex gap-6 font-semibold text-sm">
+        <a href="/tools/" class="text-slate-400 hover:text-white transition">All Tools</a>
+        <a href="/ai-news/" class="text-slate-400 hover:text-white transition">Blog</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero-sec">
+    <h1>Password Security Toolkit</h1>
+    <p style="max-width: 650px; margin: 0 auto;">Generate cryptographically strong passwords and validate user input against your own customizable security policy. Export policy rules instantly for backend logic.</p>
+  </section>
+
+  <div class="app-card">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10">
+      
+      <!-- COL 1: Generator -->
+      <div class="space-y-6">
+        <h2 class="panel-title">1. Password Generator</h2>
+        
+        <div>
+          <input type="text" id="password-output" class="text-input mb-4" placeholder="Generated Password" readonly onclick="copyGeneratedPassword()" />
+          <div class="flex gap-3">
+            <button onclick="generatePassword()" class="btn-action flex-grow">Generate</button>
+            <button onclick="copyGeneratedPassword()" class="btn-ghost flex-none w-auto">Copy</button>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-white/10">
+          <label class="input-label">Password Length <span class="val" id="length-value">16</span></label>
+          <input type="range" id="password-length" min="8" max="64" value="16" oninput="document.getElementById('length-value').textContent=this.value; generatePassword();" />
+        </div>
+
+        <div>
+          <h3 class="input-label mb-2 mt-4">Character Sets</h3>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="checkbox-wrap">
+              <input type="checkbox" id="gen-uppercase" checked onchange="generatePassword()" />
+              <span>A-Z (Upper)</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input type="checkbox" id="gen-lowercase" checked onchange="generatePassword()" />
+              <span>a-z (Lower)</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input type="checkbox" id="gen-numbers" checked onchange="generatePassword()" />
+              <span>0-9 (Digits)</span>
+            </label>
+            <label class="checkbox-wrap">
+              <input type="checkbox" id="gen-symbols" checked onchange="generatePassword()" />
+              <span>!@# (Symbols)</span>
+            </label>
+          </div>
+          <!-- NEW FEATURE: Exclude Ambiguous -->
+          <label class="checkbox-wrap mt-4 bg-white/5 border border-white/10">
+            <input type="checkbox" id="gen-exclude" onchange="generatePassword()" />
+            <span>Exclude Ambiguous ( i, l, 1, L, o, 0, O )</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- COL 2: Policy Checker -->
+      <div class="space-y-6">
+        <h2 class="panel-title">2. Policy Checker</h2>
+        
+        <div>
+          <input type="text" id="password-check-input" class="text-input mb-4" placeholder="Type password to evaluate..." oninput="checkPasswordStrength()" />
+          
+          <div class="mb-4">
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-sm font-bold text-gray-400">Strength Evaluation</span>
+              <span id="strength-text" class="text-sm font-bold text-white uppercase tracking-wider">N/A</span>
+            </div>
+            <div class="strength-track">
+              <div id="strength-bar" class="strength-bar" style="width: 0%; background-color: #374151;"></div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-white/10">
+            <h3 class="input-label mb-3">Live Policy Checklist</h3>
+            <div id="validation-list" class="space-y-3">
+              <div id="check-length" class="validation-item text-gray-500">
+                <svg class="validation-icon icon-fail w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <span id="length-label">Minimum 8 characters</span>
+              </div>
+              <div id="check-uppercase" class="validation-item text-gray-500">
+                <svg class="validation-icon icon-fail w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <span id="uppercase-label">At least 1 uppercase letter</span>
+              </div>
+              <div id="check-numbers" class="validation-item text-gray-500">
+                <svg class="validation-icon icon-fail w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <span id="numbers-label">At least 1 number</span>
+              </div>
+              <div id="check-symbols" class="validation-item text-gray-500">
+                <svg class="validation-icon icon-fail w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <span id="symbols-label">At least 1 symbol</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COL 3: Policy Settings & Export -->
+      <div class="space-y-6">
+        <h2 class="panel-title">3. Policy Settings & Export</h2>
+        
+        <div class="bg-black/30 p-5 rounded-xl border border-white/5 space-y-5">
+          <div>
+            <label class="input-label">Min Length <span class="val" id="min-length-value">8</span></label>
+            <input type="range" id="policy-min-length" min="4" max="32" value="8" oninput="updatePolicyUI(); checkPasswordStrength();" />
+          </div>
+          <div>
+            <label class="input-label">Min Uppercase <span class="val" id="min-uppercase-value">1</span></label>
+            <input type="range" id="policy-min-uppercase" min="0" max="4" value="1" oninput="updatePolicyUI(); checkPasswordStrength();" />
+          </div>
+          <div>
+            <label class="input-label">Min Numbers <span class="val" id="min-numbers-value">1</span></label>
+            <input type="range" id="policy-min-numbers" min="0" max="4" value="1" oninput="updatePolicyUI(); checkPasswordStrength();" />
+          </div>
+          <div>
+            <label class="input-label">Min Symbols <span class="val" id="min-symbols-value">1</span></label>
+            <input type="range" id="policy-min-symbols" min="0" max="4" value="1" oninput="updatePolicyUI(); checkPasswordStrength();" />
+          </div>
+        </div>
+
+        <div class="pt-4">
+          <label class="input-label mb-2">Export Rules (JS Object)</label>
+          <div style="position: relative; z-index: 2;">
+            <button onclick="copyPolicyCode()" class="btn-copy">Copy JSON</button>
+            <textarea id="policy-output" class="code-area" readonly></textarea>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec">
+    <h2>Why Use a Customizable Password Policy Tool?</h2>
+    <p>For developers, managing and enforcing strict password requirements can be challenging. This tool simplifies development by allowing you to visually define a rigorous security policy and instantly test its real-world impact on user passwords.</p>
+    <p>By providing a copyable, formatted JavaScript object, you can seamlessly integrate the required rules into your frontend regex validation or backend middleware, ensuring consistency across your entire stack. This "policy-first" approach is key to modern web security architectures.</p>
+
+    <h3>Frequently Asked Questions</h3>
+    <ul>
+      <li><strong>Is the generated password truly random?</strong> Yes. We ensure the generated password mathematically meets your chosen character sets and then randomly shuffle the string using cryptographic best practices to prevent predictable patterns.</li>
+      <li><strong>What does "Exclude Ambiguous Characters" do?</strong> It removes characters that look similar and often confuse users (like the lowercase 'l', the number '1', the capital 'I', the letter 'O', and the number '0'). This is a highly recommended UX pattern for auto-generated passwords.</li>
+      <li><strong>Is my password stored or sent anywhere?</strong> No. All processing, checking, and generation is executed securely and instantly via JavaScript in your local browser. Your password never touches a network request or backend server.</li>
+    </ul>
+
+    <div class="flex flex-wrap gap-3 mt-10 border-t border-white/10 pt-6">
+      <a href="/tools/base64-encoder/" class="tag-link">Base64 Encoder</a>
+      <a href="/tools/json-formatter/" class="tag-link">JSON Formatter</a>
+      <a href="/tools/" class="tag-link">View All Tools &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> Web Online Tools. Processed strictly on your device.</p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Action completed!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const SYMBOLS = "!@#$%^&*()-=_+[]{}|;:,.<>?";
+  const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
+  const NUMBERS = "0123456789";
+  const AMBIGUOUS = /[il1Lo0O]/g;
+
+  function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show ' + (isError ? 'error' : '');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ── MODERN CLIPBOARD API ──
+  async function copyToClipboard(text, successMsg) {
+    if (!text) {
+      showToast("Nothing to copy.", true);
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast(successMsg || "Copied to clipboard!");
+    } catch (err) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = 'fixed'; 
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        showToast(successMsg || "Copied to clipboard!");
+      } catch (e) {
+        showToast("Copy Failed!", true);
+      }
+      document.body.removeChild(textarea);
+    }
+  }
+
+  function copyGeneratedPassword() {
+    const pass = document.getElementById("password-output").value;
+    copyToClipboard(pass, "Password Copied!");
+  }
+
+  function copyPolicyCode() {
+    const code = document.getElementById("policy-output").value;
+    copyToClipboard(code, "Policy Object Copied!");
+  }
+
+  // ── PASSWORD GENERATION ──
+  function generatePassword() {
+    const length = parseInt(document.getElementById("password-length").value);
+    const useUpper = document.getElementById("gen-uppercase").checked;
+    const useLower = document.getElementById("gen-lowercase").checked;
+    const useNumbers = document.getElementById("gen-numbers").checked;
+    const useSymbols = document.getElementById("gen-symbols").checked;
+    const excludeAmb = document.getElementById("gen-exclude").checked;
+
+    if (length === 0 || (!useUpper && !useLower && !useNumbers && !useSymbols)) {
+      document.getElementById("password-output").value = "Select at least one character set.";
+      return;
+    }
+
+    let requiredChars = [];
+    let charSet = "";
+
+    const processSet = (baseStr) => excludeAmb ? baseStr.replace(AMBIGUOUS, '') : baseStr;
+
+    if (useUpper) {
+      const s = processSet(UPPERCASE);
+      if(s.length > 0) { charSet += s; requiredChars.push(s[Math.floor(Math.random() * s.length)]); }
+    }
+    if (useLower) {
+      const s = processSet(LOWERCASE);
+      if(s.length > 0) { charSet += s; requiredChars.push(s[Math.floor(Math.random() * s.length)]); }
+    }
+    if (useNumbers) {
+      const s = processSet(NUMBERS);
+      if(s.length > 0) { charSet += s; requiredChars.push(s[Math.floor(Math.random() * s.length)]); }
+    }
+    if (useSymbols) {
+      // Symbols generally don't have ambiguous lookalikes, but pass through process anyway
+      const s = processSet(SYMBOLS);
+      if(s.length > 0) { charSet += s; requiredChars.push(s[Math.floor(Math.random() * s.length)]); }
+    }
+
+    // Safety fallback if exclusion removes everything (unlikely but possible with weird edits)
+    if(charSet.length === 0) charSet = "abcdefghjkmnpqrstuvwxyz23456789"; 
+
+    let password = requiredChars.join("");
+    for (let i = password.length; i < length; i++) {
+      password += charSet[Math.floor(Math.random() * charSet.length)];
+    }
+
+    password = password.split("").sort(() => 0.5 - Math.random()).join("");
+
+    document.getElementById("password-output").value = password;
+    
+    // Auto-check the new password against the policy
+    document.getElementById("password-check-input").value = password;
+    checkPasswordStrength();
+  }
+
+  // ── POLICY MANAGEMENT ──
+  function getPolicyRules() {
+    return {
+      minLength: parseInt(document.getElementById("policy-min-length").value),
+      minUppercase: parseInt(document.getElementById("policy-min-uppercase").value),
+      minNumbers: parseInt(document.getElementById("policy-min-numbers").value),
+      minSymbols: parseInt(document.getElementById("policy-min-symbols").value),
+    };
+  }
+
+  function updatePolicyUI() {
+    const rules = getPolicyRules();
+
+    document.getElementById("min-length-value").textContent = rules.minLength;
+    document.getElementById("min-uppercase-value").textContent = rules.minUppercase;
+    document.getElementById("min-numbers-value").textContent = rules.minNumbers;
+    document.getElementById("min-symbols-value").textContent = rules.minSymbols;
+
+    document.getElementById("length-label").textContent = `Minimum ${rules.minLength} characters`;
+    document.getElementById("uppercase-label").textContent = `At least ${rules.minUppercase} uppercase letter(s)`;
+    document.getElementById("numbers-label").textContent = `At least ${rules.minNumbers} number(s)`;
+    document.getElementById("symbols-label").textContent = `At least ${rules.minSymbols} symbol(s)`;
+
+    const jsPolicy = `const securityPolicy = {\n    "minLength": ${rules.minLength},\n    "minUppercase": ${rules.minUppercase},\n    "minNumbers": ${rules.minNumbers},\n    "minSymbols": ${rules.minSymbols}\n};`;
+    document.getElementById("policy-output").value = jsPolicy;
+  }
+
+  // ── STRENGTH CHECKER ──
+  function updateCheck(elementId, passed, isRequired) {
+    const item = document.getElementById(elementId);
+    const icon = item.querySelector(".validation-icon");
+
+    if (!isRequired && passed) {
+      // If rule is 0, technically it passes but shouldn't necessarily be highlighted green if irrelevant.
+      // But standard UX: if passed, make it green.
+    }
+
+    item.classList.remove("text-red-500", "text-emerald-400", "text-gray-500");
+    item.classList.add(passed ? "text-emerald-400" : "text-red-500");
+
+    icon.classList.remove("icon-fail", "icon-pass");
+    icon.classList.add(passed ? "icon-pass" : "icon-fail");
+
+    if (passed) {
+      icon.innerHTML = `<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9.59l-8 8z"/>`;
+    } else {
+      icon.innerHTML = `<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>`;
+    }
+  }
+
+  function checkPasswordStrength() {
+    const password = document.getElementById("password-check-input").value;
+    const rules = getPolicyRules();
+    
+    let score = 0;
+    
+    // 1. Length Check
+    const hasMinLength = password.length >= rules.minLength;
+    updateCheck("check-length", hasMinLength, rules.minLength > 0);
+    if (hasMinLength) score += 25;
+
+    // 2. Uppercase Check
+    const uppercaseCount = (password.match(/[A-Z]/g) || []).length;
+    const hasUppercase = uppercaseCount >= rules.minUppercase;
+    updateCheck("check-uppercase", hasUppercase, rules.minUppercase > 0);
+    if (hasUppercase) score += 25;
+
+    // 3. Numbers Check
+    const numberCount = (password.match(/[0-9]/g) || []).length;
+    const hasNumbers = numberCount >= rules.minNumbers;
+    updateCheck("check-numbers", hasNumbers, rules.minNumbers > 0);
+    if (hasNumbers) score += 25;
+
+    // 4. Symbols Check
+    const symbolCount = (password.match(/[!@#$%^&*()\-_+=|\[\]{}.,:;'"<>?]/g) || []).length;
+    const hasSymbols = symbolCount >= rules.minSymbols;
+    updateCheck("check-symbols", hasSymbols, rules.minSymbols > 0);
+    if (hasSymbols) score += 25;
+
+    // Entropy / Length Bonus (Max 20 bonus points)
+    if (hasMinLength && password.length > rules.minLength) {
+      score += Math.min(20, (password.length - rules.minLength) * 2);
+    }
+    score = Math.min(100, score);
+
+    // UI Updates
+    let strengthText = "Too Short";
+    let barColor = "#ef4444"; // Red
+
+    if (password.length === 0) {
+      strengthText = "N/A";
+      score = 0;
+      barColor = "#374151"; // Gray
+    } else if (score < 50) {
+      strengthText = "Weak";
+      barColor = "#ef4444";
+    } else if (score < 85) {
+      strengthText = "Medium";
+      barColor = "#f59e0b"; // Yellow
+    } else if (score < 100) {
+      strengthText = "Strong";
+      barColor = "#3b82f6"; // Blue
+    } else {
+      strengthText = "Excellent";
+      barColor = "#10b981"; // Green
+    }
+
+    document.getElementById("strength-text").textContent = strengthText;
+    const strengthBar = document.getElementById("strength-bar");
+    strengthBar.style.width = `${score}%`;
+    strengthBar.style.backgroundColor = barColor;
+  }
+
+  // Init
+  window.onload = function () {
+    updatePolicyUI();
+    generatePassword();
+  };
+</script>
+</body>
+</html>

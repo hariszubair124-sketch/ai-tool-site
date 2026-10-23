@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /tools/*/default.php
+
+Sitemap: https://webonlinetools.com/sitemap.xml

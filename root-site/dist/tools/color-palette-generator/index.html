@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>document.documentElement.classList.add("js")</script>
+<title>Color Palette Generator with Contrast Checker</title>
+<meta name="description" content="Generate 5-color palettes from analogous, triadic, complementary or monochrome schemes, lock colors you like and check WCAG contrast.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://webonlinetools.com/tools/color-palette-generator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Web Online Tools">
+<meta property="og:title" content="Color Palette Generator with Contrast Checker">
+<meta property="og:description" content="Generate 5-color palettes from analogous, triadic, complementary or monochrome schemes, lock colors you like and check WCAG contrast.">
+<meta property="og:url" content="https://webonlinetools.com/tools/color-palette-generator/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#060b18">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/ui.css?v=605b0e79">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Color Palette Generator",
+   "url": "https://webonlinetools.com/tools/color-palette-generator/",
+   "description": "Generate 5-color palettes from analogous, triadic, complementary or monochrome schemes, lock colors you like and check WCAG contrast.",
+   "applicationCategory": "DesignApplication",
+   "operatingSystem": "Any (runs in a web browser)",
+   "browserRequirements": "Requires JavaScript",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Web Online Tools",
+    "url": "https://webonlinetools.com/"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://webonlinetools.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Tools",
+     "item": "https://webonlinetools.com/tools/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Color Palette Generator",
+     "item": "https://webonlinetools.com/tools/color-palette-generator/"
+    }
+   ]
+  }
+ ]
+}
+</script>
+  <meta name="color-scheme" content="dark" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Inter', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+    /* Buttons */
+    .btn-action { background: var(--grad-main); color: #fff; border: none; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 12px; transition: transform .2s, box-shadow .2s; cursor: pointer; }
+    .btn-action:hover { box-shadow: 0 0 20px rgba(37,99,235,0.4); }
+    .btn-action:active { transform: scale(0.98); }
+    .harmony-btn { background: rgba(255,255,255,0.04); color: var(--t2); border: 1px solid var(--border); font-family: var(--font-body); font-weight: 600; font-size: 0.85rem; padding: 0.75rem 1rem; border-radius: 10px; cursor: pointer; transition: all .2s; }
+    .harmony-btn:hover { background: rgba(255,255,255,0.08); color: var(--t1); border-color: rgba(255,255,255,0.15); }
+    .harmony-btn.active { border-color: var(--border-act); color: #60a5fa; background: rgba(37,99,235,0.1); }
+    /* Swatches */
+    .color-swatch-container {
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative; z-index: 10; overflow: hidden;
+    }
+    .color-swatch-container.selected {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.5), 0 0 0 3px #60a5fa;
+      z-index: 20;
+    }
+    .hex-input {
+      width: 110px; text-align: center; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; padding: 6px; font-weight: 700; font-size: 1.15rem; font-family: var(--font-mono);
+      cursor: text; transition: background 0.2s, border-color 0.2s; backdrop-filter: blur(4px); text-transform: uppercase;
+    }
+    .hex-input:focus { outline: none; background: rgba(0, 0, 0, 0.7); border-color: #60a5fa; }
+    /* Details Panel */
+    .details-panel {
+      background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 16px;
+      padding: 1.5rem; position: relative; z-index: 10; margin-top: 2rem;
+    }
+    .copy-link { font-size: 0.8rem; font-weight: 700; color: #60a5fa; cursor: pointer; transition: color .2s; }
+    .copy-link:hover { color: #93c5fd; text-decoration: underline; }
+    /* Live Preview Section */
+    #sample-page-preview {
+      background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 20px 20px; position: relative; z-index: 10;
+    }
+    #sample-page-preview * { transition: all 0.5s ease; }
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border);
+      color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000;
+      opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.error { border-color: #ef4444; color: #fca5a5; }
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-head" id="top">
+  <div class="site-head-inner">
+    <a class="ui-logo" href="/" aria-label="Web Online Tools home">
+      <span class="ui-logo-mark"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span><span class="ui-logo-text">Web Online Tools</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Main"><a href="/tools/" class="nav-link" aria-current="page"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Tools</span></a><a href="/ai-news/" class="nav-link"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg><span>AI news</span></a>
+      <a href="/tools/" class="nav-cta">Browse tools <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </nav>
+    <button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Open menu"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg></button>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="/tools/">Tools</a><span class="sep">/</span><span aria-current="page">Color Palette Generator</span></nav>
+  <section class="hero-sec">
+    <h1>Color Palette Generator</h1>
+    <p style="max-width: 650px; margin: 0 auto;">Generate 5-color palettes from monochrome, analogous, triadic or complementary schemes. Lock the colors you like, press the spacebar for new ones, and check text contrast.</p>
+  </section>
+
+  <section class="app-card">
+    
+    <!-- Controls -->
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8 relative z-10">
+      <button onclick="generatePalette(currentScheme)" class="btn-action w-full md:w-auto">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7m4-1 6 6m0-6-6 6"/></svg>
+        Generate (Spacebar)
+      </button>
+
+      <div class="grid grid-cols-2 sm:flex gap-2 w-full md:w-auto">
+        <button onclick="setScheme('monochrome')" id="btn-monochrome" class="harmony-btn">Monochrome</button>
+        <button onclick="setScheme('analogous')" id="btn-analogous" class="harmony-btn active">Analogous</button>
+        <button onclick="setScheme('triadic')" id="btn-triadic" class="harmony-btn">Triadic</button>
+        <button onclick="setScheme('complementary')" id="btn-complementary" class="harmony-btn">Complementary</button>
+        <button onclick="copyCssVariables()" class="harmony-btn">Copy CSS variables</button>
+      </div>
+    </div>
+
+    <!-- Color Swatches Area -->
+    <div id="palette-display" class="flex flex-col sm:flex-row gap-4 mb-6 relative z-10">
+      <!-- Generated by JS -->
+    </div>
+
+    <!-- Dedicated Color Details Panel -->
+    <div id="color-details-panel" class="details-panel">
+      <!-- Generated by JS -->
+    </div>
+
+    <!-- Live Preview Section -->
+    <div class="mt-12 pt-8 border-t border-white/10 relative z-10">
+      <h2 class="text-xl font-bold text-white mb-6 uppercase tracking-wider text-sm">UI Concept Preview</h2>
+      
+      <div id="sample-page-preview" class="p-4 sm:p-8 rounded-2xl border border-white/5 shadow-2xl">
+        <!-- Header Bar -->
+        <div id="preview-header" class="p-4 rounded-xl flex justify-between items-center mb-8 shadow-lg">
+          <span id="preview-logo" class="text-xl font-display font-extrabold">BrandLogo</span>
+          <div id="preview-nav" class="flex space-x-6 text-sm font-bold">
+            <span id="preview-link-1" class="cursor-pointer">Features</span>
+            <span id="preview-link-2" class="cursor-pointer">Pricing</span>
+          </div>
+        </div>
+
+        <!-- Card Surface -->
+        <div id="preview-card" class="p-8 rounded-2xl shadow-2xl max-w-2xl border border-white/5">
+          <h3 id="preview-card-title" class="text-3xl font-display font-bold mb-4">Design in Context</h3>
+          <p id="preview-card-text" class="mb-8 leading-relaxed text-base opacity-90 font-medium">
+            This is sample text to demonstrate the contrast and hierarchy of your newly generated color scheme. The entire layout adapts to your palette in real-time. Lock colors above to fine-tune your aesthetic.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <button id="preview-button-primary" class="font-bold py-3 px-6 rounded-xl shadow-lg border-none cursor-pointer">Primary Action</button>
+            <button id="preview-button-secondary" class="font-bold py-3 px-6 rounded-xl shadow-lg border-none cursor-pointer">Secondary View</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec">
+    <h2>Mastering Color Schemes for Web Design</h2>
+    <p>Understanding color harmony is crucial for creating professional and visually appealing user interfaces. Our <strong>Color Palette Generator</strong> leverages classic color theory to provide you with aesthetically pleasing schemes that ensure maximum impact.</p>
+    <p>The most popular schemes, like the <strong>Monochromatic</strong> (using shades, tints, and tones of a single color) and <strong>Complementary</strong> (using colors opposite each other on the color wheel for high contrast), are built directly into this free tool.</p>
+    <p>Every color generated provides instant access to its <strong>HEX code</strong>, <strong>RGB values</strong>, and <strong>HSL values</strong> (ideal for dynamic CSS). We also include a WCAG contrast rating to help you meet web accessibility standards, ensuring your designs are inclusive and readable.</p>
+
+    
+  </article>
+<section class="related-tools" aria-labelledby="related-tools-title"><div class="section-head"><h2 class="block-title" id="related-tools-title"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.71 2.29a1 1 0 0 1 1.42 0l4.58 4.58a1 1 0 0 1 0 1.42l-2.3 2.3a1 1 0 0 1-1.42 0l-4.58-4.58a1 1 0 0 1 0-1.42Z"/><path d="m14 7-9.54 9.54a2 2 0 0 0-.46.83L3 21l3.63-1a2 2 0 0 0 .83-.46L17 10"/></svg>Related tools</h2><a class="link-arrow" href="/tools/#design">More css and design <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div><ul class="ui-grid ui-grid-3"><li class="reveal" style="--d:0.00s" data-search="hex to rgb and hsl converter convert colors between hex, rgb and hsl, including transparency. css and design"><a class="card" href="/tools/color-code-converter/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 22 1-1h3l9-9"/><path d="M3 21v-3l9-9"/><path d="m15 6 3.4-3.4a2.1 2.1 0 1 1 3 3L18 9l.4.4a2.1 2.1 0 1 1-3 3l-3.8-3.8a2.1 2.1 0 1 1 3-3l.4.4Z"/></svg></span><h3>HEX to RGB and HSL Converter</h3><p>Convert colors between HEX, RGB and HSL, including transparency.</p><div class="card-foot"><span>CSS and design</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li><li class="reveal" style="--d:0.06s" data-search="css gradient generator build linear and radial gradients with up to six colors and copy css or a tailwind class. css and design"><a class="card" href="/tools/css-gradient-generator/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="7"/><circle cx="15" cy="15" r="7"/></svg></span><h3>CSS Gradient Generator</h3><p>Build linear and radial gradients with up to six colors and copy CSS or a Tailwind class.</p><div class="card-foot"><span>CSS and design</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li><li class="reveal" style="--d:0.12s" data-search="css box shadow generator adjust offset, blur, spread and color, then copy css or a tailwind class. css and design"><a class="card" href="/tools/css-box-shadow/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></span><h3>CSS Box Shadow Generator</h3><p>Adjust offset, blur, spread and color, then copy CSS or a Tailwind class.</p><div class="card-foot"><span>CSS and design</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li></ul></section>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot-inner">
+    <div class="foot-brand">
+      <a class="ui-logo" href="/"><span class="ui-logo-mark"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span><span class="ui-logo-text">Web Online Tools</span></a>
+      <p>Free tools that run in your browser, plus sourced news on AI models, companies and policy.</p>
+      <ul class="foot-points">
+        <li><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg> Your files and text never leave your device</li>
+        <li><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg> Free, no sign-up</li>
+      </ul>
+    </div>
+    <nav class="foot-col" aria-label="Popular tools"><h2>Popular tools</h2><ul><li><a href="/tools/json-formatter/">JSON Formatter and Validator</a></li><li><a href="/tools/base64-encoder/">Base64 Encoder and Decoder</a></li><li><a href="/tools/password-rule-generator/">Password Policy Regex Generator</a></li><li><a href="/tools/css-gradient-generator/">CSS Gradient Generator</a></li><li><a href="/tools/css-box-shadow/">CSS Box Shadow Generator</a></li><li><a href="/tools/color-palette-generator/">Color Palette Generator</a></li><li><a href="/tools/word-counter/">Word and Character Counter</a></li><li><a href="/tools/">All 17 tools</a></li></ul></nav>
+    <nav class="foot-col" aria-label="Tool categories"><h2>Categories</h2><ul><li><a href="/tools/#developer">Developer tools</a></li><li><a href="/tools/#design">CSS and design</a></li><li><a href="/tools/#text">Text tools</a></li><li><a href="/tools/#files">Images and files</a></li><li><a href="/tools/#calculators">Calculators</a></li></ul></nav>
+    <nav class="foot-col" aria-label="AI news"><h2>AI news</h2><ul><li><a href="/ai-news/">Latest stories</a></li><li><a href="/ai-news/openai/">OpenAI</a></li><li><a href="/ai-news/google/">Google</a></li><li><a href="/ai-news/anthropic/">Anthropic</a></li><li><a href="/ai-news/microsoft/">Microsoft</a></li><li><a href="/ai-news/nvidia/">Nvidia</a></li><li><a href="/ai-news/meta/">Meta</a></li><li><a href="/ai-news/apple/">Apple</a></li><li><a href="/ai-news/policy/">Policy and regulation</a></li></ul></nav>
+  </div>
+  <div class="foot-bottom">
+    <p>© <span id="year">2026</span> Web Online Tools</p>
+    <p class="foot-links"><a href="/ai-news/editorial-policy.html">Editorial policy</a><a href="/#about">About</a></p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Action completed!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const paletteSize = 5;
+  const paletteDisplay = document.getElementById("palette-display");
+  const detailsPanel = document.getElementById("color-details-panel");
+  let currentPalette = [];
+  let lockedColors = Array(paletteSize).fill(false);
+  let selectedColorIndex = 0;
+  let currentScheme = "analogous";
+
+  function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show ' + (isError ? 'error' : '');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // --- CORE COLOR MATH ---
+  const rand = (min, max) => Math.random() * (max - min) + min;
+
+  const hslToHex = (h, s, l) => {
+    s /= 100; l /= 100;
+    const k = n => (n + h / 30) % 12;
+    const a = s * Math.min(l, 1 - l);
+    const f = n => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+    const toHex = x => Math.round(255 * x).toString(16).padStart(2, "0");
+    return `#${toHex(f(0))}${toHex(f(8))}${toHex(f(4))}`;
+  };
+
+  // Returns a 6-digit uppercase hex, or null if the input is not a valid #RGB or #RRGGBB code.
+  function normaliseHex(hex) {
+    let h = hex.trim().replace(/^#/, "");
+    if (!/^([0-9a-f]{3}|[0-9a-f]{6})$/i.test(h)) return null;
+    if (h.length === 3) h = [...h].map(c => c + c).join("");
+    return "#" + h.toUpperCase();
+  }
+
+  function hexToRgb(hex) {
+    const h = normaliseHex(hex);
+    if (!h) return null;
+    const n = parseInt(h.slice(1), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+
+  function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+    if (max === min) { h = s = 0; } 
+    else {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        case b: h = (r - g) / d + 4; break;
+      }
+      h /= 6;
+    }
+    return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+  }
+
+  // --- WCAG CONTRAST ---
+  const relLum = (hex) => {
+    const [r, g, b] = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255).map(c => c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+
+  function getContrastRatio(hex) {
+    const rgb = hexToRgb(hex);
+    if (!rgb) return { ratioWhite: "0.00", ratioBlack: "0.00", textWhite: "Fail", textBlack: "Fail" };
+    
+    const L1 = relLum(hex);
+    const lumWhite = 1.0;
+    const lumBlack = 0.0;
+
+    const ratioWhite = L1 > lumWhite ? (L1 + 0.05) / (lumWhite + 0.05) : (lumWhite + 0.05) / (L1 + 0.05);
+    const textWhite = ratioWhite >= 4.5 ? (ratioWhite >= 7.0 ? "AAA" : "AA") : "Fail";
+
+    const ratioBlack = L1 > lumBlack ? (L1 + 0.05) / (lumBlack + 0.05) : (lumBlack + 0.05) / (L1 + 0.05);
+    const textBlack = ratioBlack >= 4.5 ? (ratioBlack >= 7.0 ? "AAA" : "AA") : "Fail";
+
+    return { ratioWhite: ratioWhite.toFixed(2), ratioBlack: ratioBlack.toFixed(2), textWhite, textBlack };
+  }
+
+  function getBestTextColor(hex) {
+    const L1 = relLum(hex);
+    const ratioWhite = L1 > 1.0 ? (L1 + 0.05) / 1.05 : 1.05 / (L1 + 0.05);
+    const ratioBlack = L1 > 0.0 ? (L1 + 0.05) / 0.05 : 0.05 / (L1 + 0.05);
+    if (ratioWhite >= 4.5) return "#FFFFFF";
+    return ratioWhite > ratioBlack ? "#FFFFFF" : "#060b18";
+  }
+
+  // --- PALETTE GENERATION ---
+  // Builds a palette from real colour-wheel relationships:
+  // monochrome = one hue, analogous = neighbours 30° apart, triadic = 120° apart,
+  // complementary = opposite hues. Slots: light surface, dark surface, three accents.
+  function generateCorePalette({ scheme = "analogous" } = {}) {
+    const base = rand(0, 360);
+    const offsets = {
+      monochrome: [0, 0, 0],
+      analogous: [0, 30, -30],
+      triadic: [0, 120, 240],
+      complementary: [0, 180, 0],
+    }[scheme] || [0, 30, -30];
+    const hues = offsets.map(o => (base + o + 360) % 360);
+    const sat = rand(60, 82);
+    const lights = scheme === "monochrome" ? [32, 48, 64]
+                 : scheme === "complementary" ? [45, 50, 68]
+                 : [rand(42, 52), rand(48, 58), rand(40, 55)];
+    const accents = hues.map((h, i) => hslToHex(h, sat, lights[i]));
+    const surfaceLight = hslToHex(hues[0], rand(10, 18), 96);
+    const surfaceDark = hslToHex(hues[0], rand(12, 22), 14);
+    return [surfaceLight, surfaceDark, ...accents];
+  }
+
+  function updateColorData(hex, index) {
+    const clean = normaliseHex(hex);
+    if (!clean) { showToast(`"${hex}" is not a valid hex color. Use #RGB or #RRGGBB.`, true); return false; }
+    hex = clean;
+    const rgb = hexToRgb(hex);
+    const [r, g, b] = rgb;
+    const hsl = rgbToHsl(r, g, b);
+    
+    currentPalette[index] = {
+      hsl: `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`,
+      hex: hex.toUpperCase(),
+      rgb: `rgb(${r}, ${g}, ${b})`,
+      contrast: getContrastRatio(hex),
+    };
+    return true;
+  }
+
+  function setScheme(scheme) {
+    currentScheme = scheme;
+    document.querySelectorAll('.harmony-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(`btn-${scheme}`).classList.add('active');
+    generatePalette(scheme);
+  }
+
+  function generatePalette(schemeType = "analogous") {
+    const newHexes = generateCorePalette({ scheme: schemeType });
+    for (let i = 0; i < paletteSize; i++) {
+      if (i >= currentPalette.length || !lockedColors[i]) {
+        updateColorData(newHexes[i], i);
+      }
+    }
+    renderPalette();
+    updateColorDetails(selectedColorIndex);
+  }
+
+  // --- UI RENDERING ---
+  function toggleLock(index) {
+    lockedColors[index] = !lockedColors[index];
+    renderPalette();
+  }
+
+  function renderPalette() {
+    paletteDisplay.innerHTML = "";
+    currentPalette.forEach((color, index) => {
+      const isLocked = lockedColors[index];
+      const textColor = getBestTextColor(color.hex);
+      const isSelected = selectedColorIndex === index;
+
+      const swatch = document.createElement("div");
+      swatch.className = `color-swatch-container flex-1 min-w-0 h-40 sm:h-48 rounded-xl shadow-xl p-3 flex flex-col justify-between cursor-pointer border border-white/5 ${isSelected ? 'selected' : ''}`;
+      swatch.style.backgroundColor = color.hex;
+
+      swatch.innerHTML = `
+        <div class="flex justify-between items-start">
+          <span class="text-xs font-bold px-2 py-1 rounded-md bg-black/50 text-white backdrop-blur-md">Color ${index + 1}</span>
+          <button onclick="event.stopPropagation(); toggleLock(${index})" 
+                  class="p-2 rounded-lg ${isLocked ? "bg-red-500 hover:bg-red-600" : "bg-black/40 hover:bg-black/60"} text-white shadow-md transition backdrop-blur-md">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+              ${isLocked 
+                ? '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>' 
+                : '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/>'}
+            </svg>
+          </button>
+        </div>
+        <div class="flex justify-center">
+          <input type="text" value="${color.hex}" 
+                 onkeydown="handleHexEdit(event, ${index})" 
+                 onblur="handleHexEdit(event, ${index})" 
+                 onclick="event.stopPropagation()" 
+                 class="hex-input" style="color: ${textColor};">
+        </div>
+      `;
+
+      swatch.addEventListener("click", () => {
+        selectedColorIndex = index;
+        renderPalette(); // Re-render to update the 'selected' class outline
+        updateColorDetails(index);
+      });
+
+      paletteDisplay.appendChild(swatch);
+    });
+
+    applyPaletteToPreview();
+  }
+
+  function handleHexEdit(event, index) {
+    if (event.key === "Enter" || event.type === "blur") {
+      let newHex = event.target.value.toUpperCase().trim();
+      if (!newHex.startsWith("#")) newHex = "#" + newHex;
+
+      if (updateColorData(newHex, index)) {
+        renderPalette();
+        updateColorDetails(index);
+      } else {
+        event.target.value = currentPalette[index].hex;
+      }
+    }
+  }
+
+  function updateColorDetails(index) {
+    const color = currentPalette[index];
+    const textColor = getBestTextColor(color.hex);
+
+    detailsPanel.innerHTML = `
+      <div class="flex items-center gap-2 mb-4">
+        <div class="w-4 h-4 rounded-full" style="background: ${color.hex}"></div>
+        <h2 class="text-xl font-bold text-white font-display">Details: Color ${index + 1}</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        
+        <div class="space-y-3 text-sm font-mono">
+          <p class="flex justify-between border-b border-white/5 pb-2">
+            <span class="text-gray-400 font-body">RGB:</span> 
+            <span class="text-white">${color.rgb}</span> 
+            <span onclick="copyToClipboard('${color.rgb}')" class="copy-link">Copy</span>
+          </p>
+          <p class="flex justify-between border-b border-white/5 pb-2">
+            <span class="text-gray-400 font-body">HSL:</span> 
+            <span class="text-white">${color.hsl}</span> 
+            <span onclick="copyToClipboard('${color.hsl}')" class="copy-link">Copy</span>
+          </p>
+        </div>
+
+        <div class="space-y-2 text-sm bg-black/40 p-4 rounded-xl border border-white/5 md:col-span-2">
+          <p class="font-bold text-white mb-2 font-display">WCAG Contrast Readability</p>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <span class="text-gray-400 block mb-1">On White Background:</span>
+              <span class="${color.contrast.textWhite === "Fail" ? "text-red-400" : "text-emerald-400"} font-bold bg-white/5 px-2 py-1 rounded">
+                ${color.contrast.textWhite} (${color.contrast.ratioWhite})
+              </span>
+            </div>
+            <div>
+              <span class="text-gray-400 block mb-1">On Dark Background:</span>
+              <span class="${color.contrast.textBlack === "Fail" ? "text-red-400" : "text-emerald-400"} font-bold bg-white/5 px-2 py-1 rounded">
+                ${color.contrast.textBlack} (${color.contrast.ratioBlack})
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function applyPaletteToPreview() {
+    if (currentPalette.length !== paletteSize) return;
+
+    const bg = currentPalette[0].hex; 
+    const surface = currentPalette[1].hex; 
+    const pAcc = currentPalette[2].hex; 
+    const sAcc = currentPalette[3].hex; 
+
+    const pText = getBestTextColor(pAcc);
+    const surText = getBestTextColor(surface);
+
+    // Container
+    const pCon = document.getElementById("sample-page-preview");
+    pCon.style.backgroundColor = bg;
+    pCon.style.color = getBestTextColor(bg);
+
+    // Card
+    const pCard = document.getElementById("preview-card");
+    pCard.style.backgroundColor = surface;
+    pCard.style.color = surText;
+
+    // Header
+    const pHead = document.getElementById("preview-header");
+    pHead.style.backgroundColor = pAcc;
+    pHead.style.color = pText;
+
+    // Buttons & Accents
+    document.getElementById("preview-card-title").style.color = pAcc;
+    
+    const btnP = document.getElementById("preview-button-primary");
+    btnP.style.backgroundColor = pAcc;
+    btnP.style.color = pText;
+
+    const btnS = document.getElementById("preview-button-secondary");
+    btnS.style.backgroundColor = "transparent";
+    btnS.style.border = `2px solid ${sAcc}`;
+    btnS.style.color = sAcc;
+  }
+
+  function copyCssVariables() {
+    const names = ["surface-light", "surface-dark", "accent-1", "accent-2", "accent-3"];
+    const css = ":root {\n" + currentPalette.map((c, i) => `  --${names[i]}: ${c.hex};`).join("\n") + "\n}";
+    copyToClipboard(css);
+  }
+
+  // --- MODERN CLIPBOARD API ---
+  async function copyToClipboard(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast(`Copied ${text}`);
+    } catch (err) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        showToast(`Copied ${text}`);
+      } catch (e) {
+        showToast("Failed to copy.", true);
+      }
+      document.body.removeChild(textarea);
+    }
+  }
+
+  // --- INIT ---
+  window.onload = () => {
+    generatePalette(currentScheme);
+    
+    // Spacebar to generate
+    document.addEventListener("keydown", (e) => {
+      if (e.code === "Space" && e.target.tagName !== "INPUT" && e.target.tagName !== "TEXTAREA") {
+        e.preventDefault();
+        generatePalette(currentScheme);
+      }
+    });
+  };
+</script>
+<script>
+(function () {
+  var btn = document.querySelector(".menu-btn"), nav = document.getElementById("main-nav");
+  if (btn && nav) btn.addEventListener("click", function () {
+    var open = nav.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+  var y = document.getElementById("year"); if (y) y.textContent = new Date().getFullYear();
+  var items = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    items.forEach(function (el) { el.classList.add("in"); }); return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>

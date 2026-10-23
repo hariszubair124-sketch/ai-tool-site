@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>document.documentElement.classList.add("js")</script>
+<title>PDF to JPG Converter: All Pages to a ZIP | Web Online Tools</title>
+<meta name="description" content="Turn every page of a PDF into a JPG image and download them together as a ZIP. Choose image quality and size. Your PDF never leaves your device.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://webonlinetools.com/tools/pdf-to-jpeg/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Web Online Tools">
+<meta property="og:title" content="PDF to JPG Converter: All Pages to a ZIP">
+<meta property="og:description" content="Turn every page of a PDF into a JPG image and download them together as a ZIP. Choose image quality and size. Your PDF never leaves your device.">
+<meta property="og:url" content="https://webonlinetools.com/tools/pdf-to-jpeg/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#060b18">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/ui.css?v=605b0e79">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "PDF to JPG Converter",
+   "url": "https://webonlinetools.com/tools/pdf-to-jpeg/",
+   "description": "Turn every page of a PDF into a JPG image and download them together as a ZIP. Choose image quality and size. Your PDF never leaves your device.",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Any (runs in a web browser)",
+   "browserRequirements": "Requires JavaScript",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Web Online Tools",
+    "url": "https://webonlinetools.com/"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://webonlinetools.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Tools",
+     "item": "https://webonlinetools.com/tools/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "PDF to JPG Converter",
+     "item": "https://webonlinetools.com/tools/pdf-to-jpeg/"
+    }
+   ]
+  }
+ ]
+}
+</script>
+  <meta name="color-scheme" content="dark" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Inter', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+    /* PDF tool */
+    .drop-zone { border: 2px dashed var(--border); border-radius: 16px; padding: 2.5rem 1.5rem; text-align: center; cursor: pointer; position: relative; z-index: 2; transition: border-color .2s, background .2s; }
+    .drop-zone:hover, .drop-zone.active { border-color: var(--border-act); background: rgba(37,99,235,0.06); }
+    .opt-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.25rem; position: relative; z-index: 2; }
+    .opt-row label { display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.85rem; color: var(--t2); }
+    .progress { height: 8px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; margin-top: 1.25rem; position: relative; z-index: 2; }
+    .progress > div { height: 100%; width: 0; background: var(--grad-main); transition: width .2s; }
+    #status { margin-top: 0.75rem; font-size: 0.9rem; position: relative; z-index: 2; min-height: 1.4em; }
+    /* Text Areas */
+    .panel-title { font-family: var(--font-body); font-weight: 700; color: var(--t1); border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1rem; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+    .code-area {
+      width: 100%; min-height: 450px; padding: 1.5rem; font-family: var(--font-mono); font-size: 0.9rem;
+      background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 16px;
+      color: #a5b4fc; outline: none; transition: border-color .2s, box-shadow .2s;
+      resize: vertical; line-height: 1.6; tab-size: 4; position: relative; z-index: 2;
+    }
+    .code-area::placeholder { color: var(--t3); font-family: var(--font-body); }
+    .code-area:focus { border-color: var(--border-act); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+    .code-area[readonly] { background: rgba(255,255,255,0.02); }
+    /* Buttons */
+    .controls-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; position: relative; z-index: 2; }
+    .btn {
+      font-family: var(--font-body); font-weight: 600; font-size: 0.85rem;
+      padding: 0.75rem 1.25rem; border-radius: 10px; cursor: pointer; text-align: center;
+      transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+    }
+    .btn:active { transform: scale(0.96); }
+    .btn-action { background: var(--grad-main); color: #fff; border: none; font-weight: 700; font-size: 0.95rem; box-shadow: 0 0 15px rgba(37,99,235,0.3); }
+    .btn-action:hover { box-shadow: 0 0 25px rgba(37,99,235,0.5); }
+    .btn-ghost { background: rgba(255,255,255,0.04); color: var(--t2); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); color: var(--t1); border-color: rgba(255,255,255,0.15); }
+    .select-input {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--t1);
+      padding: 0.75rem 1rem; border-radius: 10px; font-family: var(--font-body); font-weight: 600; font-size: 0.85rem; outline: none; cursor: pointer;
+    }
+    .select-input option { background-color: var(--card); color: var(--t1); }
+    /* Error Box */
+    .error-box {
+      background: rgba(239,68,68,0.1); border-left: 4px solid #ef4444; color: #fca5a5;
+      padding: 1.25rem; border-radius: 8px; font-family: var(--font-mono); font-size: 0.85rem;
+      margin-top: 1rem; position: relative; z-index: 2; white-space: pre-wrap;
+    }
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border);
+      color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000;
+      opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.error { border-color: #ef4444; color: #fca5a5; }
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-head" id="top">
+  <div class="site-head-inner">
+    <a class="ui-logo" href="/" aria-label="Web Online Tools home">
+      <span class="ui-logo-mark"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span><span class="ui-logo-text">Web Online Tools</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Main"><a href="/tools/" class="nav-link" aria-current="page"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Tools</span></a><a href="/ai-news/" class="nav-link"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg><span>AI news</span></a>
+      <a href="/tools/" class="nav-cta">Browse tools <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </nav>
+    <button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Open menu"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg></button>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="/tools/">Tools</a><span class="sep">/</span><span aria-current="page">PDF to JPG Converter</span></nav>
+  <section class="hero-sec">
+    <h1>PDF to JPG Converter</h1>
+    <p style="max-width: 650px; margin: 0 auto;">Turn every page of a PDF into a JPG image and download them together as a ZIP file. The conversion runs in your browser, so your PDF is never uploaded.</p>
+  </section>
+
+  <section class="app-card">
+    <input type="file" id="pdf-upload" accept="application/pdf,.pdf" class="hidden" />
+    <div id="drop-zone" class="drop-zone" role="button" tabindex="0" aria-label="Choose a PDF file">
+      <p class="text-white font-semibold text-lg">Drop a PDF here or click to choose one</p>
+      <p id="file-name" class="text-sm mt-2" style="color: var(--t3);">No file chosen</p>
+    </div>
+
+    <div class="opt-row">
+      <label>Image quality
+        <select id="quality" class="select-input">
+          <option value="0.95">High (larger files)</option>
+          <option value="0.85" selected>Balanced</option>
+          <option value="0.7">Small files</option>
+        </select>
+      </label>
+      <label>Image size
+        <select id="scale" class="select-input">
+          <option value="1">Standard (about 72 DPI)</option>
+          <option value="2" selected>Sharp (about 144 DPI)</option>
+          <option value="3">Print (about 216 DPI)</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="controls-row mt-6">
+      <button id="convert-btn" class="btn btn-action flex-grow">Convert and download ZIP</button>
+    </div>
+    <div class="progress" aria-hidden="true"><div id="progress-bar"></div></div>
+    <p id="status" role="status" aria-live="polite"></p>
+  </section>
+
+  <article class="article-sec">
+    <h2>How to convert a PDF to JPG images</h2>
+    <ol class="list-decimal pl-6 space-y-2">
+      <li>Drop your PDF into the box above, or click it to choose a file.</li>
+      <li>Pick an image quality and size. "Sharp" suits screens; "Print" gives larger images for printing.</li>
+      <li>Click <strong>Convert and download ZIP</strong>. Each page becomes one JPG, named in page order (page-01.jpg, page-02.jpg and so on).</li>
+    </ol>
+
+    <h3>Is my PDF uploaded anywhere?</h3>
+    <p>No. The PDF is read and rendered by your browser using the open-source PDF.js library, and the images are zipped on your device. Nothing is sent to a server, so confidential documents stay private.</p>
+
+    <h3>Why does a page look blurry or the ZIP feel large?</h3>
+    <p>Image size controls sharpness: a higher setting renders more pixels per page. Quality controls JPG compression. For documents full of small text, use "Sharp" or "Print" with "Balanced" quality. Very large pages at "Print" size can exceed what the browser can draw; the tool will tell you if that happens.</p>
+
+    <h3>Can it open password-protected PDFs?</h3>
+    <p>Not yet. Remove the password in your PDF reader first, then convert the unlocked copy.</p>
+  </article>
+<section class="related-tools" aria-labelledby="related-tools-title"><div class="section-head"><h2 class="block-title" id="related-tools-title"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Related tools</h2><a class="link-arrow" href="/tools/#files">More images and files <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div><ul class="ui-grid ui-grid-3"><li class="reveal" style="--d:0.00s" data-search="webp converter convert images between webp, png and jpg and resize them, without uploading. images and files"><a class="card" href="/tools/webp-converter/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></svg></span><h3>WebP Converter</h3><p>Convert images between WebP, PNG and JPG and resize them, without uploading.</p><div class="card-foot"><span>Images and files</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li><li class="reveal" style="--d:0.06s" data-search="base64 encoder and decoder encode text or files to base64, decode it back, or turn images into data uris for css. developer tools"><a class="card" href="/tools/base64-encoder/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="14" width="4" height="6" rx="2"/><rect x="6" y="4" width="4" height="6" rx="2"/><path d="M6 20h4"/><path d="M14 10h4"/><path d="M6 14h2v6"/><path d="M14 4h2v6"/></svg></span><h3>Base64 Encoder and Decoder</h3><p>Encode text or files to Base64, decode it back, or turn images into data URIs for CSS.</p><div class="card-foot"><span>Developer tools</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li><li class="reveal" style="--d:0.12s" data-search="word and character counter count words, characters, sentences and reading time as you type. text tools"><a class="card" href="/tools/word-counter/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 6.1H3"/><path d="M21 12.1H3"/><path d="M15.1 18H3"/></svg></span><h3>Word and Character Counter</h3><p>Count words, characters, sentences and reading time as you type.</p><div class="card-foot"><span>Text tools</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li></ul></section>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot-inner">
+    <div class="foot-brand">
+      <a class="ui-logo" href="/"><span class="ui-logo-mark"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span><span class="ui-logo-text">Web Online Tools</span></a>
+      <p>Free tools that run in your browser, plus sourced news on AI models, companies and policy.</p>
+      <ul class="foot-points">
+        <li><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg> Your files and text never leave your device</li>
+        <li><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg> Free, no sign-up</li>
+      </ul>
+    </div>
+    <nav class="foot-col" aria-label="Popular tools"><h2>Popular tools</h2><ul><li><a href="/tools/json-formatter/">JSON Formatter and Validator</a></li><li><a href="/tools/base64-encoder/">Base64 Encoder and Decoder</a></li><li><a href="/tools/password-rule-generator/">Password Policy Regex Generator</a></li><li><a href="/tools/css-gradient-generator/">CSS Gradient Generator</a></li><li><a href="/tools/css-box-shadow/">CSS Box Shadow Generator</a></li><li><a href="/tools/color-palette-generator/">Color Palette Generator</a></li><li><a href="/tools/word-counter/">Word and Character Counter</a></li><li><a href="/tools/">All 17 tools</a></li></ul></nav>
+    <nav class="foot-col" aria-label="Tool categories"><h2>Categories</h2><ul><li><a href="/tools/#developer">Developer tools</a></li><li><a href="/tools/#design">CSS and design</a></li><li><a href="/tools/#text">Text tools</a></li><li><a href="/tools/#files">Images and files</a></li><li><a href="/tools/#calculators">Calculators</a></li></ul></nav>
+    <nav class="foot-col" aria-label="AI news"><h2>AI news</h2><ul><li><a href="/ai-news/">Latest stories</a></li><li><a href="/ai-news/openai/">OpenAI</a></li><li><a href="/ai-news/google/">Google</a></li><li><a href="/ai-news/anthropic/">Anthropic</a></li><li><a href="/ai-news/microsoft/">Microsoft</a></li><li><a href="/ai-news/nvidia/">Nvidia</a></li><li><a href="/ai-news/meta/">Meta</a></li><li><a href="/ai-news/apple/">Apple</a></li><li><a href="/ai-news/policy/">Policy and regulation</a></li></ul></nav>
+  </div>
+  <div class="foot-bottom">
+    <p>© <span id="year">2026</span> Web Online Tools</p>
+    <p class="foot-links"><a href="/ai-news/editorial-policy.html">Editorial policy</a><a href="/#about">About</a></p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Done</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
+
+  const input = document.getElementById("pdf-upload");
+  const zone = document.getElementById("drop-zone");
+  const btn = document.getElementById("convert-btn");
+  const statusEl = document.getElementById("status");
+  const bar = document.getElementById("progress-bar");
+  let chosen = null;
+
+  function setStatus(text, kind) {
+    statusEl.textContent = text;
+    statusEl.style.color = kind === "error" ? "#fca5a5" : kind === "ok" ? "#6ee7b7" : "var(--t2)";
+  }
+
+  function choose(file) {
+    if (!file) return;
+    if (file.type !== "application/pdf" && !/\.pdf$/i.test(file.name)) {
+      setStatus("That file is not a PDF. Choose a file ending in .pdf.", "error");
+      return;
+    }
+    chosen = file;
+    document.getElementById("file-name").textContent = `${file.name} (${(file.size / 1048576).toFixed(1)} MB)`;
+    setStatus("");
+  }
+
+  zone.addEventListener("click", () => input.click());
+  zone.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); input.click(); } });
+  zone.addEventListener("dragover", e => { e.preventDefault(); zone.classList.add("active"); });
+  zone.addEventListener("dragleave", () => zone.classList.remove("active"));
+  zone.addEventListener("drop", e => { e.preventDefault(); zone.classList.remove("active"); choose(e.dataTransfer.files[0]); });
+  input.addEventListener("change", () => { choose(input.files[0]); input.value = ""; });
+
+  const canvasToBlob = (canvas, quality) => new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", quality));
+
+  btn.addEventListener("click", async () => {
+    if (!chosen) { setStatus("Choose a PDF file first.", "error"); return; }
+    const quality = Number(document.getElementById("quality").value);
+    const scale = Number(document.getElementById("scale").value);
+    btn.disabled = true;
+    bar.style.width = "0";
+    try {
+      setStatus("Reading the PDF...");
+      const pdf = await pdfjsLib.getDocument({ data: await chosen.arrayBuffer() }).promise;
+      const total = pdf.numPages;
+      const digits = String(total).length < 2 ? 2 : String(total).length;
+      const zip = new JSZip();
+      for (let n = 1; n <= total; n++) {
+        setStatus(`Converting page ${n} of ${total}...`);
+        const page = await pdf.getPage(n);
+        const viewport = page.getViewport({ scale });
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.floor(viewport.width);
+        canvas.height = Math.floor(viewport.height);
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#ffffff"; // JPG has no transparency, so pages get a white background
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        await page.render({ canvasContext: ctx, viewport }).promise;
+        const blob = await canvasToBlob(canvas, quality);
+        if (!blob) throw new Error(`Page ${n} is too large to draw at this size. Choose a smaller image size.`);
+        zip.file(`page-${String(n).padStart(digits, "0")}.jpg`, blob);
+        canvas.width = canvas.height = 0; // free the memory before the next page
+        page.cleanup();
+        bar.style.width = `${Math.round((n / total) * 100)}%`;
+      }
+      setStatus("Creating the ZIP file...");
+      const content = await zip.generateAsync({ type: "blob" });
+      const url = URL.createObjectURL(content);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${chosen.name.replace(/\.pdf$/i, "")}-images.zip`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+      setStatus(`Done. ${total} page${total === 1 ? "" : "s"} converted to JPG.`, "ok");
+    } catch (err) {
+      console.error(err);
+      const msg = err && err.name === "PasswordException"
+        ? "This PDF is password-protected. Remove the password in your PDF reader, then try again."
+        : err && err.name === "InvalidPDFException"
+        ? "This file could not be read as a PDF. It may be damaged."
+        : (err && err.message) || "Something went wrong while converting.";
+      setStatus(msg, "error");
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+<script>
+(function () {
+  var btn = document.querySelector(".menu-btn"), nav = document.getElementById("main-nav");
+  if (btn && nav) btn.addEventListener("click", function () {
+    var open = nav.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+  var y = document.getElementById("year"); if (y) y.textContent = new Date().getFullYear();
+  var items = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    items.forEach(function (el) { el.classList.add("in"); }); return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>

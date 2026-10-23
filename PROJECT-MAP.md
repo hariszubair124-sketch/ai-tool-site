@@ -70,6 +70,10 @@ scripts/write-post.py       daily Gemini writer with source, freshness and dupli
 
 ## Root site (everything outside /ai-news/)
 
+`public-html/` is an untouched backup of the Hostinger `public_html` files that sat next to `ai-news/`
+(homepage, tools, sitemap, favicon), saved before the domain expired. See `public-html/README.md`.
+`root-site/dist/` is the redesigned, ready-to-upload version, built from `root-site/src/`.
+
 The homepage, `/tools/` and the tool pages are hosted directly on Hostinger, not deployed from this repo.
 Their source lives in `root-site/` (blocked from public access) so changes are made here and uploaded.
 

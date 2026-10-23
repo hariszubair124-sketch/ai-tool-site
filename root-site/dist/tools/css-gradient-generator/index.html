@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>document.documentElement.classList.add("js")</script>
+<title>CSS Gradient Generator with Tailwind Code | Web Online Tools</title>
+<meta name="description" content="Build linear and radial CSS gradients with up to 6 colors and a live preview. Copy the CSS or a Tailwind class for your project.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://webonlinetools.com/tools/css-gradient-generator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Web Online Tools">
+<meta property="og:title" content="CSS Gradient Generator with Tailwind Code">
+<meta property="og:description" content="Build linear and radial CSS gradients with up to 6 colors and a live preview. Copy the CSS or a Tailwind class for your project.">
+<meta property="og:url" content="https://webonlinetools.com/tools/css-gradient-generator/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#060b18">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/ui.css?v=605b0e79">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "CSS Gradient Generator",
+   "url": "https://webonlinetools.com/tools/css-gradient-generator/",
+   "description": "Build linear and radial CSS gradients with up to 6 colors and a live preview. Copy the CSS or a Tailwind class for your project.",
+   "applicationCategory": "DesignApplication",
+   "operatingSystem": "Any (runs in a web browser)",
+   "browserRequirements": "Requires JavaScript",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Web Online Tools",
+    "url": "https://webonlinetools.com/"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://webonlinetools.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Tools",
+     "item": "https://webonlinetools.com/tools/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "CSS Gradient Generator",
+     "item": "https://webonlinetools.com/tools/css-gradient-generator/"
+    }
+   ]
+  }
+ ]
+}
+</script>
+  <meta name="color-scheme" content="dark" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ════ DESIGN TOKENS ════ */
+    :root {
+      --surface:      #060b18;
+      --card:         #0d1225;
+      --border:       rgba(255,255,255,0.07);
+      --border-act:   rgba(99,179,237,0.4);
+      --grad-main:    linear-gradient(135deg, #2563eb 0%, #06b6d4 55%, #10b981 100%);
+      --grad-text:    linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #34d399 100%);
+      --grad-card:    linear-gradient(145deg, rgba(37,99,235,0.04) 0%, rgba(16,185,129,0.02) 100%);
+      --t1: #f8fafc;
+      --t2: #94a3b8;
+      --t3: #475569;
+      --font-display: 'Inter', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+    body {
+      font-family: var(--font-body); background: var(--surface); color: var(--t2);
+      line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 15%, rgba(37,99,235,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 75%, rgba(16,185,129,0.05) 0%, transparent 55%);
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
+    /* ══ HEADER ══ */
+    .site-header {
+      position: sticky; top: 0; z-index: 200; background: rgba(6,11,24,0.85);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .logo-mark {
+      width: 38px; height: 38px; background: var(--grad-main); border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--t1); letter-spacing: -0.03em; }
+    .logo-text em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    /* ══ TOOL UI ══ */
+    .hero-sec { padding: 4rem 0 2rem; text-align: center; }
+    .hero-sec h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--t1); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+    .app-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      margin-bottom: 4rem;
+    }
+    .app-card::after { content: ''; position: absolute; inset: 0; background: var(--grad-card); pointer-events: none; }
+    .panel-title { font-family: var(--font-body); font-weight: 700; color: var(--t1); border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1.5rem; font-size: 1.1rem; position: relative; z-index: 2; }
+    /* Inputs */
+    .input-label { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; color: var(--t2); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; position: relative; z-index: 2;}
+    .input-label span.val { color: var(--t1); font-family: var(--font-mono); font-weight: 500; }
+    /* Toggle Control */
+    .toggle-control { display: flex; border: 1px solid var(--border); border-radius: 12px; background-color: rgba(0,0,0,0.3); padding: 4px; position: relative; z-index: 2; }
+    .toggle-control button {
+      flex: 1; padding: 0.75rem; border: none; background: transparent; cursor: pointer;
+      font-weight: 600; color: var(--t2); border-radius: 8px; transition: all 0.2s; font-family: var(--font-body);
+    }
+    .toggle-control button.active { background: var(--grad-main); color: #fff; box-shadow: 0 4px 15px rgba(37,99,235,0.3); }
+    /* Custom Range Slider */
+    input[type="range"] { -webkit-appearance: none; width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; outline: none; margin-top: 0.5rem; position: relative; z-index: 2; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: #60a5fa; cursor: pointer; border-radius: 50%; box-shadow: 0 0 10px rgba(96,165,250,0.5); transition: transform .1s; }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    /* Color Swatches */
+    .color-swatch-wrap {
+      width: 48px; height: 48px; border-radius: 10px; overflow: hidden; flex-shrink: 0;
+      border: 2px solid var(--border); transition: border-color .2s; position: relative;
+    }
+    .color-swatch-wrap:focus-within { border-color: var(--border-act); }
+    .color-picker { width: 200%; height: 200%; transform: translate(-25%, -25%); cursor: pointer; border: none; padding: 0; }
+    /* Buttons */
+    .btn-action { background: var(--grad-main); color: #fff; border: none; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: 12px; transition: transform .2s, box-shadow .2s; cursor: pointer; position: relative; z-index: 2; width: 100%; }
+    .btn-action:hover { box-shadow: 0 0 20px rgba(37,99,235,0.4); }
+    .btn-action:active { transform: scale(0.98); }
+    .btn-ghost { background: rgba(255,255,255,0.04); color: var(--t2); border: 1px solid var(--border); font-family: var(--font-body); font-weight: 600; font-size: 0.9rem; padding: 0.8rem 1rem; border-radius: 10px; cursor: pointer; transition: all .2s; width: 100%; position: relative; z-index: 2;}
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); color: var(--t1); border-color: rgba(255,255,255,0.15); }
+    /* Preview & Code */
+    .gradient-preview {
+      width: 100%; min-height: 400px; border-radius: 16px; border: 1px solid var(--border);
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.4);
+      transition: background 0.1s ease; position: relative; z-index: 2; margin-bottom: 2rem;
+    }
+    .code-area {
+      width: 100%; min-height: 100px; padding: 1.25rem; font-family: var(--font-mono); font-size: 0.85rem;
+      background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 14px;
+      color: #a5b4fc; outline: none; resize: vertical; position: relative; z-index: 2; white-space: pre; line-height: 1.6;
+    }
+    .btn-copy {
+      position: absolute; top: 1rem; right: 1rem; background: rgba(37,99,235,0.15); color: #60a5fa;
+      border: 1px solid rgba(37,99,235,0.3); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.8rem;
+      font-weight: 700; cursor: pointer; transition: all .2s; z-index: 10;
+    }
+    .btn-copy:hover { background: var(--grad-main); color: #fff; border-color: transparent; }
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border);
+      color: var(--t1); padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000;
+      opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    /* ARTICLE */
+    .article-sec { max-width: 800px; margin: 0 auto 5rem; }
+    .article-sec h2 { font-family: var(--font-display); font-size: 1.8rem; color: var(--t1); margin-bottom: 1.2rem; }
+    .article-sec h3 { font-size: 1.2rem; color: var(--t1); margin: 2rem 0 1rem; font-weight: 700; }
+    .article-sec p { margin-bottom: 1rem; color: var(--t2); }
+    .article-sec ul { list-style: none; padding: 0; margin-bottom: 2rem; }
+    .article-sec li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; color: var(--t2); }
+    .article-sec li::before { content: '•'; position: absolute; left: 0; color: #3b82f6; font-weight: bold; font-size: 1.2rem; line-height: 1; top: 2px; }
+    .tag-link { display: inline-block; padding: 0.4rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 0.8rem; color: var(--t2); text-decoration: none; transition: all .2s; }
+    .tag-link:hover { color: #60a5fa; border-color: var(--border-act); background: rgba(37,99,235,0.05); }
+    .site-footer { border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-head" id="top">
+  <div class="site-head-inner">
+    <a class="ui-logo" href="/" aria-label="Web Online Tools home">
+      <span class="ui-logo-mark"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span><span class="ui-logo-text">Web Online Tools</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Main"><a href="/tools/" class="nav-link" aria-current="page"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Tools</span></a><a href="/ai-news/" class="nav-link"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg><span>AI news</span></a>
+      <a href="/tools/" class="nav-cta">Browse tools <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </nav>
+    <button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Open menu"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg></button>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="/tools/">Tools</a><span class="sep">/</span><span aria-current="page">CSS Gradient Generator</span></nav>
+  <section class="hero-sec">
+    <h1>CSS Gradient Generator</h1>
+    <p style="max-width: 650px; margin: 0 auto;">Pick up to six colors, choose linear or radial, set the angle and preview the result. Copy the CSS or a Tailwind class.</p>
+  </section>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+    
+    <!-- LEFT: Controls -->
+    <div class="app-card lg:col-span-1" style="margin-bottom: 0;">
+      
+      <div class="mb-8">
+        <h2 class="panel-title">1. Gradient Style</h2>
+        <div class="toggle-control mb-6">
+          <button id="linearBtn" class="active">Linear</button>
+          <button id="radialBtn">Radial</button>
+        </div>
+
+        <div class="input-group" id="angleControl">
+          <label class="input-label">Angle (Direction) <span class="val" id="angleValue">90°</span></label>
+          <input type="range" id="angleSlider" min="0" max="360" value="90" />
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <h2 class="panel-title">2. Color Stops</h2>
+        <div id="colorsList" class="flex flex-col gap-3 mb-4 relative z-10">
+          <!-- Dynamically populated -->
+        </div>
+        <button id="addColorBtn" class="btn-ghost">
+          + Add Color Stop
+        </button>
+      </div>
+
+      <div class="border-t border-white/10 pt-6 relative z-10">
+        <button id="randomizeButton" class="btn-action">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7m4-1 6 6m0-6-6 6"/></svg>
+          Surprise Me (Randomize)
+        </button>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Preview & Code Output -->
+    <div class="lg:col-span-2">
+      <div id="gradientPreview" class="gradient-preview"></div>
+      
+      <div class="relative">
+        <button id="copyButton" class="btn-copy">Copy CSS</button>
+        <textarea id="codeBox" readonly class="code-area"></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Article / SEO Content -->
+  <article class="article-sec mt-16">
+    <h2>The Ultimate CSS Gradient Maker</h2>
+    <p>This <strong>CSS gradient maker</strong> is a powerful tool for creating smooth transitions between colors. Instead of relying on heavy static images, our <strong>online gradient generator</strong> lets you create dynamic, beautiful, and fast-loading backgrounds directly with CSS code. This is essential for modern UI design and creating responsive website layouts.</p>
+
+    <h3>How to Make a CSS Gradient</h3>
+    <p>Our creator simplifies the syntax for the two main types of CSS gradients: <code class="text-blue-400">linear-gradient()</code> and <code class="text-blue-400">radial-gradient()</code>.</p>
+    <ul>
+      <li><strong>Linear Gradients:</strong> Colors transition along a straight line. By adjusting the Angle slider, you can easily create horizontal, vertical, or sharp diagonal blends.</li>
+      <li><strong>Radial Gradients:</strong> Colors emerge from a central point outwards in a circular or elliptical shape, perfect for creating subtle vignette lighting or spotlight effects.</li>
+    </ul>
+
+    <h3>Finding Gradient Palettes & Inspiration</h3>
+    <p>Stuck for ideas? Use the <strong>Surprise Me</strong> button as a discovery tool to uncover unique gradient color combinations. It automatically generates 2-3 stop gradients with random angles, serving as a great source of inspiration for your next SaaS dashboard, landing page hero, or mobile app UI.</p>
+
+    
+  </article>
+<section class="related-tools" aria-labelledby="related-tools-title"><div class="section-head"><h2 class="block-title" id="related-tools-title"><svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.71 2.29a1 1 0 0 1 1.42 0l4.58 4.58a1 1 0 0 1 0 1.42l-2.3 2.3a1 1 0 0 1-1.42 0l-4.58-4.58a1 1 0 0 1 0-1.42Z"/><path d="m14 7-9.54 9.54a2 2 0 0 0-.46.83L3 21l3.63-1a2 2 0 0 0 .83-.46L17 10"/></svg>Related tools</h2><a class="link-arrow" href="/tools/#design">More css and design <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div><ul class="ui-grid ui-grid-3"><li class="reveal" style="--d:0.00s" data-search="css box shadow generator adjust offset, blur, spread and color, then copy css or a tailwind class. css and design"><a class="card" href="/tools/css-box-shadow/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></span><h3>CSS Box Shadow Generator</h3><p>Adjust offset, blur, spread and color, then copy CSS or a Tailwind class.</p><div class="card-foot"><span>CSS and design</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li><li class="reveal" style="--d:0.06s" data-search="color palette generator generate 5-color palettes from real color schemes and check text contrast. css and design"><a class="card" href="/tools/color-palette-generator/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.65-.75 1.65-1.69 0-.44-.18-.84-.44-1.13-.29-.29-.44-.65-.44-1.13a1.64 1.64 0 0 1 1.67-1.67h2c3.05 0 5.56-2.5 5.56-5.55C21.97 6.01 17.46 2 12 2z"/></svg></span><h3>Color Palette Generator</h3><p>Generate 5-color palettes from real color schemes and check text contrast.</p><div class="card-foot"><span>CSS and design</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li><li class="reveal" style="--d:0.12s" data-search="css button hover effect generator design a button with gradient, shadow and hover animations, then copy the css and html. css and design"><a class="card" href="/tools/button-transition-generator/"><span class="tool-icon"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.1 12 6"/><path d="m5.1 8-2.9-.8"/><path d="m6 12-1.9 2"/><path d="M7.2 2.2 8 5.1"/><path d="M9.04 9.68a.5.5 0 0 1 .64-.64l11 4.5a.5.5 0 0 1-.06.94l-4.43 1.18a2 2 0 0 0-1.42 1.42l-1.18 4.43a.5.5 0 0 1-.94.06z"/></svg></span><h3>CSS Button Hover Effect Generator</h3><p>Design a button with gradient, shadow and hover animations, then copy the CSS and HTML.</p><div class="card-foot"><span>CSS and design</span><span class="card-go">Open <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div></a></li></ul></section>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot-inner">
+    <div class="foot-brand">
+      <a class="ui-logo" href="/"><span class="ui-logo-mark"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span><span class="ui-logo-text">Web Online Tools</span></a>
+      <p>Free tools that run in your browser, plus sourced news on AI models, companies and policy.</p>
+      <ul class="foot-points">
+        <li><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg> Your files and text never leave your device</li>
+        <li><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg> Free, no sign-up</li>
+      </ul>
+    </div>
+    <nav class="foot-col" aria-label="Popular tools"><h2>Popular tools</h2><ul><li><a href="/tools/json-formatter/">JSON Formatter and Validator</a></li><li><a href="/tools/base64-encoder/">Base64 Encoder and Decoder</a></li><li><a href="/tools/password-rule-generator/">Password Policy Regex Generator</a></li><li><a href="/tools/css-gradient-generator/">CSS Gradient Generator</a></li><li><a href="/tools/css-box-shadow/">CSS Box Shadow Generator</a></li><li><a href="/tools/color-palette-generator/">Color Palette Generator</a></li><li><a href="/tools/word-counter/">Word and Character Counter</a></li><li><a href="/tools/">All 17 tools</a></li></ul></nav>
+    <nav class="foot-col" aria-label="Tool categories"><h2>Categories</h2><ul><li><a href="/tools/#developer">Developer tools</a></li><li><a href="/tools/#design">CSS and design</a></li><li><a href="/tools/#text">Text tools</a></li><li><a href="/tools/#files">Images and files</a></li><li><a href="/tools/#calculators">Calculators</a></li></ul></nav>
+    <nav class="foot-col" aria-label="AI news"><h2>AI news</h2><ul><li><a href="/ai-news/">Latest stories</a></li><li><a href="/ai-news/openai/">OpenAI</a></li><li><a href="/ai-news/google/">Google</a></li><li><a href="/ai-news/anthropic/">Anthropic</a></li><li><a href="/ai-news/microsoft/">Microsoft</a></li><li><a href="/ai-news/nvidia/">Nvidia</a></li><li><a href="/ai-news/meta/">Meta</a></li><li><a href="/ai-news/apple/">Apple</a></li><li><a href="/ai-news/policy/">Policy and regulation</a></li></ul></nav>
+  </div>
+  <div class="foot-bottom">
+    <p>© <span id="year">2026</span> Web Online Tools</p>
+    <p class="foot-links"><a href="/ai-news/editorial-policy.html">Editorial policy</a><a href="/#about">About</a></p>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Code copied to clipboard!</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Helper function to show notifications
+  function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.remove("error");
+    if (isError) t.classList.add("error");
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const DOM = {
+      colorsList: document.getElementById("colorsList"),
+      addColorBtn: document.getElementById("addColorBtn"),
+      gradientPreview: document.getElementById("gradientPreview"),
+      codeBox: document.getElementById("codeBox"),
+      copyButton: document.getElementById("copyButton"),
+      angleSlider: document.getElementById("angleSlider"),
+      angleValue: document.getElementById("angleValue"),
+      angleControl: document.getElementById("angleControl"),
+      linearBtn: document.getElementById("linearBtn"),
+      radialBtn: document.getElementById("radialBtn"),
+      randomizeButton: document.getElementById("randomizeButton"),
+    };
+
+    let state = {
+      colors: [
+        { id: Date.now() + 1, value: "#6366F1" },
+        { id: Date.now() + 2, value: "#EC4899" },
+      ],
+      angle: 135,
+      type: "linear",
+    };
+
+    function generateGradientCSS() {
+      const colorStops = state.colors.map(c => c.value).join(", ");
+      if (state.type === "linear") {
+        return `linear-gradient(${state.angle}deg, ${colorStops})`;
+      } else {
+        return `radial-gradient(circle, ${colorStops})`;
+      }
+    }
+
+    function updatePreviewAndCode() {
+      const css = generateGradientCSS();
+      DOM.gradientPreview.style.background = css;
+      const tailwind = `bg-[${css.replace(/,\s*/g, ",")}]`;
+      DOM.codeBox.value =
+        `/* CSS */\nbackground-color: ${state.colors[0].value}; /* fallback */\nbackground-image: ${css};\n\n` +
+        `/* Tailwind CSS class */\n${tailwind}`;
+      DOM.angleValue.textContent = `${state.angle}°`;
+    }
+
+    function renderColorList() {
+      DOM.colorsList.innerHTML = state.colors.map((color) => `
+        <div class="flex items-center gap-3 relative z-10 color-input-wrapper" data-id="${color.id}">
+          <div class="color-swatch-wrap">
+            <input type="color" class="color-picker" value="${color.value}">
+          </div>
+          <input type="text" class="text-input hex-input font-mono uppercase" value="${color.value}" maxlength="7">
+          ${state.colors.length > 2 
+            ? `<button class="remove-color-btn text-red-400 hover:text-red-300 p-2 text-xl font-bold transition flex-shrink-0">&times;</button>` 
+            : `<div class="w-8 flex-shrink-0"></div>`
+          }
+        </div>
+      `).join("");
+    }
+
+    function fullRender() {
+      renderColorList();
+      updatePreviewAndCode();
+      DOM.angleControl.style.display = state.type === "linear" ? "block" : "none";
+      DOM.linearBtn.classList.toggle("active", state.type === "linear");
+      DOM.radialBtn.classList.toggle("active", state.type === "radial");
+    }
+
+    function handleColorChange(e) {
+      const wrapper = e.target.closest(".color-input-wrapper");
+      if (!wrapper) return;
+
+      const id = parseInt(wrapper.dataset.id);
+      const color = state.colors.find((c) => c.id === id);
+
+      if (e.target.matches(".color-picker") || e.target.matches(".hex-input")) {
+        let val = e.target.value.trim().toUpperCase();
+        if (!val.startsWith("#")) val = "#" + val;
+        // Wait for a complete code while typing, so half-typed values never reach the CSS.
+        if (!/^#([0-9A-F]{3}|[0-9A-F]{6})$/.test(val)) return;
+        if (val.length === 4) val = "#" + [...val.slice(1)].map(c => c + c).join("");
+
+        color.value = val;
+        if (e.target.matches(".color-picker")) {
+          wrapper.querySelector(".hex-input").value = val;
+        } else {
+          wrapper.querySelector(".color-picker").value = val.toLowerCase();
+        }
+        updatePreviewAndCode();
+      }
+
+      if (e.target.matches(".remove-color-btn")) {
+        state.colors = state.colors.filter((c) => c.id !== id);
+        fullRender(); 
+      }
+    }
+
+    function addColor() {
+      if (state.colors.length < 6) {
+        state.colors.push({ id: Date.now(), value: "#FFFFFF" });
+        fullRender();
+      } else {
+        showToast("Maximum of 6 colors allowed.", true);
+      }
+    }
+
+    function randomize() {
+      const numColors = Math.floor(Math.random() * 2) + 2; // 2 to 3 colors
+      state.colors = [];
+      for (let i = 0; i < numColors; i++) {
+        const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0").toUpperCase();
+        state.colors.push({ id: Date.now() + i, value: randomColor });
+      }
+      state.angle = Math.floor(Math.random() * 361);
+      state.type = Math.random() > 0.6 ? "radial" : "linear";
+      DOM.angleSlider.value = state.angle;
+      fullRender();
+    }
+
+    // --- Event Listeners ---
+    DOM.colorsList.addEventListener("input", handleColorChange);
+    DOM.colorsList.addEventListener("click", handleColorChange);
+    DOM.addColorBtn.addEventListener("click", addColor);
+
+    DOM.angleSlider.addEventListener("input", (e) => {
+      state.angle = Number(e.target.value);
+      updatePreviewAndCode();
+    });
+
+    DOM.linearBtn.addEventListener("click", () => {
+      state.type = "linear";
+      fullRender();
+    });
+
+    DOM.radialBtn.addEventListener("click", () => {
+      state.type = "radial";
+      fullRender();
+    });
+
+    // Modern Clipboard API
+    DOM.copyButton.addEventListener("click", async () => {
+      if (!DOM.codeBox.value) return;
+      try {
+        await navigator.clipboard.writeText(DOM.codeBox.value);
+        showToast("CSS copied to clipboard!");
+      } catch (err) {
+        DOM.codeBox.select();
+        document.execCommand("copy");
+        showToast("CSS copied to clipboard!");
+      }
+    });
+    
+    DOM.randomizeButton.addEventListener("click", randomize);
+
+    // Initial render
+    randomize(); 
+  });
+</script>
+<script>
+(function () {
+  var btn = document.querySelector(".menu-btn"), nav = document.getElementById("main-nav");
+  if (btn && nav) btn.addEventListener("click", function () {
+    var open = nav.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+  var y = document.getElementById("year"); if (y) y.textContent = new Date().getFullYear();
+  var items = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    items.forEach(function (el) { el.classList.add("in"); }); return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>

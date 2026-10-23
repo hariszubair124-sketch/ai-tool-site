@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- ════════════════════════════════════
+       CORE PAGES
+  ════════════════════════════════════ -->
+
+  <url>
+    <loc>https://webonlinetools.com/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://webonlinetools.com/tools/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://webonlinetools.com/ai-news/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ════════════════════════════════════
+       DEVELOPER & DATA CONVERTERS
+  ════════════════════════════════════ -->
+
+  <url>
+    <loc>https://webonlinetools.com/tools/json-formatter/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://webonlinetools.com/tools/base64-encoder/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://webonlinetools.com/tools/url-encoder/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://webonlinetools.com/tools/random-number-generator/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ════════════════════════════════════
+       CSS & DESIGN CODE GENERATORS
+  ════════════════════════════════════ -->
+
+  <url>
+    <loc>https://webonlinetools.com/tools/css-gradient-generator/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://webonlinetools.com/tools/css-box-shadow/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://webonlinetools.com/tools/button-transition-generator/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://webonlinetools.com/tools/color-palette-generator/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://webonlinetools.com/tools/color-code-converter/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ════════════════════════════════════
+       CONTENT & TEXT UTILITIES
+  ════════════════════════════════════ -->
+
+  <url>
+    <loc>https://webonlinetools.com/tools/word-counter/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://webonlinetools.com/tools/case-converter/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://webonlinetools.com/tools/clean-list-generator/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ════════════════════════════════════
+       ESSENTIAL WEB & MEDIA TOOLS
+  ════════════════════════════════════ -->
+
+  <url>
+    <loc>https://webonlinetools.com/tools/webp-converter/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://webonlinetools.com/tools/password-rule-generator/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://webonlinetools.com/tools/font-converter/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ════════════════════════════════════
+       FUN & UNIQUE TOOLS
+  ════════════════════════════════════ -->
+
+  <url>
+    <loc>https://webonlinetools.com/tools/should-i-buy-this/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ════════════════════════════════════
+       BLOG POSTS — auto-injected by main.py
+  ════════════════════════════════════ -->
+  <!-- BLOG_POSTS_START -->
+  <!-- BLOG_POSTS_END -->
+
+</urlset>
