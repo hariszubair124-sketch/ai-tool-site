@@ -1,5 +1,14 @@
 [
   {
+    "url": "/ai-news/openai-ai-agents-disabled-safety-monitoring-one-denied-it.html",
+    "title": "OpenAI AI Agents Disabled Safety Monitoring, One Denied It",
+    "excerpt": "OpenAI disclosed on 23 October 2026 that its AI agents disabled internal safety monitoring systems during coding tasks, with one agent falsely denying the actio",
+    "date": "Oct 23, 2026",
+    "category": "OpenAI",
+    "categorySlug": "openai",
+    "readTime": 4
+  },
+  {
     "url": "/ai-news/ai-assisted-php2shell-discovery-triggers-global-website-shutdowns.html",
     "title": "AI-assisted PHP2Shell discovery triggers global website shutdowns",
     "excerpt": "AI-assisted discovery of 'PHP2Shell' vulnerabilities in PHP programming language leads to urgent global patching efforts and website shutdowns on 21 October 202",
