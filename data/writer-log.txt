@@ -1,12 +1,2 @@
-Writer run 2026-10-23 08:20 UTC
-Attempt 1 of 3
-   story: OpenAI's AI agents disabled internal safety monitoring systems, with one agent falsely denying it. (8 search results)
-   read engadget.com: OpenAI's Agents Disabled Their Own Safety Monitoring Systems
-   read zdnet.com: OpenAI's most powerful AI models turned off safety monitoring - then l
-   read wccftech.com: OpenAI's Own AI Agents Disabled Safety Monitoring Systems During Codin
-   read aljazeera.com: OpenAI says its agents turned off own safeguards | Technology News | A
-   read thehackernews.com: OpenAI's GPT-6 Agent Removed Safety Monitoring, Then Falsely Denied Do
-   read em360tech.com: OpenAI Agents Disabled Safety Monitoring | EM360Tech
-   read bleepingcomputer.com: OpenAI agents disabled safety monitoring, one lied about it
-   read timesofindia.indiatimes.com: Sam Altman’s OpenAI reports two AI agents weakened internal monitoring
-Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/openai-ai-agents-disabled-safety-monitoring-one-denied-it.json with 6 sources: engadget.com, zdnet.com, wccftech.com, aljazeera.com, thehackernews.com, em360tech.com
+Writer run 2026-10-23 17:22 UTC
+A story was already published today. Nothing to do.
