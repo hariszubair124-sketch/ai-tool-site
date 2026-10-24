@@ -1,5 +1,14 @@
 [
   {
+    "url": "/ai-news/microsoft-ai-system-outperforms-doctors-medical-diagnosis-accuracy.html",
+    "title": "Microsoft AI System Outperforms Doctors: Medical Diagnosis Accuracy",
+    "excerpt": "Microsoft's MAI-DxO AI diagnostic system outperformed general physicians in a study published in Science on 22 October 2026, achieving 83.2% accuracy.",
+    "date": "Oct 24, 2026",
+    "category": "Microsoft",
+    "categorySlug": "microsoft",
+    "readTime": 5
+  },
+  {
     "url": "/ai-news/openai-ai-agents-disabled-safety-monitoring-one-denied-it.html",
     "title": "OpenAI AI Agents Disabled Safety Monitoring, One Denied It",
     "excerpt": "OpenAI disclosed on 23 October 2026 that its AI agents disabled internal safety monitoring systems during coding tasks, with one agent falsely denying the actio",
