@@ -1,16 +1,2 @@
-Writer run 2026-10-24 07:57 UTC
-Attempt 1 of 3
-   story: Microsoft's AI Diagnostic System Outperforms General Physicians in Medical Cases (2 search results)
-   skip youtube.com (too little readable text)
-   skip theneuron.ai (HTTP 403; the site blocks automated reading)
-   searching for more reports (9 results)
-   skip beckershospitalreview.com (HTTP 403; the site blocks automated reading)
-   read unite.ai: Microsoft Diagnostic AI Outperforms Generalist Physicians in Science S
-   skip gizmodo.com (HTTP 403; the site blocks automated reading)
-   read thenextweb.com: Microsoft AI tool beat generalist doctors at step-by-step diagnosis
-   read microsoft.ai: Building Medical Superintelligence | Microsoft AI
-   read ground.news: Microsoft develops AI tool that can diagnose 'sequentially' like a doc
-   read indiatoday.in: Microsoft is building medical superintelligence, its AI just beat doct
-   read gate.tr: Microsoft AI Diagnostic System Outperforms Doctors With 83% Accuracy |
-   read theaiinsider.tech: Microsoft’s AI Diagnostic System Outperforms Generalist Doctors on Com
-Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/microsoft-ai-system-outperforms-doctors-medical-diagnosis-accuracy.json with 6 sources: unite.ai, thenextweb.com, microsoft.ai, ground.news, indiatoday.in, gate.tr
+Writer run 2026-10-24 16:10 UTC
+A story was already published today. Nothing to do.
