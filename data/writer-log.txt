@@ -1,2 +1,17 @@
-Writer run 2026-10-24 16:10 UTC
-A story was already published today. Nothing to do.
+Writer run 2026-10-25 08:12 UTC
+Attempt 1 of 3
+   story: Google Updates Privacy Policy to Link AI Features with Targeted Ads (1 search results)
+   read thehackernews.com: Google Says Gmail and Photos Data Shared With AI Search Could Be Used 
+   searching for more reports (12 results)
+   read renascence.io: Google privacy policy change could allow Gmail and Photos data in ad t
+   read dexerto.com: Google quietly changes privacy policy so your Gmail and Photos could b
+   read notebookcheck.net: Google's privacy policy now lets connected Gmail data shape ads - Note
+   read decrypt.co: Google Quietly Updates Privacy Policy to Let Gmail and Photos Data Fee
+   read androidauthority.com: Your Gmail and Photos could now fuel Google's personalized ads
+   read emergent.sh: Gmail and Photos Data in AI Search May Target Ads: Google
+   read 9to5google.com: Google will target ads based on Gmail, Photos data if Personal Intelli
+   read aiweekly.co: Google Ties Gmail, Photos Data to Ads via Personal Intelligence | AI W
+   read timesofindia.indiatimes.com: Google changes its privacy policy: Your Gmail, Photos data may now be 
+   read superpowerdaily.com: Google removes Gmail ad-targeting exclusion from privacy policy, Ars r
+   read shattered.io: Google Privacy Policy: Gmail Ads Opt-In, Oct. 16 [2026]
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/google-updates-privacy-ai-features-link-to-targeted-ads.json with 6 sources: thehackernews.com, renascence.io, dexerto.com, notebookcheck.net, decrypt.co, androidauthority.com

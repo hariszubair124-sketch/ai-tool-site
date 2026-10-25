@@ -1,0 +1,56 @@
+{
+  "slug": "google-updates-privacy-ai-features-link-to-targeted-ads",
+  "title": "Google Updates Privacy: AI Features Link to Targeted Ads",
+  "description": "On October 16, 2026, Google updated its privacy policy, linking personalized AI features to targeted ads using Gmail and Photos data.",
+  "keyword": "google ai ads privacy policy",
+  "published": "2026-10-25T08:11:14+00:00",
+  "updated": "",
+  "facts": {
+    "Who": "Google",
+    "What": "Updated its privacy policy to allow personal data from Gmail, Google Drive, and Google Photos to be used for targeted ads when users opt-in to personalized AI features like Personal Intelligence in Search and Gemini, creating an exception to a prior commitment.",
+    "When": "7 October 2026",
+    "Status": "The policy is effective, and Google has begun testing ads in AI Mode for users who connected apps via Personal Intelligence. The feature is rolling out as a beta to eligible users over 18 globally, excluding the European Economic Area, Switzerland, the U.K., and Nigeria. Users can opt out."
+  },
+  "company": "Google",
+  "sources": [
+    {
+      "title": "Google Says Gmail and Photos Data Shared With AI Search Could Be Used for Targeted Ads",
+      "publisher": "thehackernews.com",
+      "date": "",
+      "url": "https://thehackernews.com/2026/10/google-says-gmail-and-photos-data.html"
+    },
+    {
+      "title": "Google privacy policy change could allow Gmail and Photos data in ad targeting — Renascence",
+      "publisher": "renascence.io",
+      "date": "2026-10-24",
+      "url": "https://www.renascence.io/news/131749/google-privacy-policy-change-could-allow-gmail-and-photos-data-in-ad-targeting"
+    },
+    {
+      "title": "Google quietly changes privacy policy so your Gmail and Photos could be used in targeted ads - Dexerto",
+      "publisher": "dexerto.com",
+      "date": "2026-10-23",
+      "url": "https://www.dexerto.com/entertainment/google-quietly-changes-privacy-policy-so-your-gmail-and-photos-could-be-used-in-targeted-ads-3421462/"
+    },
+    {
+      "title": "Google's privacy policy now lets connected Gmail data shape ads - Notebookcheck News",
+      "publisher": "notebookcheck.net",
+      "date": "2026-10-24",
+      "url": "https://www.notebookcheck.net/Google-s-privacy-policy-now-lets-connected-Gmail-data-shape-ads.1432929.0.html"
+    },
+    {
+      "title": "Google Quietly Updates Privacy Policy to Let Gmail and Photos Data Feed Ads - Decrypt",
+      "publisher": "decrypt.co",
+      "date": "2026-10-24",
+      "url": "https://decrypt.co/381775/google-quietly-updates-privacy-policy-gmail-photos-ads"
+    },
+    {
+      "title": "Your Gmail and Photos could now fuel Google's personalized ads",
+      "publisher": "androidauthority.com",
+      "date": "2026-10-23",
+      "url": "https://www.androidauthority.com/google-personal-intelligence-privacy-3727111/"
+    }
+  ],
+  "related": [],
+  "status": "verified",
+  "body": "<p>Google has revised its privacy policy, effective October 16, 2026, to clarify that data from services such as Gmail, Google Drive, and Google Photos could be used for targeted advertising when users opt into personalized artificial intelligence (AI) features [1][3][4][5]. This change introduces a conditional exception to the company's previous commitment regarding the use of personal content for ads [2][3][4][5].</p>\n<h2>What did Google announce?</h2>\n<p>The technology giant updated its privacy policy to explicitly state that using personalized AI features in Search or Gemini could enable the company to serve targeted ads to users based on their activity on other connected Google services [1][3]. While the company maintains that it does not show personalized ads based on content from Drive, Gmail, or Google Photos by default, this position changes if users choose to make data from these services available to other Google services that support personalized ads [1][3][4][5][6]. News of this policy update was first reported by Android Authority [1][2][3][5][6].</p>\n<p>The revised policy now includes an important exception to a long-standing promise that Google would not use content from these services for personalized advertising [2][3][5]. Under the updated wording, this assurance is no longer absolute but conditional [2][5]. For instance, Search may process some of the data that a user allows it to access to personalize content, including ads [1][4]. The reporting available so far focuses on the policy wording and does not specify a start date for any ad changes, the ad formats involved, or how many users the exception might affect [2].</p>\n<h2>How does this work with AI features?</h2>\n<p>The policy change is connected to Google's Personal Intelligence features, which were unveiled in Gemini in January 2026 [1][3][5]. This functionality allows users to connect services like Gmail, Google Photos, and YouTube to provide tailored answers in combination with their chat history preferences [1][6]. For example, someone could give Google access to their Gmail inbox to help organize travel plans or find restaurant recommendations near a hotel reservation [3][6]. The feature is currently rolling out as a beta to eligible users over the age of 18 globally, with the exception of the European Economic Area, Switzerland, the U.K., and Nigeria [1][4].</p>\n<p>The updated policy clarifies that if users interact with AI Mode or Gemini while Personal Intelligence is enabled, the data informing those answers—such as content from Gmail or Photos—could be used as a signal to serve targeted ads [1][6]. Google notes that this information \"may be used to show you ads, so they are even more helpful for you\" [4]. The company has already begun testing ads in AI Mode for users who have connected their apps through Personal Intelligence [4].</p>\n<p>Google stresses that advertisers do not get direct access to private emails, photos, or personally identifying information without permission [3][4][5][6]. The company also maintains that it will not share personally identifying details without permission [5][6]. Furthermore, sensitive categories such as health, religion, or sexual orientation remain excluded from ad personalization [4]. This means the company is not automatically scanning everyone's private emails and photos wholesale to sell ads, but rather that the exception applies to information users choose to share with eligible services [3][5][6].</p>\n<h2>Why does this policy update matter?</h2>\n<p>This policy update sits at the intersection of AI personalization and data governance [2]. Useful AI assistants depend on access to context such as emails, documents, and photos, which is what makes the experience feel tailored [2]. However, this same access raises questions about the extent of data-use promises when a company adds new capabilities on top of existing products [2].</p>\n<p>For users, the change to a data-use promise is often perceived as an experience event rather than a mere legal footnote [2]. Behavioral research indicates that people tend to focus on headline assurances and rarely revisit the fine print, meaning that exceptions often operate quietly [2]. This potential gap between what individuals believe they have agreed to and what the policy now permits is where trust can be lost [2]. Users should be mindful of the privacy trade-off involved when connecting their apps to enable AI features [1][6]. Opting into these AI conveniences may mean trading some ad privacy for them [5].</p>\n<p>Beyond advertising, connecting apps also allows the company to use summaries, excerpts, and inferences from those sources to train generative AI models [4]. A subset of this data may also go to human reviewers, including trained service providers [4]. For a short or particularly relevant email, the summary provided for AI training could simply be the email itself [4].</p>\n<h2>What can users do?</h2>\n<p>Users concerned about this privacy change have options to manage their data [3][6]. They can choose to disconnect specific apps from Personal Intelligence or disable Personalized Recommendations entirely [1][3][5][6]. These settings can be found in the Search Services Personalization section of their Google Account [1][4][6]. To disconnect apps, users can navigate to their Google Account, select \"Data &amp; privacy,\" then \"Personalization settings,\" and finally \"Manage Personalized Recommendations in Search Services\" [6]. Under \"Connected Content apps\" within \"Additional Personal Intelligence,\" users can disconnect Google Workspace and Google Photos [4][6]. Personalized ads are managed separately in My Ad Center [4].</p>\n<p>It is important to note that disconnecting an app does not necessarily delete information that Google has previously saved in Search Services History [3][4][5][6]. This data may remain even after the app is disconnected or the original email or photo is deleted [4][6]. Such data can still be used for training until a user manually deletes it at activity.google.com [4]. For those with sensitive material, Google's help page advises against connecting content apps if they contain personal or confidential information that users wouldn't want used for training generative AI models [4]. Operators are encouraged to explain the trade-off upfront and make access to personal content a visible, opt-in decision presented in plain language to maintain user trust [2].</p>"
+}
