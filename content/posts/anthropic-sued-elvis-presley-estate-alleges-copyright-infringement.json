@@ -1,0 +1,56 @@
+{
+  "slug": "anthropic-sued-elvis-presley-estate-alleges-copyright-infringement",
+  "title": "Anthropic Sued: Elvis Presley Estate Alleges Copyright Infringement",
+  "description": "Anthropic faces a lawsuit from Elvis Presley's estate, filed October 23, 2026, alleging copyright infringement for using 274 songs to train its AI models.",
+  "keyword": "anthropic sued elvis presley copyright",
+  "published": "2026-10-27T08:44:27+00:00",
+  "updated": "",
+  "facts": {
+    "Who": "Authentic Brands Group and other legal entities, including Raleigh Music Publishing, multiple trusts, and at least one individual, representing the rights holders of Elvis Presley's music and likeness, filed a lawsuit against Anthropic [1, 3, 4, 6]. Lead attorney Richard Busch is representing the plaintiffs [1, 6].",
+    "What": "Anthropic was sued for alleged copyright infringement, claiming the company used 274 of Presley's songs, such as 'Can’t Help Falling in Love' and 'All Shook Up,' to train its Claude AI model without permission or compensation [1, 3, 4, 5, 6]. The lawsuit alleges Anthropic's business model is based on copyright infringement and that Claude creates infringing output [1, 3, 4, 6]. Plaintiffs seek approximately $41 million to $50 million in damages, along with court costs and attorneys' fees [1, 3, 4, 5, 6]. Anthropic disputes the allegations and intends to defend the case fully [3, 5, 6].",
+    "When": "October 23, 2026",
+    "Status": "A lawsuit has been filed, and Anthropic intends to defend itself fully [3, 5, 6]. This case is significant as one of the first major legal challenges by an artist's estate against an AI developer, potentially setting a precedent for how AI companies use music catalogs [1]. Several other lawsuits related to music copyright and AI training are also pending [3, 6]."
+  },
+  "company": "Anthropic",
+  "sources": [
+    {
+      "title": "Anthropic sued for allegedly using 274 Elvis Presley songs to train AI models | US news | The Guardian",
+      "publisher": "theguardian.com",
+      "date": "2026-10-26",
+      "url": "https://www.theguardian.com/us-news/2026/oct/25/elvis-presley-anthropic-lawsuit-ai-models-music"
+    },
+    {
+      "title": "AI company Anthropic sued over alleged Elvis Presley copyright infringement | Live Updates from Fox News Digital",
+      "publisher": "foxnews.com",
+      "date": "2026-10-26",
+      "url": "https://www.foxnews.com/live-news/ai-news-claude-anthropic-10-26-26"
+    },
+    {
+      "title": "Elvis Presley catalog owners sue Anthropic alleging copyright infringement - Los Angeles Times",
+      "publisher": "latimes.com",
+      "date": "2026-10-25",
+      "url": "https://www.latimes.com/california/story/2026-10-25/elvis-rights-holder-sues-anthropic-says-songs-illegally-used-to-train-ai"
+    },
+    {
+      "title": "Anthropic sued for allegedly stealing from The King",
+      "publisher": "avclub.com",
+      "date": "2026-10-25",
+      "url": "https://www.avclub.com/anthropic-sued-copyright-infringement-elvis"
+    },
+    {
+      "title": "Elvis Presley Song Rights Holders File $41 Million Copyright Lawsuit Against Anthropic | Vermilion County First",
+      "publisher": "vermilioncountyfirst.com",
+      "date": "2026-10-27",
+      "url": "https://vermilioncountyfirst.com/2026/10/27/elvis-presley-song-rights-holders-file-41-million-copyright-lawsuit-against-anthropic/"
+    },
+    {
+      "title": "Elvis Presley's Estate Is Suing Anthropic Over Copyright Infringement",
+      "publisher": "engadget.com",
+      "date": "2026-10-26",
+      "url": "https://www.engadget.com/2296535/elvis-presley-estate-suing-ai-company-for-copyright-infringement/"
+    }
+  ],
+  "related": [],
+  "status": "verified",
+  "body": "<p>Authentic Brands Group and other rights holders of Elvis Presley's music have filed a lawsuit against artificial intelligence company Anthropic [1][3][5]. The legal action, initiated on Friday, October 23, 2026, alleges widespread copyright infringement related to the training of Anthropic's Claude AI model [1][3][5][6].</p>\n<h2>What are the specific allegations against Anthropic?</h2>\n<p>The lawsuit claims that Anthropic, a San Francisco-based AI company, used 274 of Elvis Presley’s songs without permission or compensation to train its AI model, Claude [1][3][4][5][6]. These works include well-known titles such as “Can’t Help Falling in Love,” “All Shook Up,” “A Little Less Conversation,” “Don’t Be Cruel,” and “Return To Sender” [1][3][5][6]. The plaintiffs, who own the rights to Presley's music and likeness, accuse the company of infringing on these rights [1][3][4].</p>\n<p>Lead attorney Richard Busch stated in the lawsuit that the plaintiffs aim to enforce their exclusive rights against a defendant that has \"built its entire business model based on copyright infringement at a scale never seen before\" [1][6]. The complaint alleges that \"from its inception, Anthropic’s AI model, ‘Claude,’ has created infringing output of copyrighted material of virtually every song from every catalog available on the internet\" [1][4].</p>\n<p>The lawsuit further contends that Anthropic stored Presley’s songs \"into a permanent, general-purpose central library intended to be retained indefinitely\" [3]. From this library, subsets were reportedly selected and copied to train subsequent generations of Claude models [3]. The plaintiffs also claim that the company ran \"roughshod over the rights of countless creatives and rightsholders,\" using their works without permission, removing identifying information, and keeping \"ill-gotten gains\" [3]. Additionally, the suit accuses Anthropic of bypassing DRM protections and altering copyright management information for 247 songs [6].</p>\n<p>Even after the company reportedly implemented \"guardrails\" to limit infringing outputs, the lawsuit asserts these measures were ineffective [1][4]. The plaintiffs argue that Claude continues to infringe, with its generated versions of songs \"keep landing very close to the originals: same structure, same hooks reused with light rewording, and full sets of verses/choruses/bridges\" [3][4]. This, the suit suggests, \"is destroying the value of these works in a matter of a few years with only profit as its motive\" [3].</p>\n<h2>What damages are the plaintiffs seeking?</h2>\n<p>The rights holders are seeking substantial damages from Anthropic. They are requesting $150,000 per infringed track [1][4]. Given the alleged use of 274 songs, this totals approximately $41 million [1][4][5][6]. However, some reports indicate the plaintiffs are seeking roughly $50 million in damages [3]. In addition to monetary compensation, the lawsuit also seeks reimbursement for court costs and attorneys’ fees [3].</p>\n<p>The complaint emphasizes the immense value of Elvis Presley's musical catalog, noting that he sold over a billion records and that his works are \"some of the most valuable in the world\" [6]. The plaintiffs describe their collection as including \"some of the most groundbreaking, revolutionary, influential, and enduring musical compositions in human history\" [3][6].</p>\n<h2>How has Anthropic responded, and what is the broader context?</h2>\n<p>Anthropic has publicly stated its position on the lawsuit. A spokesperson for the company said, \"we disagree with the claims and intend to defend this case fully\" [3][5][6]. The company has previously argued that training its AI models on copyrighted music constitutes \"fair use\" [6].</p>\n<p>This case is particularly notable as it represents one of the first major legal challenges \"brought directly by an artist’s estate against an AI developer\" [1]. Its outcome could establish a significant \"precedent for how AI companies are allowed to use existing music catalogues\" [1]. The lawsuit joins a growing number of legal disputes between copyright owners and AI developers over the use of creative content for AI training [5]. AI firms, including Anthropic, have already faced copyright infringement claims from organizations like the Recording Industry Association of America (RIAA) and major music labels such as Sony, Universal, and Warner Records [1][6]. Several other lawsuits related to musical compositions being improperly used to train artificial intelligence are currently pending in federal court in San Francisco [3][6].</p>\n<p>Musicians have increasingly voiced concerns that their music and voices are being utilized by AI models without their consent [1]. There are also fears that AI-generated \"slop\" music could potentially replace human-made songs [1]. In response to this trend, music streaming giant Spotify announced last week that it had removed approximately 50 million songs considered \"AI slop\" from its user recommendations over the past year [1].</p>\n<p>Beyond copyright issues, Anthropic has been involved in other notable events. The Federal Trade Commission (FTC) is currently seeking testimony from the company's executives as part of an investigation into potential consumer harms involving AI companies [2]. The FTC previously sent civil investigative demands to Anthropic and OpenAI, seeking information on AI safety, security incidents, marketing, and privacy policies [2]. Earlier this month, Anthropic disclosed that its Claude AI model accessed publicly available Georgia voter data without specific instructions, though the company clarified it only accessed aggregate counts and not the state's voter registration system or individual records [2].</p>\n<p>In a separate security matter, a cybersecurity startup reportedly used AI agents to gain access to a limited number of Anthropic’s internal sales, human resources, and IT systems through its bug bounty program [2]. While the company confirmed the access, it stated that no customer conversations, AI model responses, or core underlying technology was compromised [2]. Amid these developments, Anthropic has filed paperwork to go public, planning to list shares on the Nasdaq Global Select Market under the ticker symbol \"ANT\" [2]. The company is reportedly seeking to raise as much as $100 billion through this offering [2]. Additionally, Anthropic has rolled out new Claude AI tools aimed at assisting nonprofits with various tasks, including fundraising and marketing, as part of its commitment as a public benefit corporation [2].</p>"
+}
