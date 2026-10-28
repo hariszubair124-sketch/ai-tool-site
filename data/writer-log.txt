@@ -1,2 +1,38 @@
-Writer run 2026-10-27 18:11 UTC
-A story was already published today. Nothing to do.
+Writer run 2026-10-28 09:26 UTC
+Attempt 1 of 3
+   story: Oracle and OpenAI Partner to Integrate AI into Enterprise Computing (2 search results)
+   skip aiweekly.co (not about this story: AI News for October 27, 2026 — Daily Edition | AI Weekly)
+   skip oracle.com (HTTP 403; the site blocks automated reading)
+   searching for more reports (0 results)
+   rejected 'Oracle and OpenAI Partner to Integrate AI into Enterprise Computing': only 0 readable source page(s) about it
+Attempt 2 of 3
+   story: OpenAI reportedly plans to purchase AI chips from Google (2 search results)
+   read taipeitimes.com: OpenAI plans to buy Google's AI chips - Taipei Times
+   skip businesstoday.com.my (HTTP 403; the site blocks automated reading)
+   searching for more reports (15 results)
+   read superpowerdaily.com: OpenAI reportedly seeks to buy Google AI chips, moving beyond rentals 
+   read live.euronext.com: OpenAI plans to buy Google's AI chips, The Information reports | live
+   read wmbdradio.com: OpenAI plans to buy Google’s AI chips, The Information reports | 1470 
+   skip investing.com (HTTP 403; the site blocks automated reading)
+   read bdnews24.com: OpenAI plans to buy Google's AI chips, The Information reports
+   skip tradingview.com (too little readable text)
+   read thedailystar.net: OpenAI plans to buy AI chips from Google | The Daily Star
+   skip enterpriseai.economictimes.indiatimes.com (too little readable text)
+   read en.bloomingbit.io: OpenAI Weighs Buying Google AI Chips to Reduce Nvidia Dependence
+   read aiweekly.co: OpenAI Plans to Buy Google TPUs, Hires for Compiler Role | AI Weekly
+   read thenews.com.pk: OpenAI plans to buy Google AI chips to reduce Nvidia reliance: report
+   skip technetbooks.com (HTTP 403; the site blocks automated reading)
+   skip gurufocus.com (HTTP 403; the site blocks automated reading)
+   skip finance.biggo.com (HTTP 429; the site blocks automated reading)
+   skip business-standard.com (HTTP 403; the site blocks automated reading)
+   rejected 'OpenAI Reportedly Plans Google AI Chip Purchase: Deepening Ties': '4 5 6' makes up 5.8% of the text (keyword stuffing)
+Attempt 3 of 3
+   story: Anthropic Files for IPO, Disclosing Significant Losses and AI Model Security Breaches (7 search results)
+   read stocktitan.net: Anthropic IPO: Everything to Know About the Company Behind Claude
+   read kucoin.com: Anthropic's IPO Filing Reveals AI Security Breaches and Month-Long Tra
+   read tbsnews.net: Anthropic discloses month-long training pause, AI security breaches in
+   read thevccorner.com: Anthropic S-1: IPO Filing, ANT Ticker, Revenue and Losses
+   skip barchart.com (HTTP 202; the site blocks automated reading)
+   read foxnews.com: Anthropic IPO filing reveals AI security breaches, training halt | Liv
+   read techpowerup.com: Anthropic Files to Go Public on Nasdaq, Reveals $16.3 Billion in First
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/anthropic-files-for-ipo-discloses-losses-security-breaches.json with 4 sources: stocktitan.net, kucoin.com, tbsnews.net, thevccorner.com
