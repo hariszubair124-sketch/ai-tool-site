@@ -1,2 +1,7 @@
-Writer run 2026-10-28 18:27 UTC
-A story was already published today. Nothing to do.
+Writer run 2026-10-29 09:32 UTC
+Attempt 1 of 3
+   story: Google DeepMind unveils Genie 4, a real-time interactive world model that generates sound (2 search results)
+   read dailyaibrief.blog: AI Industry News Brief — October 28, 2026 – Daily AI Brief
+   read eyssen.ai: Latest AI news — October 27, 2026 | eYssen AI
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/google-deepmind-releases-genie-4-real-time-world-model-with-sound.json with 2 sources: dailyaibrief.blog, eyssen.ai
+Added new company to data/companies.json: Google DeepMind

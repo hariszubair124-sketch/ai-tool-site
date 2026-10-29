@@ -22,5 +22,6 @@
   {"name": "Biohub", "slug": "biohub", "match": ["biohub"], "about": "Biohub's AI products, research and business news"},
   {"name": "OpenAI, Anthropic", "slug": "openai-anthropic", "match": ["openai,\\ anthropic"], "about": "OpenAI, Anthropic's AI products, research and business news"},
   {"name": "SpaceX", "slug": "spacex", "match": ["spacex"], "about": "SpaceX's AI products, research and business news"},
+  {"name": "Google DeepMind", "slug": "google-deepmind", "match": ["google\\ deepmind"], "about": "Google DeepMind's AI products, research and business news"},
   {"name": "Policy and regulation", "slug": "policy", "kind": "topic", "match": ["white house", "government", "regulat\\w*", "congress", "federal", "eu ai act", "export controls?", "senate", "pentagon", "un global dialogue", "us house", "national ai", "policy framework", "lawsuit", "sues"], "about": "AI laws, government rules, export controls and court cases", "title": "AI Policy and Regulation News"}
 ]
