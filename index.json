@@ -1,5 +1,14 @@
 [
   {
+    "url": "/ai-news/anthropic-internal-systems-breached-ai-agents-access-business-data.html",
+    "title": "Anthropic Internal Systems Breached: AI Agents Access Business Data",
+    "excerpt": "AI agents from cybersecurity startup Cathedral breached Anthropic's internal business systems, accessing salary data and Slack messages on 7 October 2026.",
+    "date": "Oct 30, 2026",
+    "category": "Anthropic",
+    "categorySlug": "anthropic",
+    "readTime": 4
+  },
+  {
     "url": "/ai-news/google-deepmind-releases-genie-4-real-time-world-model-with-sound.html",
     "title": "Google DeepMind releases Genie 4: Real-time world model with sound",
     "excerpt": "Google DeepMind introduced Genie 4, a real-time interactive world model generating sound and simulating physics, on 27 October 2026.",

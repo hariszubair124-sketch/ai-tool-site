@@ -1,24 +1,27 @@
-Writer run 2026-10-30 09:44 UTC
+Writer run 2026-10-30 18:11 UTC
 Attempt 1 of 3
-   story: Google DeepMind Launches Gemini 4 Carbon AI Model for Cybersecurity (0 search results)
-   searching for more reports (0 results)
-   rejected 'Google DeepMind Launches Gemini 4 Carbon AI Model for Cybersecurity': only 0 readable source page(s) about it
+   story: Alphabet shares plunge by nearly $500 billion due to investor concerns over AI spending and slowing search growth (9 search results)
+   read gulfnews.com: Alphabet Shares Plunge Over 12% Amid Disappointing Results, AI Boom Co
+   read foxbusiness.com: Alphabet stock plunges as Google parent loses nearly $500 billion | Fo
+   skip cnn.com (too little readable text)
+   read thehindu.com: Google parent Alphabet’s shares plunge 12.6% as investors question ret
+   read dealroom.co: Alphabet loses ~$500B in market value as AI spending soars and Search 
+   read irishtimes.com: Alphabet shares tumble in $500bn rout – The Irish Times
+   read startupfortune.com: Alphabet shares suffer worst day ever as Wall Street doubts AI payoff 
+   skip forbes.com (HTTP 403; the site blocks automated reading)
+   read entrepreneur.com: Alphabet Just Lost $500 Billion in Its Worst Day Ever
+   rejected 'Alphabet Shares Plunge: AI Spending and Slowing Search Growth': '2 3' makes up 2.6% of the text (keyword stuffing)
 Attempt 2 of 3
-   story: Samsung Electronics Reports Record Q3 Profit Driven by Soaring AI Chip Demand (9 search results)
-   skip gurufocus.com (HTTP 403; the site blocks automated reading)
+   story: AI Agents Breach Anthropic's Internal Business Systems (1 search results)
+   skip youtube.com (too little readable text)
+   searching for more reports (9 results)
+   read the-decoder.com: AI agents hacked Anthropic, maker of arguably the most capable AI mode
+   skip esecurityplanet.com (HTTP 403; the site blocks automated reading)
+   read decrypt.co: AI Agents Found a Way Into Anthropic's Business Systems in Under 12 Ho
+   read pluang.com: Ex-DOGE staffers' startup hacked Anthropic's sy... | Pluang
    skip result (link did not open): washingtonpost.com
-   skip investing.com (HTTP 403; the site blocks automated reading)
-   read qazinform.com: Samsung's Q3 net profit surges sixfold on booming AI chip demand
-   read koreaherald.com: Samsung Electronics posts record profit in Q3 on AI chip supercycle - 
-   read siliconangle.com: Samsung confirms record-breaking operating profit on soaring AI memory
-   read ua.news: Samsung reported 107.44 trillion won in operating profit — CNBC | UA.N
-   read tradingview.com: News by CNBC TV18 on TradingView, 2026-10-29 — cnbctv:d7ffdd8a9094b:0
-   read globalbankingandfinance.com: Samsung Faces Worsening AI Chip Shortage, Investor Uncertainty
-   rejected 'Samsung Electronics Reports: Record Q3 Profit on AI Chip Demand': '1 2' makes up 4.2% of the text (keyword stuffing)
-Attempt 3 of 3
-   story: OpenAI and ServiceNow expand partnership to integrate AI models into enterprise workflows (2 search results)
-   skip theneuron.ai (HTTP 403; the site blocks automated reading)
-   skip openai.com (HTTP 403; the site blocks automated reading)
-   searching for more reports (0 results)
-   rejected 'OpenAI and ServiceNow expand partnership to integrate AI models into enterprise workflows': only 0 readable source page(s) about it
-No story passed the checks today. Nothing published.
+   skip gizmodo.com (HTTP 403; the site blocks automated reading)
+   read gpa.net: Global Payroll Alliance
+   skip foxnews.com (not about this story: Anthropic IPO filing reveals AI security breaches, training )
+   read thestar.com.my: Anthropic discloses month-long training pause, AI security breaches in
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/anthropic-internal-systems-breached-ai-agents-access-business-data.json with 5 sources: the-decoder.com, decrypt.co, pluang.com, gpa.net, thestar.com.my
