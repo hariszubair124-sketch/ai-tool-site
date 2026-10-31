@@ -1,5 +1,14 @@
 [
   {
+    "url": "/ai-news/openai-enhances-ai-monitoring-boosts-enterprise-privacy.html",
+    "title": "OpenAI Enhances AI Monitoring, Boosts Enterprise Privacy",
+    "excerpt": "OpenAI detailed an enhanced AI agent monitoring system and introduced new enterprise privacy protections on 29 September and 29 October 2026.",
+    "date": "Oct 31, 2026",
+    "category": "OpenAI",
+    "categorySlug": "openai",
+    "readTime": 6
+  },
+  {
     "url": "/ai-news/anthropic-internal-systems-breached-ai-agents-access-business-data.html",
     "title": "Anthropic Internal Systems Breached: AI Agents Access Business Data",
     "excerpt": "AI agents from cybersecurity startup Cathedral breached Anthropic's internal business systems, accessing salary data and Slack messages on 7 October 2026.",

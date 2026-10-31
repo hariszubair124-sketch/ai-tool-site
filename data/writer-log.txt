@@ -1,27 +1,12 @@
-Writer run 2026-10-30 18:11 UTC
+Writer run 2026-10-31 09:23 UTC
 Attempt 1 of 3
-   story: Alphabet shares plunge by nearly $500 billion due to investor concerns over AI spending and slowing search growth (9 search results)
-   read gulfnews.com: Alphabet Shares Plunge Over 12% Amid Disappointing Results, AI Boom Co
-   read foxbusiness.com: Alphabet stock plunges as Google parent loses nearly $500 billion | Fo
-   skip cnn.com (too little readable text)
-   read thehindu.com: Google parent Alphabet’s shares plunge 12.6% as investors question ret
-   read dealroom.co: Alphabet loses ~$500B in market value as AI spending soars and Search 
-   read irishtimes.com: Alphabet shares tumble in $500bn rout – The Irish Times
-   read startupfortune.com: Alphabet shares suffer worst day ever as Wall Street doubts AI payoff 
-   skip forbes.com (HTTP 403; the site blocks automated reading)
-   read entrepreneur.com: Alphabet Just Lost $500 Billion in Its Worst Day Ever
-   rejected 'Alphabet Shares Plunge: AI Spending and Slowing Search Growth': '2 3' makes up 2.6% of the text (keyword stuffing)
-Attempt 2 of 3
-   story: AI Agents Breach Anthropic's Internal Business Systems (1 search results)
-   skip youtube.com (too little readable text)
-   searching for more reports (9 results)
-   read the-decoder.com: AI agents hacked Anthropic, maker of arguably the most capable AI mode
-   skip esecurityplanet.com (HTTP 403; the site blocks automated reading)
-   read decrypt.co: AI Agents Found a Way Into Anthropic's Business Systems in Under 12 Ho
-   read pluang.com: Ex-DOGE staffers' startup hacked Anthropic's sy... | Pluang
-   skip result (link did not open): washingtonpost.com
-   skip gizmodo.com (HTTP 403; the site blocks automated reading)
-   read gpa.net: Global Payroll Alliance
-   skip foxnews.com (not about this story: Anthropic IPO filing reveals AI security breaches, training )
-   read thestar.com.my: Anthropic discloses month-long training pause, AI security breaches in
-Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/anthropic-internal-systems-breached-ai-agents-access-business-data.json with 5 sources: the-decoder.com, decrypt.co, pluang.com, gpa.net, thestar.com.my
+   story: OpenAI Introduces Enhanced Monitoring for AI Agent Misalignment and New Enterprise Privacy Protections (8 search results)
+   skip economictimes.indiatimes.com (too little readable text)
+   skip ndtvprofit.com (HTTP 403; the site blocks automated reading)
+   skip fourweekmba.com (HTTP 403; the site blocks automated reading)
+   read resultsense.com: How OpenAI monitors its frontier models for misalignment
+   skip gadgets360.com (HTTP 403; the site blocks automated reading)
+   read unite.ai: OpenAI Expands Monitoring to Detect Frontier Model Misalignment – Unit
+   skip venturebeat.com (HTTP 429; the site blocks automated reading)
+   read codexworkshop.com: OpenAI Private Intelligence: Private Safety Processing setup
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/openai-enhances-ai-monitoring-boosts-enterprise-privacy.json with 3 sources: resultsense.com, unite.ai, codexworkshop.com
