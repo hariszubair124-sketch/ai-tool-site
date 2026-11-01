@@ -1,0 +1,56 @@
+{
+  "slug": "ai-labs-agree-standardized-opt-out-for-publisher-content",
+  "title": "AI Labs Agree: Standardized Opt-Out for Publisher Content",
+  "description": "Four major AI labs, including Google and OpenAI, agreed on October 30, 2026, to honor a single robots.txt signal for content training opt-outs.",
+  "keyword": "ai content training opt-out standard",
+  "published": "2026-11-01T10:11:47+00:00",
+  "updated": "",
+  "facts": {
+    "Who": "Anthropic, Google, Microsoft, and OpenAI",
+    "What": "Agreed to honor a single robots.txt policy token (__usage_ai-training) for publishers to opt out of AI model training content use.",
+    "When": "7 October 2026",
+    "Status": "An individual IETF Internet-Draft, not a formal standard; implementation timelines vary by company."
+  },
+  "company": "",
+  "sources": [
+    {
+      "title": "Anthropic, Google, Microsoft, and OpenAI Agree to Let Sites Opt Out of AI Training - Thurrott.com",
+      "publisher": "thurrott.com",
+      "date": "2026-10-30",
+      "url": "https://www.thurrott.com/microsoft/343407/anthropic-google-microsoft-and-openai-agree-to-let-sites-opt-out-of-ai-training"
+    },
+    {
+      "title": "OpenAI, Google, Microsoft, Anthropic Back One AI Opt-Out Token | AI Weekly",
+      "publisher": "aiweekly.co",
+      "date": "2026-10-30",
+      "url": "https://aiweekly.co/alerts/openai-google-microsoft-anthropic-back-one-ai-opt-out-token"
+    },
+    {
+      "title": "AI Training Opt-Out: 4 Giants Back One Token [2026]",
+      "publisher": "shattered.io",
+      "date": "2026-11-01",
+      "url": "https://shattered.io/ai-training-opt-out-robots-txt-token-openai-google-microsoft-anthropic-2026/"
+    },
+    {
+      "title": "OpenAI, Google, Microsoft And Anthropic Back Shared AI Training Opt-Out For Publishers - The 420.in",
+      "publisher": "the420.in",
+      "date": "2026-11-01",
+      "url": "https://the420.in/policy-initiative/openai-google-microsoft-and-anthropic-back-shared-ai-training-opt-out-for-publishers/"
+    },
+    {
+      "title": "Google, Microsoft & OpenAI Plan To Honor Shared AI Training Opt-Out",
+      "publisher": "searchenginejournal.com",
+      "date": "2026-11-01",
+      "url": "https://www.searchenginejournal.com/google-microsoft-openai-shared-ai-training-opt-out/595387/"
+    },
+    {
+      "title": "Google, Microsoft, OpenAI and Anthropic back one AI training opt-out",
+      "publisher": "thenextweb.com",
+      "date": "2026-10-31",
+      "url": "https://thenextweb.com/news/ai-training-opt-out-robots-txt-google-openai-microsoft-anthropic"
+    }
+  ],
+  "related": [],
+  "status": "verified",
+  "body": "<p>Four major artificial intelligence laboratories, including Google and OpenAI, announced on October 30, 2026, their agreement to support a shared mechanism for website owners to opt out of AI model training. This initiative aims to simplify how publishers communicate their preferences regarding content usage for generative AI.</p>\n<h2>What did the companies announce?</h2>\n<p>Anthropic, Google, Microsoft, and OpenAI have committed to honoring a single robots.txt policy token, identified as <code>__usage_ai-training</code> [2][3]. This shared signal will allow website owners to express their preference to opt out of AI model training across all participating providers with a single instruction [2][4]. The move is intended to replace the growing need for publishers to maintain separate rules for each individual AI company's crawler [3][4][6]. Microsoft Principal Product Manager Krishna Madhavan emphasized the importance of this choice, stating, \"Publishers should not have to choose between being discoverable in Bing and deciding how generative models use their work\" [1][6]. OpenAI characterized the initiative as a \"voluntary effort\" [1][3]. The policy token's meaning is derived from a written definition of AI training developed by an Internet Engineering Task Force (IETF) working group [3][5]. This definition specifically describes AI training as using content to modify a generative AI model’s learned parameters, while exempting non-generative tasks such as classification or ranking [5]. This shared vocabulary provides a common understanding for the participating companies [3].</p>\n<h2>How does the opt-out system work?</h2>\n<p>The proposed mechanism integrates a common policy signal directly into a website’s robots.txt file, a familiar tool for webmasters [3][4]. To opt out an entire site from AI training, a publisher would add a specific user-agent group: <code>User-Agent: __usage_ai-training</code> followed by <code>Disallow: /</code> [2][4][5]. The system also allows for granular control, enabling publishers to carve out exceptions for specific sections or paths using <code>Allow:</code> lines [2][3][4][5]. This reuses existing robots.txt syntax, making the learning curve short for site owners [3]. It is important to note that this token controls AI training, not the act of crawling itself; bots may still fetch the page even if training is disallowed [2][4][5]. The draft specifies that a general wildcard group (<code>User-Agent: *</code>) will not match this policy token, meaning older blanket rules will not automatically opt anyone out [3][5]. Furthermore, if a site does not explicitly state a preference using the <code>__usage_ai-training</code> group, it is treated as allowing AI training by default [3][5]. Private licensing agreements between a publisher and an AI company can also override the token's instructions [3][6]. A key limitation is that updating robots.txt with this new signal does not remove content that has already been collected into existing datasets or trained models [2][4].</p>\n<h2>What are the implementation timelines?</h2>\n<p>The implementation schedules for the participating companies are not uniform [2][3]. Anthropic, whose technical lead for standards, Kevin Kelley, authored the underlying Internet-Draft, has already begun implementing support for the signal [1][2][3][4][6]. Kelley noted that it would take \"some time to add support across our services\" [6]. OpenAI has stated its aim \"to implement the signal in the coming months\" [2][3][5][6], clarifying that its existing crawler controls will continue to operate alongside the new mechanism [4][6]. Microsoft has set a target of February 1, 2027, for honoring the new preferences as its crawlers discover them [2][3][4][5][6]. Microsoft also plans to introduce a separate setting for AI grounding, which involves pulling live content into chat answers, in addition to the training preference [2][4][5][6]. The company intends to stop recognizing its older NoArchive and NoCache tags for training and grounding purposes after March 1, 2027 [5]. Google aims to support the shared control in 2027, with some reports indicating early 2027 [2][3][4][5][6]. Google has specified that if a site opts out via the new token without explicitly mentioning Google-Extended, it plans to interpret this as if the publisher had disallowed Google-Extended [2][5][6]. Google-Extended is its own control for whether content can be used to train future Gemini models and for grounding in Gemini Apps and Vertex AI [5].</p>\n<h2>Why is this development significant for publishers?</h2>\n<p>This agreement comes at a time when publishers have been observing a decline in referral traffic as AI products increasingly reuse their work [3]. The shared opt-out mechanism offers a simpler and more efficient way for digital publishers to communicate their content usage preferences to major AI developers, eliminating the need to manage a growing list of company-specific restrictions [4]. This is particularly relevant for news organizations, whose valuable reporting, photographs, and archives are frequently used as sources for generative AI systems [4]. Publishers have raised concerns about AI companies collecting such material without clear consent or separate licensing arrangements [4]. A crucial aspect of this proposal is the clear distinction between allowing a website to be crawled for search engine visibility and allowing its content to be used for AI training [4]. This means publishers can choose to remain discoverable in traditional search results on platforms like Google Search and Bing while simultaneously restricting the use of their content for training generative AI models [1][4][5]. Microsoft has explicitly stated that restricting content for AI training or grounding will not affect a site's eligibility for Bing search results [1][4][5], and Google has confirmed that its existing search visibility arrangements will continue alongside the proposed training signal [4][5].</p>\n<h2>What are the limitations and ongoing discussions?</h2>\n<p>While the opt-out system was developed by a working group at the Internet Engineering Task Force (IETF) [1][4], the document that defines the token is an individual IETF Internet-Draft, authored by Anthropic's Kevin Kelley [2][3][5]. The IETF's document tracker explicitly states that this draft \"does not represent official IETF standardization activity\" and \"has no formal standing in the IETF standards process\" [2][4][5][6]. The draft is also temporary, with an expiry date of May 3, 2027 [2][3]. The mechanism is framed as a \"coordination mechanism rather than a security control\" [2], which implies that non-compliant scrapers could potentially disregard it [2]. The agreement also does not establish a payment system, guarantee compensation, or resolve existing disputes over copyright and fair use [4]. Furthermore, implementing the new robots.txt instruction will not retroactively remove material that has already been collected into existing datasets or trained models by AI companies [2][4]. Discussions are ongoing regarding related drafts, including a vocabulary document and one covering how preferences attach to content, indicating that the \"plumbing is still being argued over\" [3]. Microsoft has cautioned that blocking AI grounding \"will significantly reduce your content’s visibility in AI-generated experiences\" [6]. While Meta has expressed support for the concept of a common mechanism, it has not yet confirmed whether it will honor the proposed signal [2][4][6].</p>"
+}
