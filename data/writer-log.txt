@@ -1,2 +1,23 @@
-Writer run 2026-11-01 18:02 UTC
-A story was already published today. Nothing to do.
+Writer run 2026-11-02 10:42 UTC
+Attempt 1 of 3
+   story: South Korea pledges $16 billion for AI and semiconductor development in 2027 budget (13 search results)
+   read shattered.io: South Korea AI Budget 2027: 21.3T Won, Nearly 2x [2026]
+   read cio.economictimes.indiatimes.com: South Korea Plans Record $16 Billion Investment in AI and Semiconducto
+   read explainx.ai: South Korea 2027 Budget: $15.97B for AI, Chips, Physical AI | explainx
+   read tradingview.com: Lee Jae Myung proposes record 2027 budget with $15.97 billion for AI —
+   skip daily-sun.com (HTTP 403; the site blocks automated reading)
+   read bworldonline.com: South Korea’s Lee vows to make bold AI investment in record budget pus
+   read channelnewsasia.com: South Korea’s president vows to make bold AI investment in record budg
+   read japantimes.co.jp: South Korea to double spending on AI and chips in 2027 - The Japan Tim
+   read sharjah24.ae: Korea plans to double its AI investments to $16 billion
+   skip wam.ae (too little readable text)
+   skip koreabizwire.com (too little readable text)
+   skip bignewsnetwork.com (too little readable text)
+   read freemalaysiatoday.com: South Korea to double spending on AI and chips in 2027 | FMT
+   rejected 'South Korea pledges $15.97 billion: AI and chip development gets boost': '5 6' makes up 2.9% of the text (keyword stuffing)
+Attempt 2 of 3
+   story: OpenAI plans to rebrand its data centers as 'AI compute campuses' as part of a post-midterm PR strategy (3 search results)
+   skip explainx.ai (not about this story: AI News November 2, 2026: 11 Stories Explained | explainx.ai)
+   read emergent.sh: OpenAI Plans Rebrand: Data Centers to AI Compute Campuses
+   read businessinsider.com: OpenAI Wants Everyone to Call AI Data Centers 'Compute Campuses' - Bus
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/openai-rebrands-data-centers-ai-compute-campuses-planned.json with 2 sources: emergent.sh, businessinsider.com
