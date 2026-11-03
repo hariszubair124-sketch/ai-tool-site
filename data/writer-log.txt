@@ -1,2 +1,8 @@
-Writer run 2026-11-02 21:52 UTC
-A story was already published today. Nothing to do.
+Writer run 2026-11-03 10:33 UTC
+Attempt 1 of 3
+   gemini-2.5-flash busy (503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This mo...); waiting 30s
+   story: CrowdStrike introduces 'AI Kill Switch' for AI agents and acquires Dreadnode for automated AI security testing (2 search results)
+   read morningstar.com: CrowdStrike Introduces the AI Kill Switch for AI Safety | Morningstar
+   read stocktitan.net: CrowdStrike to Acquire Dreadnode for AI Security | CRWD Stock News
+Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/crowdstrike-boosts-ai-security-kill-switch-dreadnode-acquisition.json with 2 sources: morningstar.com, stocktitan.net
+Added new company to data/companies.json: CrowdStrike
