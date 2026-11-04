@@ -1,6 +1,2 @@
-Writer run 2026-11-04 10:36 UTC
-Attempt 1 of 3
-   story: Google clarifies AI policy for K-12 schools, requiring districts to choose between AI-integrated search or no search at all for students. (2 search results)
-   read emergent.sh: Google Clarifies AI Policy for Schools Amid Threats Claims
-   read edweek.org: Google's New Rules Hand Schools Hard Choices About AI and Search
-Saved /home/runner/work/ai-tool-site/ai-tool-site/content/posts/google-k-12-ai-policy-districts-must-choose-ai-search.json with 2 sources: emergent.sh, edweek.org
+Writer run 2026-11-04 19:58 UTC
+A story was already published today. Nothing to do.
