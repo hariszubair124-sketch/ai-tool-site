@@ -1,2 +1,8 @@
-Writer run 2026-11-05 20:13 UTC
-A story was already published today. Nothing to do.
+Writer run 2026-11-06 10:29 UTC
+Attempt 1 of 3
+   attempt failed: ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Search as tool is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}}
+Attempt 2 of 3
+   attempt failed: ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Search as tool is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}}
+Attempt 3 of 3
+   attempt failed: ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Search as tool is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}}
+No story passed the checks today. Nothing published.
