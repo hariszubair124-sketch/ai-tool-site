@@ -1,4 +1,4 @@
-Writer run 2026-11-11 10:27 UTC
+Writer run 2026-11-11 19:49 UTC
 Attempt 1 of 3
    attempt failed: ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Search as tool is not enabled for api version v1. Use api version v1beta instead.', 'status': 'INVALID_ARGUMENT'}}
 Attempt 2 of 3
